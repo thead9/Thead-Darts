@@ -135,7 +135,6 @@ class CricketGameTests: XCTestCase {
     }
     
     // MARK: Hitting
-    
     func testHittingWithNoOneClosed() {
         cricketScore1.hit(on: .fifteen, with: .single)
         XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 1)
