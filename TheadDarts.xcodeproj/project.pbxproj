@@ -1,0 +1,815 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C7062B1322F44A59006CE930 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7062B1222F44A59006CE930 /* Stack.swift */; };
+		C7062B1422F44A59006CE930 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7062B1222F44A59006CE930 /* Stack.swift */; };
+		C708132022D1236B00B22BFF /* CricketHitLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708131F22D1236B00B22BFF /* CricketHitLabelView.swift */; };
+		C708132222D1250400B22BFF /* CricketPlayerUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708132122D1250400B22BFF /* CricketPlayerUnitView.swift */; };
+		C70E310222CBB09200269AEE /* CricketHitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E310122CBB09200269AEE /* CricketHitView.swift */; };
+		C72B638323007EDD008B0189 /* ViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72B638223007EDD008B0189 /* ViewStyle.swift */; };
+		C75C5F3823022FF80019C8B7 /* DartPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */; };
+		C75C5F3923022FF80019C8B7 /* DartPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */; };
+		C75C5F3B2303281F0019C8B7 /* DartAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3A2303281F0019C8B7 /* DartAction.swift */; };
+		C75C5F3C2303281F0019C8B7 /* DartAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3A2303281F0019C8B7 /* DartAction.swift */; };
+		C75C5F3F2303287D0019C8B7 /* DartThrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3E2303287D0019C8B7 /* DartThrow.swift */; };
+		C75C5F402303287D0019C8B7 /* DartThrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3E2303287D0019C8B7 /* DartThrow.swift */; };
+		C75C5F4223032DC60019C8B7 /* TurnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F4123032DC60019C8B7 /* TurnChange.swift */; };
+		C75C5F4323032DC60019C8B7 /* TurnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F4123032DC60019C8B7 /* TurnChange.swift */; };
+		C78EDD25230D9DC500700A55 /* DartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD24230D9DC500700A55 /* DartTurn.swift */; };
+		C78EDD26230D9DC500700A55 /* DartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD24230D9DC500700A55 /* DartTurn.swift */; };
+		C78EDD28230F044F00700A55 /* DartThrowOnTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */; };
+		C78EDD29230F044F00700A55 /* DartThrowOnTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */; };
+		C7983E2022CACC0E00ACC903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */; };
+		C7983E2222CACC0E00ACC903 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E2122CACC0E00ACC903 /* SceneDelegate.swift */; };
+		C7983E2422CACC0E00ACC903 /* CricketGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E2322CACC0E00ACC903 /* CricketGameView.swift */; };
+		C7983E2622CACC1200ACC903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2522CACC1200ACC903 /* Assets.xcassets */; };
+		C7983E2922CACC1200ACC903 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2822CACC1200ACC903 /* Preview Assets.xcassets */; };
+		C7983E2C22CACC1200ACC903 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2A22CACC1200ACC903 /* LaunchScreen.storyboard */; };
+		C7983E4222CACC1200ACC903 /* TheadDartsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E4122CACC1200ACC903 /* TheadDartsUITests.swift */; };
+		C7983E5422CACC7000ACC903 /* Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5322CACC7000ACC903 /* Wedge.swift */; };
+		C7983E5522CACC7000ACC903 /* Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5322CACC7000ACC903 /* Wedge.swift */; };
+		C7983E5722CACC8300ACC903 /* Multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5622CACC8300ACC903 /* Multiplier.swift */; };
+		C7983E5822CACC8300ACC903 /* Multiplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5622CACC8300ACC903 /* Multiplier.swift */; };
+		C7983E5A22CACC9900ACC903 /* CricketGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5922CACC9900ACC903 /* CricketGame.swift */; };
+		C7983E5B22CACC9900ACC903 /* CricketGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5922CACC9900ACC903 /* CricketGame.swift */; };
+		C7983E5D22CACCAA00ACC903 /* CricketPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5C22CACCAA00ACC903 /* CricketPlayer.swift */; };
+		C7983E5E22CACCAA00ACC903 /* CricketPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5C22CACCAA00ACC903 /* CricketPlayer.swift */; };
+		C7983E6022CACCBF00ACC903 /* CricketScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5F22CACCBF00ACC903 /* CricketScore.swift */; };
+		C7983E6122CACCBF00ACC903 /* CricketScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5F22CACCBF00ACC903 /* CricketScore.swift */; };
+		C7983E6322CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6222CACCD300ACC903 /* CricketScoreKeeper.swift */; };
+		C7983E6422CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6222CACCD300ACC903 /* CricketScoreKeeper.swift */; };
+		C7983E6622CACCE800ACC903 /* DartGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6522CACCE800ACC903 /* DartGame.swift */; };
+		C7983E6722CACCE800ACC903 /* DartGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6522CACCE800ACC903 /* DartGame.swift */; };
+		C7983E6922CACCFA00ACC903 /* DartPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6822CACCFA00ACC903 /* DartPlayer.swift */; };
+		C7983E6A22CACCFA00ACC903 /* DartPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6822CACCFA00ACC903 /* DartPlayer.swift */; };
+		C7983E6C22CACD0D00ACC903 /* DartScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6B22CACD0D00ACC903 /* DartScore.swift */; };
+		C7983E6D22CACD0D00ACC903 /* DartScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6B22CACD0D00ACC903 /* DartScore.swift */; };
+		C7983E6F22CACD1F00ACC903 /* DartScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6E22CACD1F00ACC903 /* DartScoreKeeper.swift */; };
+		C7983E7022CACD1F00ACC903 /* DartScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E6E22CACD1F00ACC903 /* DartScoreKeeper.swift */; };
+		C7983E7322CACD4800ACC903 /* CricketGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E7222CACD4800ACC903 /* CricketGameTests.swift */; };
+		C7983E7522CACD5E00ACC903 /* CricketPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E7422CACD5E00ACC903 /* CricketPlayerTests.swift */; };
+		C7983E7722CACD7800ACC903 /* CricketScoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E7622CACD7800ACC903 /* CricketScoreTest.swift */; };
+		C7D61D0C232D2A770098D339 /* CricketMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D61D0B232D2A770098D339 /* CricketMarkView.swift */; };
+		C7D61D0D232D2A770098D339 /* CricketMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D61D0B232D2A770098D339 /* CricketMarkView.swift */; };
+		C7F0A20D22CD7876005171BB /* CricketPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */; };
+		C7F0A20E22CD7876005171BB /* CricketPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C7983E3322CACC1200ACC903 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7983E1422CACC0E00ACC903 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7983E1B22CACC0E00ACC903;
+			remoteInfo = TheadDarts;
+		};
+		C7983E3E22CACC1200ACC903 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C7983E1422CACC0E00ACC903 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C7983E1B22CACC0E00ACC903;
+			remoteInfo = TheadDarts;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C7062B1222F44A59006CE930 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = ../../../../../../../../System/Volumes/Data/Users/thomasheadley/Developer/SwiftUI/TheadDarts/TheadDarts/Model/Utility/Stack.swift; sourceTree = "<group>"; };
+		C708131F22D1236B00B22BFF /* CricketHitLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketHitLabelView.swift; sourceTree = "<group>"; };
+		C708132122D1250400B22BFF /* CricketPlayerUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketPlayerUnitView.swift; sourceTree = "<group>"; };
+		C70E310122CBB09200269AEE /* CricketHitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketHitView.swift; sourceTree = "<group>"; };
+		C72B638223007EDD008B0189 /* ViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyle.swift; sourceTree = "<group>"; };
+		C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartPlayerUnit.swift; sourceTree = "<group>"; };
+		C75C5F3A2303281F0019C8B7 /* DartAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartAction.swift; sourceTree = "<group>"; };
+		C75C5F3E2303287D0019C8B7 /* DartThrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrow.swift; sourceTree = "<group>"; };
+		C75C5F4123032DC60019C8B7 /* TurnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnChange.swift; sourceTree = "<group>"; };
+		C78EDD24230D9DC500700A55 /* DartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartTurn.swift; sourceTree = "<group>"; };
+		C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrowOnTurn.swift; sourceTree = "<group>"; };
+		C7983E1C22CACC0E00ACC903 /* TheadDarts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheadDarts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C7983E2122CACC0E00ACC903 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		C7983E2322CACC0E00ACC903 /* CricketGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketGameView.swift; sourceTree = "<group>"; };
+		C7983E2522CACC1200ACC903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C7983E2822CACC1200ACC903 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C7983E2B22CACC1200ACC903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C7983E2D22CACC1200ACC903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7983E3222CACC1200ACC903 /* TheadDartsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheadDartsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7983E3822CACC1200ACC903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7983E3D22CACC1200ACC903 /* TheadDartsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheadDartsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7983E4122CACC1200ACC903 /* TheadDartsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheadDartsUITests.swift; sourceTree = "<group>"; };
+		C7983E4322CACC1200ACC903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7983E5322CACC7000ACC903 /* Wedge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wedge.swift; sourceTree = "<group>"; };
+		C7983E5622CACC8300ACC903 /* Multiplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Multiplier.swift; sourceTree = "<group>"; };
+		C7983E5922CACC9900ACC903 /* CricketGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketGame.swift; sourceTree = "<group>"; };
+		C7983E5C22CACCAA00ACC903 /* CricketPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketPlayer.swift; sourceTree = "<group>"; };
+		C7983E5F22CACCBF00ACC903 /* CricketScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketScore.swift; sourceTree = "<group>"; };
+		C7983E6222CACCD300ACC903 /* CricketScoreKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketScoreKeeper.swift; sourceTree = "<group>"; };
+		C7983E6522CACCE800ACC903 /* DartGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartGame.swift; sourceTree = "<group>"; };
+		C7983E6822CACCFA00ACC903 /* DartPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartPlayer.swift; sourceTree = "<group>"; };
+		C7983E6B22CACD0D00ACC903 /* DartScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartScore.swift; sourceTree = "<group>"; };
+		C7983E6E22CACD1F00ACC903 /* DartScoreKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartScoreKeeper.swift; sourceTree = "<group>"; };
+		C7983E7222CACD4800ACC903 /* CricketGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketGameTests.swift; sourceTree = "<group>"; };
+		C7983E7422CACD5E00ACC903 /* CricketPlayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketPlayerTests.swift; sourceTree = "<group>"; };
+		C7983E7622CACD7800ACC903 /* CricketScoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketScoreTest.swift; sourceTree = "<group>"; };
+		C7D61D0B232D2A770098D339 /* CricketMarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CricketMarkView.swift; sourceTree = "<group>"; };
+		C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketPlayerUnit.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C7983E1922CACC0E00ACC903 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7983E2F22CACC1200ACC903 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7983E3A22CACC1200ACC903 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C7062B1122F449B0006CE930 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				C7062B1222F44A59006CE930 /* Stack.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		C71E265222CB96A5005D91E1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C732757022F03D2A003DDC77 /* Styles */,
+				C71E265322CB9755005D91E1 /* Cricket Views */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C71E265322CB9755005D91E1 /* Cricket Views */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E2322CACC0E00ACC903 /* CricketGameView.swift */,
+				C7D61D0B232D2A770098D339 /* CricketMarkView.swift */,
+				C70E310122CBB09200269AEE /* CricketHitView.swift */,
+				C708131F22D1236B00B22BFF /* CricketHitLabelView.swift */,
+				C708132122D1250400B22BFF /* CricketPlayerUnitView.swift */,
+			);
+			path = "Cricket Views";
+			sourceTree = "<group>";
+		};
+		C732757022F03D2A003DDC77 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				C72B638223007EDD008B0189 /* ViewStyle.swift */,
+			);
+			path = Styles;
+			sourceTree = "<group>";
+		};
+		C75C5F3D230328680019C8B7 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C75C5F3E2303287D0019C8B7 /* DartThrow.swift */,
+				C75C5F4123032DC60019C8B7 /* TurnChange.swift */,
+				C78EDD24230D9DC500700A55 /* DartTurn.swift */,
+				C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		C7983E1322CACC0E00ACC903 = {
+			isa = PBXGroup;
+			children = (
+				C7983E1E22CACC0E00ACC903 /* TheadDarts */,
+				C7983E3522CACC1200ACC903 /* TheadDartsTests */,
+				C7983E4022CACC1200ACC903 /* TheadDartsUITests */,
+				C7983E1D22CACC0E00ACC903 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C7983E1D22CACC0E00ACC903 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E1C22CACC0E00ACC903 /* TheadDarts.app */,
+				C7983E3222CACC1200ACC903 /* TheadDartsTests.xctest */,
+				C7983E3D22CACC1200ACC903 /* TheadDartsUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C7983E1E22CACC0E00ACC903 /* TheadDarts */ = {
+			isa = PBXGroup;
+			children = (
+				C71E265222CB96A5005D91E1 /* View */,
+				C7983E4F22CACC2B00ACC903 /* Model */,
+				C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */,
+				C7983E2122CACC0E00ACC903 /* SceneDelegate.swift */,
+				C7983E2522CACC1200ACC903 /* Assets.xcassets */,
+				C7983E2A22CACC1200ACC903 /* LaunchScreen.storyboard */,
+				C7983E2D22CACC1200ACC903 /* Info.plist */,
+				C7983E2722CACC1200ACC903 /* Preview Content */,
+			);
+			path = TheadDarts;
+			sourceTree = "<group>";
+		};
+		C7983E2722CACC1200ACC903 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E2822CACC1200ACC903 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C7983E3522CACC1200ACC903 /* TheadDartsTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E7122CACD3000ACC903 /* CricketTests */,
+				C7983E3822CACC1200ACC903 /* Info.plist */,
+			);
+			path = TheadDartsTests;
+			sourceTree = "<group>";
+		};
+		C7983E4022CACC1200ACC903 /* TheadDartsUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E4122CACC1200ACC903 /* TheadDartsUITests.swift */,
+				C7983E4322CACC1200ACC903 /* Info.plist */,
+			);
+			path = TheadDartsUITests;
+			sourceTree = "<group>";
+		};
+		C7983E4F22CACC2B00ACC903 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C7062B1122F449B0006CE930 /* Utility */,
+				C75C5F3D230328680019C8B7 /* Common */,
+				C7983E5022CACC3700ACC903 /* Enum */,
+				C7983E5122CACC3D00ACC903 /* Cricket */,
+				C7983E5222CACC4200ACC903 /* Protocol */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C7983E5022CACC3700ACC903 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E5322CACC7000ACC903 /* Wedge.swift */,
+				C7983E5622CACC8300ACC903 /* Multiplier.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		C7983E5122CACC3D00ACC903 /* Cricket */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E5922CACC9900ACC903 /* CricketGame.swift */,
+				C7983E5C22CACCAA00ACC903 /* CricketPlayer.swift */,
+				C7983E5F22CACCBF00ACC903 /* CricketScore.swift */,
+				C7983E6222CACCD300ACC903 /* CricketScoreKeeper.swift */,
+				C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */,
+			);
+			path = Cricket;
+			sourceTree = "<group>";
+		};
+		C7983E5222CACC4200ACC903 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E6522CACCE800ACC903 /* DartGame.swift */,
+				C7983E6822CACCFA00ACC903 /* DartPlayer.swift */,
+				C7983E6B22CACD0D00ACC903 /* DartScore.swift */,
+				C7983E6E22CACD1F00ACC903 /* DartScoreKeeper.swift */,
+				C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */,
+				C75C5F3A2303281F0019C8B7 /* DartAction.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		C7983E7122CACD3000ACC903 /* CricketTests */ = {
+			isa = PBXGroup;
+			children = (
+				C7983E7222CACD4800ACC903 /* CricketGameTests.swift */,
+				C7983E7422CACD5E00ACC903 /* CricketPlayerTests.swift */,
+				C7983E7622CACD7800ACC903 /* CricketScoreTest.swift */,
+			);
+			path = CricketTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C7983E1B22CACC0E00ACC903 /* TheadDarts */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7983E4622CACC1200ACC903 /* Build configuration list for PBXNativeTarget "TheadDarts" */;
+			buildPhases = (
+				C7983E1822CACC0E00ACC903 /* Sources */,
+				C7983E1922CACC0E00ACC903 /* Frameworks */,
+				C7983E1A22CACC0E00ACC903 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TheadDarts;
+			productName = TheadDarts;
+			productReference = C7983E1C22CACC0E00ACC903 /* TheadDarts.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C7983E3122CACC1200ACC903 /* TheadDartsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7983E4922CACC1200ACC903 /* Build configuration list for PBXNativeTarget "TheadDartsTests" */;
+			buildPhases = (
+				C7983E2E22CACC1200ACC903 /* Sources */,
+				C7983E2F22CACC1200ACC903 /* Frameworks */,
+				C7983E3022CACC1200ACC903 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7983E3422CACC1200ACC903 /* PBXTargetDependency */,
+			);
+			name = TheadDartsTests;
+			productName = TheadDartsTests;
+			productReference = C7983E3222CACC1200ACC903 /* TheadDartsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C7983E3C22CACC1200ACC903 /* TheadDartsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C7983E4C22CACC1200ACC903 /* Build configuration list for PBXNativeTarget "TheadDartsUITests" */;
+			buildPhases = (
+				C7983E3922CACC1200ACC903 /* Sources */,
+				C7983E3A22CACC1200ACC903 /* Frameworks */,
+				C7983E3B22CACC1200ACC903 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C7983E3F22CACC1200ACC903 /* PBXTargetDependency */,
+			);
+			name = TheadDartsUITests;
+			productName = TheadDartsUITests;
+			productReference = C7983E3D22CACC1200ACC903 /* TheadDartsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C7983E1422CACC0E00ACC903 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+				ORGANIZATIONNAME = Thead;
+				TargetAttributes = {
+					C7983E1B22CACC0E00ACC903 = {
+						CreatedOnToolsVersion = 11.0;
+					};
+					C7983E3122CACC1200ACC903 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = C7983E1B22CACC0E00ACC903;
+					};
+					C7983E3C22CACC1200ACC903 = {
+						CreatedOnToolsVersion = 11.0;
+						TestTargetID = C7983E1B22CACC0E00ACC903;
+					};
+				};
+			};
+			buildConfigurationList = C7983E1722CACC0E00ACC903 /* Build configuration list for PBXProject "TheadDarts" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C7983E1322CACC0E00ACC903;
+			productRefGroup = C7983E1D22CACC0E00ACC903 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C7983E1B22CACC0E00ACC903 /* TheadDarts */,
+				C7983E3122CACC1200ACC903 /* TheadDartsTests */,
+				C7983E3C22CACC1200ACC903 /* TheadDartsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C7983E1A22CACC0E00ACC903 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7983E2C22CACC1200ACC903 /* LaunchScreen.storyboard in Resources */,
+				C7983E2922CACC1200ACC903 /* Preview Assets.xcassets in Resources */,
+				C7983E2622CACC1200ACC903 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7983E3022CACC1200ACC903 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7983E3B22CACC1200ACC903 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C7983E1822CACC0E00ACC903 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C75C5F3B2303281F0019C8B7 /* DartAction.swift in Sources */,
+				C78EDD28230F044F00700A55 /* DartThrowOnTurn.swift in Sources */,
+				C7983E6622CACCE800ACC903 /* DartGame.swift in Sources */,
+				C7D61D0C232D2A770098D339 /* CricketMarkView.swift in Sources */,
+				C75C5F3823022FF80019C8B7 /* DartPlayerUnit.swift in Sources */,
+				C7983E6922CACCFA00ACC903 /* DartPlayer.swift in Sources */,
+				C7983E2022CACC0E00ACC903 /* AppDelegate.swift in Sources */,
+				C7983E6F22CACD1F00ACC903 /* DartScoreKeeper.swift in Sources */,
+				C7983E5D22CACCAA00ACC903 /* CricketPlayer.swift in Sources */,
+				C7983E5A22CACC9900ACC903 /* CricketGame.swift in Sources */,
+				C70E310222CBB09200269AEE /* CricketHitView.swift in Sources */,
+				C7F0A20D22CD7876005171BB /* CricketPlayerUnit.swift in Sources */,
+				C75C5F3F2303287D0019C8B7 /* DartThrow.swift in Sources */,
+				C7983E2222CACC0E00ACC903 /* SceneDelegate.swift in Sources */,
+				C708132022D1236B00B22BFF /* CricketHitLabelView.swift in Sources */,
+				C78EDD25230D9DC500700A55 /* DartTurn.swift in Sources */,
+				C708132222D1250400B22BFF /* CricketPlayerUnitView.swift in Sources */,
+				C7983E6322CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */,
+				C7983E5722CACC8300ACC903 /* Multiplier.swift in Sources */,
+				C7983E5422CACC7000ACC903 /* Wedge.swift in Sources */,
+				C7983E6C22CACD0D00ACC903 /* DartScore.swift in Sources */,
+				C75C5F4223032DC60019C8B7 /* TurnChange.swift in Sources */,
+				C7062B1322F44A59006CE930 /* Stack.swift in Sources */,
+				C7983E6022CACCBF00ACC903 /* CricketScore.swift in Sources */,
+				C72B638323007EDD008B0189 /* ViewStyle.swift in Sources */,
+				C7983E2422CACC0E00ACC903 /* CricketGameView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7983E2E22CACC1200ACC903 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7983E5522CACC7000ACC903 /* Wedge.swift in Sources */,
+				C75C5F3923022FF80019C8B7 /* DartPlayerUnit.swift in Sources */,
+				C75C5F3C2303281F0019C8B7 /* DartAction.swift in Sources */,
+				C7F0A20E22CD7876005171BB /* CricketPlayerUnit.swift in Sources */,
+				C7D61D0D232D2A770098D339 /* CricketMarkView.swift in Sources */,
+				C75C5F402303287D0019C8B7 /* DartThrow.swift in Sources */,
+				C7983E7022CACD1F00ACC903 /* DartScoreKeeper.swift in Sources */,
+				C7983E6D22CACD0D00ACC903 /* DartScore.swift in Sources */,
+				C78EDD29230F044F00700A55 /* DartThrowOnTurn.swift in Sources */,
+				C7983E7322CACD4800ACC903 /* CricketGameTests.swift in Sources */,
+				C7983E5E22CACCAA00ACC903 /* CricketPlayer.swift in Sources */,
+				C7983E5822CACC8300ACC903 /* Multiplier.swift in Sources */,
+				C7983E6122CACCBF00ACC903 /* CricketScore.swift in Sources */,
+				C7983E6422CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */,
+				C7983E7522CACD5E00ACC903 /* CricketPlayerTests.swift in Sources */,
+				C7983E7722CACD7800ACC903 /* CricketScoreTest.swift in Sources */,
+				C7062B1422F44A59006CE930 /* Stack.swift in Sources */,
+				C7983E6A22CACCFA00ACC903 /* DartPlayer.swift in Sources */,
+				C7983E6722CACCE800ACC903 /* DartGame.swift in Sources */,
+				C75C5F4323032DC60019C8B7 /* TurnChange.swift in Sources */,
+				C78EDD26230D9DC500700A55 /* DartTurn.swift in Sources */,
+				C7983E5B22CACC9900ACC903 /* CricketGame.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7983E3922CACC1200ACC903 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C7983E4222CACC1200ACC903 /* TheadDartsUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C7983E3422CACC1200ACC903 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7983E1B22CACC0E00ACC903 /* TheadDarts */;
+			targetProxy = C7983E3322CACC1200ACC903 /* PBXContainerItemProxy */;
+		};
+		C7983E3F22CACC1200ACC903 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C7983E1B22CACC0E00ACC903 /* TheadDarts */;
+			targetProxy = C7983E3E22CACC1200ACC903 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C7983E2A22CACC1200ACC903 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C7983E2B22CACC1200ACC903 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C7983E4422CACC1200ACC903 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C7983E4522CACC1200ACC903 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C7983E4722CACC1200ACC903 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "TheadDarts/Preview\\ Content";
+				DEVELOPMENT_TEAM = X94L6WV9DW;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TheadDarts/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDarts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C7983E4822CACC1200ACC903 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "TheadDarts/Preview\\ Content";
+				DEVELOPMENT_TEAM = X94L6WV9DW;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = TheadDarts/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDarts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C7983E4A22CACC1200ACC903 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X94L6WV9DW;
+				INFOPLIST_FILE = TheadDartsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDartsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheadDarts.app/TheadDarts";
+			};
+			name = Debug;
+		};
+		C7983E4B22CACC1200ACC903 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X94L6WV9DW;
+				INFOPLIST_FILE = TheadDartsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDartsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheadDarts.app/TheadDarts";
+			};
+			name = Release;
+		};
+		C7983E4D22CACC1200ACC903 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X94L6WV9DW;
+				INFOPLIST_FILE = TheadDartsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDartsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TheadDarts;
+			};
+			name = Debug;
+		};
+		C7983E4E22CACC1200ACC903 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = X94L6WV9DW;
+				INFOPLIST_FILE = TheadDartsUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDartsUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TheadDarts;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C7983E1722CACC0E00ACC903 /* Build configuration list for PBXProject "TheadDarts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7983E4422CACC1200ACC903 /* Debug */,
+				C7983E4522CACC1200ACC903 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7983E4622CACC1200ACC903 /* Build configuration list for PBXNativeTarget "TheadDarts" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7983E4722CACC1200ACC903 /* Debug */,
+				C7983E4822CACC1200ACC903 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7983E4922CACC1200ACC903 /* Build configuration list for PBXNativeTarget "TheadDartsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7983E4A22CACC1200ACC903 /* Debug */,
+				C7983E4B22CACC1200ACC903 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C7983E4C22CACC1200ACC903 /* Build configuration list for PBXNativeTarget "TheadDartsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C7983E4D22CACC1200ACC903 /* Debug */,
+				C7983E4E22CACC1200ACC903 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C7983E1422CACC0E00ACC903 /* Project object */;
+}
