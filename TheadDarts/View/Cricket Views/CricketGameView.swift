@@ -63,7 +63,7 @@ struct CricketGameView : View {
     
     //MARK: Scoreboard
     var scoreboard: some View {
-        Group {
+        VStack {
             HStack {
                 Spacer()
                     .frame(width: leftColumnWidth+5)
@@ -71,7 +71,7 @@ struct CricketGameView : View {
 
                 ForEach(0..<cricketGame.scores.count) { index in
                     CricketPlayerUnitView(playerUnit: self.cricketGame.playerUnits[index])
-                        .padding(5)
+                        .padding(.horizontal, 5)
                         .addBorder(Color("Secondary"), width: 3, condition: self.shouldAddActiveBorder(on: index))
                 }
             }
@@ -90,12 +90,13 @@ struct CricketGameView : View {
                             self.setGameOver()
                         }
                     )
-                    .padding(5)
+                    .padding(.horizontal, 5)
                     .disabled(self.shouldDisableHitView(at: index))
                 }
             }
             .padding(.horizontal, 5)
         }
+        .padding(.bottom)
     }
     
     // MARK: Turn Controls
@@ -146,7 +147,7 @@ struct CricketGameView : View {
                         self.mode.wrappedValue.dismiss()
                     }
                 ) {
-                    Text("Home")
+                    Image(systemName: "house")
                 }
                 .padding(.horizontal)
                 
@@ -161,7 +162,7 @@ struct CricketGameView : View {
                 .padding(.horizontal)
                 
                 Button(action: { self.showNewGameActionSheet = true } ) {
-                    Text("New Game")
+                    Image(systemName: "trash")
                 }
                 .padding(.horizontal)
             }
