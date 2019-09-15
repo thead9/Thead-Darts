@@ -22,59 +22,34 @@ struct HomeView: View {
                         .frame(height: 2, alignment: .bottom)
                         .foregroundColor(Color("Primary"))
                     
-                    GeometryReader { cricketGeometry in
-                        HStack(spacing: 0) {
-                            NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2))) {
-                                    Text("Cricket")
-                                        .frame(maxWidth: cricketGeometry.size.width * 0.75, maxHeight: .infinity)
-                                }
-                            
-                            Rectangle()
-                                .frame(width: 2)
-                                .foregroundColor(Color("Primary"))
-                                
-                            VStack(alignment: .center) {
-                                Image(systemName: "gear")
-                            }
-                            .frame(maxWidth: cricketGeometry.size.width * 0.25, maxHeight: .infinity)
-
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: geometry.size.height / 2)
-                        .background(Color("HitBackground"))
-                        .foregroundColor(Color("Secondary"))
+                    NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2))) {
+                        Text("Cricket")
+                            .frame(maxWidth: .infinity, maxHeight: geometry.size.height * 0.4)
+                    }        
+                    
+                    Rectangle()
+                        .frame(height: 2, alignment: .bottom)
+                        .foregroundColor(Color("Primary"))
+                    
+                    NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2))) {
+                        Text("Cricket")
+                            .frame(maxWidth: .infinity, maxHeight: geometry.size.height * 0.4)
                     }
                     
                     Rectangle()
                         .frame(height: 2, alignment: .bottom)
                         .foregroundColor(Color("Primary"))
                     
-                    GeometryReader { cricketGeometry in
-                        HStack(spacing: 0) {
-                            NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2))) {
-                                    Text("Cricket")
-                                        .frame(maxWidth: cricketGeometry.size.width * 0.75, maxHeight: .infinity)
-                                }
-                            
-                            Rectangle()
-                                .frame(width: 2)
-                                .foregroundColor(Color("Primary"))
-                                
-                            VStack(alignment: .center) {
-                                Image(systemName: "gear")
-                            }
-                            .frame(maxWidth: cricketGeometry.size.width * 0.25, maxHeight: .infinity)
-
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: geometry.size.height / 2)
-                        .background(Color("HitBackground"))
-                        .foregroundColor(Color("Secondary"))
-                    }
+                    Image(systemName: "gear")
+                        .frame(maxWidth: .infinity, maxHeight: geometry.size.height * 0.2)
                     
                     Rectangle()
                         .frame(height: 2, alignment: .bottom)
                         .foregroundColor(Color("Primary"))
                 }
                 .navigationBarTitle(Text("Thead Darts"))
+                .background(Color("HitBackground"))
+                .foregroundColor(Color("Secondary"))
             }
         }
         .font(.title)
