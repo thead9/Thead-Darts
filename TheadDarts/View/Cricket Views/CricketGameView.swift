@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CricketGameView : View {
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
     @ObservedObject var cricketGame: CricketGame
     
     @State var gameOver: Bool = false
@@ -41,7 +43,7 @@ struct CricketGameView : View {
             
             bottomControls
         }
-        .padding(.bottom)
+        .padding(.vertical)
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) {
             Alert(title: Text("Winner!"),
@@ -54,6 +56,9 @@ struct CricketGameView : View {
             )
         }
         .foregroundColor(Color("Primary"))
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.top)
     }
     
     //MARK: Scoreboard
@@ -136,6 +141,15 @@ struct CricketGameView : View {
     var bottomControls: some View {
         Group {
             HStack {
+                Button(
+                    action: {
+                        self.mode.wrappedValue.dismiss()
+                    }
+                ) {
+                    Text("Home")
+                }
+                .padding(.horizontal)
+                
                 Button(
                     action: {
                         self.cricketGame.scoreKeeper.undo()

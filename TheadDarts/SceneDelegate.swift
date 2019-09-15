@@ -24,7 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
             let cricketGame = CricketGame(numberOfPlayers: 2)
             cricketGame.scoreKeeper.activeTurn = DartTurn<CricketScore>()
-            window.rootViewController = UIHostingController(rootView: CricketGameView(cricketGame: cricketGame))
+            //window.rootViewController = UIHostingController(rootView: CricketGameView(cricketGame: cricketGame))
+            window.rootViewController = UIHostingController(rootView: HomeView())
             self.window = window
             window.makeKeyAndVisible()
         }

@@ -21,6 +21,7 @@
 		C75C5F402303287D0019C8B7 /* DartThrow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3E2303287D0019C8B7 /* DartThrow.swift */; };
 		C75C5F4223032DC60019C8B7 /* TurnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F4123032DC60019C8B7 /* TurnChange.swift */; };
 		C75C5F4323032DC60019C8B7 /* TurnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F4123032DC60019C8B7 /* TurnChange.swift */; };
+		C77EF0A4232D4C57004B4045 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77EF0A3232D4C57004B4045 /* HomeView.swift */; };
 		C78EDD25230D9DC500700A55 /* DartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD24230D9DC500700A55 /* DartTurn.swift */; };
 		C78EDD26230D9DC500700A55 /* DartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD24230D9DC500700A55 /* DartTurn.swift */; };
 		C78EDD28230F044F00700A55 /* DartThrowOnTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */; };
@@ -88,6 +89,7 @@
 		C75C5F3A2303281F0019C8B7 /* DartAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartAction.swift; sourceTree = "<group>"; };
 		C75C5F3E2303287D0019C8B7 /* DartThrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrow.swift; sourceTree = "<group>"; };
 		C75C5F4123032DC60019C8B7 /* TurnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TurnChange.swift; sourceTree = "<group>"; };
+		C77EF0A3232D4C57004B4045 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C78EDD24230D9DC500700A55 /* DartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartTurn.swift; sourceTree = "<group>"; };
 		C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrowOnTurn.swift; sourceTree = "<group>"; };
 		C7983E1C22CACC0E00ACC903 /* TheadDarts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheadDarts.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,6 +158,7 @@
 		C71E265222CB96A5005D91E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C77EF0A2232D4C1B004B4045 /* Menu */,
 				C732757022F03D2A003DDC77 /* Styles */,
 				C71E265322CB9755005D91E1 /* Cricket Views */,
 			);
@@ -191,6 +194,14 @@
 				C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		C77EF0A2232D4C1B004B4045 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				C77EF0A3232D4C57004B4045 /* HomeView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		C7983E1322CACC0E00ACC903 = {
@@ -462,6 +473,7 @@
 				C7983E5722CACC8300ACC903 /* Multiplier.swift in Sources */,
 				C7983E5422CACC7000ACC903 /* Wedge.swift in Sources */,
 				C7983E6C22CACD0D00ACC903 /* DartScore.swift in Sources */,
+				C77EF0A4232D4C57004B4045 /* HomeView.swift in Sources */,
 				C75C5F4223032DC60019C8B7 /* TurnChange.swift in Sources */,
 				C7062B1322F44A59006CE930 /* Stack.swift in Sources */,
 				C7983E6022CACCBF00ACC903 /* CricketScore.swift in Sources */,
