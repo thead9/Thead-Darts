@@ -168,7 +168,9 @@ class CricketScoreKeeper: DartScoreKeeper {
     
     func reset() {
         gameActions = Stack<DartAction>()
-        activeTurn = DartTurn()
+        if let _ = activeTurn {
+            activeTurn = DartTurn()
+        }
         activeIndex = 0
     }
 }

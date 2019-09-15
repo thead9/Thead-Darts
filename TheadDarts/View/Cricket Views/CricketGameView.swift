@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct CricketGameView : View {
+    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    
     @ObservedObject var cricketGame: CricketGame
     
     @State var gameOver: Bool = false
@@ -41,7 +43,7 @@ struct CricketGameView : View {
             
             bottomControls
         }
-        .padding(.bottom)
+        .padding(.vertical)
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) {
             Alert(title: Text("Winner!"),
@@ -54,11 +56,14 @@ struct CricketGameView : View {
             )
         }
         .foregroundColor(Color("Primary"))
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+        .edgesIgnoringSafeArea(.top)
     }
     
     //MARK: Scoreboard
     var scoreboard: some View {
-        Group {
+        VStack {
             HStack {
                 Spacer()
                     .frame(width: leftColumnWidth+5)
@@ -66,7 +71,7 @@ struct CricketGameView : View {
 
                 ForEach(0..<cricketGame.scores.count) { index in
                     CricketPlayerUnitView(playerUnit: self.cricketGame.playerUnits[index])
-                        .padding(5)
+                        .padding(.horizontal, 5)
                         .addBorder(Color("Secondary"), width: 3, condition: self.shouldAddActiveBorder(on: index))
                 }
             }
@@ -85,12 +90,13 @@ struct CricketGameView : View {
                             self.setGameOver()
                         }
                     )
-                    .padding(5)
+                    .padding(.horizontal, 5)
                     .disabled(self.shouldDisableHitView(at: index))
                 }
             }
             .padding(.horizontal, 5)
         }
+        .padding(.bottom)
     }
     
     // MARK: Turn Controls
@@ -138,6 +144,15 @@ struct CricketGameView : View {
             HStack {
                 Button(
                     action: {
+                        self.mode.wrappedValue.dismiss()
+                    }
+                ) {
+                    Image(systemName: "house")
+                }
+                .padding(.horizontal)
+                
+                Button(
+                    action: {
                         self.cricketGame.scoreKeeper.undo()
                         self.setGameOver()
                     }
@@ -147,7 +162,7 @@ struct CricketGameView : View {
                 .padding(.horizontal)
                 
                 Button(action: { self.showNewGameActionSheet = true } ) {
-                    Text("New Game")
+                    Image(systemName: "trash")
                 }
                 .padding(.horizontal)
             }
