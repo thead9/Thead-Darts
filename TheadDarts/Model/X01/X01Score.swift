@@ -74,7 +74,7 @@ class X01Score: DartScore {
     // MARK: Inits
     init () { }
 
-    init(startingPoint: Int = 301, updated: @escaping () -> ()) {
+    init(startingPoint: Int = 301, updated: @escaping () -> () = { }) {
         self.startingPoint = startingPoint
         self.updated = updated
     }
@@ -96,11 +96,113 @@ extension X01Score {
             return self
         }
         
+        switch wedge {
+        case .one:
+            marks.one += multiplier.rawValue
+        case .two:
+            marks.two += multiplier.rawValue
+        case .three:
+            marks.three += multiplier.rawValue
+        case .four:
+            marks.four += multiplier.rawValue
+        case .five:
+            marks.five += multiplier.rawValue
+        case .six:
+            marks.six += multiplier.rawValue
+        case .seven:
+            marks.seven += multiplier.rawValue
+        case .eight:
+            marks.eight += multiplier.rawValue
+        case .nine:
+            marks.nine += multiplier.rawValue
+        case .ten:
+            marks.ten += multiplier.rawValue
+        case .eleven:
+            marks.eleven += multiplier.rawValue
+        case .twelve:
+            marks.twelve += multiplier.rawValue
+        case .thirteen:
+            marks.thirteen += multiplier.rawValue
+        case .fourteen:
+            marks.fourteen += multiplier.rawValue
+        case .fifteen:
+            marks.fifteen += multiplier.rawValue
+        case .sixteen:
+            marks.sixteen += multiplier.rawValue
+        case .seventeen:
+            marks.seventeen += multiplier.rawValue
+        case .eightteen:
+            marks.eightteen += multiplier.rawValue
+        case .nineteen:
+            marks.nineteen += multiplier.rawValue
+        case .twenty:
+            marks.twenty += multiplier.rawValue
+        case .bull:
+            marks.bull += multiplier.rawValue
+        default:
+            return self
+        }
+        
+        if points < 0 {
+            undo(on: wedge, with: multiplier)
+        }
+        
         return self
     }
     
     @discardableResult
     func undo(on wedge: Wedge, with multiplier: Multiplier) -> X01Score {
+        guard !(wedge == .bull && multiplier == .triple) else {
+            return self
+        }
+        
+        switch wedge {
+        case .one:
+            marks.one -= multiplier.rawValue
+        case .two:
+            marks.two -= multiplier.rawValue
+        case .three:
+            marks.three -= multiplier.rawValue
+        case .four:
+            marks.four -= multiplier.rawValue
+        case .five:
+            marks.five -= multiplier.rawValue
+        case .six:
+            marks.six -= multiplier.rawValue
+        case .seven:
+            marks.seven -= multiplier.rawValue
+        case .eight:
+            marks.eight -= multiplier.rawValue
+        case .nine:
+            marks.nine -= multiplier.rawValue
+        case .ten:
+            marks.ten -= multiplier.rawValue
+        case .eleven:
+            marks.eleven -= multiplier.rawValue
+        case .twelve:
+            marks.twelve -= multiplier.rawValue
+        case .thirteen:
+            marks.thirteen -= multiplier.rawValue
+        case .fourteen:
+            marks.fourteen -= multiplier.rawValue
+        case .fifteen:
+            marks.fifteen -= multiplier.rawValue
+        case .sixteen:
+            marks.sixteen -= multiplier.rawValue
+        case .seventeen:
+            marks.seventeen -= multiplier.rawValue
+        case .eightteen:
+            marks.eightteen -= multiplier.rawValue
+        case .nineteen:
+            marks.nineteen -= multiplier.rawValue
+        case .twenty:
+            marks.twenty -= multiplier.rawValue
+        case .bull:
+            marks.bull -= multiplier.rawValue
+        default:
+            return self
+        }
+        
         return self
     }
 }
