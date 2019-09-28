@@ -16,7 +16,7 @@ class X01Score: DartScore {
     var updated: () -> () = { }
     
     var scoreKeeper: X01ScoreKeeper = X01ScoreKeeper(playerUnits: [X01PlayerUnit]())
-    
+
     var startingPoint: Int = 301
     var points: Int {
         get {
@@ -81,9 +81,8 @@ class X01Score: DartScore {
         self.updated = updated
     }
     
-    func shouldAllowHit(on: Wedge) -> Bool {
-        // TODO:
-        return true
+    func shouldAllowHit(on wedge: Wedge) -> Bool {
+        return scoreKeeper.shouldAllowHit(on: wedge, for: self)
     }
 }
 
@@ -97,6 +96,8 @@ extension X01Score {
         guard shouldAllowHit(on: wedge) else {
             return self
         }
+        
+        scoreKeeper.hit(on: wedge, with: multiplier, for: self)
         
         switch wedge {
         case .one:

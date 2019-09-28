@@ -133,4 +133,41 @@ class X01GameTests: XCTestCase {
         x01Game.addPlayer()
         XCTAssertEqual(x01Game.players[2].name, "Player 3")
     }
+    
+    // MARK: Gameplay
+    func testHit() {
+        x01Score1.hit(on: .one, with: .single)
+        XCTAssertEqual(x01Game.scores[0].points, 300)
+    }
+    
+    func testTryingToThrowFourDarts() {
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+
+        XCTAssertEqual(x01Game.scores[0].points, 298)
+    }
+    
+    func testNoWinner() {
+        XCTAssertNil(x01Game.winnerIndex)
+        XCTAssertNil(x01Game.winner)
+        XCTAssertFalse(x01Game.gameOver)
+    }
+    
+    func testWinner() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .five, with: .double)
+        
+        XCTAssertEqual(x01Game.winnerIndex, 0)
+        XCTAssertNotNil(x01Game.winner)
+        XCTAssertTrue(x01Game.gameOver)
+    }
+    
+//    func testBustNegativeScore() {
+//        x01Score1.startingPoint = 10
+//        x01Score1.hit(on: .eleven, with: .single)
+//
+//
+//    }
 }

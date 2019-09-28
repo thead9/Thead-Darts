@@ -22,13 +22,17 @@ class X01ScoreKeeper: DartScoreKeeper {
         }
     }
     
-    var activeTurn: DartTurn<Score>?
+    var activeTurn: DartTurn<Score> = DartTurn()
     
     var gameActions = Stack<DartAction>()
     
     var winnerIndex: Int? {
         get {
-            // MARK: TODO
+            for (index, playerUnit) in playerUnits.enumerated() {
+                if playerUnit.score.points == 0 {
+                    return index
+                }
+            }
             return nil
         }
     }
@@ -64,13 +68,18 @@ class X01ScoreKeeper: DartScoreKeeper {
     
     // MARK: Actions
     func shouldAllowHit(on wedge: Wedge, for score: Score) -> Bool {
-        //var shouldAllowHit = false
+        var shouldAllowHit = false
         
         if scores.count == 0 { // this occurs when a score is not associated with a game
+            if !activeTurn.canAddThrow() {
+                activeTurn = DartTurn()
+            }
             return true
         }
         
-        return true
+        shouldAllowHit = activeTurn.canAddThrow()
+        
+        return shouldAllowHit
     }
     
     func hit(on wedge: Wedge, with multiplier: Multiplier, for score: Score) {
@@ -80,19 +89,16 @@ class X01ScoreKeeper: DartScoreKeeper {
         
         let dartThrow = DartThrow(wedge: wedge, multiplier: multiplier, score: score)
         
-        if var _ = activeTurn {
-            self.activeTurn!.add(dartThrow)
-            gameActions.push(DartThrowOnTurn(dartThrow: dartThrow, turn: self.activeTurn!))
-        } else {
-            gameActions.push(dartThrow)
-        }
+        self.activeTurn.add(dartThrow)
+        gameActions.push(DartThrowOnTurn(dartThrow: dartThrow, turn: self.activeTurn))
+
         updated()
     }
     
     func nextPlayer() {
         let oldActiveIndex = activeIndex
         activeIndex = oldActiveIndex + 1 >= playerUnits.count ? 0 : oldActiveIndex + 1
-        gameActions.push(TurnChange(oldActiveIndex: oldActiveIndex, oldTurn: activeTurn!, newActiveIndex: activeIndex))
+        gameActions.push(TurnChange(oldActiveIndex: oldActiveIndex, oldTurn: activeTurn, newActiveIndex: activeIndex))
         activeTurn = DartTurn()
         updated()
     }
@@ -116,9 +122,7 @@ class X01ScoreKeeper: DartScoreKeeper {
     
     func reset() {
         gameActions = Stack<DartAction>()
-        if let _ = activeTurn {
-            activeTurn = DartTurn()
-        }
+        activeTurn = DartTurn()
         activeIndex = 0
     }
 }
