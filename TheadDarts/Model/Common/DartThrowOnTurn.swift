@@ -11,4 +11,8 @@ import Foundation
 struct DartThrowOnTurn<Score: DartScore>: DartAction {
     let dartThrow: DartThrow<Score>
     var turn: DartTurn<Score>
+    
+    func undo() {
+        dartThrow.undo()
+    }
 }

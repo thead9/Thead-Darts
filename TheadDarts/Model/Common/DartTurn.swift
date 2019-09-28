@@ -26,11 +26,27 @@ struct DartTurn<Score: DartScore> {
         }
         
         dartThrows.removeLast()
+        
         return self
     }
     
     func canAddThrow() -> Bool {
-        return dartThrows.count < 3
+        if busted {
+            return false
+        } else {
+            return dartThrows.count < 3
+        }
+    }
+    
+    var busted: Bool {
+        get {
+            for dartThrow in dartThrows {
+                if dartThrow.bust {
+                    return true
+                }
+            }
+            return false
+        }
     }
     
     func toString() -> [String] {
@@ -39,5 +55,17 @@ struct DartTurn<Score: DartScore> {
             display[index] = dartThrow.toString()
         }
         return display
+    }
+    
+    func undoAllThrows() {
+        for dartThrow in dartThrows {
+            dartThrow.undo()
+        }
+    }
+    
+    func redoAllThrows() {
+        for dartThrow in dartThrows {
+            dartThrow.redo()
+        }
     }
 }

@@ -18,6 +18,5 @@ protocol DartScoreKeeper {
     var winner: Player? { get }
     var gameOver: Bool { get }
     
-    func shouldAllowHit(on wedge: Wedge, for score: Score) -> Bool
     func hit(on wedge: Wedge, with multiplier: Multiplier, for score: Score)
 }

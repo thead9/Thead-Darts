@@ -12,15 +12,38 @@ struct DartThrow<Score: DartScore>: DartAction {
     let wedge: Wedge
     let multiplier: Multiplier
     let score: Score
+    let bust: Bool
+    
+    init (wedge: Wedge, multiplier: Multiplier, score: Score, bust: Bool = false) {
+        self.wedge = wedge
+        self.multiplier = multiplier
+        self.score = score
+        self.bust = bust
+    }
     
     func toString() -> String {
-        if (wedge == .miss) {
+        if bust {
+            return "Bust"
+        }
+        if wedge == .miss {
             return "\(wedge.rawValue)"
-        } else if (wedge == .bull) {
+        } else if wedge == .bull {
             return "Bx\(multiplier.rawValue)"
         }
         else {
             return "\(wedge.rawValue)x\(multiplier.rawValue)"
         }
+    }
+
+    func undo() {
+        guard !bust else {
+            return
+        }
+        
+        score.undo(on: wedge, with: multiplier)
+    }
+    
+    func redo() {
+        score.registerHit(on: wedge, with: multiplier)
     }
 }

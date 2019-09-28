@@ -10,8 +10,13 @@ import Foundation
 
 protocol DartScore {
     associatedtype Score: DartScore
-    
-    func shouldAllowHit(on wedge: Wedge) -> Bool
+        
+    @discardableResult
     func hit(on wedge: Wedge, with multiplier: Multiplier) -> Score
+    
+    @discardableResult
+    func registerHit(on wedge: Wedge, with multiplier: Multiplier) -> Score
+    
+    @discardableResult
     func undo(on wedge: Wedge, with multiplier: Multiplier) -> Score
 }

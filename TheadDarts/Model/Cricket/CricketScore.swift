@@ -158,6 +158,11 @@ extension CricketScore {
             return self
         }
         
+        return registerHit(on: wedge, with: multiplier)
+    }
+    
+    @discardableResult
+    func registerHit(on wedge: Wedge, with multiplier: Multiplier) -> CricketScore {
         // All of the below need to occur in order to allow for proper logic evaluation
         // Only change the order if you know what you are doing
         let allowScoring = shouldAllowScoring(on: wedge, with: multiplier) || getMarks(for: wedge) + multiplier.rawValue < 3

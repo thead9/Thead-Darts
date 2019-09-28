@@ -67,7 +67,7 @@ class X01ScoreKeeper: DartScoreKeeper {
     }
     
     // MARK: Actions
-    func shouldAllowHit(on wedge: Wedge, for score: Score) -> Bool {
+    func shouldAllowHit(on wedge: Wedge, with multiplier: Multiplier, for score: Score) -> Bool {
         var shouldAllowHit = false
         
         if scores.count == 0 { // this occurs when a score is not associated with a game
@@ -79,19 +79,35 @@ class X01ScoreKeeper: DartScoreKeeper {
         
         shouldAllowHit = activeTurn.canAddThrow()
         
+        if shouldAllowHit {
+            let previewPoints = score.previewPointsForHit(on: wedge, with: multiplier)
+            // Bust
+            if ( (previewPoints < 0) || (previewPoints == 0 && multiplier != .double) ) {
+                self.activeTurn.undoAllThrows()
+                
+                registerHit(on: wedge, with: multiplier, for: score, bust: true)
+                
+                shouldAllowHit = false
+            }
+        }
+        
         return shouldAllowHit
     }
     
     func hit(on wedge: Wedge, with multiplier: Multiplier, for score: Score) {
-        guard shouldAllowHit(on: wedge, for: score) else {
+        guard shouldAllowHit(on: wedge, with: multiplier, for: score) else {
             return
         }
         
-        let dartThrow = DartThrow(wedge: wedge, multiplier: multiplier, score: score)
+        registerHit(on: wedge, with: multiplier, for: score)
+    }
+    
+    func registerHit(on wedge: Wedge, with multiplier: Multiplier, for score: Score, bust: Bool = false) {
+        let dartThrow = DartThrow(wedge: wedge, multiplier: multiplier, score: score, bust: bust)
         
         self.activeTurn.add(dartThrow)
         gameActions.push(DartThrowOnTurn(dartThrow: dartThrow, turn: self.activeTurn))
-
+        
         updated()
     }
     
@@ -104,12 +120,13 @@ class X01ScoreKeeper: DartScoreKeeper {
     }
     
     func undo() {
-        if let gameActionToUndo = gameActions.peek() as? DartThrow<X01Score> {
-            gameActionToUndo.score.undo(on: gameActionToUndo.wedge, with: gameActionToUndo.multiplier)
-        }
         if var gameActionToUndo = gameActions.peek() as? DartThrowOnTurn<X01Score> {
             activeTurn = gameActionToUndo.turn.undo()
-            gameActionToUndo.dartThrow.score.undo(on: gameActionToUndo.dartThrow.wedge, with: gameActionToUndo.dartThrow.multiplier)
+            gameActionToUndo.dartThrow.undo()
+            
+            if gameActionToUndo.dartThrow.bust {
+                gameActionToUndo.turn.redoAllThrows()
+            }
         }
         if let gameActionToUndo = gameActions.peek() as? TurnChange<X01Score> {
             activeIndex = gameActionToUndo.oldActiveIndex

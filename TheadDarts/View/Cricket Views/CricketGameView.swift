@@ -58,7 +58,6 @@ struct CricketGameView : View {
         .foregroundColor(Color("Primary"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
-        .addBorder(Color(.blue))
     }
     
     //MARK: Scoreboard

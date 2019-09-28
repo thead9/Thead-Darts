@@ -81,8 +81,8 @@ class X01Score: DartScore {
         self.updated = updated
     }
     
-    func shouldAllowHit(on wedge: Wedge) -> Bool {
-        return scoreKeeper.shouldAllowHit(on: wedge, for: self)
+    func shouldAllowHit(on wedge: Wedge, with multiplier: Multiplier) -> Bool {
+        return scoreKeeper.shouldAllowHit(on: wedge, with: multiplier, for: self)
     }
 }
 
@@ -93,12 +93,17 @@ extension X01Score {
         guard !(wedge == .bull && multiplier == .triple) else {
             return self
         }
-        guard shouldAllowHit(on: wedge) else {
+        guard shouldAllowHit(on: wedge, with: multiplier) else {
             return self
         }
         
         scoreKeeper.hit(on: wedge, with: multiplier, for: self)
         
+        return registerHit(on: wedge, with: multiplier)
+    }
+    
+    @discardableResult
+    func registerHit(on wedge: Wedge, with multiplier: Multiplier) -> X01Score {
         switch wedge {
         case .one:
             marks.one += multiplier.rawValue
@@ -207,6 +212,10 @@ extension X01Score {
         }
         
         return self
+    }
+    
+    func previewPointsForHit(on wedge: Wedge, with multiplier: Multiplier) -> Int {
+        return points - (wedge.rawValue * multiplier.rawValue)
     }
     
     func reset() {

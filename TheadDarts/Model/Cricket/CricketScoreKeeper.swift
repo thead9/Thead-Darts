@@ -151,11 +151,11 @@ class CricketScoreKeeper: DartScoreKeeper {
     
     func undo() {
         if let gameActionToUndo = gameActions.peek() as? DartThrow<CricketScore> {
-            gameActionToUndo.score.undo(on: gameActionToUndo.wedge, with: gameActionToUndo.multiplier)
+            gameActionToUndo.undo()
         }
         if var gameActionToUndo = gameActions.peek() as? DartThrowOnTurn<CricketScore> {
             activeTurn = gameActionToUndo.turn.undo()
-            gameActionToUndo.dartThrow.score.undo(on: gameActionToUndo.dartThrow.wedge, with: gameActionToUndo.dartThrow.multiplier)
+            gameActionToUndo.undo()
         }
         if let gameActionToUndo = gameActions.peek() as? TurnChange<CricketScore> {
             activeIndex = gameActionToUndo.oldActiveIndex

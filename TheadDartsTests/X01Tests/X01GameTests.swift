@@ -140,6 +140,12 @@ class X01GameTests: XCTestCase {
         XCTAssertEqual(x01Game.scores[0].points, 300)
     }
     
+    func testUndo() {
+        x01Score1.hit(on: .one, with: .single)
+        x01Game.scoreKeeper.undo()
+        XCTAssertEqual(x01Game.scores[0].points, 301)
+    }
+    
     func testTryingToThrowFourDarts() {
         x01Score1.hit(on: .one, with: .single)
         x01Score1.hit(on: .one, with: .single)
@@ -164,10 +170,79 @@ class X01GameTests: XCTestCase {
         XCTAssertTrue(x01Game.gameOver)
     }
     
-//    func testBustNegativeScore() {
-//        x01Score1.startingPoint = 10
-//        x01Score1.hit(on: .eleven, with: .single)
-//
-//
-//    }
+    func testBustOnFirstThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .eleven, with: .single)
+
+        XCTAssertEqual(x01Game.scores[0].points, 10)
+    }
+    
+    func testUndoBustOnFirstThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .eleven, with: .single)
+        
+        x01Game.scoreKeeper.undo()
+
+        XCTAssertEqual(x01Game.scores[0].points, 10)
+    }
+    
+    func testBustOnSecondThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .eleven, with: .single)
+
+        XCTAssertEqual(x01Game.scores[0].points, 10)
+    }
+    
+    func testUndoBustOnSecondThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .eleven, with: .single)
+        x01Game.scoreKeeper.undo()
+
+        XCTAssertEqual(x01Game.scores[0].points, 9)
+    }
+    
+    func testBustOnThirdThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .eleven, with: .single)
+
+        XCTAssertEqual(x01Game.scores[0].points, 10)
+    }
+    
+    func testUndoBustOnThirdThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .eleven, with: .single)
+        x01Game.scoreKeeper.undo()
+
+        XCTAssertEqual(x01Game.scores[0].points, 8)
+    }
+    
+    func testBustWithZeroButNotDouble() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .ten, with: .single)
+        
+        XCTAssertEqual(x01Game.scores[0].points, 10)
+    }
+    
+    func testBustOnFirstThrowThenTryingToThrowAgain() {
+        // Bust
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .eleven, with: .single)
+        
+        XCTAssertFalse(x01Game.scoreKeeper.activeTurn.canAddThrow())
+    }
+    
+    func testBustOnSecondThrowThenTryingToThrowAgain() {
+        // Bust
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .eleven, with: .single)
+        
+        XCTAssertFalse(x01Game.scoreKeeper.activeTurn.canAddThrow())
+    }
 }
