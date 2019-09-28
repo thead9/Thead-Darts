@@ -186,6 +186,19 @@ class X01GameTests: XCTestCase {
         XCTAssertEqual(x01Game.scores[0].points, 10)
     }
     
+    func testHittingAfterUndoingBustOnFirstThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .eleven, with: .single)
+        
+        x01Game.scoreKeeper.undo()
+        
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        
+        XCTAssertEqual(x01Game.scores[0].points, 7)
+    }
+    
     func testBustOnSecondThrow() {
         x01Score1.startingPoint = 10
         x01Score1.hit(on: .one, with: .single)
@@ -201,6 +214,18 @@ class X01GameTests: XCTestCase {
         x01Game.scoreKeeper.undo()
 
         XCTAssertEqual(x01Game.scores[0].points, 9)
+    }
+    
+    func testHittingAfterUndoingBustOnSecondThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .eleven, with: .single)
+        x01Game.scoreKeeper.undo()
+        
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        
+        XCTAssertEqual(x01Game.scores[0].points, 7)
     }
     
     func testBustOnThirdThrow() {
@@ -220,6 +245,18 @@ class X01GameTests: XCTestCase {
         x01Game.scoreKeeper.undo()
 
         XCTAssertEqual(x01Game.scores[0].points, 8)
+    }
+    
+    func testHittingAfterUndoingBustOnThirdThrow() {
+        x01Score1.startingPoint = 10
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .one, with: .single)
+        x01Score1.hit(on: .eleven, with: .single)
+        x01Game.scoreKeeper.undo()
+        
+        x01Score1.hit(on: .one, with: .single)
+        
+        XCTAssertEqual(x01Game.scores[0].points, 7)
     }
     
     func testBustWithZeroButNotDouble() {
