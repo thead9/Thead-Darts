@@ -22,7 +22,7 @@ class CricketScoreKeeper: DartScoreKeeper {
         }
     }
     
-    var activeTurn: DartTurn<CricketScore>?
+    var activeTurn: DartTurn<Score>?
     
     var gameActions = Stack<DartAction>()
     

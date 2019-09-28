@@ -68,6 +68,10 @@
 		C7D61D0D232D2A770098D339 /* CricketMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D61D0B232D2A770098D339 /* CricketMarkView.swift */; };
 		C7F0A20D22CD7876005171BB /* CricketPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */; };
 		C7F0A20E22CD7876005171BB /* CricketPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */; };
+		C7F46D18233F9B2900C3C3F7 /* X01Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D17233F9B2800C3C3F7 /* X01Game.swift */; };
+		C7F46D19233F9B2900C3C3F7 /* X01Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D17233F9B2800C3C3F7 /* X01Game.swift */; };
+		C7F46D1B233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */; };
+		C7F46D1C233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +137,8 @@
 		C7C5252C232EE3C8009AF03B /* X01ScoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01ScoreTests.swift; sourceTree = "<group>"; };
 		C7D61D0B232D2A770098D339 /* CricketMarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CricketMarkView.swift; sourceTree = "<group>"; };
 		C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketPlayerUnit.swift; sourceTree = "<group>"; };
+		C7F46D17233F9B2800C3C3F7 /* X01Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01Game.swift; sourceTree = "<group>"; };
+		C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01ScoreKeeper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,6 +348,8 @@
 				C7C5251E232EDB87009AF03B /* X01Player.swift */,
 				C7C52521232EDBF7009AF03B /* X01PlayerUnit.swift */,
 				C7C52524232EDC62009AF03B /* X01Score.swift */,
+				C7F46D17233F9B2800C3C3F7 /* X01Game.swift */,
+				C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */,
 			);
 			path = X01;
 			sourceTree = "<group>";
@@ -486,7 +494,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7F46D1B233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */,
 				C7C52525232EDC62009AF03B /* X01Score.swift in Sources */,
+				C7F46D18233F9B2900C3C3F7 /* X01Game.swift in Sources */,
 				C75C5F3B2303281F0019C8B7 /* DartAction.swift in Sources */,
 				C78EDD28230F044F00700A55 /* DartThrowOnTurn.swift in Sources */,
 				C7983E6622CACCE800ACC903 /* DartGame.swift in Sources */,
@@ -530,11 +540,13 @@
 				C7C52523232EDBF7009AF03B /* X01PlayerUnit.swift in Sources */,
 				C7D61D0D232D2A770098D339 /* CricketMarkView.swift in Sources */,
 				C75C5F402303287D0019C8B7 /* DartThrow.swift in Sources */,
+				C7F46D19233F9B2900C3C3F7 /* X01Game.swift in Sources */,
 				C7983E7022CACD1F00ACC903 /* DartScoreKeeper.swift in Sources */,
 				C7C5252D232EE3C8009AF03B /* X01ScoreTests.swift in Sources */,
 				C7983E6D22CACD0D00ACC903 /* DartScore.swift in Sources */,
 				C78EDD29230F044F00700A55 /* DartThrowOnTurn.swift in Sources */,
 				C7C5252B232EE234009AF03B /* X01PlayerTests.swift in Sources */,
+				C7F46D1C233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */,
 				C7983E7322CACD4800ACC903 /* CricketGameTests.swift in Sources */,
 				C7983E5E22CACCAA00ACC903 /* CricketPlayer.swift in Sources */,
 				C7983E5822CACC8300ACC903 /* Multiplier.swift in Sources */,

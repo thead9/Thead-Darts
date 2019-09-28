@@ -15,6 +15,8 @@ class X01Score: DartScore {
     var objectWillChange = PassthroughSubject<Void, Never>()
     var updated: () -> () = { }
     
+    var scoreKeeper: X01ScoreKeeper = X01ScoreKeeper(playerUnits: [X01PlayerUnit]())
+    
     var startingPoint: Int = 301
     var points: Int {
         get {
@@ -204,6 +206,10 @@ extension X01Score {
         }
         
         return self
+    }
+    
+    func reset() {
+        marks = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     }
 }
 
