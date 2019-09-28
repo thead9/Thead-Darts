@@ -27,10 +27,10 @@ class X01Game: DartGame, ObservableObject {
     var scoreKeeper: X01ScoreKeeper!
     
     // MARK: Inits
-    init(numberOfPlayers: Int) {
+    init(numberOfPlayers: Int, startingPoint: Int = 301) {
         for index in 0..<numberOfPlayers {
             let playerUnit = X01PlayerUnit(player: X01Player(name: "Player \(index+1)"),
-                                               score: X01Score(),
+                                               score: X01Score(startingPoint: startingPoint),
                                                updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }
@@ -40,10 +40,10 @@ class X01Game: DartGame, ObservableObject {
         }
     }
     
-    init(players: [X01Player]) {
+    init(players: [X01Player], startingPoint: Int = 301) {
         for player in players {
             let playerUnit = X01PlayerUnit(player: player,
-                                               score: X01Score(),
+                                               score: X01Score(startingPoint: startingPoint),
                                                updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }

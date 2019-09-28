@@ -26,20 +26,26 @@ class CricketGame: DartGame, ObservableObject {
     var scoreKeeper: CricketScoreKeeper!
     
     // MARK: Inits
-    init(numberOfPlayers: Int) {
+    init(numberOfPlayers: Int, trackTurns: Bool = false) {
         for index in 0..<numberOfPlayers {
             let playerUnit = CricketPlayerUnit(player: CricketPlayer(name: "Player \(index+1)"),
                                                score: CricketScore(),
                                                updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }
+        
         scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits, updated: { self.objectWillChange.send(()) })
+        
+        if trackTurns {
+            scoreKeeper.activeTurn = DartTurn<CricketScore>()
+        }
+        
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }
     }
     
-    init(players: [CricketPlayer]) {
+    init(players: [CricketPlayer], trackTurns: Bool = false) {
         for player in players {
             let playerUnit = CricketPlayerUnit(player: player,
                                                score: CricketScore(),
@@ -47,6 +53,11 @@ class CricketGame: DartGame, ObservableObject {
             self.playerUnits.append(playerUnit)
         }
         scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits, updated: { self.objectWillChange.send(()) })
+        
+        if trackTurns {
+            scoreKeeper.activeTurn = DartTurn<CricketScore>()
+        }
+        
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }
