@@ -72,6 +72,7 @@
 		C7F46D19233F9B2900C3C3F7 /* X01Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D17233F9B2800C3C3F7 /* X01Game.swift */; };
 		C7F46D1B233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */; };
 		C7F46D1C233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */; };
+		C7F46D1E233FA38A00C3C3F7 /* X01GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D1D233FA38A00C3C3F7 /* X01GameTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 		C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketPlayerUnit.swift; sourceTree = "<group>"; };
 		C7F46D17233F9B2800C3C3F7 /* X01Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01Game.swift; sourceTree = "<group>"; };
 		C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01ScoreKeeper.swift; sourceTree = "<group>"; };
+		C7F46D1D233FA38A00C3C3F7 /* X01GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01GameTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +361,7 @@
 			children = (
 				C7C52528232EE1B0009AF03B /* X01PlayerTests.swift */,
 				C7C5252C232EE3C8009AF03B /* X01ScoreTests.swift */,
+				C7F46D1D233FA38A00C3C3F7 /* X01GameTests.swift */,
 			);
 			path = X01Tests;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7983E5522CACC7000ACC903 /* Wedge.swift in Sources */,
+				C7F46D1E233FA38A00C3C3F7 /* X01GameTests.swift in Sources */,
 				C75C5F3923022FF80019C8B7 /* DartPlayerUnit.swift in Sources */,
 				C75C5F3C2303281F0019C8B7 /* DartAction.swift in Sources */,
 				C7F0A20E22CD7876005171BB /* CricketPlayerUnit.swift in Sources */,
