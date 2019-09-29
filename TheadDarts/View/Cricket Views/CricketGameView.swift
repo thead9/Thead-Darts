@@ -51,6 +51,7 @@ struct CricketGameView : View {
             scoreboard
             
             turnControls
+                .padding(.bottom, 2)
             
             bottomControls
         }
@@ -58,6 +59,7 @@ struct CricketGameView : View {
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
         .foregroundColor(Color("Primary"))
+        .navigationBarTitle(Text("Title"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
@@ -80,6 +82,7 @@ struct CricketGameView : View {
                 ForEach(0..<cricketGame.scores.count) { index in
                     CricketPlayerUnitView(playerUnit: self.cricketGame.playerUnits[index])
                         .padding(.horizontal, 5)
+                        .padding(.vertical, 10)
                         .addBorder(Color("Secondary"), width: 3, condition: self.shouldAddActiveBorder(on: index))
                 }
             }
@@ -104,7 +107,6 @@ struct CricketGameView : View {
             }
             .padding(.horizontal, 5)
         }
-        .padding(.bottom)
     }
     
     // MARK: Turn Controls
@@ -156,12 +158,14 @@ struct CricketGameView : View {
                         self.setGameOver()
                     }
                 ) {
-                    Image(systemName: "arrow.uturn.left")
+                    Text("Undo")
+                        .font(.title)
                 }
                 .padding(.horizontal)
                 
                 Button(action: { self.showNewGameActionSheet = true } ) {
-                    Image(systemName: "trash")
+                    Text("New Game")
+                        .font(.title)
                 }
                 .padding(.horizontal)
             }

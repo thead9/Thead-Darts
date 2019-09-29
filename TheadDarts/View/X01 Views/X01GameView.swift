@@ -68,13 +68,17 @@ struct X01GameView: View {
                         self.gameOver = self.x01Game.gameOver
                        })
             
-            turnControls
+            if (x01Game.scoreKeeper.activeTurn.canAddThrow()) {
+                turnControls
+                    .padding(.bottom, 2)
+            }
             
             bottomControls
         }
         .foregroundColor(Color("Primary"))
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
+        .navigationBarTitle(Text("Title"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
@@ -84,6 +88,7 @@ struct X01GameView: View {
             ForEach(0..<x01Game.scores.count) { index in
                 X01PlayerUnitView(playerUnit: self.x01Game.playerUnits[index])
                     .padding(.horizontal, 5)
+                    .padding(.vertical, 10)
                     .addBorder(Color("Secondary"), width: 3, condition: self.shouldAddActiveBorder(on: index))
             }
         }
@@ -101,16 +106,6 @@ struct X01GameView: View {
                         .foregroundColor(label.contains("T") ? Color("HitBackground") : Color("Primary") )
                         .addBorder((label.contains("T") ? Color("HitBackground") : Color("Secondary")), width: 1)
                 }
-                if (!x01Game.scoreKeeper.activeTurn.canAddThrow()) {
-                    Button(action: { self.x01Game.scoreKeeper.nextPlayer() }) {
-                        Text("Next")
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                    }
-                    .background(Color("Secondary"))
-                    .foregroundColor(Color("HitBackground"))
-                    .cornerRadius(25)
-                }
             }
             .padding(.horizontal)
             .font(.headline)
@@ -127,12 +122,14 @@ struct X01GameView: View {
                         self.setGameOver()
                     }
                 ) {
-                    Image(systemName: "arrow.uturn.left")
+                    Text("Undo")
+                        .font(.title)
                 }
                 .padding(.horizontal)
                 
                 Button(action: { self.showNewGameActionSheet = true } ) {
-                    Image(systemName: "trash")
+                    Text("New Game")
+                        .font(.title)
                 }
                 .padding(.horizontal)
             }

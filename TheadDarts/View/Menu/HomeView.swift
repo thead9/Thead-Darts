@@ -16,6 +16,7 @@ struct HomeView: View {
     
     @ObservedObject var settings = UserSettings()
         
+    // MARK: Body
     var body: some View {
         NavigationView {
             VStack {
@@ -27,16 +28,18 @@ struct HomeView: View {
             }
             .padding(.horizontal)
             .navigationBarTitle(Text("Thead Darts"))
-            .foregroundColor(Color("Secondary"))
         }
         .font(.title)
     }
         
+    // MARK: Cricket
     var cricketCard: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Cricket")
                 .padding()
                 .font(.largeTitle)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color("HitBackground"))
             
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
@@ -51,6 +54,7 @@ struct HomeView: View {
                         Text("\(boolToYesNo(settings.trackTurns))")
                             .padding()
                     }
+                    .foregroundColor(Color("Secondary"))
                     .background(Color("HitBackground"))
                     .cornerRadius(25)
                     .addBorder(Color("Primary"), width: 2)
@@ -61,6 +65,7 @@ struct HomeView: View {
                         .padding()
                         .font(.largeTitle)
                 }
+                .foregroundColor(Color("Secondary"))
                 .background(Color("HitBackground"))
                 .cornerRadius(25)
                 .addBorder(Color("Primary"), width: 2)
@@ -73,6 +78,7 @@ struct HomeView: View {
         .padding(.top)
     }
     
+    // MARK: X01
     let x01StartingPoints1 = [201, 301, 401, 501]
     let x01StartingPoints2 = [601, 701, 801, 901]
     @State var selectingX01StartingPoint = false
@@ -82,6 +88,8 @@ struct HomeView: View {
             Text("X01")
                 .padding()
                 .font(.largeTitle)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color("HitBackground"))
             
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
@@ -101,6 +109,7 @@ struct HomeView: View {
                                 .padding()
                         }
                     }
+                    .foregroundColor(Color("Secondary"))
                     .background(Color("HitBackground"))
                     .cornerRadius(25)
                     .addBorder(Color("Primary"), width: 2)
@@ -119,6 +128,7 @@ struct HomeView: View {
                                     Text("\(startingPoint)")
                                         .padding()
                                 }
+                                .foregroundColor(Color("Secondary"))
                                 .background(Color("HitBackground"))
                                 .cornerRadius(25)
                                 .addBorder(Color("Primary"), width: 2)
@@ -136,6 +146,7 @@ struct HomeView: View {
                                     Text("\(startingPoint)")
                                         .padding()
                                 }
+                                .foregroundColor(Color("Secondary"))
                                 .background(Color("HitBackground"))
                                 .cornerRadius(25)
                                 .addBorder(Color("Primary"), width: 2)
@@ -154,6 +165,7 @@ struct HomeView: View {
                         Text("\(boolToYesNo(settings.doubleOut))")
                             .padding()
                     }
+                    .foregroundColor(Color("Secondary"))
                     .background(Color("HitBackground"))
                     .cornerRadius(25)
                     .addBorder(Color("Primary"), width: 2)
@@ -165,6 +177,7 @@ struct HomeView: View {
                         .padding()
                         .font(.largeTitle)
                 }
+                .foregroundColor(Color("Secondary"))
                 .background(Color("HitBackground"))
                 .cornerRadius(25)
                 .addBorder(Color("Primary"), width: 2)

@@ -14,16 +14,20 @@ struct X01HitView: View {
     
     var onHit: () -> ()
     
+    // MARK: Body
     var body: some View {
         Group {
             if self.selectingMultiplier.0 {
                 x01SelectingMultiplier
+            } else if !self.x01Game.scoreKeeper.activeTurn.canAddThrow() {
+                x01TurnOverview
             } else {
                 x01HitGrid
             }
         }
     }
     
+    // MARK: Hit Grid
     let wedgesArray: [[Wedge]] = [[.one, .two, .three, .four],
                                   [.five, .six, .seven, .eight],
                                   [.nine, .ten, .eleven, .twelve],
@@ -74,7 +78,7 @@ struct X01HitView: View {
                                     Text("\(wedge.rawValue)")
                                 }
                             }
-                            .frame(width: (self.isBullOrMiss(wedge: wedge) ? 2 : 1) * self.getItemWidth(containerWidth: geometry.size.width), height: self.getItemHeight(containerHeight: geometry.size.height))
+                            .frame(width: ( (self.isBullOrMiss(wedge: wedge) ? 2 : 1) * self.getItemWidth(containerWidth: geometry.size.width) ) + (self.isBullOrMiss(wedge: wedge) ? self.hitViewSpacing / 2 : 0), height: self.getItemHeight(containerHeight: geometry.size.height))
                             .background(Color("HitBackground"))
                             .foregroundColor(Color("Secondary"))
                             .cornerRadius(25)
@@ -87,6 +91,7 @@ struct X01HitView: View {
         }
     }
     
+    // MARK: Selecting Multiplier
     var x01SelectingMultiplier: some View {
         GeometryReader { geometry in
             VStack(spacing: 5) {
@@ -161,6 +166,64 @@ struct X01HitView: View {
             .cornerRadius(25)
             .addBorder(Color("Primary"), width: 2)
             .padding()
+        }
+    }
+    
+    // MARK: Turn Overview
+    var x01TurnOverview: some View {
+        GeometryReader { geometry in
+            VStack() {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text("Turn Summary")
+                        .padding()
+                        .font(.largeTitle)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color("HitBackground"))
+                    
+                    Rectangle()
+                        .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
+                        .foregroundColor(Color("Primary"))
+                    
+                    VStack(alignment: .leading, spacing: 0) {
+                        ForEach(0..<self.x01Game.scoreKeeper!.activeTurn.dartThrows.count, id: \.self) { index in
+                            HStack(spacing: 10) {
+                                Text("Throw \(index + 1)")
+                                Text("\(self.x01Game.scoreKeeper!.activeTurn.dartThrows[index].toString())")
+                                    .foregroundColor(Color("Secondary"))
+                            }
+                            .font(.title)
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                        }
+                        
+                        Rectangle()
+                            .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
+                            .foregroundColor(Color("Primary"))
+                        
+                        HStack(spacing: 10) {
+                            Text("Total")
+                            Text("\(self.x01Game.scoreKeeper!.activeTurn.totalScore())")
+                                .foregroundColor(Color("Secondary"))
+                        }
+                        .padding(.horizontal)
+                        .padding(.top)
+                    }
+                    .padding(.vertical)
+                }
+                .cornerRadius(25)
+                .addBorder(Color("Primary"), width: 2)
+                
+                Button(action: { self.x01Game.scoreKeeper.nextPlayer() }) {
+                    Text("Next")
+                        .padding()
+                        .frame(maxWidth: geometry.size.width / 3)
+                }
+                .background(Color("Secondary"))
+                .foregroundColor(Color("HitBackground"))
+                .cornerRadius(25)
+                .padding(.top)
+            }
+            .padding(.horizontal)
         }
     }
 }

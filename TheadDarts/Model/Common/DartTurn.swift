@@ -57,6 +57,17 @@ struct DartTurn<Score: DartScore> {
         return display
     }
     
+    func totalScore() -> String {
+        var totalScore = 0
+        for dartThrow in dartThrows {
+            if dartThrow.bust {
+                return "Bust"
+            }
+            totalScore += dartThrow.wedge.rawValue * dartThrow.multiplier.rawValue
+        }
+        return String(totalScore)
+    }
+    
     func undoAllThrows() {
         for dartThrow in dartThrows {
             dartThrow.undo()

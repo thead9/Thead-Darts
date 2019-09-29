@@ -20,10 +20,14 @@ struct DartThrow<Score: DartScore>: DartAction {
         self.score = score
         self.bust = bust
     }
-    
+        
     func toString() -> String {
         if bust {
-            return "Bust"
+            if wedge == .bull {
+                return "Bust (Bx\(multiplier.rawValue))"
+            } else {
+                return "Bust (\(wedge.rawValue)x\(multiplier.rawValue))"
+            }
         }
         if wedge == .miss {
             return "\(wedge.rawValue)"
