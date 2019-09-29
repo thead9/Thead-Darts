@@ -80,13 +80,20 @@ class X01ScoreKeeper: DartScoreKeeper {
         shouldAllowHit = activeTurn.canAddThrow()
         
         if shouldAllowHit {
+            // Bust Checking
+            var bust = false
             let previewPoints = score.previewPointsForHit(on: wedge, with: multiplier)
-            // Bust
-            if ( (previewPoints < 0) || (previewPoints == 0 && multiplier != .double) ) {
+            
+            if previewPoints < 0 {
+                bust = true
+            } else if (previewPoints == 0 && multiplier != .double) {
+                if (!(wedge == .one && multiplier == .single)) {
+                    bust = true
+                }
+            }
+            if bust {
                 self.activeTurn.undoAllThrows()
-                
                 registerHit(on: wedge, with: multiplier, for: score, bust: true)
-                
                 shouldAllowHit = false
             }
         }
