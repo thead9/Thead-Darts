@@ -15,6 +15,17 @@ struct CricketGameView : View {
     
     @State var gameOver: Bool = false
     @State var showWinnerAlert: Bool = false
+    var winnerAlert: Alert {
+        Alert(title: Text("Winner!"),
+              message: Text("\(self.cricketGame.winner!.name) has won!"),
+              primaryButton: .default(Text("New Game")) {
+                    self.cricketGame.newGame()
+                    self.setGameOver()
+              },
+              secondaryButton: .default(Text("View Scoreboard"))
+        )
+    }
+    
     @State var showNewGameActionSheet = false
     var newGameActionSheet: ActionSheet {
         ActionSheet(
@@ -45,16 +56,7 @@ struct CricketGameView : View {
         }
         .padding(.vertical)
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
-        .alert(isPresented: $showWinnerAlert) {
-            Alert(title: Text("Winner!"),
-                  message: Text("\(self.cricketGame.winner!.name) has won!"),
-                  primaryButton: .default(Text("New Game")) {
-                        self.cricketGame.newGame()
-                        self.setGameOver()
-                  },
-                  secondaryButton: .default(Text("View Scoreboard"))
-            )
-        }
+        .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
         .foregroundColor(Color("Primary"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
@@ -64,9 +66,16 @@ struct CricketGameView : View {
     var scoreboard: some View {
         VStack {
             HStack {
-                Spacer()
-                    .frame(width: leftColumnWidth+5)
-                    .padding(.horizontal, 5)
+                Button(
+                    action: {
+                        self.mode.wrappedValue.dismiss()
+                    }
+                ) {
+                    Image(systemName: "house")
+                }
+                .frame(width: leftColumnWidth)
+                .padding(.horizontal, 5)
+                .foregroundColor(Color("Secondary"))
 
                 ForEach(0..<cricketGame.scores.count) { index in
                     CricketPlayerUnitView(playerUnit: self.cricketGame.playerUnits[index])
@@ -141,15 +150,6 @@ struct CricketGameView : View {
     var bottomControls: some View {
         Group {
             HStack {
-                Button(
-                    action: {
-                        self.mode.wrappedValue.dismiss()
-                    }
-                ) {
-                    Image(systemName: "house")
-                }
-                .padding(.horizontal)
-                
                 Button(
                     action: {
                         self.cricketGame.scoreKeeper.undo()

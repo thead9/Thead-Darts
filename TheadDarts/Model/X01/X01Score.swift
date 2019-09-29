@@ -89,7 +89,7 @@ class X01Score: DartScore {
 // MARK: Change Marks
 extension X01Score {
     @discardableResult
-    func hit(on wedge: Wedge, with multiplier: Multiplier) -> X01Score {
+    func hit(on wedge: Wedge, with multiplier: Multiplier = .single) -> X01Score {
         guard !(wedge == .bull && multiplier == .triple) else {
             return self
         }

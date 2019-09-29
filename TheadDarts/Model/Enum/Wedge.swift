@@ -130,3 +130,7 @@ enum Wedge: Int {
         }
     }
 }
+
+extension Wedge: Identifiable {
+    var id: Wedge { self }
+}

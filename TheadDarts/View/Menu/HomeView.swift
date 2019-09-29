@@ -123,7 +123,7 @@ struct HomeView: View {
                     })
                 }
                 
-                NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: self.trackTurns))) {
+                NavigationLink(destination: X01GameView(x01Game: X01Game(numberOfPlayers: 2, startingPoint: x01StartingPoint))) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)

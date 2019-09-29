@@ -33,7 +33,7 @@ struct CricketHitView : View {
         GeometryReader { geometry in
             VStack(alignment: .center, spacing: self.spacing) {
                 if (self.selectingMultiplier.0) {
-                    VStack(spacing: 5) {
+                    VStack(spacing: self.spacing) {
                         Text("\(self.selectingMultiplier.1.abbreviation())")
                             .padding(.bottom)
                             .foregroundColor(Color("Primary"))
