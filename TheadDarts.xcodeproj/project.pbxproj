@@ -76,6 +76,8 @@
 		C7F46D2123402BCE00C3C3F7 /* X01GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D2023402BCE00C3C3F7 /* X01GameView.swift */; };
 		C7F46D2323402D8900C3C3F7 /* X01PlayerUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D2223402D8900C3C3F7 /* X01PlayerUnitView.swift */; };
 		C7F46D272340CB4800C3C3F7 /* X01HitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D262340CB4800C3C3F7 /* X01HitView.swift */; };
+		C7F46D292340FDBB00C3C3F7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D282340FDBB00C3C3F7 /* Extensions.swift */; };
+		C7F46D2A2340FDBB00C3C3F7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D282340FDBB00C3C3F7 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +149,7 @@
 		C7F46D2023402BCE00C3C3F7 /* X01GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01GameView.swift; sourceTree = "<group>"; };
 		C7F46D2223402D8900C3C3F7 /* X01PlayerUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01PlayerUnitView.swift; sourceTree = "<group>"; };
 		C7F46D262340CB4800C3C3F7 /* X01HitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01HitView.swift; sourceTree = "<group>"; };
+		C7F46D282340FDBB00C3C3F7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				C7062B1222F44A59006CE930 /* Stack.swift */,
+				C7F46D282340FDBB00C3C3F7 /* Extensions.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -533,6 +537,7 @@
 				C7F0A20D22CD7876005171BB /* CricketPlayerUnit.swift in Sources */,
 				C75C5F3F2303287D0019C8B7 /* DartThrow.swift in Sources */,
 				C7F46D2323402D8900C3C3F7 /* X01PlayerUnitView.swift in Sources */,
+				C7F46D292340FDBB00C3C3F7 /* Extensions.swift in Sources */,
 				C7C52522232EDBF7009AF03B /* X01PlayerUnit.swift in Sources */,
 				C7983E2222CACC0E00ACC903 /* SceneDelegate.swift in Sources */,
 				C708132022D1236B00B22BFF /* CricketHitLabelView.swift in Sources */,
@@ -575,6 +580,7 @@
 				C7983E5E22CACCAA00ACC903 /* CricketPlayer.swift in Sources */,
 				C7983E5822CACC8300ACC903 /* Multiplier.swift in Sources */,
 				C7983E6122CACCBF00ACC903 /* CricketScore.swift in Sources */,
+				C7F46D2A2340FDBB00C3C3F7 /* Extensions.swift in Sources */,
 				C7983E6422CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */,
 				C7983E7522CACD5E00ACC903 /* CricketPlayerTests.swift in Sources */,
 				C7C52520232EDB87009AF03B /* X01Player.swift in Sources */,

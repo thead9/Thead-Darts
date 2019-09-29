@@ -13,15 +13,17 @@ struct HomeView: View {
     init() {
         UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "Secondary") ?? UIColor.black]
     }
+    
+    @ObservedObject var settings = UserSettings()
         
     var body: some View {
         NavigationView {
             VStack {
-                cricketCard
-                
-                x01Card
-                
-                Spacer()
+                ScrollView(showsIndicators: false) {
+                    cricketCard
+                      
+                    x01Card
+                }
             }
             .padding(.horizontal)
             .navigationBarTitle(Text("Thead Darts"))
@@ -29,9 +31,7 @@ struct HomeView: View {
         }
         .font(.title)
     }
-    
-    @State var trackTurns: Bool = true
-    
+        
     var cricketCard: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Cricket")
@@ -39,16 +39,16 @@ struct HomeView: View {
                 .font(.largeTitle)
             
             Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: 2)
+                .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
                 .foregroundColor(Color("Primary"))
             
             VStack(alignment: .leading) {
                 HStack {
                     Text("Track Turns:")
                     Button(
-                        action: { self.trackTurns.toggle() }
+                        action: { self.settings.trackTurns.toggle() }
                     ) {
-                        Text("\(boolToYesNo(trackTurns))")
+                        Text("\(boolToYesNo(settings.trackTurns))")
                             .padding()
                     }
                     .background(Color("HitBackground"))
@@ -56,7 +56,7 @@ struct HomeView: View {
                     .addBorder(Color("Primary"), width: 2)
                 }
                 
-                NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: self.trackTurns))) {
+                NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns))) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)
@@ -73,9 +73,9 @@ struct HomeView: View {
         .padding(.top)
     }
     
-    let x01StartingPoints = [501, 401, 301, 201, 101]
+    let x01StartingPoints1 = [201, 301, 401, 501]
+    let x01StartingPoints2 = [601, 701, 801, 901]
     @State var selectingX01StartingPoint = false
-    @State var x01StartingPoint = 301
     
     var x01Card: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -84,7 +84,7 @@ struct HomeView: View {
                 .font(.largeTitle)
             
             Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: 2)
+                .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
                 .foregroundColor(Color("Primary"))
             
             VStack(alignment: .leading) {
@@ -93,8 +93,13 @@ struct HomeView: View {
                     Button(
                         action: { self.selectingX01StartingPoint = true }
                     ) {
-                        Text("\(x01StartingPoint)")
-                            .padding()
+                        if selectingX01StartingPoint {
+                            Text("???")
+                                .padding()
+                        } else {
+                            Text("\(settings.x01StartingPoint)")
+                                .padding()
+                        }
                     }
                     .background(Color("HitBackground"))
                     .cornerRadius(25)
@@ -102,12 +107,12 @@ struct HomeView: View {
                 }
                 
                 if selectingX01StartingPoint {
-                    ScrollView(.horizontal, showsIndicators: false, content: {
-                        HStack {
-                            ForEach(x01StartingPoints, id: \.self) { startingPoint in
+                    VStack(spacing: 5) {
+                        HStack(spacing: 5) {
+                            ForEach(x01StartingPoints1, id: \.self) { startingPoint in
                                 Button(
                                     action: {
-                                        self.x01StartingPoint = startingPoint
+                                        self.settings.x01StartingPoint = startingPoint
                                         self.selectingX01StartingPoint = false
                                     }
                                 ) {
@@ -120,10 +125,42 @@ struct HomeView: View {
                             }
                         }
                         .frame(maxWidth: .infinity)
-                    })
+                        HStack(spacing: 5) {
+                            ForEach(x01StartingPoints2, id: \.self) { startingPoint in
+                                Button(
+                                    action: {
+                                        self.settings.x01StartingPoint = startingPoint
+                                        self.selectingX01StartingPoint = false
+                                    }
+                                ) {
+                                    Text("\(startingPoint)")
+                                        .padding()
+                                }
+                                .background(Color("HitBackground"))
+                                .cornerRadius(25)
+                                .addBorder(Color("Primary"), width: 2)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                    .padding(.top, 5)
                 }
                 
-                NavigationLink(destination: X01GameView(x01Game: X01Game(numberOfPlayers: 2, startingPoint: x01StartingPoint))) {
+                HStack {
+                    Text("Double Out:")
+                    Button(
+                        action: { self.settings.doubleOut.toggle() }
+                    ) {
+                        Text("\(boolToYesNo(settings.doubleOut))")
+                            .padding()
+                    }
+                    .background(Color("HitBackground"))
+                    .cornerRadius(25)
+                    .addBorder(Color("Primary"), width: 2)
+                }
+                .padding(.top)
+                
+                NavigationLink(destination: X01GameView(x01Game: X01Game(numberOfPlayers: 2, startingPoint: settings.x01StartingPoint, doubleOut: settings.doubleOut))) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)

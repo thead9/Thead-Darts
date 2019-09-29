@@ -26,6 +26,8 @@ class X01ScoreKeeper: DartScoreKeeper {
     
     var gameActions = Stack<DartAction>()
     
+    var doubleOut: Bool
+    
     var winnerIndex: Int? {
         get {
             for (index, playerUnit) in playerUnits.enumerated() {
@@ -57,12 +59,13 @@ class X01ScoreKeeper: DartScoreKeeper {
     }
     
     // MARK: Inits
-    init(playerUnits: [X01PlayerUnit]) {
+    init(playerUnits: [X01PlayerUnit], doubleOut: Bool = true) {
         self.playerUnits = playerUnits
+        self.doubleOut = doubleOut
     }
     
-    convenience init(playerUnits: [X01PlayerUnit], updated: @escaping () -> ()) {
-        self.init(playerUnits: playerUnits)
+    convenience init(playerUnits: [X01PlayerUnit], doubleOut: Bool = true, updated: @escaping () -> ()) {
+        self.init(playerUnits: playerUnits, doubleOut: doubleOut)
         self.updated = updated
     }
     
@@ -86,7 +89,7 @@ class X01ScoreKeeper: DartScoreKeeper {
             
             if previewPoints < 0 {
                 bust = true
-            } else if (previewPoints == 0 && multiplier != .double) {
+            } else if ( (previewPoints == 0 && multiplier != .double) && doubleOut ) {
                 if (!(wedge == .one && multiplier == .single)) {
                     bust = true
                 }

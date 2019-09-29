@@ -27,27 +27,27 @@ class X01Game: DartGame, ObservableObject {
     var scoreKeeper: X01ScoreKeeper!
     
     // MARK: Inits
-    init(numberOfPlayers: Int, startingPoint: Int = 301) {
+    init(numberOfPlayers: Int, startingPoint: Int = 301, doubleOut: Bool = true) {
         for index in 0..<numberOfPlayers {
             let playerUnit = X01PlayerUnit(player: X01Player(name: "Player \(index+1)"),
                                                score: X01Score(startingPoint: startingPoint),
                                                updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }
-        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits, updated: { self.objectWillChange.send(()) })
+        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits, doubleOut: doubleOut, updated: { self.objectWillChange.send(()) })
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }
     }
     
-    init(players: [X01Player], startingPoint: Int = 301) {
+    init(players: [X01Player], startingPoint: Int = 301, doubleOut: Bool = true) {
         for player in players {
             let playerUnit = X01PlayerUnit(player: player,
                                                score: X01Score(startingPoint: startingPoint),
                                                updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }
-        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits, updated: { self.objectWillChange.send(()) })
+        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits, doubleOut: doubleOut, updated: { self.objectWillChange.send(()) })
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }
