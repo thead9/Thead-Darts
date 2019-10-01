@@ -27,6 +27,9 @@ struct CricketHitView : View {
     
     let onHit: () -> ()
     
+    let wholeViewDisabled: Bool
+
+    
     @State var selectingMultiplier: (Bool, Wedge) = (false, .one)
     
     var body: some View {
@@ -119,7 +122,7 @@ struct CricketHitView : View {
                         .frame(width: self.getItemWidth(containerWidth: geometry.size.width), height: self.getItemHeight(containerHeight: geometry.size.height))
                         .background(Color("HitBackground"))
                         .cornerRadius(25)
-                        .addBorder(Color("Primary"), width: 2)
+                        .addBorder(self.score.shouldAllowHit(on: wedge) && !self.wholeViewDisabled ? Color("Primary") : Color.clear, width: 2)
                     }
                 }
             }
@@ -131,7 +134,7 @@ struct CricketHitView : View {
 #if DEBUG
 struct CricketHitView_Previews : PreviewProvider {
     static var previews: some View {
-        CricketHitView(score: CricketScore(), onHit: { })
+        CricketHitView(score: CricketScore(), onHit: { }, wholeViewDisabled: false)
             .previewLayout(.fixed(width: 150, height: 650))
     }
 }

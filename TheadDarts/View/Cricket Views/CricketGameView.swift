@@ -99,7 +99,8 @@ struct CricketGameView : View {
                         onHit: {
                             self.showWinnerAlert = self.cricketGame.gameOver
                             self.setGameOver()
-                        }
+                        },
+                        wholeViewDisabled: self.shouldDisableHitView(at: index)
                     )
                     .padding(.horizontal, 5)
                     .disabled(self.shouldDisableHitView(at: index))
