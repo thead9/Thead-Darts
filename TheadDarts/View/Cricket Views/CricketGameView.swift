@@ -55,10 +55,11 @@ struct CricketGameView : View {
             
             bottomControls
         }
+        .font(.title)
         .padding(.vertical)
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
-        .foregroundColor(Color("Primary"))
+        .foregroundColor(Color.select(.primary))
         .navigationBarTitle(Text("Title"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
@@ -77,13 +78,13 @@ struct CricketGameView : View {
                 }
                 .frame(width: leftColumnWidth)
                 .padding(.horizontal, 5)
-                .foregroundColor(Color("Secondary"))
+                .foregroundColor(Color.select(.secondary))
 
                 ForEach(0..<cricketGame.scores.count) { index in
                     CricketPlayerUnitView(playerUnit: self.cricketGame.playerUnits[index])
                         .padding(.horizontal, 5)
                         .padding(.vertical, 10)
-                        .addBorder(Color("Secondary"), width: 3, condition: self.shouldAddActiveBorder(on: index))
+                        .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
                 }
             }
             .padding(.horizontal, 5)
@@ -110,6 +111,7 @@ struct CricketGameView : View {
         }
     }
     
+    
     // MARK: Turn Controls
     var turnControls: some View {
         Group {
@@ -119,17 +121,19 @@ struct CricketGameView : View {
                         Text("\(label)")
                             .padding(.vertical)
                             .frame(maxWidth: .infinity)
-                            .foregroundColor(label.contains("T") ? Color("HitBackground") : Color("Primary") )
-                            .addBorder((label.contains("T") ? Color("HitBackground") : Color("Secondary")), width: 1)
+                            .foregroundColor(label.contains("T") ? Color.select(.hitBackground) : Color.select(.primary) )
+                            .addBorder((label.contains("T") ? Color.select(.hitBackground) : Color.select(.secondary)), width: 1)
                     }
                     if (!cricketGame.scoreKeeper.activeTurn!.canAddThrow()) {
-                        Button(action: { self.cricketGame.scoreKeeper.nextPlayer() }) {
+                        Button(action: {
+                            self.cricketGame.scoreKeeper.nextPlayer()
+                        }) {
                             Text("Next")
                                 .padding()
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color("Secondary"))
-                        .foregroundColor(Color("HitBackground"))
+                        .background(Color.select(.secondary))
+                        .foregroundColor(Color.select(.hitBackground))
                         .cornerRadius(25)
                     } else {
                         Button(action: { self.cricketGame.scores[self.cricketGame.scoreKeeper.activeIndex].hit(on: .miss) }) {
@@ -137,9 +141,9 @@ struct CricketGameView : View {
                                 .padding()
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color("HitBackground"))
-                        .foregroundColor(Color("Secondary"))
-                        .addBorder(Color("Primary"), width: 2)
+                        .background(Color.select(.hitBackground))
+                        .foregroundColor(Color.select(.secondary))
+                        .addBorder(Color.select(.primary), width: 2)
                         .cornerRadius(25)
                     }
                 }
@@ -171,7 +175,7 @@ struct CricketGameView : View {
                 .padding(.horizontal)
             }
             .font(.title)
-            .foregroundColor(Color("Secondary"))
+            .foregroundColor(Color.select(.secondary))
         }
     }
     

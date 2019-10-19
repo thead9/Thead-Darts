@@ -87,12 +87,10 @@ class X01ScoreKeeper: DartScoreKeeper {
             var bust = false
             let previewPoints = score.previewPointsForHit(on: wedge, with: multiplier)
             
-            if previewPoints < 0 {
+            if (previewPoints < 0 || (previewPoints == 1 && doubleOut) ) {
                 bust = true
             } else if ( (previewPoints == 0 && multiplier != .double) && doubleOut ) {
-                if (!(wedge == .one && multiplier == .single)) {
-                    bust = true
-                }
+                bust = true
             }
             if bust {
                 self.activeTurn.undoAllThrows()

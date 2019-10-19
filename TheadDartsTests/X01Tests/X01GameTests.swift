@@ -170,13 +170,11 @@ class X01GameTests: XCTestCase {
         XCTAssertTrue(x01Game.gameOver)
     }
     
-    func testWinnerOnSingleOne() {
-        x01Score1.startingPoint = 1
+    func testBustOn1() {
+        x01Score1.startingPoint = 2
         x01Score1.hit(on: .one, with: .single)
         
-        XCTAssertEqual(x01Game.winnerIndex, 0)
-        XCTAssertNotNil(x01Game.winner)
-        XCTAssertTrue(x01Game.gameOver)
+        XCTAssertEqual(x01Game.scores[0].points, 2)
     }
     
     func testBustOnFirstThrow() {

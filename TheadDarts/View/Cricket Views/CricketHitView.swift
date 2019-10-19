@@ -39,60 +39,60 @@ struct CricketHitView : View {
                     VStack(spacing: self.spacing) {
                         Text("\(self.selectingMultiplier.1.abbreviation())")
                             .padding(.bottom)
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(Color.select(.primary))
                                                 
-                        Button(
-                            action: {
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.25)) {
                                 self.score.hit(on: self.selectingMultiplier.1, with: .single)
                                 self.selectingMultiplier = (false, .one)
                                 self.onHit()
                             }
-                        ) {
+                        }) {
                             Text("Single")
                                 .padding(.vertical, 10)
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color("Secondary"))
+                        .background(Color.select(.secondary))
                         .foregroundColor(Color("Background"))
                         .cornerRadius(25)
                         
-                        Button(
-                            action: {
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.25)) {
                                 self.score.hit(on: self.selectingMultiplier.1, with: .double)
                                 self.selectingMultiplier = (false, .one)
                                 self.onHit()
                             }
-                        ) {
+                        }) {
                             Text("Double")
                                 .padding(.vertical, 10)
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color("Secondary"))
+                        .background(Color.select(.secondary))
                         .foregroundColor(Color("Background"))
                         .cornerRadius(25)
                         
                         if (self.selectingMultiplier.1 != .bull) {
-                            Button(
-                                action: {
+                            Button(action: {
+                                withAnimation(.easeInOut(duration: 0.25)) {
                                     self.score.hit(on: self.selectingMultiplier.1, with: .triple)
                                     self.selectingMultiplier = (false, .one)
                                     self.onHit()
                                 }
-                            ) {
+                            }) {
                                 Text("Triple")
                                     .padding(.vertical, 10)
                                     .frame(maxWidth: .infinity)
                             }
-                            .background(Color("Secondary"))
+                            .background(Color.select(.secondary))
                             .foregroundColor(Color("Background"))
                             .cornerRadius(25)
                         }
                         
-                        Button(
-                            action: {
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.25)) {
                                 self.selectingMultiplier = (false, .one)
                             }
-                        ) {
+                        }) {
                             Text("Cancel")
                                 .padding(.vertical, 10)
                                 .frame(maxWidth: .infinity)
@@ -102,27 +102,29 @@ struct CricketHitView : View {
                         .foregroundColor(Color("Background"))
                         .cornerRadius(20)
                     }
+                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .padding(.vertical)
                     .padding(.horizontal, 10)
-                    .background(Color("HitBackground"))
+                    .background(Color.select(.hitBackground))
                     .cornerRadius(25)
-                    .addBorder(Color("Primary"), width: 2)
+                    .addBorder(Color.select(.primary), width: 2)
                 } else {
                     ForEach(self.cricketWedges, id: \.self) { wedge in
                         HStack(spacing: 0) {
-                            Button(
-                                action: {
+                            Button(action: {
+                                withAnimation(.easeInOut(duration: 0.25)) {
                                     self.selectingMultiplier = (true, wedge)
                                 }
-                            ) {
+                            }) {
                                 CricketMarkView(marks: self.score.getMarks(for: wedge))
                             }
                             .disabled(!self.score.shouldAllowHit(on: wedge))
                         }
+                        .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         .frame(width: self.getItemWidth(containerWidth: geometry.size.width), height: self.getItemHeight(containerHeight: geometry.size.height))
-                        .background(Color("HitBackground"))
+                        .background(Color.select(.hitBackground))
                         .cornerRadius(25)
-                        .addBorder(self.score.shouldAllowHit(on: wedge) && !self.wholeViewDisabled ? Color("Primary") : Color.clear, width: 2)
+                        .addBorder(self.score.shouldAllowHit(on: wedge) && !self.wholeViewDisabled ? Color.select(.primary) : Color.clear, width: 2)
                     }
                 }
             }

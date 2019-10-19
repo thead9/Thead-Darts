@@ -14,15 +14,20 @@ struct X01HitView: View {
     
     var onHit: () -> ()
     
+    var animationTime = 0.25
+    
     // MARK: Body
     var body: some View {
         Group {
             if self.selectingMultiplier.0 {
                 x01SelectingMultiplier
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             } else if !self.x01Game.scoreKeeper.activeTurn.canAddThrow() {
                 x01TurnOverview
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             } else {
                 x01HitGrid
+                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
             }
         }
     }
@@ -67,22 +72,24 @@ struct X01HitView: View {
                 ForEach(0..<self.wedgesArray.count, id: \.self) { rowIndex in
                     HStack(spacing: self.hitViewSpacing / 2) {
                         ForEach(self.wedgesArray[rowIndex]) { wedge in
-                            Button(
-                                action: {
+                            Button(action: {
+                                withAnimation(.easeInOut(duration: self.animationTime)) {
                                     self.x01HitButtonAction(for: wedge)
                                 }
-                            ) {
+                            }) {
                                 if self.isBullOrMiss(wedge: wedge) {
                                     Text("\(wedge.name())")
+                                        .padding()
                                 } else {
                                     Text("\(wedge.rawValue)")
+                                        .padding()
                                 }
                             }
                             .frame(width: ( (self.isBullOrMiss(wedge: wedge) ? 2 : 1) * self.getItemWidth(containerWidth: geometry.size.width) ) + (self.isBullOrMiss(wedge: wedge) ? self.hitViewSpacing / 2 : 0), height: self.getItemHeight(containerHeight: geometry.size.height))
-                            .background(Color("HitBackground"))
-                            .foregroundColor(Color("Secondary"))
+                            .background(Color.select(.hitBackground))
+                            .foregroundColor(Color.select(.secondary))
                             .cornerRadius(25)
-                            .addBorder(Color("Primary"), width: 2)
+                            .addBorder(Color.select(.primary), width: 2)
                             .disabled(!self.x01Game.scoreKeeper.activeTurn.canAddThrow())
                         }
                     }
@@ -96,64 +103,65 @@ struct X01HitView: View {
         GeometryReader { geometry in
             VStack(spacing: 5) {
                 Text("\(self.selectingMultiplier.1.abbreviation())")
-                    .padding(.bottom)
-                    .foregroundColor(Color("Primary"))
+                    .font(.largeTitle)
+                    //.padding(.bottom)
+                    .foregroundColor(Color.select(.primary))
                                         
-                Button(
-                    action: {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: self.animationTime)) {
                         self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].hit(on: self.selectingMultiplier.1, with: .single)
                         self.selectingMultiplier = (false, .one)
                         self.onHit()
                     }
-                ) {
+                }) {
                     Text("Single")
-                        .padding(.vertical, 10)
-                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .frame(width: geometry.size.width / 2)
                 }
-                .background(Color("Secondary"))
+                .background(Color.select(.secondary))
                 .foregroundColor(Color("Background"))
                 .cornerRadius(25)
                 
-                Button(
-                    action: {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: self.animationTime)) {
                         self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].hit(on: self.selectingMultiplier.1, with: .double)
                         self.selectingMultiplier = (false, .one)
                         self.onHit()
                     }
-                ) {
+                }) {
                     Text("Double")
-                        .padding(.vertical, 10)
-                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .frame(width: geometry.size.width / 2)
                 }
-                .background(Color("Secondary"))
+                .background(Color.select(.secondary))
                 .foregroundColor(Color("Background"))
                 .cornerRadius(25)
                 
                 if (self.selectingMultiplier.1 != .bull) {
-                    Button(
-                        action: {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: self.animationTime)) {
                             self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].hit(on: self.selectingMultiplier.1, with: .triple)
                             self.selectingMultiplier = (false, .one)
                             self.onHit()
                         }
-                    ) {
+                    }) {
                         Text("Triple")
-                            .padding(.vertical, 10)
-                            .frame(maxWidth: .infinity)
+                            .padding(10)
+                            .frame(width: geometry.size.width / 2)
                     }
-                    .background(Color("Secondary"))
+                    .background(Color.select(.secondary))
                     .foregroundColor(Color("Background"))
                     .cornerRadius(25)
                 }
                 
-                Button(
-                    action: {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: self.animationTime)) {
                         self.selectingMultiplier = (false, .one)
                     }
-                ) {
+                }) {
                     Text("Cancel")
-                        .padding(.vertical, 10)
-                        .frame(maxWidth: .infinity)
+                        .padding(10)
+                        .frame(width: geometry.size.width / 2)
                         .font(.subheadline)
                 }
                 .background(Color(.gray))
@@ -162,14 +170,14 @@ struct X01HitView: View {
             }
             .padding(.vertical)
             .padding(.horizontal, 10)
-            .background(Color("HitBackground"))
+            .background(Color.select(.hitBackground))
             .cornerRadius(25)
-            .addBorder(Color("Primary"), width: 2)
+            .addBorder(Color.select(.primary), width: 2)
             .padding()
         }
     }
     
-    // MARK: Turn Overview
+    // MARK: Turn Summary
     var x01TurnOverview: some View {
         GeometryReader { geometry in
             VStack() {
@@ -178,18 +186,18 @@ struct X01HitView: View {
                         .padding()
                         .font(.largeTitle)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color("HitBackground"))
+                        .background(Color.select(.secondary))
                     
                     Rectangle()
                         .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
-                        .foregroundColor(Color("Primary"))
+                        .foregroundColor(Color.select(.primary))
                     
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(0..<self.x01Game.scoreKeeper!.activeTurn.dartThrows.count, id: \.self) { index in
                             HStack(spacing: 10) {
                                 Text("Throw \(index + 1)")
                                 Text("\(self.x01Game.scoreKeeper!.activeTurn.dartThrows[index].toString())")
-                                    .foregroundColor(Color("Secondary"))
+                                    .foregroundColor(Color.select(.secondary))
                             }
                             .font(.title)
                             .padding(.horizontal)
@@ -198,12 +206,12 @@ struct X01HitView: View {
                         
                         Rectangle()
                             .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
-                            .foregroundColor(Color("Primary"))
+                            .foregroundColor(Color.select(.primary))
                         
                         HStack(spacing: 10) {
                             Text("Total")
                             Text("\(self.x01Game.scoreKeeper!.activeTurn.totalScore())")
-                                .foregroundColor(Color("Secondary"))
+                                .foregroundColor(Color.select(.secondary))
                         }
                         .padding(.horizontal)
                         .padding(.top)
@@ -211,15 +219,19 @@ struct X01HitView: View {
                     .padding(.vertical)
                 }
                 .cornerRadius(25)
-                .addBorder(Color("Primary"), width: 2)
+                .addBorder(Color.select(.primary), width: 2)
                 
-                Button(action: { self.x01Game.scoreKeeper.nextPlayer() }) {
+                Button(action: {
+                    withAnimation(.easeInOut(duration: self.animationTime)) {
+                        self.x01Game.scoreKeeper.nextPlayer()
+                    }
+                }) {
                     Text("Next")
                         .padding()
                         .frame(maxWidth: geometry.size.width / 3)
                 }
-                .background(Color("Secondary"))
-                .foregroundColor(Color("HitBackground"))
+                .background(Color.select(.secondary))
+                .foregroundColor(Color.select(.hitBackground))
                 .cornerRadius(25)
                 .padding(.top)
             }

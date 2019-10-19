@@ -56,7 +56,7 @@ struct X01GameView: View {
                 }
                 .frame(width: 50)
                 .padding(.horizontal)
-                .foregroundColor(Color("Secondary"))
+                .foregroundColor(Color.select(.secondary))
                 
                 scoreBoard
             }
@@ -75,7 +75,8 @@ struct X01GameView: View {
             
             bottomControls
         }
-        .foregroundColor(Color("Primary"))
+        .font(.title)
+        .foregroundColor(Color.select(.primary))
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
         .navigationBarTitle(Text("Title"))
@@ -89,7 +90,7 @@ struct X01GameView: View {
                 X01PlayerUnitView(playerUnit: self.x01Game.playerUnits[index])
                     .padding(.horizontal, 5)
                     .padding(.vertical, 10)
-                    .addBorder(Color("Secondary"), width: 3, condition: self.shouldAddActiveBorder(on: index))
+                    .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
             }
         }
         .padding(.horizontal, 5)
@@ -103,8 +104,8 @@ struct X01GameView: View {
                     Text("\(label)")
                         .padding(.vertical)
                         .frame(maxWidth: .infinity)
-                        .foregroundColor(label.contains("T") ? Color("HitBackground") : Color("Primary") )
-                        .addBorder((label.contains("T") ? Color("HitBackground") : Color("Secondary")), width: 1)
+                        .foregroundColor(label.contains("T") ? Color.select(.hitBackground) : Color.select(.primary) )
+                        .addBorder((label.contains("T") ? Color.select(.hitBackground) : Color.select(.secondary)), width: 1)
                 }
             }
             .padding(.horizontal)
@@ -116,12 +117,12 @@ struct X01GameView: View {
     var bottomControls: some View {
         Group {
             HStack {
-                Button(
-                    action: {
+                Button(action: {
+                    withAnimation {
                         self.x01Game.scoreKeeper.undo()
                         self.setGameOver()
                     }
-                ) {
+                }) {
                     Text("Undo")
                         .font(.title)
                 }
@@ -134,7 +135,7 @@ struct X01GameView: View {
                 .padding(.horizontal)
             }
             .font(.title)
-            .foregroundColor(Color("Secondary"))
+            .foregroundColor(Color.select(.secondary))
         }
     }
     

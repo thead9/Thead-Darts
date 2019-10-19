@@ -36,14 +36,14 @@ struct CricketMarkView: View {
                             path.addArc(center: CGPoint(x: width * 0.5, y: height * 0.5), radius: radius, startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 360), clockwise: true)
                         }
                     }
-                    .stroke(Color("Secondary"), lineWidth: CGFloat(4))
+                    .stroke(Color.select(.secondary), lineWidth: CGFloat(4))
                 }
                 .frame(width: self.marks > 3 ? geometry.size.width / 2 : geometry.size.width)
                 
                 if (self.marks > 3) {
                     Spacer()
                     Text("\(self.marks - 3)")
-                        .foregroundColor(Color("Secondary"))
+                        .foregroundColor(Color.select(.secondary))
                     Spacer()
 
                 }

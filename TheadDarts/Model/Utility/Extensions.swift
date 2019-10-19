@@ -48,4 +48,38 @@ final class UserSettings: ObservableObject {
             objectWillChange.send()
         }
     }
+    
+    enum Theme: String {
+        case blue = "Blue"
+        case green = "Green"
+        case indigo = "Indigo"
+        case orange = "Orange"
+        case pink = "Pink"
+        case purple = "Purple"
+        case red = "Red"
+        case teal = "Teal"
+        case yellow = "Yellow"
+        
+        func toString() -> String {
+            return self.rawValue
+        }
+    }
+    
+    @UserDefault(key: "theme", defaultValue: "Indigo")
+    var theme: String {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+}
+
+extension AnyTransition {
+    static var slideInFadeAway: AnyTransition {
+        let insertion = AnyTransition.move(edge: .leading)
+            .combined(with: .opacity)
+        let removal = AnyTransition.move(edge: .top)
+            .combined(with: .opacity)
+            .combined(with: .scale)
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
 }

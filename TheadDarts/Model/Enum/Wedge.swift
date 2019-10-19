@@ -77,7 +77,7 @@ enum Wedge: Int {
         case .twenty:
             return "Twenty"
         case .bull:
-            return "Bull"
+            return "Bullseye"
         }
     }
     
