@@ -65,8 +65,15 @@ final class UserSettings: ObservableObject {
         }
     }
     
-    @UserDefault(key: "theme", defaultValue: "Indigo")
+    @UserDefault(key: "theme", defaultValue: "Blue")
     var theme: String {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
+    @UserDefault(key: "gameType", defaultValue: "Cricket")
+    var gameType: String {
         didSet {
             objectWillChange.send()
         }
@@ -74,12 +81,20 @@ final class UserSettings: ObservableObject {
 }
 
 extension AnyTransition {
-    static var slideInFadeAway: AnyTransition {
+    static var slideInFadeUp: AnyTransition {
         let insertion = AnyTransition.move(edge: .leading)
             .combined(with: .opacity)
         let removal = AnyTransition.move(edge: .top)
             .combined(with: .opacity)
             .combined(with: .scale)
+        return .asymmetric(insertion: insertion, removal: removal)
+    }
+    
+    static var slideAndFade: AnyTransition {
+        let insertion = AnyTransition.move(edge: .leading)
+            .combined(with: .opacity)
+        let removal = AnyTransition.move(edge: .trailing)
+            .combined(with: .opacity)
         return .asymmetric(insertion: insertion, removal: removal)
     }
 }

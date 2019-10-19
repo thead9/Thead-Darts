@@ -15,162 +15,189 @@ struct HomeView: View {
 //    }
     
     @ObservedObject var settings = UserSettings()
+    
+    @State var selectedGameType: GameType = GameType(rawValue: UserSettings().gameType)
+    
+    @State var selectingTheme = false
         
     // MARK: Body
     var body: some View {
         NavigationView {
-            VStack {
-                ScrollView(showsIndicators: false) {
-                    EncapsulatedView() // This is needed to allow for animations in ScrollView
-                }
-            }
-            .padding(.horizontal)
-            .navigationBarTitle(Text("Thead Darts"))
-            .navigationBarHidden(true)
-        }
-        .font(.headline)
-    }
-        
-    // This is needed to allow for animations in ScrollView
-    struct EncapsulatedView: View {
-        @ObservedObject var settings = UserSettings()
-        
-        var body: some View {
-            VStack {
-                cricketCard
-                  
-                X01CardView()
-                
-                settingsCard
-            }
-        }
-        
-        // MARK: Cricket
-        var cricketCard: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("Cricket")
-                    .padding()
+            VStack(alignment: .leading) {
+                Text("Select Game Type")
                     .font(.largeTitle)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.select(.secondary))
                 
-                Rectangle()
-                    .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
-                    .foregroundColor(Color.select(.primary))
-                
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Track Turns:")
-                            .font(.title)
-                        Button(
-                            action: { self.settings.trackTurns.toggle() }
-                        ) {
-                            Text("\(boolToYesNo(settings.trackTurns))")
-                                .padding()
+                HStack {
+                    Button(action: {
+                        withAnimation {
+                            self.selectingTheme = false
+                            self.selectedGameType = GameType.cricket
+                            self.settings.gameType = GameType.cricket.rawValue
                         }
-                        .foregroundColor(Color.select(.secondary))
-                        .background(Color.select(.hitBackground))
-                        .cornerRadius(25)
-                        .addBorder(Color.select(.primary), width: 2)
-                    }
-                    
-                    NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns))) {
-                        Text("Start Game")
+                    }) {
+                        Text("Cricket")
                             .padding()
                             .font(.largeTitle)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(self.selectedGameType == .cricket ? Color.select(.background) : Color.select(.secondary))
+                    .background(self.selectedGameType == .cricket ? Color.select(.secondary) : Color.select(.hitBackground))
+                    .cornerRadius(25)
+                    
+                    Button(action: {
+                        withAnimation {
+                            self.selectingTheme = false
+                            self.selectedGameType = .x01
+                            self.settings.gameType = GameType.x01.rawValue
+                        }
+                    }) {
+                        Text("X01")
+                            .padding()
+                            .font(.largeTitle)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .foregroundColor(self.selectedGameType == .x01 ? Color.select(.background) : Color.select(.secondary))
+                    .background(self.selectedGameType == .x01 ? Color.select(.secondary) : Color.select(.hitBackground))
+                    .cornerRadius(25)
+                }
+                .padding(.vertical)
+                
+                if self.selectedGameType == .cricket {
+                    CricketCardView()
+                        .transition(.slideAndFade)
+                }
+                
+                if self.selectedGameType == .x01 {
+                    X01CardView()
+                        .transition(.slideAndFade)
+                }
+                
+                Spacer()
+                
+                if !self.selectingTheme {
+                    Button(action: {
+                        withAnimation {
+                            self.selectedGameType = GameType.none
+                            self.selectingTheme = true
+                        }
+                    }) {
+                        Text("Theme")
+                            .padding()
+                            .font(.title)
                     }
                     .foregroundColor(Color.select(.secondary))
                     .background(Color.select(.hitBackground))
                     .cornerRadius(25)
                     .addBorder(Color.select(.primary), width: 2)
-                    .padding(.top)
+                    .transition(.opacity)
+                } else {
+                    themeCard
+                        .transition(.move(edge: .bottom))
                 }
-                .padding()
             }
-            .cornerRadius(25)
-            .addBorder(Color.select(.primary), width: 2)
-            .padding(.top)
+            .addBorder(Color(.clear), width: 0.0, condition: settings.theme == "clear")
+            .padding(.horizontal, 15)
+            .frame(maxWidth: .infinity)
+            .navigationBarTitle(Text("Thead Darts"))
+            .navigationBarHidden(true)
         }
-        
-        // MARK: Settings
-        @State var selectingTheme = false
-        
-        var settingsCard: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                Text("Settings")
-                    .padding()
-                    .font(.largeTitle)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .background(Color.select(.hitBackground))
-                
-                Rectangle()
-                    .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
-                    .foregroundColor(Color.select(.primary))
-                
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text("Theme:")
-                            .font(.title)
-                        Button(action: {
-                            withAnimation {
-                                self.selectingTheme.toggle()
-                            }
-                        }) {
-                            Text("\(self.settings.theme)")
-                                .padding()
-                        }
+        .font(.headline)
+    }
+    
+    // MARK: Theme
+    var themeCard: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text("Theme")
+                .padding()
+                .font(.largeTitle)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.select(.secondary))
+            
+            Rectangle()
+                .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
+                .foregroundColor(Color.select(.primary))
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("Selected Theme:")
+                        .font(.title)
+                    Text("\(self.settings.theme)")
+                        .padding()
                         .foregroundColor(Color.select(.secondary))
                         .background(Color.select(.hitBackground))
                         .cornerRadius(25)
                         .addBorder(Color.select(.primary), width: 2)
-                    }
-                    
-                    if selectingTheme {
-                        themeGrid
-                            .transition(.slideInFadeAway)
-                            .padding(.top, 3)
-                    }
                 }
-                .padding()
+                
+                themeGrid
+                    .transition(.slideInFadeUp)
+                    .padding(.top, 3)
+                
+                Button(action: {
+                    withAnimation {
+                        self.selectedGameType = GameType(rawValue: self.settings.gameType)
+                        self.selectingTheme = false
+                    }
+                }) {
+                    Text("Done")
+                        .padding()
+                        .font(.title)
+                }
+                .foregroundColor(Color.select(.secondary))
+                .background(Color.select(.hitBackground))
+                .cornerRadius(25)
+                .addBorder(Color.select(.primary), width: 2)
+                .padding(.top)
             }
-            .cornerRadius(25)
-            .addBorder(Color.select(.primary), width: 2)
-            .padding(.top)
+            .padding()
         }
-        
-        let themeArray: [[UserSettings.Theme]] = [[.blue, .green, .indigo],
-                                                  [.orange, .pink, .purple],
-                                                  [.red, .teal, .yellow]]
-        
-        var themeGrid: some View {
-            VStack(spacing: 5) {
-                ForEach(0..<self.themeArray.count, id: \.self) { rowIndex in
-                    HStack(spacing: 5) {
-                        ForEach(self.themeArray[rowIndex], id: \.self) { theme in
-                            Button( action: {
-                                withAnimation {
-                                    self.settings.theme = theme.rawValue
-                                    self.selectingTheme.toggle()
-                                }
-                            }) {
-                                Text("\(theme.rawValue)")
-                                    .padding()
-                                    .font(.headline)
-                                    .frame(maxWidth: 150)
+        .navigationBarHidden(false)
+        .cornerRadius(25)
+        .addBorder(Color.select(.primary), width: 2)
+        .padding(.top)
+    }
+    
+    let themeArray: [[UserSettings.Theme]] = [[.blue, .green, .indigo],
+                                              [.orange, .pink, .purple],
+                                              [.red, .teal, .yellow]]
+    
+    var themeGrid: some View {
+        VStack(spacing: 5) {
+            ForEach(0..<self.themeArray.count, id: \.self) { rowIndex in
+                HStack(spacing: 5) {
+                    ForEach(self.themeArray[rowIndex], id: \.self) { theme in
+                        Button( action: {
+                            withAnimation {
+                                self.settings.theme = theme.rawValue
                             }
-                            .background(Color.select(.hitBackground))
-                            .foregroundColor(Color.getColorNamed(theme.rawValue))
-                            .cornerRadius(25)
-                            .addBorder(Color.select(.primary), width: 2)
+                        }) {
+                            Text("\(theme.rawValue)")
+                                .padding()
+                                .font(.headline)
+                                .frame(maxWidth: 150)
                         }
+                        .background(Color.select(.hitBackground))
+                        .foregroundColor(Color.getColorNamed(theme.rawValue))
+                        .cornerRadius(25)
+                        .addBorder(Color.select(.primary), width: 2)
                     }
                 }
             }
         }
+    }
         
-        func boolToYesNo(_ bool: Bool) -> String {
-            return bool ? "Yes" : "No"
-        }
+    func boolToYesNo(_ bool: Bool) -> String {
+        return bool ? "Yes" : "No"
+    }
+}
+
+enum GameType: String {
+    case cricket
+    case x01
+    case none
+    
+    func toString() -> String {
+        return self.rawValue
     }
 }
 

@@ -45,7 +45,7 @@ struct X01CardView: View {
                 
                 if selectingX01StartingPoint {
                     startingPointGrid
-                        .transition(.slideInFadeAway)
+                        .transition(.slideInFadeUp)
                         .padding(.top, 3)
                 }
                 

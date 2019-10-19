@@ -14,6 +14,7 @@ extension Color {
         case primary
         case secondary
         case hitBackground
+        case background
     }
     
     static func select(_ colorPurpose: ColorPurpose) -> Color {
@@ -24,6 +25,8 @@ extension Color {
             return secondaryColor()
         case .hitBackground:
             return Color("HitBackground")
+        case .background:
+            return Color("Background")
         }
     }
     

@@ -209,8 +209,16 @@ struct X01HitView: View {
                             .foregroundColor(Color.select(.primary))
                         
                         HStack(spacing: 10) {
-                            Text("Total")
+                            Text("Scored")
                             Text("\(self.x01Game.scoreKeeper!.activeTurn.totalScore())")
+                                .foregroundColor(Color.select(.secondary))
+                        }
+                        .padding(.horizontal)
+                        .padding(.top)
+                        
+                        HStack(spacing: 10) {
+                            Text("Remaining")
+                            Text("\(self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].points)")
                                 .foregroundColor(Color.select(.secondary))
                         }
                         .padding(.horizontal)
