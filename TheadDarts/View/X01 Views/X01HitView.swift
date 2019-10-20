@@ -119,7 +119,7 @@ struct X01HitView: View {
                         .frame(width: geometry.size.width / 2)
                 }
                 .background(Color.select(.secondary))
-                .foregroundColor(Color("Background"))
+                .foregroundColor(Color.select(.background))
                 .cornerRadius(25)
                 
                 Button(action: {
@@ -134,7 +134,7 @@ struct X01HitView: View {
                         .frame(width: geometry.size.width / 2)
                 }
                 .background(Color.select(.secondary))
-                .foregroundColor(Color("Background"))
+                .foregroundColor(Color.select(.background))
                 .cornerRadius(25)
                 
                 if (self.selectingMultiplier.1 != .bull) {
@@ -150,7 +150,7 @@ struct X01HitView: View {
                             .frame(width: geometry.size.width / 2)
                     }
                     .background(Color.select(.secondary))
-                    .foregroundColor(Color("Background"))
+                    .foregroundColor(Color.select(.background))
                     .cornerRadius(25)
                 }
                 
@@ -165,7 +165,7 @@ struct X01HitView: View {
                         .font(.subheadline)
                 }
                 .background(Color(.gray))
-                .foregroundColor(Color("Background"))
+                .foregroundColor(Color.select(.background))
                 .cornerRadius(20)
             }
             .padding(.vertical)
@@ -239,7 +239,7 @@ struct X01HitView: View {
                         .frame(maxWidth: geometry.size.width / 3)
                 }
                 .background(Color.select(.secondary))
-                .foregroundColor(Color.select(.hitBackground))
+                .foregroundColor(Color.select(.background))
                 .cornerRadius(25)
                 .padding(.top)
             }

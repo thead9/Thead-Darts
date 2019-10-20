@@ -53,7 +53,7 @@ struct CricketHitView : View {
                                 .frame(maxWidth: .infinity)
                         }
                         .background(Color.select(.secondary))
-                        .foregroundColor(Color("Background"))
+                        .foregroundColor(Color.select(.background))
                         .cornerRadius(25)
                         
                         Button(action: {
@@ -68,7 +68,7 @@ struct CricketHitView : View {
                                 .frame(maxWidth: .infinity)
                         }
                         .background(Color.select(.secondary))
-                        .foregroundColor(Color("Background"))
+                        .foregroundColor(Color.select(.background))
                         .cornerRadius(25)
                         
                         if (self.selectingMultiplier.1 != .bull) {
@@ -84,7 +84,7 @@ struct CricketHitView : View {
                                     .frame(maxWidth: .infinity)
                             }
                             .background(Color.select(.secondary))
-                            .foregroundColor(Color("Background"))
+                            .foregroundColor(Color.select(.background))
                             .cornerRadius(25)
                         }
                         
@@ -99,7 +99,7 @@ struct CricketHitView : View {
                                 .font(.subheadline)
                         }
                         .background(Color(.gray))
-                        .foregroundColor(Color("Background"))
+                        .foregroundColor(Color.select(.background))
                         .cornerRadius(20)
                     }
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
@@ -120,6 +120,7 @@ struct CricketHitView : View {
                             }
                             .disabled(!self.score.shouldAllowHit(on: wedge))
                         }
+                        .animation(.easeInOut)
                         .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         .frame(width: self.getItemWidth(containerWidth: geometry.size.width), height: self.getItemHeight(containerHeight: geometry.size.height))
                         .background(Color.select(.hitBackground))

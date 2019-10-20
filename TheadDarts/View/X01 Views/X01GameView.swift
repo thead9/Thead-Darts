@@ -117,22 +117,41 @@ struct X01GameView: View {
     var bottomControls: some View {
         Group {
             HStack {
+                Spacer()
+
                 Button(action: {
                     withAnimation {
                         self.x01Game.scoreKeeper.undo()
                         self.setGameOver()
                     }
                 }) {
-                    Text("Undo")
+                    Image(systemName: "arrow.uturn.left")
+                        .padding()
                         .font(.title)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
+                .foregroundColor(Color.select(.secondary))
+                .background(Color.select(.hitBackground))
+                .cornerRadius(25)
+                .addBorder(Color.select(.primary), width: 2)
                 
-                Button(action: { self.showNewGameActionSheet = true } ) {
-                    Text("New Game")
+                Spacer()
+                
+                Button(action: {
+                    self.showNewGameActionSheet = true
+                    
+                }) {
+                    Image(systemName: "arrow.2.circlepath")
+                        .padding()
                         .font(.title)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
+                .foregroundColor(Color.select(.secondary))
+                .background(Color.select(.hitBackground))
+                .cornerRadius(25)
+                .addBorder(Color.select(.primary), width: 2)
+                
+                Spacer()
             }
             .font(.title)
             .foregroundColor(Color.select(.secondary))

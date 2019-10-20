@@ -126,7 +126,9 @@ struct CricketGameView : View {
                     }
                     if (!cricketGame.scoreKeeper.activeTurn!.canAddThrow()) {
                         Button(action: {
-                            self.cricketGame.scoreKeeper.nextPlayer()
+                            withAnimation {
+                                self.cricketGame.scoreKeeper.nextPlayer()
+                            }
                         }) {
                             Text("Next")
                                 .padding()
@@ -136,7 +138,9 @@ struct CricketGameView : View {
                         .foregroundColor(Color.select(.hitBackground))
                         .cornerRadius(25)
                     } else {
-                        Button(action: { self.cricketGame.scores[self.cricketGame.scoreKeeper.activeIndex].hit(on: .miss) }) {
+                        Button(action: {
+                            self.cricketGame.scores[self.cricketGame.scoreKeeper.activeIndex].hit(on: .miss)
+                        }) {
                             Text("Miss")
                                 .padding()
                                 .frame(maxWidth: .infinity)
@@ -157,22 +161,41 @@ struct CricketGameView : View {
     var bottomControls: some View {
         Group {
             HStack {
-                Button(
-                    action: {
+                Spacer()
+                
+                Button(action: {
+                    withAnimation {
                         self.cricketGame.scoreKeeper.undo()
                         self.setGameOver()
                     }
-                ) {
-                    Text("Undo")
+                }) {
+                    Image(systemName: "arrow.uturn.left")
+                        .padding()
                         .font(.title)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
+                .foregroundColor(Color.select(.secondary))
+                .background(Color.select(.hitBackground))
+                .cornerRadius(25)
+                .addBorder(Color.select(.primary), width: 2)
                 
-                Button(action: { self.showNewGameActionSheet = true } ) {
-                    Text("New Game")
+                Spacer()
+
+                Button(action: {
+                    self.showNewGameActionSheet = true
+                    
+                }) {
+                    Image(systemName: "arrow.2.circlepath")
+                        .padding()
                         .font(.title)
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
+                .foregroundColor(Color.select(.secondary))
+                .background(Color.select(.hitBackground))
+                .cornerRadius(25)
+                .addBorder(Color.select(.primary), width: 2)
+                
+                Spacer()
             }
             .font(.title)
             .foregroundColor(Color.select(.secondary))

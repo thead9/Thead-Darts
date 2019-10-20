@@ -18,7 +18,7 @@ struct HomeView: View {
     
     @State var selectedGameType: GameType = GameType(rawValue: UserSettings().gameType)
     
-    @State var selectingTheme = false
+    @State var settingsActive = false
         
     // MARK: Body
     var body: some View {
@@ -30,7 +30,7 @@ struct HomeView: View {
                 HStack {
                     Button(action: {
                         withAnimation {
-                            self.selectingTheme = false
+                            self.settingsActive = false
                             self.selectedGameType = GameType.cricket
                             self.settings.gameType = GameType.cricket.rawValue
                         }
@@ -46,7 +46,7 @@ struct HomeView: View {
                     
                     Button(action: {
                         withAnimation {
-                            self.selectingTheme = false
+                            self.settingsActive = false
                             self.selectedGameType = .x01
                             self.settings.gameType = GameType.x01.rawValue
                         }
@@ -74,24 +74,27 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                if !self.selectingTheme {
-                    Button(action: {
-                        withAnimation {
-                            self.selectedGameType = GameType.none
-                            self.selectingTheme = true
+                if !self.settingsActive {
+                    HStack {
+                        Spacer()
+                        
+                        Button(action: {
+                            withAnimation {
+                                self.selectedGameType = GameType.none
+                                self.settingsActive = true
+                            }
+                        }) {
+                            Image(systemName: "gear")
+                                .padding()
+                                .font(.title)
                         }
-                    }) {
-                        Text("Theme")
-                            .padding()
-                            .font(.title)
+                        .foregroundColor(Color.select(.secondary))
+                        .background(Color.select(.hitBackground))
+                        .cornerRadius(25)
+                        .addBorder(Color.select(.primary), width: 2)
                     }
-                    .foregroundColor(Color.select(.secondary))
-                    .background(Color.select(.hitBackground))
-                    .cornerRadius(25)
-                    .addBorder(Color.select(.primary), width: 2)
-                    .transition(.opacity)
                 } else {
-                    themeCard
+                    settingsCard
                         .transition(.move(edge: .bottom))
                 }
             }
@@ -105,9 +108,9 @@ struct HomeView: View {
     }
     
     // MARK: Theme
-    var themeCard: some View {
+    var settingsCard: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Theme")
+            Text("Settings")
                 .padding()
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -119,7 +122,7 @@ struct HomeView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text("Selected Theme:")
+                    Text("Theme:")
                         .font(.title)
                     Text("\(self.settings.theme)")
                         .padding()
@@ -131,12 +134,12 @@ struct HomeView: View {
                 
                 themeGrid
                     .transition(.slideInFadeUp)
-                    .padding(.top, 3)
+                    .padding(.top)
                 
                 Button(action: {
                     withAnimation {
                         self.selectedGameType = GameType(rawValue: self.settings.gameType)
-                        self.selectingTheme = false
+                        self.settingsActive = false
                     }
                 }) {
                     Text("Done")
