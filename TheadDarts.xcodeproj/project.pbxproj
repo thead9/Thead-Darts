@@ -125,7 +125,7 @@
 		C77EF0A3232D4C57004B4045 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C78EDD24230D9DC500700A55 /* DartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartTurn.swift; sourceTree = "<group>"; };
 		C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrowOnTurn.swift; sourceTree = "<group>"; };
-		C7983E1C22CACC0E00ACC903 /* TheadDarts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TheadDarts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7983E1C22CACC0E00ACC903 /* Darts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Darts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7983E2122CACC0E00ACC903 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C7983E2322CACC0E00ACC903 /* CricketGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketGameView.swift; sourceTree = "<group>"; };
@@ -268,7 +268,7 @@
 		C7983E1D22CACC0E00ACC903 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C7983E1C22CACC0E00ACC903 /* TheadDarts.app */,
+				C7983E1C22CACC0E00ACC903 /* Darts.app */,
 				C7983E3222CACC1200ACC903 /* TheadDartsTests.xctest */,
 				C7983E3D22CACC1200ACC903 /* TheadDartsUITests.xctest */,
 			);
@@ -423,7 +423,7 @@
 			);
 			name = TheadDarts;
 			productName = TheadDarts;
-			productReference = C7983E1C22CACC0E00ACC903 /* TheadDarts.app */;
+			productReference = C7983E1C22CACC0E00ACC903 /* Darts.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C7983E3122CACC1200ACC903 /* TheadDartsTests */ = {
@@ -779,7 +779,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "TheadDarts/Preview\\ Content";
 				DEVELOPMENT_TEAM = X94L6WV9DW;
 				ENABLE_PREVIEWS = YES;
@@ -789,7 +789,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDarts;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Darts;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -800,7 +800,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "TheadDarts/Preview\\ Content";
 				DEVELOPMENT_TEAM = X94L6WV9DW;
 				ENABLE_PREVIEWS = YES;
@@ -810,7 +810,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDarts;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Darts;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -79,13 +79,14 @@ struct X01HitView: View {
                             }) {
                                 if self.isBullOrMiss(wedge: wedge) {
                                     Text("\(wedge.name())")
-                                        .padding()
+                                        .padding(.vertical)
+                                        .frame(width: ( (self.isBullOrMiss(wedge: wedge) ? 2 : 1) * self.getItemWidth(containerWidth: geometry.size.width) ) + (self.isBullOrMiss(wedge: wedge) ? self.hitViewSpacing / 2 : 0), height: self.getItemHeight(containerHeight: geometry.size.height))
                                 } else {
                                     Text("\(wedge.rawValue)")
-                                        .padding()
+                                        .padding(.vertical)
+                                        .frame(width: ( (self.isBullOrMiss(wedge: wedge) ? 2 : 1) * self.getItemWidth(containerWidth: geometry.size.width) ) + (self.isBullOrMiss(wedge: wedge) ? self.hitViewSpacing / 2 : 0), height: self.getItemHeight(containerHeight: geometry.size.height))
                                 }
                             }
-                            .frame(width: ( (self.isBullOrMiss(wedge: wedge) ? 2 : 1) * self.getItemWidth(containerWidth: geometry.size.width) ) + (self.isBullOrMiss(wedge: wedge) ? self.hitViewSpacing / 2 : 0), height: self.getItemHeight(containerHeight: geometry.size.height))
                             .background(Color.select(.hitBackground))
                             .foregroundColor(Color.select(.secondary))
                             .cornerRadius(25)
@@ -104,7 +105,6 @@ struct X01HitView: View {
             VStack(spacing: 5) {
                 Text("\(self.selectingMultiplier.1.abbreviation())")
                     .font(.largeTitle)
-                    //.padding(.bottom)
                     .foregroundColor(Color.select(.primary))
                                         
                 Button(action: {
@@ -115,8 +115,8 @@ struct X01HitView: View {
                     }
                 }) {
                     Text("Single")
-                        .padding(10)
-                        .frame(width: geometry.size.width / 2)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity)
                 }
                 .background(Color.select(.secondary))
                 .foregroundColor(Color.select(.background))
@@ -130,8 +130,8 @@ struct X01HitView: View {
                     }
                 }) {
                     Text("Double")
-                        .padding(10)
-                        .frame(width: geometry.size.width / 2)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity)
                 }
                 .background(Color.select(.secondary))
                 .foregroundColor(Color.select(.background))
@@ -146,8 +146,8 @@ struct X01HitView: View {
                         }
                     }) {
                         Text("Triple")
-                            .padding(10)
-                            .frame(width: geometry.size.width / 2)
+                            .padding(.vertical, 10)
+                            .frame(maxWidth: .infinity)
                     }
                     .background(Color.select(.secondary))
                     .foregroundColor(Color.select(.background))
@@ -160,8 +160,8 @@ struct X01HitView: View {
                     }
                 }) {
                     Text("Cancel")
-                        .padding(10)
-                        .frame(width: geometry.size.width / 2)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity)
                         .font(.subheadline)
                 }
                 .background(Color(.gray))
@@ -170,6 +170,7 @@ struct X01HitView: View {
             }
             .padding(.vertical)
             .padding(.horizontal, 10)
+            .frame(width: geometry.size.width / 1.5)
             .background(Color.select(.hitBackground))
             .cornerRadius(25)
             .addBorder(Color.select(.primary), width: 2)

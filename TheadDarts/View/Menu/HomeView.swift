@@ -36,10 +36,10 @@ struct HomeView: View {
                         }
                     }) {
                         Text("Cricket")
-                            .padding()
+                            .padding(.vertical)
+                            .frame(maxWidth: .infinity)
                             .font(.largeTitle)
                     }
-                    .frame(maxWidth: .infinity)
                     .foregroundColor(self.selectedGameType == .cricket ? Color.select(.background) : Color.select(.secondary))
                     .background(self.selectedGameType == .cricket ? Color.select(.secondary) : Color.select(.hitBackground))
                     .cornerRadius(25)
@@ -52,10 +52,10 @@ struct HomeView: View {
                         }
                     }) {
                         Text("X01")
-                            .padding()
+                            .padding(.vertical)
+                            .frame(maxWidth: .infinity)
                             .font(.largeTitle)
                     }
-                    .frame(maxWidth: .infinity)
                     .foregroundColor(self.selectedGameType == .x01 ? Color.select(.background) : Color.select(.secondary))
                     .background(self.selectedGameType == .x01 ? Color.select(.secondary) : Color.select(.hitBackground))
                     .cornerRadius(25)
