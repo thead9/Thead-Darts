@@ -105,6 +105,7 @@ struct HomeView: View {
             .navigationBarTitle(Text("Thead Darts"))
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .font(.headline)
     }
     
