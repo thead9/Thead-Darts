@@ -93,6 +93,7 @@ struct HomeView: View {
                         .cornerRadius(25)
                         .addBorder(Color.select(.primary), width: 2)
                     }
+                    .padding(.bottom)
                 } else {
                     settingsCard
                         .transition(.move(edge: .bottom))

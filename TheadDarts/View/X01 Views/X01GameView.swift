@@ -76,6 +76,7 @@ struct X01GameView: View {
             bottomControls
         }
         .font(.title)
+        .padding(.vertical)
         .foregroundColor(Color.select(.primary))
         .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
