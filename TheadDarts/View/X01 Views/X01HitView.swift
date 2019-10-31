@@ -22,14 +22,17 @@ struct X01HitView: View {
             if self.selectingMultiplier.0 {
                 x01SelectingMultiplier
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    .frame(maxWidth: 450)
             } else if !self.x01Game.scoreKeeper.activeTurn.canAddThrow() {
                 x01TurnOverview
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    .frame(maxWidth: 450)
             } else {
                 x01HitGrid
                     .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
             }
         }
+        .frame(alignment: !self.selectingMultiplier.0 && !self.x01Game.scoreKeeper.activeTurn.canAddThrow() ? .center : .leading)
     }
     
     // MARK: Hit Grid

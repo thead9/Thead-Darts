@@ -25,6 +25,7 @@ struct HomeView: View {
         NavigationView {
             VStack(alignment: .leading) {
                 Text("Select Game Type")
+                    .padding(.top)
                     .font(.largeTitle)
                 
                 HStack {
@@ -62,15 +63,20 @@ struct HomeView: View {
                 }
                 .padding(.vertical)
                 
-                if self.selectedGameType == .cricket {
-                    CricketCardView()
-                        .transition(.slideAndFade)
+                Group {
+                    if self.selectedGameType == .cricket {
+                        CricketCardView()
+                            .transition(.slideAndFade)
+                            .frame(maxWidth: 500)
+                    }
+                    
+                    if self.selectedGameType == .x01 {
+                        X01CardView()
+                            .transition(.slideAndFade)
+                            .frame(maxWidth: 500)
+                    }
                 }
-                
-                if self.selectedGameType == .x01 {
-                    X01CardView()
-                        .transition(.slideAndFade)
-                }
+                .frame(maxWidth: .infinity, alignment: .center)
                 
                 Spacer()
                 
@@ -95,8 +101,12 @@ struct HomeView: View {
                     }
                     .padding(.bottom)
                 } else {
-                    settingsCard
+                    Group {
+                        settingsCard
                         .transition(.move(edge: .bottom))
+                        .frame(maxWidth: 500)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
             .addBorder(Color(.clear), width: 0.0, condition: settings.theme == "clear")

@@ -22,7 +22,7 @@ struct CricketCardView: View {
                 .background(Color.select(.secondary))
             
             Rectangle()
-                .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
+                .frame(minHeight: 2, maxHeight: 2)
                 .foregroundColor(Color.select(.primary))
             
             VStack(alignment: .leading) {

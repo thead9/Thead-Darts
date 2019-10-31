@@ -105,6 +105,7 @@ struct CricketHitView : View {
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .padding(.vertical)
                     .padding(.horizontal, 10)
+                    .frame(maxWidth: 250)
                     .background(Color.select(.hitBackground))
                     .cornerRadius(25)
                     .addBorder(Color.select(.primary), width: 2)
