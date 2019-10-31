@@ -74,7 +74,7 @@ class X01Score: DartScore {
     }
     
     // MARK: Inits
-    init () { }
+    required init () { }
 
     init(startingPoint: Int = 301, updated: @escaping () -> () = { }) {
         self.startingPoint = startingPoint

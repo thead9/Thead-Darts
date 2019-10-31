@@ -29,7 +29,7 @@ class X01PlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {
     }
     let id = UUID()
     
-    init(player: X01Player, score: X01Score) {
+    required init(player: X01Player, score: X01Score) {
         self.player = player
         self.score = score
 

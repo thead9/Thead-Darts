@@ -77,6 +77,10 @@
 		C7C5252D232EE3C8009AF03B /* X01ScoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C5252C232EE3C8009AF03B /* X01ScoreTests.swift */; };
 		C7D61D0C232D2A770098D339 /* CricketMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D61D0B232D2A770098D339 /* CricketMarkView.swift */; };
 		C7D61D0D232D2A770098D339 /* CricketMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D61D0B232D2A770098D339 /* CricketMarkView.swift */; };
+		C7E3C594236B3BA90098A122 /* CricketGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E2322CACC0E00ACC903 /* CricketGameView.swift */; };
+		C7E3C595236B3BBA0098A122 /* CricketHitLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708131F22D1236B00B22BFF /* CricketHitLabelView.swift */; };
+		C7E3C596236B3BC00098A122 /* CricketHitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E310122CBB09200269AEE /* CricketHitView.swift */; };
+		C7E3C597236B3BC30098A122 /* CricketPlayerUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708132122D1250400B22BFF /* CricketPlayerUnitView.swift */; };
 		C7F0A20D22CD7876005171BB /* CricketPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */; };
 		C7F0A20E22CD7876005171BB /* CricketPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */; };
 		C7F46D18233F9B2900C3C3F7 /* X01Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D17233F9B2800C3C3F7 /* X01Game.swift */; };
@@ -344,9 +348,9 @@
 			children = (
 				C7983E5922CACC9900ACC903 /* CricketGame.swift */,
 				C7983E5C22CACCAA00ACC903 /* CricketPlayer.swift */,
+				C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */,
 				C7983E5F22CACCBF00ACC903 /* CricketScore.swift */,
 				C7983E6222CACCD300ACC903 /* CricketScoreKeeper.swift */,
-				C7F0A20C22CD7875005171BB /* CricketPlayerUnit.swift */,
 			);
 			path = Cricket;
 			sourceTree = "<group>";
@@ -377,10 +381,10 @@
 		C7C5251D232EDB3C009AF03B /* X01 */ = {
 			isa = PBXGroup;
 			children = (
+				C7F46D17233F9B2800C3C3F7 /* X01Game.swift */,
 				C7C5251E232EDB87009AF03B /* X01Player.swift */,
 				C7C52521232EDBF7009AF03B /* X01PlayerUnit.swift */,
 				C7C52524232EDC62009AF03B /* X01Score.swift */,
-				C7F46D17233F9B2800C3C3F7 /* X01Game.swift */,
 				C7F46D1A233F9BAE00C3C3F7 /* X01ScoreKeeper.swift */,
 			);
 			path = X01;
@@ -612,13 +616,17 @@
 				C7F46D2A2340FDBB00C3C3F7 /* Extensions.swift in Sources */,
 				C7983E6422CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */,
 				C7983E7522CACD5E00ACC903 /* CricketPlayerTests.swift in Sources */,
+				C7E3C596236B3BC00098A122 /* CricketHitView.swift in Sources */,
 				C7C52520232EDB87009AF03B /* X01Player.swift in Sources */,
 				C7983E7722CACD7800ACC903 /* CricketScoreTests.swift in Sources */,
 				C7062B1422F44A59006CE930 /* Stack.swift in Sources */,
 				C7983E6A22CACCFA00ACC903 /* DartPlayer.swift in Sources */,
 				C7C52526232EDC62009AF03B /* X01Score.swift in Sources */,
+				C7E3C595236B3BBA0098A122 /* CricketHitLabelView.swift in Sources */,
+				C7E3C597236B3BC30098A122 /* CricketPlayerUnitView.swift in Sources */,
 				C7983E6722CACCE800ACC903 /* DartGame.swift in Sources */,
 				C75C5F4323032DC60019C8B7 /* TurnChange.swift in Sources */,
+				C7E3C594236B3BA90098A122 /* CricketGameView.swift in Sources */,
 				C78EDD26230D9DC500700A55 /* DartTurn.swift in Sources */,
 				C7983E5B22CACC9900ACC903 /* CricketGame.swift in Sources */,
 				C70E1EED23525CF000706F81 /* X01CardView.swift in Sources */,
@@ -835,7 +843,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheadDarts.app/TheadDarts";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Darts.app/Darts";
 			};
 			name = Debug;
 		};
@@ -856,7 +864,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TheadDarts.app/TheadDarts";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Darts.app/Darts";
 			};
 			name = Release;
 		};

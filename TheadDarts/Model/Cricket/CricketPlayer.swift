@@ -20,7 +20,7 @@ class CricketPlayer: DartPlayer {
     // MARK: Inits
     init() { }
     
-    init(name: String) {
+    required init(name: String) {
         self.name = name
     }
     

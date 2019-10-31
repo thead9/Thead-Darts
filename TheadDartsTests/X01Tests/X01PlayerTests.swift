@@ -9,7 +9,7 @@
 import Foundation
 
 import XCTest
-@testable import TheadDarts
+@testable import Darts
 
 class X01PlayerTests: XCTestCase {
     

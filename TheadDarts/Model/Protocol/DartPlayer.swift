@@ -10,4 +10,6 @@ import Foundation
 
 protocol DartPlayer {
     var name: String { get set }
+    
+    init(name: String)
 }

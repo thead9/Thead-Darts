@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import TheadDarts
+@testable import Darts
 
 class CricketScoreTests: XCTestCase {
     

@@ -20,7 +20,7 @@ class X01Player: DartPlayer {
     // MARK: Inits
     init() { }
     
-    init(name: String) {
+    required init(name: String) {
         self.name = name
     }
     

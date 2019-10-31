@@ -14,4 +14,6 @@ protocol DartPlayerUnit {
     
     var player: Player { get set }
     var score: Score { get set }
+    
+    init(player: Player, score: Score)
 }

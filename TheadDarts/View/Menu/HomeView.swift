@@ -103,8 +103,8 @@ struct HomeView: View {
                 } else {
                     Group {
                         settingsCard
-                        .transition(.move(edge: .bottom))
-                        .frame(maxWidth: 500)
+                            .transition(.move(edge: .bottom))
+                            .frame(maxWidth: 500)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }

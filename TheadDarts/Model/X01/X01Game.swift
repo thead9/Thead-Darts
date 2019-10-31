@@ -30,11 +30,13 @@ class X01Game: DartGame, ObservableObject {
     init(numberOfPlayers: Int, startingPoint: Int = 301, doubleOut: Bool = true) {
         for index in 0..<numberOfPlayers {
             let playerUnit = X01PlayerUnit(player: X01Player(name: "Player \(index+1)"),
-                                               score: X01Score(startingPoint: startingPoint),
-                                               updated: { self.objectWillChange.send(()) })
+                                           score: X01Score(startingPoint: startingPoint),
+                                           updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }
-        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits, doubleOut: doubleOut, updated: { self.objectWillChange.send(()) })
+        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits,
+                                     doubleOut: doubleOut,
+                                     updated: { self.objectWillChange.send(()) })
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }
@@ -43,11 +45,13 @@ class X01Game: DartGame, ObservableObject {
     init(players: [X01Player], startingPoint: Int = 301, doubleOut: Bool = true) {
         for player in players {
             let playerUnit = X01PlayerUnit(player: player,
-                                               score: X01Score(startingPoint: startingPoint),
-                                               updated: { self.objectWillChange.send(()) })
+                                           score: X01Score(startingPoint: startingPoint),
+                                           updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }
-        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits, doubleOut: doubleOut, updated: { self.objectWillChange.send(()) })
+        scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits,
+                                     doubleOut: doubleOut,
+                                     updated: { self.objectWillChange.send(()) })
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }
@@ -74,35 +78,6 @@ extension X01Game {
     }
     
     // MARK: Adding Players
-    func addPlayer() {
-        func getDefaultNewPlayerName() -> String {
-            var biggestDefaultPlayerName = 1
-            for player in players {
-                if player.name.contains("Player") {
-                    let nameArray = player.name.components(separatedBy: " ")
-                    if let currentNumber = Int(nameArray.last!) {
-                        if biggestDefaultPlayerName < currentNumber {
-                            biggestDefaultPlayerName = currentNumber
-                        }
-                    }
-                }
-            }
-            
-            var newPlayerNameNumber = 1
-            if biggestDefaultPlayerName < players.count {
-                newPlayerNameNumber = players.count
-            } else {
-                newPlayerNameNumber = biggestDefaultPlayerName
-            }
-            return "Player \(newPlayerNameNumber+1)"
-        }
-        addPlayer(named: getDefaultNewPlayerName())
-    }
-    
-    func addPlayer(named name: String) {
-        addPlayer(X01Player(name: name))
-    }
-    
     func addPlayer(_ player : X01Player) {
         playerUnits.append(X01PlayerUnit(player: player, score: X01Score()))
     }

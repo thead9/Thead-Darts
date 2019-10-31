@@ -34,7 +34,8 @@ class CricketGame: DartGame, ObservableObject {
             self.playerUnits.append(playerUnit)
         }
         
-        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits, updated: { self.objectWillChange.send(()) })
+        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits,
+                                         updated: { self.objectWillChange.send(()) })
         
         if trackTurns {
             scoreKeeper.activeTurn = DartTurn<CricketScore>()
@@ -52,7 +53,8 @@ class CricketGame: DartGame, ObservableObject {
                                                updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
         }
-        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits, updated: { self.objectWillChange.send(()) })
+        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits,
+                                         updated: { self.objectWillChange.send(()) })
         
         if trackTurns {
             scoreKeeper.activeTurn = DartTurn<CricketScore>()
@@ -84,35 +86,6 @@ extension CricketGame {
     }
     
     // MARK: Adding Players
-    func addPlayer() {
-        func getDefaultNewPlayerName() -> String {
-            var biggestDefaultPlayerName = 1
-            for player in players {
-                if player.name.contains("Player") {
-                    let nameArray = player.name.components(separatedBy: " ")
-                    if let currentNumber = Int(nameArray.last!) {
-                        if biggestDefaultPlayerName < currentNumber {
-                            biggestDefaultPlayerName = currentNumber
-                        }
-                    }
-                }
-            }
-            
-            var newPlayerNameNumber = 1
-            if biggestDefaultPlayerName < players.count {
-                newPlayerNameNumber = players.count
-            } else {
-                newPlayerNameNumber = biggestDefaultPlayerName
-            }
-            return "Player \(newPlayerNameNumber+1)"
-        }
-        addPlayer(named: getDefaultNewPlayerName())
-    }
-    
-    func addPlayer(named name: String) {
-        addPlayer(CricketPlayer(name: name))
-    }
-    
     func addPlayer(_ player : CricketPlayer) {
         playerUnits.append(CricketPlayerUnit(player: player, score: CricketScore()))
     }

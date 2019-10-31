@@ -64,7 +64,7 @@ class CricketScore: DartScore, ObservableObject {
     }
     
     // MARK: Inits
-    init () { }
+    required init () { }
 
     init(updated: @escaping () -> ()) {
         self.updated = updated

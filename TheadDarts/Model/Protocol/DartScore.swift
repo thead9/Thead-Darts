@@ -10,6 +10,8 @@ import Foundation
 
 protocol DartScore {
     associatedtype Score: DartScore
+    
+    init()
         
     @discardableResult
     func hit(on wedge: Wedge, with multiplier: Multiplier) -> Score
