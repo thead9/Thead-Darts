@@ -137,22 +137,22 @@ class CricketGameTests: XCTestCase {
     // MARK: Hitting
     func testHittingWithNoOneClosed() {
         cricketScore1.hit(on: .fifteen, with: .single)
-        XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 1)
+        XCTAssertEqual(cricketGame.scores[0].marks[.fifteen], 1)
     }
     
     func testHittingByOneClosed() {
         cricketScore1.hit(on: .fifteen, with: .triple)
         cricketScore1.hit(on: .fifteen, with: .single)
 
-        XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 4)
+        XCTAssertEqual(cricketGame.scores[0].marks[.fifteen], 4)
     }
     
     func testHittingByOneNotClosedWithOneClosed() {
         cricketScore1.hit(on: .fifteen, with: .triple)
         cricketScore2.hit(on: .fifteen, with: .single)
 
-        XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 3)
-        XCTAssertEqual(cricketGame.scores[1].marks.fifteen, 1)
+        XCTAssertEqual(cricketGame.scores[0].marks[.fifteen], 3)
+        XCTAssertEqual(cricketGame.scores[1].marks[.fifteen], 1)
     }
     
     func testHittingWithAllClosed() {
@@ -161,8 +161,8 @@ class CricketGameTests: XCTestCase {
         cricketScore1.hit(on: .fifteen, with: .triple)
         cricketScore2.hit(on: .fifteen, with: .triple)
 
-        XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 3)
-        XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 3)
+        XCTAssertEqual(cricketGame.scores[0].marks[.fifteen], 3)
+        XCTAssertEqual(cricketGame.scores[0].marks[.fifteen], 3)
     }
     
     func testOverHitWhenOtherClosed() {
@@ -170,8 +170,8 @@ class CricketGameTests: XCTestCase {
         cricketScore2.hit(on: .fifteen, with: .single)
         cricketScore2.hit(on: .fifteen, with: .triple)
         
-        XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 3)
-        XCTAssertEqual(cricketGame.scores[0].marks.fifteen, 3)
+        XCTAssertEqual(cricketGame.scores[0].marks[.fifteen], 3)
+        XCTAssertEqual(cricketGame.scores[0].marks[.fifteen], 3)
     }
     
     // MARK: Winner & Game Over

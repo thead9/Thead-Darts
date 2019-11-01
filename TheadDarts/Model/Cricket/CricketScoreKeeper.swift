@@ -117,7 +117,7 @@ class CricketScoreKeeper: DartScoreKeeper {
         
         var multiplierForPoints = multiplier
         if !shouldAllowScoring(on: wedge, with: multiplier, for: score) {
-            let markDifference = 3 - score.getMarks(for: wedge)
+            let markDifference = 3 - score.marks[wedge]
             if markDifference == 1 {
                 multiplierForPoints = .single
             }
@@ -189,7 +189,7 @@ extension CricketScoreKeeper {
     
     func everyoneClosed(wedge: Wedge) -> Bool {
         for score in scores {
-            if !score.closed(wedge: wedge) {
+            if !score.isWedgeClosed(wedge) {
                 return false
             }
         }
@@ -198,10 +198,10 @@ extension CricketScoreKeeper {
     }
     
     func onlyScoreNotClosed(scoreToCheck: Score, wedge: Wedge) -> Bool {
-        if !scoreToCheck.closed(wedge: wedge) {
+        if !scoreToCheck.isWedgeClosed(wedge) {
             var numberOfScoresClosed = 0
             for score in scores {
-                if score.closed(wedge: wedge) {
+                if score.isWedgeClosed(wedge) {
                     numberOfScoresClosed += 1
                 }
             }

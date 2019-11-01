@@ -117,7 +117,7 @@ struct CricketHitView : View {
                                     self.selectingMultiplier = (true, wedge)
                                 }
                             }) {
-                                CricketMarkView(marks: self.score.getMarks(for: wedge))
+                                CricketMarkView(marks: self.score.marks[wedge])
                             }
                             .disabled(!self.score.shouldAllowHit(on: wedge))
                         }
