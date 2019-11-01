@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Wedge: Int {
+enum Wedge: Int, CaseIterable {
     case miss = 0
     case one = 1
     case two = 2
