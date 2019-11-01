@@ -81,30 +81,6 @@ extension X01Game {
     func addPlayer(_ player : X01Player) {
         playerUnits.append(X01PlayerUnit(player: player, score: X01Score()))
     }
-    
-    // MARK: Removing Players
-    @discardableResult
-    func removePlayer() -> X01Player {
-        return removePlayer(at: playerUnits.count-1)!
-    }
-    
-    @discardableResult
-    func removePlayer(at index: Int) -> X01Player? {
-        guard index < players.count && index >= 0 else {
-            return nil
-        }
-        return playerUnits.remove(at: index).player
-    }
-    
-    // MARK: Modifying Players
-    @discardableResult
-    func changePlayerName(at index: Int, to name: String) -> X01Player? {
-        guard index < players.count && index >= 0 else {
-            return nil
-        }
-        playerUnits[index].player.name = name
-        return players[index]
-    }
 }
 
 // MARK: Score Keeping

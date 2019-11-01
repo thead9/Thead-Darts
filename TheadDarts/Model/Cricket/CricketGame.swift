@@ -85,33 +85,8 @@ extension CricketGame {
         }
     }
     
-    // MARK: Adding Players
     func addPlayer(_ player : CricketPlayer) {
         playerUnits.append(CricketPlayerUnit(player: player, score: CricketScore()))
-    }
-    
-    // MARK: Removing Players
-    @discardableResult
-    func removePlayer() -> CricketPlayer {
-        return removePlayer(at: playerUnits.count-1)!
-    }
-    
-    @discardableResult
-    func removePlayer(at index: Int) -> CricketPlayer? {
-        guard index < players.count && index >= 0 else {
-            return nil
-        }
-        return playerUnits.remove(at: index).player
-    }
-    
-    // MARK: Modifying Players
-    @discardableResult
-    func changePlayerName(at index: Int, to name: String) -> CricketPlayer? {
-        guard index < players.count && index >= 0 else {
-            return nil
-        }
-        playerUnits[index].player.name = name
-        return players[index]
     }
 }
 
