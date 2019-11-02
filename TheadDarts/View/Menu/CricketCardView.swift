@@ -35,10 +35,7 @@ struct CricketCardView: View {
                         Text("\(boolToYesNo(settings.trackTurns))")
                             .padding()
                     }
-                    .foregroundColor(Color.select(.secondary))
-                    .background(Color.select(.hitBackground))
-                    .cornerRadius(25)
-                    .addBorder(Color.select(.primary), width: 2)
+                    .buttonStyle(SecondaryButtonStyle())
                 }
                 
                 NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns))) {
@@ -46,10 +43,7 @@ struct CricketCardView: View {
                         .padding()
                         .font(.largeTitle)
                 }
-                .foregroundColor(Color.select(.secondary))
-                .background(Color.select(.hitBackground))
-                .cornerRadius(25)
-                .addBorder(Color.select(.primary), width: 2)
+                .buttonStyle(SecondaryButtonStyle())
                 .padding(.top)
             }
             .padding()
