@@ -92,7 +92,7 @@ struct HomeView: View {
                                 .padding()
                                 .font(.title)
                         }
-                        .buttonStyle(SecondaryButtonStyle(addBorder: true))
+                        .buttonStyle(SecondaryButtonStyle())
                     
                     }
                     .padding(.bottom)
@@ -154,7 +154,7 @@ struct HomeView: View {
                         .padding()
                         .font(.title)
                 }
-                .buttonStyle(SecondaryButtonStyle(addBorder: true))
+                .buttonStyle(SecondaryButtonStyle())
                 .padding(.top)
             }
             .padding()
@@ -184,8 +184,7 @@ struct HomeView: View {
                                 .font(.headline)
                                 .frame(maxWidth: 150)
                         }
-                        .buttonStyle(SecondaryButtonStyle(addBorder: true,
-                                                          foregroundColor: Color.getColorNamed(theme.rawValue)))
+                        .buttonStyle(SecondaryButtonStyle(foregroundColor: Color.getColorNamed(theme.rawValue)))
                     }
                 }
             }

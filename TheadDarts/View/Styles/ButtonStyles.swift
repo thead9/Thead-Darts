@@ -19,7 +19,7 @@ struct PrimaryButtonStyle: ButtonStyle {
 }
 
 struct SecondaryButtonStyle: ButtonStyle {
-    var addBorder = false
+    var addBorder = true
     var foregroundColor = Color.select(.secondary)
     
     func makeBody(configuration: Self.Configuration) -> some View {

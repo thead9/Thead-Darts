@@ -37,10 +37,7 @@ struct X01CardView: View {
                         Text("\(settings.x01StartingPoint)")
                             .padding()
                     }
-                    .foregroundColor(Color.select(.secondary))
-                    .background(Color.select(.hitBackground))
-                    .cornerRadius(25)
-                    .addBorder(Color.select(.primary), width: 2)
+                    .buttonStyle(SecondaryButtonStyle())
                 }
                 
                 if selectingX01StartingPoint {
@@ -58,10 +55,7 @@ struct X01CardView: View {
                         Text("\(boolToYesNo(settings.doubleOut))")
                             .padding()
                     }
-                    .foregroundColor(Color.select(.secondary))
-                    .background(Color.select(.hitBackground))
-                    .cornerRadius(25)
-                    .addBorder(Color.select(.primary), width: 2)
+                    .buttonStyle(SecondaryButtonStyle())
                 }
                 .padding(.top)
                 
@@ -70,10 +64,7 @@ struct X01CardView: View {
                         .padding()
                         .font(.largeTitle)
                 }
-                .foregroundColor(Color.select(.secondary))
-                .background(Color.select(.hitBackground))
-                .cornerRadius(25)
-                .addBorder(Color.select(.primary), width: 2)
+                .buttonStyle(SecondaryButtonStyle())
                 .padding(.top)
             }
             .padding()
@@ -105,10 +96,7 @@ struct X01CardView: View {
                                 .padding()
                                 .frame(maxWidth: 200)
                         }
-                        .background(Color.select(.hitBackground))
-                        .foregroundColor(Color.select(.secondary))
-                        .cornerRadius(25)
-                        .addBorder(Color.select(.primary), width: 2)
+                        .buttonStyle(SecondaryButtonStyle())
                     }
                 }
             }
