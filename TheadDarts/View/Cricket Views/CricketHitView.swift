@@ -52,9 +52,7 @@ struct CricketHitView : View {
                                 .padding(.vertical, 10)
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color.select(.secondary))
-                        .foregroundColor(Color.select(.background))
-                        .cornerRadius(25)
+                        .buttonStyle(PrimaryButtonStyle())
                         
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.25)) {
@@ -67,9 +65,8 @@ struct CricketHitView : View {
                                 .padding(.vertical, 10)
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color.select(.secondary))
-                        .foregroundColor(Color.select(.background))
-                        .cornerRadius(25)
+                        .buttonStyle(PrimaryButtonStyle())
+
                         
                         if (self.selectingMultiplier.1 != .bull) {
                             Button(action: {
@@ -83,9 +80,7 @@ struct CricketHitView : View {
                                     .padding(.vertical, 10)
                                     .frame(maxWidth: .infinity)
                             }
-                            .background(Color.select(.secondary))
-                            .foregroundColor(Color.select(.background))
-                            .cornerRadius(25)
+                            .buttonStyle(PrimaryButtonStyle())
                         }
                         
                         Button(action: {

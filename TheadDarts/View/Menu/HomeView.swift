@@ -10,10 +10,6 @@ import SwiftUI
 
 struct HomeView: View {
     
-//    init() {
-//        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(named: "Secondary") ?? UIColor.black]
-//    }
-    
     @ObservedObject var settings = UserSettings()
     
     @State var selectedGameType: GameType = GameType(rawValue: UserSettings().gameType)
@@ -41,6 +37,7 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity)
                             .font(.largeTitle)
                     }
+                    // Ideally this would be converted to a ternary style selection, but it doesn't compile???
                     .foregroundColor(self.selectedGameType == .cricket ? Color.select(.background) : Color.select(.secondary))
                     .background(self.selectedGameType == .cricket ? Color.select(.secondary) : Color.select(.hitBackground))
                     .cornerRadius(25)
@@ -57,6 +54,7 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity)
                             .font(.largeTitle)
                     }
+                    // Ideally this would be converted to a ternary style selection, but it doesn't compile???
                     .foregroundColor(self.selectedGameType == .x01 ? Color.select(.background) : Color.select(.secondary))
                     .background(self.selectedGameType == .x01 ? Color.select(.secondary) : Color.select(.hitBackground))
                     .cornerRadius(25)
@@ -94,10 +92,8 @@ struct HomeView: View {
                                 .padding()
                                 .font(.title)
                         }
-                        .foregroundColor(Color.select(.secondary))
-                        .background(Color.select(.hitBackground))
-                        .cornerRadius(25)
-                        .addBorder(Color.select(.primary), width: 2)
+                        .buttonStyle(SecondaryButtonStyle(addBorder: true))
+                    
                     }
                     .padding(.bottom)
                 } else {
@@ -158,10 +154,7 @@ struct HomeView: View {
                         .padding()
                         .font(.title)
                 }
-                .foregroundColor(Color.select(.secondary))
-                .background(Color.select(.hitBackground))
-                .cornerRadius(25)
-                .addBorder(Color.select(.primary), width: 2)
+                .buttonStyle(SecondaryButtonStyle(addBorder: true))
                 .padding(.top)
             }
             .padding()
@@ -191,10 +184,8 @@ struct HomeView: View {
                                 .font(.headline)
                                 .frame(maxWidth: 150)
                         }
-                        .background(Color.select(.hitBackground))
-                        .foregroundColor(Color.getColorNamed(theme.rawValue))
-                        .cornerRadius(25)
-                        .addBorder(Color.select(.primary), width: 2)
+                        .buttonStyle(SecondaryButtonStyle(addBorder: true,
+                                                          foregroundColor: Color.getColorNamed(theme.rawValue)))
                     }
                 }
             }
