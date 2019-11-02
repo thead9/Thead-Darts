@@ -16,10 +16,7 @@ struct CricketCardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Cricket")
-                .padding()
-                .font(.largeTitle)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.select(.secondary))
+                .textStyle(CardTitleTextStyle())
             
             Rectangle()
                 .frame(minHeight: 2, maxHeight: 2)
@@ -35,7 +32,8 @@ struct CricketCardView: View {
                         Text("\(boolToYesNo(settings.trackTurns))")
                             .padding()
                     }
-                    .buttonStyle(SecondaryButtonStyle())
+                    // Can't use scaleEffect because of bug
+                    .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
                 }
                 
                 NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns))) {
@@ -43,7 +41,8 @@ struct CricketCardView: View {
                         .padding()
                         .font(.largeTitle)
                 }
-                .buttonStyle(SecondaryButtonStyle())
+                // Can't use scaleEffect because of bug
+                .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
                 .padding(.top)
             }
             .padding()

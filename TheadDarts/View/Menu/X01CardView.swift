@@ -16,10 +16,7 @@ struct X01CardView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("X01")
-                .padding()
-                .font(.largeTitle)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.select(.secondary))
+                .textStyle(CardTitleTextStyle())
             
             Rectangle()
                 .frame(minHeight: 2, maxHeight: 2)
@@ -37,7 +34,8 @@ struct X01CardView: View {
                         Text("\(settings.x01StartingPoint)")
                             .padding()
                     }
-                    .buttonStyle(SecondaryButtonStyle())
+                    // Can't use scaleEffect because of bug
+                    .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
                 }
                 
                 if selectingX01StartingPoint {
@@ -55,7 +53,8 @@ struct X01CardView: View {
                         Text("\(boolToYesNo(settings.doubleOut))")
                             .padding()
                     }
-                    .buttonStyle(SecondaryButtonStyle())
+                    // Can't use scaleEffect because of bug
+                    .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
                 }
                 .padding(.top)
                 
@@ -64,7 +63,8 @@ struct X01CardView: View {
                         .padding()
                         .font(.largeTitle)
                 }
-                .buttonStyle(SecondaryButtonStyle())
+                // Can't use scaleEffect because of bug
+                .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
                 .padding(.top)
             }
             .padding()

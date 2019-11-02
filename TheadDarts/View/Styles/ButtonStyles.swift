@@ -10,17 +10,21 @@ import Foundation
 import SwiftUI
 
 struct PrimaryButtonStyle: ButtonStyle {
+    var useScaleEffect = true
+    
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .background(Color.select(.secondary))
             .foregroundColor(Color.select(.background))
             .cornerRadius(25)
+            .scaleEffect(configuration.isPressed && useScaleEffect ? 0.9 : 1.0)
     }
 }
 
 struct SecondaryButtonStyle: ButtonStyle {
     var addBorder = true
     var foregroundColor = Color.select(.secondary)
+    var useScaleEffect = true
     
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
@@ -28,14 +32,18 @@ struct SecondaryButtonStyle: ButtonStyle {
             .foregroundColor(foregroundColor)
             .cornerRadius(25)
             .addBorder(Color.select(.primary), condition: addBorder)
+            .scaleEffect(configuration.isPressed && useScaleEffect ? 0.9 : 1.0)
     }
 }
 
 struct CancelButtonStyle: ButtonStyle {
+    var useScaleEffect = true
+
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .background(Color(.gray))
             .foregroundColor(Color.select(.background))
             .cornerRadius(20)
+            .scaleEffect(configuration.isPressed && useScaleEffect ? 0.9 : 1.0)
     }
 }

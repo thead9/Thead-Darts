@@ -119,10 +119,7 @@ struct HomeView: View {
     var settingsCard: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Settings")
-                .padding()
-                .font(.largeTitle)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .background(Color.select(.secondary))
+                .textStyle(CardTitleTextStyle())
             
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
@@ -184,7 +181,7 @@ struct HomeView: View {
                                 .font(.headline)
                                 .frame(maxWidth: 150)
                         }
-                        .buttonStyle(SecondaryButtonStyle(foregroundColor: Color.getColorNamed(theme.rawValue)))
+                        .buttonStyle(SecondaryButtonStyle(foregroundColor: Color.getColorNamed(theme.rawValue), useScaleEffect: false))
                     }
                 }
             }

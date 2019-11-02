@@ -113,13 +113,11 @@ struct CricketHitView : View {
                                 CricketMarkView(marks: self.score.marks[wedge])
                             }
                             .disabled(!self.score.shouldAllowHit(on: wedge))
+                            .buttonStyle(SecondaryButtonStyle(addBorder: self.score.shouldAllowHit(on: wedge) && !self.wholeViewDisabled))
                         }
                         .animation(.easeInOut)
                         .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
                         .frame(width: self.getItemWidth(containerWidth: geometry.size.width), height: self.getItemHeight(containerHeight: geometry.size.height))
-                        .background(Color.select(.hitBackground))
-                        .cornerRadius(25)
-                        .addBorder(self.score.shouldAllowHit(on: wedge) && !self.wholeViewDisabled ? Color.select(.primary) : Color.clear, width: 2)
                     }
                 }
             }

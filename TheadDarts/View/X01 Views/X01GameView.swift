@@ -103,10 +103,7 @@ struct X01GameView: View {
             HStack {
                 ForEach(x01Game.scoreKeeper!.activeTurn.toString(), id: \.self) { label in
                     Text("\(label)")
-                        .padding(.vertical)
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(label.contains("T") ? Color.select(.hitBackground) : Color.select(.primary) )
-                        .addBorder((label.contains("T") ? Color.select(.hitBackground) : Color.select(.secondary)), width: 1)
+                        .textStyle(ThrowTextStyle(label))
                 }
             }
             .padding(.horizontal)
@@ -127,9 +124,7 @@ struct X01GameView: View {
                     }
                 }) {
                     Image(systemName: "arrow.uturn.left")
-                        .padding()
-                        .padding(.horizontal, 20)
-                        .font(.title)
+                        .textStyle(GameControlTextStyle())
                 }
                 .padding(.horizontal, 20)
                 .buttonStyle(SecondaryButtonStyle())
@@ -141,9 +136,7 @@ struct X01GameView: View {
                     
                 }) {
                     Image(systemName: "arrow.2.circlepath")
-                        .padding()
-                        .padding(.horizontal, 20)
-                        .font(.title)
+                        .textStyle(GameControlTextStyle())
                 }
                 .buttonStyle(SecondaryButtonStyle())
                 

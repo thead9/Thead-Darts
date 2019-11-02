@@ -165,9 +165,7 @@ struct CricketGameView : View {
                     }
                 }) {
                     Image(systemName: "arrow.uturn.left")
-                        .padding()
-                        .padding(.horizontal, 20)
-                        .font(.title)
+                        .textStyle(GameControlTextStyle())
                 }
                 .buttonStyle(SecondaryButtonStyle())
                 
@@ -178,9 +176,7 @@ struct CricketGameView : View {
                     
                 }) {
                     Image(systemName: "arrow.2.circlepath")
-                        .padding()
-                        .padding(.horizontal, 20)
-                        .font(.title)
+                        .textStyle(GameControlTextStyle())
                 }
                 .buttonStyle(SecondaryButtonStyle())
                 

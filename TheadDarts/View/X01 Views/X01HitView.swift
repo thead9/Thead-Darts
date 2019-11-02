@@ -176,10 +176,7 @@ struct X01HitView: View {
             VStack() {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Turn Summary")
-                        .padding()
-                        .font(.largeTitle)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(Color.select(.secondary))
+                        .textStyle(CardTitleTextStyle())
                     
                     Rectangle()
                         .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
