@@ -134,9 +134,7 @@ struct CricketGameView : View {
                                 .padding()
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color.select(.secondary))
-                        .foregroundColor(Color.select(.hitBackground))
-                        .cornerRadius(25)
+                        .buttonStyle(PrimaryButtonStyle())
                     } else {
                         Button(action: {
                             self.cricketGame.scores[self.cricketGame.scoreKeeper.activeIndex].hit(on: .miss)
@@ -145,10 +143,7 @@ struct CricketGameView : View {
                                 .padding()
                                 .frame(maxWidth: .infinity)
                         }
-                        .background(Color.select(.hitBackground))
-                        .foregroundColor(Color.select(.secondary))
-                        .addBorder(Color.select(.primary), width: 2)
-                        .cornerRadius(25)
+                        .buttonStyle(SecondaryButtonStyle())
                     }
                 }
                 .padding(.horizontal)
@@ -171,13 +166,10 @@ struct CricketGameView : View {
                 }) {
                     Image(systemName: "arrow.uturn.left")
                         .padding()
+                        .padding(.horizontal, 20)
                         .font(.title)
                 }
-                .padding(.horizontal, 20)
-                .foregroundColor(Color.select(.secondary))
-                .background(Color.select(.hitBackground))
-                .cornerRadius(25)
-                .addBorder(Color.select(.primary), width: 2)
+                .buttonStyle(SecondaryButtonStyle())
                 
                 Spacer()
 
@@ -187,13 +179,10 @@ struct CricketGameView : View {
                 }) {
                     Image(systemName: "arrow.2.circlepath")
                         .padding()
+                        .padding(.horizontal, 20)
                         .font(.title)
                 }
-                .padding(.horizontal, 20)
-                .foregroundColor(Color.select(.secondary))
-                .background(Color.select(.hitBackground))
-                .cornerRadius(25)
-                .addBorder(Color.select(.primary), width: 2)
+                .buttonStyle(SecondaryButtonStyle())
                 
                 Spacer()
             }

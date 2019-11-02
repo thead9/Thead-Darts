@@ -90,10 +90,7 @@ struct X01HitView: View {
                                         .frame(width: ( (self.isBullOrMiss(wedge: wedge) ? 2 : 1) * self.getItemWidth(containerWidth: geometry.size.width) ) + (self.isBullOrMiss(wedge: wedge) ? self.hitViewSpacing / 2 : 0), height: self.getItemHeight(containerHeight: geometry.size.height))
                                 }
                             }
-                            .background(Color.select(.hitBackground))
-                            .foregroundColor(Color.select(.secondary))
-                            .cornerRadius(25)
-                            .addBorder(Color.select(.primary), width: 2)
+                            .buttonStyle(SecondaryButtonStyle())
                             .disabled(!self.x01Game.scoreKeeper.activeTurn.canAddThrow())
                         }
                     }
@@ -121,9 +118,7 @@ struct X01HitView: View {
                         .padding(.vertical, 10)
                         .frame(maxWidth: .infinity)
                 }
-                .background(Color.select(.secondary))
-                .foregroundColor(Color.select(.background))
-                .cornerRadius(25)
+                .buttonStyle(PrimaryButtonStyle())
                 
                 Button(action: {
                     withAnimation(.easeInOut(duration: self.animationTime)) {
@@ -136,9 +131,7 @@ struct X01HitView: View {
                         .padding(.vertical, 10)
                         .frame(maxWidth: .infinity)
                 }
-                .background(Color.select(.secondary))
-                .foregroundColor(Color.select(.background))
-                .cornerRadius(25)
+                .buttonStyle(PrimaryButtonStyle())
                 
                 if (self.selectingMultiplier.1 != .bull) {
                     Button(action: {
@@ -152,9 +145,7 @@ struct X01HitView: View {
                             .padding(.vertical, 10)
                             .frame(maxWidth: .infinity)
                     }
-                    .background(Color.select(.secondary))
-                    .foregroundColor(Color.select(.background))
-                    .cornerRadius(25)
+                    .buttonStyle(PrimaryButtonStyle())
                 }
                 
                 Button(action: {
@@ -167,9 +158,7 @@ struct X01HitView: View {
                         .frame(maxWidth: .infinity)
                         .font(.subheadline)
                 }
-                .background(Color(.gray))
-                .foregroundColor(Color.select(.background))
-                .cornerRadius(20)
+                .buttonStyle(CancelButtonStyle())
             }
             .padding(.vertical)
             .padding(.horizontal, 10)
@@ -242,9 +231,7 @@ struct X01HitView: View {
                         .padding()
                         .frame(maxWidth: geometry.size.width / 3)
                 }
-                .background(Color.select(.secondary))
-                .foregroundColor(Color.select(.background))
-                .cornerRadius(25)
+                .buttonStyle(PrimaryButtonStyle())
                 .padding(.top)
             }
             .padding(.horizontal)

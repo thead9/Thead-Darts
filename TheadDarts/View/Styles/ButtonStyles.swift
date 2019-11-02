@@ -24,9 +24,18 @@ struct SecondaryButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .background(Color.select(.background))
+            .background(Color.select(.hitBackground))
             .foregroundColor(foregroundColor)
             .cornerRadius(25)
             .addBorder(Color.select(.primary), condition: addBorder)
+    }
+}
+
+struct CancelButtonStyle: ButtonStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(Color(.gray))
+            .foregroundColor(Color.select(.background))
+            .cornerRadius(20)
     }
 }

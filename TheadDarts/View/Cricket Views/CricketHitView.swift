@@ -93,9 +93,7 @@ struct CricketHitView : View {
                                 .frame(maxWidth: .infinity)
                                 .font(.subheadline)
                         }
-                        .background(Color(.gray))
-                        .foregroundColor(Color.select(.background))
-                        .cornerRadius(20)
+                        .buttonStyle(CancelButtonStyle())
                     }
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .padding(.vertical)

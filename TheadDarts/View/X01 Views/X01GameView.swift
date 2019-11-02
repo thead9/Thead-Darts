@@ -128,13 +128,11 @@ struct X01GameView: View {
                 }) {
                     Image(systemName: "arrow.uturn.left")
                         .padding()
+                        .padding(.horizontal, 20)
                         .font(.title)
                 }
                 .padding(.horizontal, 20)
-                .foregroundColor(Color.select(.secondary))
-                .background(Color.select(.hitBackground))
-                .cornerRadius(25)
-                .addBorder(Color.select(.primary), width: 2)
+                .buttonStyle(SecondaryButtonStyle())
                 
                 Spacer()
                 
@@ -144,13 +142,10 @@ struct X01GameView: View {
                 }) {
                     Image(systemName: "arrow.2.circlepath")
                         .padding()
+                        .padding(.horizontal, 20)
                         .font(.title)
                 }
-                .padding(.horizontal, 20)
-                .foregroundColor(Color.select(.secondary))
-                .background(Color.select(.hitBackground))
-                .cornerRadius(25)
-                .addBorder(Color.select(.primary), width: 2)
+                .buttonStyle(SecondaryButtonStyle())
                 
                 Spacer()
             }
