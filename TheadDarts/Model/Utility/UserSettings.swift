@@ -72,29 +72,10 @@ final class UserSettings: ObservableObject {
         }
     }
     
-    @UserDefault(key: "gameType", defaultValue: "Cricket")
+    @UserDefault(key: "gameType", defaultValue: "cricket")
     var gameType: String {
         didSet {
             objectWillChange.send()
         }
-    }
-}
-
-extension AnyTransition {
-    static var slideInFadeUp: AnyTransition {
-        let insertion = AnyTransition.move(edge: .leading)
-            .combined(with: .opacity)
-        let removal = AnyTransition.move(edge: .top)
-            .combined(with: .opacity)
-            .combined(with: .scale)
-        return .asymmetric(insertion: insertion, removal: removal)
-    }
-    
-    static var slideAndFade: AnyTransition {
-        let insertion = AnyTransition.move(edge: .leading)
-            .combined(with: .opacity)
-        let removal = AnyTransition.move(edge: .trailing)
-            .combined(with: .opacity)
-        return .asymmetric(insertion: insertion, removal: removal)
     }
 }

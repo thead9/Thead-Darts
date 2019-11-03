@@ -23,12 +23,17 @@ extension Image {
 }
 
 struct CardTitleTextStyle: ViewModifier {
+    
+    // This is a band-aid to allow for background color changes in init(backgroundColor) when the theme changes
+    // TODO: Figure out how to get this to change on theme change
+    var backgroundColor = Color.select(.secondary)
+    
     func body(content: Content) -> some View {
         content
             .padding()
             .font(.largeTitle)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.select(.secondary))
+            .background(backgroundColor)
     }
 }
 

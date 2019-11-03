@@ -21,6 +21,8 @@
 		C70E1EF2235B8B3C00706F81 /* CricketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E1EF1235B8B3B00706F81 /* CricketCardView.swift */; };
 		C70E1EF3235B8B3C00706F81 /* CricketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E1EF1235B8B3B00706F81 /* CricketCardView.swift */; };
 		C70E310222CBB09200269AEE /* CricketHitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E310122CBB09200269AEE /* CricketHitView.swift */; };
+		C70EA050236F579F00EEEF39 /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70EA04F236F579F00EEEF39 /* Transitions.swift */; };
+		C70EA051236F579F00EEEF39 /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70EA04F236F579F00EEEF39 /* Transitions.swift */; };
 		C72B638323007EDD008B0189 /* ViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72B638223007EDD008B0189 /* ViewStyle.swift */; };
 		C75C5F3823022FF80019C8B7 /* DartPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */; };
 		C75C5F3923022FF80019C8B7 /* DartPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */; };
@@ -95,8 +97,8 @@
 		C7F46D2123402BCE00C3C3F7 /* X01GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D2023402BCE00C3C3F7 /* X01GameView.swift */; };
 		C7F46D2323402D8900C3C3F7 /* X01PlayerUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D2223402D8900C3C3F7 /* X01PlayerUnitView.swift */; };
 		C7F46D272340CB4800C3C3F7 /* X01HitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D262340CB4800C3C3F7 /* X01HitView.swift */; };
-		C7F46D292340FDBB00C3C3F7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D282340FDBB00C3C3F7 /* Extensions.swift */; };
-		C7F46D2A2340FDBB00C3C3F7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D282340FDBB00C3C3F7 /* Extensions.swift */; };
+		C7F46D292340FDBB00C3C3F7 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D282340FDBB00C3C3F7 /* UserSettings.swift */; };
+		C7F46D2A2340FDBB00C3C3F7 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F46D282340FDBB00C3C3F7 /* UserSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +126,7 @@
 		C70E1EEB23525CF000706F81 /* X01CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01CardView.swift; sourceTree = "<group>"; };
 		C70E1EF1235B8B3B00706F81 /* CricketCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketCardView.swift; sourceTree = "<group>"; };
 		C70E310122CBB09200269AEE /* CricketHitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketHitView.swift; sourceTree = "<group>"; };
+		C70EA04F236F579F00EEEF39 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		C72B638223007EDD008B0189 /* ViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyle.swift; sourceTree = "<group>"; };
 		C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartPlayerUnit.swift; sourceTree = "<group>"; };
 		C75C5F3A2303281F0019C8B7 /* DartAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartAction.swift; sourceTree = "<group>"; };
@@ -174,7 +177,7 @@
 		C7F46D2023402BCE00C3C3F7 /* X01GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01GameView.swift; sourceTree = "<group>"; };
 		C7F46D2223402D8900C3C3F7 /* X01PlayerUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01PlayerUnitView.swift; sourceTree = "<group>"; };
 		C7F46D262340CB4800C3C3F7 /* X01HitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01HitView.swift; sourceTree = "<group>"; };
-		C7F46D282340FDBB00C3C3F7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		C7F46D282340FDBB00C3C3F7 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,7 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				C7062B1222F44A59006CE930 /* Stack.swift */,
-				C7F46D282340FDBB00C3C3F7 /* Extensions.swift */,
+				C7F46D282340FDBB00C3C3F7 /* UserSettings.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				C70E1EE52352495300706F81 /* ColorSelector.swift */,
 				C7E3C59B236C99620098A122 /* ButtonStyles.swift */,
 				C7E3C59E236E02A20098A122 /* TextStyles.swift */,
+				C70EA04F236F579F00EEEF39 /* Transitions.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -568,11 +572,12 @@
 				C7F0A20D22CD7876005171BB /* CricketPlayerUnit.swift in Sources */,
 				C75C5F3F2303287D0019C8B7 /* DartThrow.swift in Sources */,
 				C7F46D2323402D8900C3C3F7 /* X01PlayerUnitView.swift in Sources */,
-				C7F46D292340FDBB00C3C3F7 /* Extensions.swift in Sources */,
+				C7F46D292340FDBB00C3C3F7 /* UserSettings.swift in Sources */,
 				C70E1EE62352495300706F81 /* ColorSelector.swift in Sources */,
 				C7C52522232EDBF7009AF03B /* X01PlayerUnit.swift in Sources */,
 				C7983E2222CACC0E00ACC903 /* SceneDelegate.swift in Sources */,
 				C708132022D1236B00B22BFF /* CricketHitLabelView.swift in Sources */,
+				C70EA050236F579F00EEEF39 /* Transitions.swift in Sources */,
 				C7E3C59F236E02A20098A122 /* TextStyles.swift in Sources */,
 				C7E3C59C236C99620098A122 /* ButtonStyles.swift in Sources */,
 				C78EDD25230D9DC500700A55 /* DartTurn.swift in Sources */,
@@ -619,11 +624,12 @@
 				C70E1EE72352495300706F81 /* ColorSelector.swift in Sources */,
 				C7F46D1C233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */,
 				C7983E7322CACD4800ACC903 /* CricketGameTests.swift in Sources */,
+				C70EA051236F579F00EEEF39 /* Transitions.swift in Sources */,
 				C7983E5E22CACCAA00ACC903 /* CricketPlayer.swift in Sources */,
 				C70E1EEF23590F4900706F81 /* X01PlayerUnitView.swift in Sources */,
 				C7983E5822CACC8300ACC903 /* Multiplier.swift in Sources */,
 				C7983E6122CACCBF00ACC903 /* CricketScore.swift in Sources */,
-				C7F46D2A2340FDBB00C3C3F7 /* Extensions.swift in Sources */,
+				C7F46D2A2340FDBB00C3C3F7 /* UserSettings.swift in Sources */,
 				C7983E6422CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */,
 				C7983E7522CACD5E00ACC903 /* CricketPlayerTests.swift in Sources */,
 				C7E3C596236B3BC00098A122 /* CricketHitView.swift in Sources */,

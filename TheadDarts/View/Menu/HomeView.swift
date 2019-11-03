@@ -119,7 +119,7 @@ struct HomeView: View {
     var settingsCard: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Settings")
-                .textStyle(CardTitleTextStyle())
+                .textStyle(CardTitleTextStyle(backgroundColor: Color.select(.secondary)))
             
             Rectangle()
                 .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
