@@ -131,7 +131,7 @@ struct CricketGameView : View {
                             }
                         }) {
                             Text("Next")
-                                .padding()
+                                .padding(.vertical)
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(PrimaryButtonStyle())
@@ -140,7 +140,7 @@ struct CricketGameView : View {
                             self.cricketGame.scores[self.cricketGame.scoreKeeper.activeIndex].hit(on: .miss)
                         }) {
                             Text("Miss")
-                                .padding()
+                                .padding(.vertical)
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(SecondaryButtonStyle())

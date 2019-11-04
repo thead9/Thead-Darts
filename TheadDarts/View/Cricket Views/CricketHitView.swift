@@ -49,7 +49,8 @@ struct CricketHitView : View {
                             }
                         }) {
                             Text("Single")
-                                .padding(.vertical, 10)
+                                .font(.headline)
+                                .padding(.vertical, 15)
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(PrimaryButtonStyle())
@@ -62,7 +63,8 @@ struct CricketHitView : View {
                             }
                         }) {
                             Text("Double")
-                                .padding(.vertical, 10)
+                                .font(.headline)
+                                .padding(.vertical, 15)
                                 .frame(maxWidth: .infinity)
                         }
                         .buttonStyle(PrimaryButtonStyle())
@@ -77,7 +79,8 @@ struct CricketHitView : View {
                                 }
                             }) {
                                 Text("Triple")
-                                    .padding(.vertical, 10)
+                                    .font(.headline)
+                                    .padding(.vertical, 15)
                                     .frame(maxWidth: .infinity)
                             }
                             .buttonStyle(PrimaryButtonStyle())

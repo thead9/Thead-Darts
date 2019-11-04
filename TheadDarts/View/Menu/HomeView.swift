@@ -59,7 +59,7 @@ struct HomeView: View {
                     .background(self.selectedGameType == .x01 ? Color.select(.secondary) : Color.select(.hitBackground))
                     .cornerRadius(25)
                 }
-                .padding(.vertical)
+                .padding(.top)
                 
                 Group {
                     if self.selectedGameType == .cricket {
@@ -177,7 +177,7 @@ struct HomeView: View {
                             }
                         }) {
                             Text("\(theme.rawValue)")
-                                .padding()
+                                .padding(.vertical)
                                 .font(.headline)
                                 .frame(maxWidth: 150)
                         }

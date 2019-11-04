@@ -14,11 +14,15 @@ struct X01PlayerUnitView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text(self.playerUnit.player.name)
+                .font(.headline)
             Text(String(self.playerUnit.score.points))
+                .font(.title)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-        .font(.title)
+        .lineLimit(1)
+        .frame(maxWidth: .infinity, alignment: .center)
     }
+    
+    
 }
 
 struct X01PlayerUnitView_Previews: PreviewProvider {
@@ -27,3 +31,5 @@ struct X01PlayerUnitView_Previews: PreviewProvider {
             .previewLayout(.fixed(width: 150, height: 100))
     }
 }
+
+

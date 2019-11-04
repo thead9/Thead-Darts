@@ -14,10 +14,11 @@ struct CricketPlayerUnitView : View {
     var body: some View {
         VStack(spacing: 0) {
             Text(self.playerUnit.player.name)
+                .font(.headline)
             Text(String(self.playerUnit.score.points))
+                .font(.title)
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
-        .font(.title)
     }
 }
 

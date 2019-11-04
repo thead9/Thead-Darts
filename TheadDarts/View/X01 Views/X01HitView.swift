@@ -191,7 +191,7 @@ struct X01HitView: View {
                             }
                             .font(.title)
                             .padding(.horizontal)
-                            .padding(.bottom)
+                            .padding(.bottom, 5)
                         }
                         
                         Rectangle()
@@ -204,7 +204,7 @@ struct X01HitView: View {
                                 .foregroundColor(Color.select(.secondary))
                         }
                         .padding(.horizontal)
-                        .padding(.top)
+                        .padding(.top, 5)
                         
                         HStack(spacing: 10) {
                             Text("Remaining")
@@ -212,9 +212,9 @@ struct X01HitView: View {
                                 .foregroundColor(Color.select(.secondary))
                         }
                         .padding(.horizontal)
-                        .padding(.top)
+                        .padding(.top, 5)
                     }
-                    .padding(.vertical)
+                    .padding(.vertical, 5)
                 }
                 .cornerRadius(25)
                 .addBorder(Color.select(.primary), width: 2)
