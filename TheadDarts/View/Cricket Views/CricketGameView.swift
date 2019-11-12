@@ -14,6 +14,7 @@ struct CricketGameView : View {
     @ObservedObject var cricketGame: CricketGame
     
     @State var gameOver: Bool = false
+    @State var showNewGameModal = false
     @State var showWinnerAlert: Bool = false
     var winnerAlert: Alert {
         Alert(title: Text("Winner!"),
@@ -24,46 +25,6 @@ struct CricketGameView : View {
               },
               secondaryButton: .default(Text("View Scoreboard"))
         )
-    }
-    
-    @State var showNewGameModal = false
-    var newGameModal: some View {
-        VStack {
-            Text("New Game")
-                .font(.largeTitle)
-            Text("Are you sure you want to start a new game?")
-                .multilineTextAlignment(.center)
-            
-            HStack {
-                Button(action: {
-                    withAnimation {
-                        self.cricketGame.newGame()
-                        self.setGameOver()
-                        self.showNewGameModal = false
-                    }
-                }) {
-                    Text("Yes")
-                        .padding()
-                        .frame(maxWidth: 200)
-                }
-                .buttonStyle(DestructiveButtonStyle())
-                Button(action: {
-                    withAnimation {
-                        self.showNewGameModal = false
-                    }
-                }) {
-                    Text("No")
-                        .padding()
-                        .frame(maxWidth: 200)
-                }
-                .buttonStyle(SecondaryButtonStyle(addBorder: false))
-            }
-            .padding(.top)
-        }
-        .font(.title)
-        .padding()
-        .background(Color.select(.background))
-        .cornerRadius(25)
     }
             
     // MARK: Body
