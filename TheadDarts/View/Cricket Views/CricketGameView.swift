@@ -26,18 +26,6 @@ struct CricketGameView : View {
         )
     }
     
-    @State var showNewGameActionSheet = false
-    var newGameActionSheet: ActionSheet {
-        ActionSheet(title: Text("New Game"),
-                    message: Text("Are you sure you want to start a new game?"),
-                    buttons: [.destructive(Text("Yes"),
-                                action: {
-                                    self.cricketGame.newGame()
-                                    self.setGameOver()
-                                }),
-                              .default(Text("No"))])
-    }
-    
     @State var showNewGameModal = false
     var newGameModal: some View {
         VStack {
@@ -93,13 +81,18 @@ struct CricketGameView : View {
             }
             .font(.title)
             .padding(.vertical)
-            //.actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
             .zIndex(1)
             .disabled(showNewGameModal)
             .blur(radius: showNewGameModal ? 5 : 0)
             
             if showNewGameModal {
-                newGameModal
+                NewGameModal(affirmativeAction: {
+                                self.cricketGame.newGame()
+                                self.setGameOver()
+                                self.showNewGameModal = false
+                            },
+                             cancelAction: {
+                                self.showNewGameModal = false})
                     .padding()
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .zIndex(2)
