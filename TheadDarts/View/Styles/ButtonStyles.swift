@@ -47,3 +47,15 @@ struct CancelButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed && useScaleEffect ? 0.9 : 1.0)
     }
 }
+
+struct DestructiveButtonStyle: ButtonStyle {
+    var useScaleEffect = true
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(Color.red)
+            .foregroundColor(Color.select(.background))
+            .cornerRadius(25)
+            .scaleEffect(configuration.isPressed && useScaleEffect ? 0.9 : 1.0)
+    }
+}

@@ -28,39 +28,86 @@ struct CricketGameView : View {
     
     @State var showNewGameActionSheet = false
     var newGameActionSheet: ActionSheet {
-        ActionSheet(
-            title: Text("New Game"),
-            message: Text("Are you sure you want to start a new game?"),
-            buttons: [
-                .destructive(
-                    Text("Yes"), action: {
+        ActionSheet(title: Text("New Game"),
+                    message: Text("Are you sure you want to start a new game?"),
+                    buttons: [.destructive(Text("Yes"),
+                                action: {
+                                    self.cricketGame.newGame()
+                                    self.setGameOver()
+                                }),
+                              .default(Text("No"))])
+    }
+    
+    @State var showNewGameModal = false
+    var newGameModal: some View {
+        VStack {
+            Text("New Game")
+                .font(.largeTitle)
+            Text("Are you sure you want to start a new game?")
+                .multilineTextAlignment(.center)
+            
+            HStack {
+                Button(action: {
+                    withAnimation {
                         self.cricketGame.newGame()
                         self.setGameOver()
+                        self.showNewGameModal = false
                     }
-                ),
-                .default(Text("No"))
-            ]
-        )
+                }) {
+                    Text("Yes")
+                        .padding()
+                        .frame(maxWidth: 200)
+                }
+                .buttonStyle(DestructiveButtonStyle())
+                Button(action: {
+                    withAnimation {
+                        self.showNewGameModal = false
+                    }
+                }) {
+                    Text("No")
+                        .padding()
+                        .frame(maxWidth: 200)
+                }
+                .buttonStyle(SecondaryButtonStyle(addBorder: false))
+            }
+            .padding(.top)
+        }
+        .font(.title)
+        .padding()
+        .background(Color.select(.background))
+        .cornerRadius(25)
     }
             
     // MARK: Body
     let leftColumnWidth: CGFloat = 50
 
     var body: some View {
-        VStack {
-            scoreboard
+        ZStack {
+            VStack {
+                scoreboard
+                
+                turnControls
+                    .padding(.bottom, 2)
+                
+                bottomControls
+            }
+            .font(.title)
+            .padding(.vertical)
+            //.actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
+            .zIndex(1)
+            .disabled(showNewGameModal)
+            .blur(radius: showNewGameModal ? 5 : 0)
             
-            turnControls
-                .padding(.bottom, 2)
-            
-            bottomControls
+            if showNewGameModal {
+                newGameModal
+                    .padding()
+                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(2)
+            }
         }
-        .font(.title)
-        .padding(.vertical)
-        .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
         .foregroundColor(Color.select(.primary))
-        .navigationBarTitle(Text("Title"))
+        .navigationBarTitle(Text("Title")) // Placeholder title needed to avoid UI bug
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
     }
@@ -172,8 +219,9 @@ struct CricketGameView : View {
                 Spacer()
 
                 Button(action: {
-                    self.showNewGameActionSheet = true
-                    
+                    withAnimation {
+                        self.showNewGameModal = true
+                    }
                 }) {
                     Image(systemName: "arrow.2.circlepath")
                         .textStyle(GameControlTextStyle())
