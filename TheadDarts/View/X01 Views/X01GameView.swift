@@ -13,8 +13,9 @@ struct X01GameView: View {
     
     @ObservedObject var x01Game: X01Game
     
-    @State var gameOver: Bool = false
-    @State var showWinnerAlert: Bool = false
+    @State var gameOver = false
+    @State var showNewGameModal = false
+    @State var showWinnerAlert = false
     var winnerAlert: Alert {
         Alert(title: Text("Winner!"),
               message: Text("\(self.x01Game.winner!.name) has won!"),
@@ -26,60 +27,60 @@ struct X01GameView: View {
         )
     }
     
-    @State var showNewGameActionSheet = false
-    var newGameActionSheet: ActionSheet {
-        ActionSheet(
-            title: Text("New Game"),
-            message: Text("Are you sure you want to start a new game?"),
-            buttons: [
-                .destructive(
-                    Text("Yes"), action: {
-                        self.x01Game.newGame()
-                        self.setGameOver()
-                    }
-                ),
-                .default(Text("No"))
-            ]
-        )
-    }
-    
     // MARK: Body
     var body: some View {
-        VStack {
-            HStack {
-                Button(
-                    action: {
-                        self.mode.wrappedValue.dismiss()
+        ZStack {
+            VStack {
+                HStack {
+                    Button(
+                        action: {
+                            self.mode.wrappedValue.dismiss()
+                        }
+                    ) {
+                        Image(systemName: "house")
                     }
-                ) {
-                    Image(systemName: "house")
+                    .frame(width: 50)
+                    .padding(.horizontal)
+                    .foregroundColor(Color.select(.secondary))
+                    
+                    scoreBoard
                 }
-                .frame(width: 50)
-                .padding(.horizontal)
-                .foregroundColor(Color.select(.secondary))
                 
-                scoreBoard
+                
+                X01HitView(x01Game: x01Game,
+                           onHit: {
+                            self.showWinnerAlert = self.x01Game.gameOver
+                            self.gameOver = self.x01Game.gameOver
+                           })
+                
+                if (x01Game.scoreKeeper.activeTurn.canAddThrow()) {
+                    turnControls
+                        .padding(.bottom, 2)
+                }
+                
+                bottomControls
             }
+            .font(.title)
+            .padding(.vertical)
+            .zIndex(1)
+            .disabled(showNewGameModal)
+            .blur(radius: showNewGameModal ? 5 : 0)
             
-            
-            X01HitView(x01Game: x01Game,
-                       onHit: {
-                        self.showWinnerAlert = self.x01Game.gameOver
-                        self.gameOver = self.x01Game.gameOver
-                       })
-            
-            if (x01Game.scoreKeeper.activeTurn.canAddThrow()) {
-                turnControls
-                    .padding(.bottom, 2)
+            if showNewGameModal {
+                NewGameModal(affirmativeAction: {
+                                self.x01Game.newGame()
+                                self.setGameOver()
+                                self.showNewGameModal = false
+                            },
+                             cancelAction: {
+                                self.showNewGameModal = false})
+                    .padding()
+                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(2)
             }
-            
-            bottomControls
         }
-        .font(.title)
-        .padding(.vertical)
-        .foregroundColor(Color.select(.primary))
-        .actionSheet(isPresented: $showNewGameActionSheet) { self.newGameActionSheet }
         .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
+        .foregroundColor(Color.select(.primary))
         .navigationBarTitle(Text("Title"))
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)
@@ -132,8 +133,9 @@ struct X01GameView: View {
                 Spacer()
                 
                 Button(action: {
-                    self.showNewGameActionSheet = true
-                    
+                    withAnimation {
+                        self.showNewGameModal = true
+                    }
                 }) {
                     Image(systemName: "arrow.2.circlepath")
                         .textStyle(GameControlTextStyle())
