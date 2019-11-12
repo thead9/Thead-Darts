@@ -20,6 +20,7 @@ struct WinnerModal: View {
         VStack {
             Text("\(winnerName) has won!")
                 .font(.largeTitle)
+                .multilineTextAlignment(.center)
             
             Group {
                 Button(action: {
