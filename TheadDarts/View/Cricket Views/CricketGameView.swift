@@ -55,7 +55,7 @@ struct CricketGameView : View {
                                 self.cricketGame.newGame()
                                 self.setGameOver()
                                 self.showWinnerModal = false},
-                            viewScoreBoardAction: {
+                            viewScoreboardAction: {
                                 self.showWinnerModal = false},
                             undoAction: {
                                 self.cricketGame.scoreKeeper.undo()

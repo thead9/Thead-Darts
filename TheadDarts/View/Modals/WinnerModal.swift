@@ -9,9 +9,11 @@
 import SwiftUI
 
 struct WinnerModal: View {
+    var canViewScoreboard = true
+    
     var winnerName: String
     var newGameAction = { }
-    var viewScoreBoardAction = { }
+    var viewScoreboardAction = { }
     var undoAction = { }
     
     var body: some View {
@@ -32,17 +34,19 @@ struct WinnerModal: View {
                 .padding(.top)
                 .buttonStyle(PrimaryButtonStyle())
                 
-                Button(action: {
-                    withAnimation {
-                        self.viewScoreBoardAction()
+                if canViewScoreboard {
+                    Button(action: {
+                        withAnimation {
+                            self.viewScoreboardAction()
+                        }
+                    }) {
+                        Text("View Scoreboard")
+                            .padding()
+                            .frame(maxWidth: 250)
                     }
-                }) {
-                    Text("View Scoreboard")
-                        .padding()
-                        .frame(maxWidth: 250)
+                    .padding(.top)
+                    .buttonStyle(SecondaryButtonStyle(addBorder: false))
                 }
-                .padding(.top)
-                .buttonStyle(SecondaryButtonStyle(addBorder: false))
                 
                 Button(action: {
                     withAnimation {

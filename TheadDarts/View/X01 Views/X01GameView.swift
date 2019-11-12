@@ -15,17 +15,7 @@ struct X01GameView: View {
     
     @State var gameOver = false
     @State var showNewGameModal = false
-    @State var showWinnerAlert = false
-    var winnerAlert: Alert {
-        Alert(title: Text("Winner!"),
-              message: Text("\(self.x01Game.winner!.name) has won!"),
-              primaryButton: .default(Text("New Game")) {
-                    self.x01Game.newGame()
-                    self.setGameOver()
-              },
-              secondaryButton: .default(Text("View Scoreboard"))
-        )
-    }
+    @State var showWinnerModal = false
     
     // MARK: Body
     var body: some View {
@@ -49,7 +39,7 @@ struct X01GameView: View {
                 
                 X01HitView(x01Game: x01Game,
                            onHit: {
-                            self.showWinnerAlert = self.x01Game.gameOver
+                            self.showWinnerModal = self.x01Game.gameOver
                             self.gameOver = self.x01Game.gameOver
                            })
                 
@@ -63,8 +53,8 @@ struct X01GameView: View {
             .font(.title)
             .padding(.vertical)
             .zIndex(1)
-            .disabled(showNewGameModal)
-            .blur(radius: showNewGameModal ? 5 : 0)
+            .disabled(showNewGameModal || showWinnerModal)
+            .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
             
             if showNewGameModal {
                 NewGameModal(affirmativeAction: {
@@ -78,8 +68,25 @@ struct X01GameView: View {
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .zIndex(2)
             }
+            
+            if showWinnerModal {
+                WinnerModal(canViewScoreboard: false,
+                            winnerName: self.x01Game.winner!.name,
+                            newGameAction: {
+                                self.x01Game.newGame()
+                                self.setGameOver()
+                                self.showWinnerModal = false},
+                            viewScoreboardAction: {
+                                self.showWinnerModal = false},
+                            undoAction: {
+                                self.x01Game.scoreKeeper.undo()
+                                self.setGameOver()
+                                self.showWinnerModal = false})
+                    .padding()
+                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(2)
+            }
         }
-        .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
         .foregroundColor(Color.select(.primary))
         .navigationBarTitle(Text("Title"))
         .navigationBarHidden(true)

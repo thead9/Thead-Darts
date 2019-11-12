@@ -23,7 +23,7 @@ struct X01HitView: View {
                 x01SelectingMultiplier
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .frame(maxWidth: 450)
-            } else if !self.x01Game.scoreKeeper.activeTurn.canAddThrow() {
+            } else if !self.x01Game.scoreKeeper.activeTurn.canAddThrow() && !self.x01Game.gameOver {
                 x01TurnOverview
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .frame(maxWidth: 450)
