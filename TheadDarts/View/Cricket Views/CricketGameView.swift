@@ -13,9 +13,9 @@ struct CricketGameView : View {
     
     @ObservedObject var cricketGame: CricketGame
     
-    @State var gameOver: Bool = false
+    @State var gameOver = false
     @State var showNewGameModal = false
-    @State var showWinnerAlert: Bool = false
+    @State var showWinnerAlert = false
     var winnerAlert: Alert {
         Alert(title: Text("Winner!"),
               message: Text("\(self.cricketGame.winner!.name) has won!"),
