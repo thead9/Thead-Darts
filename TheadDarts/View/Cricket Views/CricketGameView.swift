@@ -15,17 +15,7 @@ struct CricketGameView : View {
     
     @State var gameOver = false
     @State var showNewGameModal = false
-    @State var showWinnerAlert = false
-    var winnerAlert: Alert {
-        Alert(title: Text("Winner!"),
-              message: Text("\(self.cricketGame.winner!.name) has won!"),
-              primaryButton: .default(Text("New Game")) {
-                    self.cricketGame.newGame()
-                    self.setGameOver()
-              },
-              secondaryButton: .default(Text("View Scoreboard"))
-        )
-    }
+    @State var showWinnerModal = false
             
     // MARK: Body
     let leftColumnWidth: CGFloat = 50
@@ -43,23 +33,39 @@ struct CricketGameView : View {
             .font(.title)
             .padding(.vertical)
             .zIndex(1)
-            .disabled(showNewGameModal)
-            .blur(radius: showNewGameModal ? 5 : 0)
+            .disabled(showNewGameModal || showWinnerModal)
+            .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
             
             if showNewGameModal {
                 NewGameModal(affirmativeAction: {
                                 self.cricketGame.newGame()
                                 self.setGameOver()
                                 self.showNewGameModal = false
-                            },
+                             },
                              cancelAction: {
                                 self.showNewGameModal = false})
                     .padding()
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .zIndex(2)
             }
+            
+            if showWinnerModal {
+                WinnerModal(winnerName: self.cricketGame.winner!.name,
+                            newGameAction: {
+                                self.cricketGame.newGame()
+                                self.setGameOver()
+                                self.showWinnerModal = false},
+                            viewScoreBoardAction: {
+                                self.showWinnerModal = false},
+                            undoAction: {
+                                self.cricketGame.scoreKeeper.undo()
+                                self.setGameOver()
+                                self.showWinnerModal = false})
+                    .padding()
+                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(2)
+            }
         }
-        .alert(isPresented: $showWinnerAlert) { self.winnerAlert }
         .foregroundColor(Color.select(.primary))
         .navigationBarTitle(Text("Title")) // Placeholder title needed to avoid UI bug
         .navigationBarHidden(true)
@@ -99,7 +105,7 @@ struct CricketGameView : View {
                     CricketHitView(
                         score: self.cricketGame.scores[index],
                         onHit: {
-                            self.showWinnerAlert = self.cricketGame.gameOver
+                            self.showWinnerModal = self.cricketGame.gameOver
                             self.setGameOver()
                         },
                         wholeViewDisabled: self.shouldDisableHitView(at: index)
