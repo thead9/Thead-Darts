@@ -20,7 +20,7 @@ class CricketGame: DartGame, ObservableObject {
         }
     }
     var winnerIndex: Int? { get { scoreKeeper.winnerIndex } }
-    var winner: CricketPlayer? { get { scoreKeeper.winner } }
+    var winner: DartPlayer? { get { scoreKeeper.winner } }
     var gameOver: Bool { get { scoreKeeper.gameOver } }
     
     var scoreKeeper: CricketScoreKeeper!
@@ -28,7 +28,7 @@ class CricketGame: DartGame, ObservableObject {
     // MARK: Inits
     init(numberOfPlayers: Int, trackTurns: Bool = false) {
         for index in 0..<numberOfPlayers {
-            let playerUnit = CricketPlayerUnit(player: CricketPlayer(name: "Player \(index+1)"),
+            let playerUnit = CricketPlayerUnit(player: DartPlayer(name: "Player \(index+1)"),
                                                score: CricketScore(),
                                                updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
@@ -46,7 +46,7 @@ class CricketGame: DartGame, ObservableObject {
         }
     }
     
-    init(players: [CricketPlayer], trackTurns: Bool = false) {
+    init(players: [DartPlayer], trackTurns: Bool = false) {
         for player in players {
             let playerUnit = CricketPlayerUnit(player: player,
                                                score: CricketScore(),
@@ -75,9 +75,9 @@ class CricketGame: DartGame, ObservableObject {
 
 // MARK: Interacting with Players
 extension CricketGame {
-    var players: [CricketPlayer] {
+    var players: [DartPlayer] {
         get {
-            var playersToBeReturned = [CricketPlayer]()
+            var playersToBeReturned = [DartPlayer]()
             for playerUnit in playerUnits {
                 playersToBeReturned.append(playerUnit.player)
             }
@@ -85,7 +85,7 @@ extension CricketGame {
         }
     }
     
-    func addPlayer(_ player : CricketPlayer) {
+    func addPlayer(_ player : DartPlayer) {
         playerUnits.append(CricketPlayerUnit(player: player, score: CricketScore()))
     }
 }

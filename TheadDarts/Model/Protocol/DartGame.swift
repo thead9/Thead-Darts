@@ -10,19 +10,18 @@ import Foundation
 
 protocol DartGame {
     associatedtype PlayerUnit: DartPlayerUnit
-    associatedtype Player: DartPlayer
     associatedtype Score: DartScore
     associatedtype ScoreKeeper: DartScoreKeeper
     
     var playerUnits: [PlayerUnit] { get set }
-    var players: [Player] { get }
+    var players: [DartPlayer] { get }
     var scores: [Score] { get }
-    var winner: Player? { get }
+    var winner: DartPlayer? { get }
     var gameOver: Bool { get }
     
     var scoreKeeper: ScoreKeeper! { get }
     
-    func addPlayer(_ player : Player)
+    func addPlayer(_ player : DartPlayer)
 }
 
 // MARK: Interacting with Players
@@ -55,26 +54,26 @@ extension DartGame {
     }
     
     mutating func addPlayer(named name: String) {
-        self.addPlayer(Player(name: name))
+        self.addPlayer(DartPlayer(name: name))
     }
     
     // MARK: Removing Players
     @discardableResult
-    mutating func removePlayer() -> Player {
+    mutating func removePlayer() -> DartPlayer {
         return removePlayer(at: playerUnits.count-1)!
     }
     
     @discardableResult
-    mutating func removePlayer(at index: Int) -> Player? {
+    mutating func removePlayer(at index: Int) -> DartPlayer? {
         guard index < players.count && index >= 0 else {
             return nil
         }
-        return playerUnits.remove(at: index).player as? Self.Player
+        return playerUnits.remove(at: index).player
     }
     
     // MARK: Modifying Players
     @discardableResult
-    mutating func changePlayerName(at index: Int, to name: String) -> Player? {
+    mutating func changePlayerName(at index: Int, to name: String) -> DartPlayer? {
         guard index < players.count && index >= 0 else {
             return nil
         }

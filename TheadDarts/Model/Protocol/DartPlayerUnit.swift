@@ -9,11 +9,10 @@
 import Foundation
 
 protocol DartPlayerUnit {
-    associatedtype Player: DartPlayer
     associatedtype Score: DartScore
     
-    var player: Player { get set }
+    var player: DartPlayer { get set }
     var score: Score { get set }
     
-    init(player: Player, score: Score)
+    init(player: DartPlayer, score: Score)
 }

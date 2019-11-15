@@ -1,14 +1,14 @@
 //
-//  CricketPlayer.swift
+//  DartPlayer.swift
 //  TheadDarts
 //
-//  Created by Thomas Headley on 5/29/19.
+//  Created by Thomas Headley on 5/21/19.
 //  Copyright © 2019 Thead. All rights reserved.
 //
 
 import Foundation
 
-class CricketPlayer: DartPlayer {
+class DartPlayer {
     var updated: () -> () = { }
 
     var name: String = "Player" {

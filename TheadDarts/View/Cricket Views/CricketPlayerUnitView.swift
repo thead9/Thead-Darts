@@ -25,7 +25,7 @@ struct CricketPlayerUnitView : View {
 #if DEBUG
 struct CricketPlayerUnitView_Previews : PreviewProvider {
     static var previews: some View {
-        CricketPlayerUnitView(playerUnit: CricketPlayerUnit(player: CricketPlayer(name: "Thomas"), score: CricketScore()))
+        CricketPlayerUnitView(playerUnit: CricketPlayerUnit(player: DartPlayer(name: "Thomas"), score: CricketScore()))
             .previewLayout(.fixed(width: 150, height: 100))
     }
 }

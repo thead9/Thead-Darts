@@ -21,7 +21,7 @@ class X01Game: DartGame, ObservableObject {
     }
     
     var winnerIndex: Int? { get { scoreKeeper.winnerIndex } }
-    var winner: X01Player? { get { scoreKeeper.winner } }
+    var winner: DartPlayer? { get { scoreKeeper.winner } }
     var gameOver: Bool { get { scoreKeeper.gameOver } }
     
     var scoreKeeper: X01ScoreKeeper!
@@ -29,7 +29,7 @@ class X01Game: DartGame, ObservableObject {
     // MARK: Inits
     init(numberOfPlayers: Int, startingPoint: Int = 301, doubleOut: Bool = true) {
         for index in 0..<numberOfPlayers {
-            let playerUnit = X01PlayerUnit(player: X01Player(name: "Player \(index+1)"),
+            let playerUnit = X01PlayerUnit(player: DartPlayer(name: "Player \(index+1)"),
                                            score: X01Score(startingPoint: startingPoint),
                                            updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
@@ -42,7 +42,7 @@ class X01Game: DartGame, ObservableObject {
         }
     }
     
-    init(players: [X01Player], startingPoint: Int = 301, doubleOut: Bool = true) {
+    init(players: [DartPlayer], startingPoint: Int = 301, doubleOut: Bool = true) {
         for player in players {
             let playerUnit = X01PlayerUnit(player: player,
                                            score: X01Score(startingPoint: startingPoint),
@@ -67,9 +67,9 @@ class X01Game: DartGame, ObservableObject {
 
 // MARK: Interacting with Players
 extension X01Game {
-    var players: [X01Player] {
+    var players: [DartPlayer] {
         get {
-            var playersToBeReturned = [X01Player]()
+            var playersToBeReturned = [DartPlayer]()
             for playerUnit in playerUnits {
                 playersToBeReturned.append(playerUnit.player)
             }
@@ -78,7 +78,7 @@ extension X01Game {
     }
     
     // MARK: Adding Players
-    func addPlayer(_ player : X01Player) {
+    func addPlayer(_ player : DartPlayer) {
         playerUnits.append(X01PlayerUnit(player: player, score: X01Score()))
     }
 }

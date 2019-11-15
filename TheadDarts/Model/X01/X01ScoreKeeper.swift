@@ -9,7 +9,6 @@
 import Foundation
 
 class X01ScoreKeeper: DartScoreKeeper {
-    typealias Player = X01Player
     typealias Score = X01Score
 
     var updated: () -> () = { }
@@ -38,7 +37,7 @@ class X01ScoreKeeper: DartScoreKeeper {
             return nil
         }
     }
-    var winner: Player? {
+    var winner: DartPlayer? {
         get {
             if let index = winnerIndex {
                 return playerUnits[index].player

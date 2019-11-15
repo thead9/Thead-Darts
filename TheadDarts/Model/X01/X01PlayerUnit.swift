@@ -15,7 +15,7 @@ class X01PlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {
     var objectWillChange = PassthroughSubject<Void, Never>()
     var updated: () -> () = { }
     
-    var player: X01Player {
+    var player: DartPlayer {
         willSet {
             updated()
             objectWillChange.send(())
@@ -29,7 +29,7 @@ class X01PlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {
     }
     let id = UUID()
     
-    required init(player: X01Player, score: X01Score) {
+    required init(player: DartPlayer, score: X01Score) {
         self.player = player
         self.score = score
 
@@ -37,7 +37,7 @@ class X01PlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {
         self.score.updated = { self.objectWillChange.send(()) }
     }
     
-    convenience init(player: X01Player, score: X01Score, updated: @escaping () -> ()) {
+    convenience init(player: DartPlayer, score: X01Score, updated: @escaping () -> ()) {
         self.init(player: player, score: score)
         self.updated = updated
     }

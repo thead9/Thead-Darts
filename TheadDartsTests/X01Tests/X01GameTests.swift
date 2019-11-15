@@ -14,15 +14,15 @@ class X01GameTests: XCTestCase {
     var x01Game = X01Game(numberOfPlayers: 2)
     var x01Score1 = X01Score()
     var x01Score2 = X01Score()
-    var x01Player1 = X01Player(name: "PlayerOne")
-    var x01Player2 = X01Player(name: "PlayerTwo")
+    var x01Player1 = DartPlayer(name: "PlayerOne")
+    var x01Player2 = DartPlayer(name: "PlayerTwo")
     
     override func setUp() {
         x01Game = X01Game(numberOfPlayers: 2)
         x01Score1 = x01Game.playerUnits[0].score
         x01Score2 = x01Game.playerUnits[1].score
-        x01Player1 = X01Player(name: "PlayerOne")
-        x01Player2 = X01Player(name: "PlayerTwo")
+        x01Player1 = DartPlayer(name: "PlayerOne")
+        x01Player2 = DartPlayer(name: "PlayerTwo")
     }
 
     override func tearDown() {
@@ -53,7 +53,7 @@ class X01GameTests: XCTestCase {
     }
     
     func testAddingPreExistingPlayer() {
-        let preExistingPlayer = X01Player(name: "Bob")
+        let preExistingPlayer = DartPlayer(name: "Bob")
         x01Game.addPlayer(preExistingPlayer)
         XCTAssertEqual(x01Game.players[2].name, "Bob")
     }

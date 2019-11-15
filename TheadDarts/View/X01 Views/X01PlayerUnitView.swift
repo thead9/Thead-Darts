@@ -27,7 +27,7 @@ struct X01PlayerUnitView: View {
 
 struct X01PlayerUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        X01PlayerUnitView(playerUnit: X01PlayerUnit(player: X01Player(name: "Thomas"), score: X01Score()))
+        X01PlayerUnitView(playerUnit: X01PlayerUnit(player: DartPlayer(name: "Thomas"), score: X01Score()))
             .previewLayout(.fixed(width: 150, height: 100))
     }
 }
