@@ -256,6 +256,13 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
+		C7594097237F0D9800B34847 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		C75C5F3D230328680019C8B7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +308,7 @@
 		C7983E1E22CACC0E00ACC903 /* TheadDarts */ = {
 			isa = PBXGroup;
 			children = (
+				C7594097237F0D9800B34847 /* View Model */,
 				C71E265222CB96A5005D91E1 /* View */,
 				C7983E4F22CACC2B00ACC903 /* Model */,
 				C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */,
