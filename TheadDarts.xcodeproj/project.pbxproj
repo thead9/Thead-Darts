@@ -834,7 +834,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2019.2;
+				MARKETING_VERSION = 2019.3;
 				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDarts;
 				PRODUCT_NAME = Darts;
 				SWIFT_VERSION = 5.0;
@@ -856,7 +856,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2019.2;
+				MARKETING_VERSION = 2019.3;
 				PRODUCT_BUNDLE_IDENTIFIER = thead.TheadDarts;
 				PRODUCT_NAME = Darts;
 				SWIFT_VERSION = 5.0;
