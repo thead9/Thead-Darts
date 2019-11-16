@@ -12,9 +12,11 @@ import Combine
 import SwiftUI
 
 class X01Game: DartGame, ObservableObject {
+    typealias Score = X01Score
+    
     var objectWillChange = PassthroughSubject<Void, Never>()
 
-    var playerUnits = [X01PlayerUnit]() {
+    var playerUnits = [DartPlayerUnit<Score>]() {
         willSet {
             objectWillChange.send(())
         }
@@ -29,7 +31,7 @@ class X01Game: DartGame, ObservableObject {
     // MARK: Inits
     init(numberOfPlayers: Int, startingPoint: Int = 301, doubleOut: Bool = true) {
         for index in 0..<numberOfPlayers {
-            let playerUnit = X01PlayerUnit(player: DartPlayer(name: "Player \(index+1)"),
+            let playerUnit = DartPlayerUnit<Score>(player: DartPlayer(name: "Player \(index+1)"),
                                            score: X01Score(startingPoint: startingPoint),
                                            updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
@@ -44,7 +46,7 @@ class X01Game: DartGame, ObservableObject {
     
     init(players: [DartPlayer], startingPoint: Int = 301, doubleOut: Bool = true) {
         for player in players {
-            let playerUnit = X01PlayerUnit(player: player,
+            let playerUnit = DartPlayerUnit<Score>(player: player,
                                            score: X01Score(startingPoint: startingPoint),
                                            updated: { self.objectWillChange.send(()) })
             self.playerUnits.append(playerUnit)
@@ -79,7 +81,7 @@ extension X01Game {
     
     // MARK: Adding Players
     func addPlayer(_ player : DartPlayer) {
-        playerUnits.append(X01PlayerUnit(player: player, score: X01Score()))
+        playerUnits.append(DartPlayerUnit<Score>(player: player, score: X01Score()))
     }
 }
 

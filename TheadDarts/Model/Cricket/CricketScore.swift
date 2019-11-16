@@ -11,11 +11,13 @@ import Foundation
 import Combine
 import SwiftUI
 
-class CricketScore: DartScore, ObservableObject {    
+class CricketScore: DartScore, ObservableObject {
+    typealias Score = CricketScore
+    
     var objectWillChange = PassthroughSubject<Void, Never>()
     var updated: () -> () = { }
     
-    var scoreKeeper: CricketScoreKeeper = CricketScoreKeeper(playerUnits: [CricketPlayerUnit]())
+    var scoreKeeper: CricketScoreKeeper = CricketScoreKeeper(playerUnits: [DartPlayerUnit<Score>]())
 
     var marks = Marks() {
         didSet {

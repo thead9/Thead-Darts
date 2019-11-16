@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CricketPlayerUnitView : View {
-    @ObservedObject var playerUnit: CricketPlayerUnit
+    @ObservedObject var playerUnit: DartPlayerUnit<CricketScore>
     
     var body: some View {
         VStack(spacing: 0) {
@@ -25,7 +25,7 @@ struct CricketPlayerUnitView : View {
 #if DEBUG
 struct CricketPlayerUnitView_Previews : PreviewProvider {
     static var previews: some View {
-        CricketPlayerUnitView(playerUnit: CricketPlayerUnit(player: DartPlayer(name: "Thomas"), score: CricketScore()))
+        CricketPlayerUnitView(playerUnit: DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore()))
             .previewLayout(.fixed(width: 150, height: 100))
     }
 }

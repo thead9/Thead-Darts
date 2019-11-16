@@ -13,7 +13,7 @@ class X01ScoreKeeper: DartScoreKeeper {
 
     var updated: () -> () = { }
     
-    var playerUnits: [X01PlayerUnit]
+    var playerUnits: [DartPlayerUnit<Score>]
     
     var activeIndex: Int = 0 {
         didSet {
@@ -58,12 +58,12 @@ class X01ScoreKeeper: DartScoreKeeper {
     }
     
     // MARK: Inits
-    init(playerUnits: [X01PlayerUnit], doubleOut: Bool = true) {
+    init(playerUnits: [DartPlayerUnit<Score>], doubleOut: Bool = true) {
         self.playerUnits = playerUnits
         self.doubleOut = doubleOut
     }
     
-    convenience init(playerUnits: [X01PlayerUnit], doubleOut: Bool = true, updated: @escaping () -> ()) {
+    convenience init(playerUnits: [DartPlayerUnit<Score>], doubleOut: Bool = true, updated: @escaping () -> ()) {
         self.init(playerUnits: playerUnits, doubleOut: doubleOut)
         self.updated = updated
     }

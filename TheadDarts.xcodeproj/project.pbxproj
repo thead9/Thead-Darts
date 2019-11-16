@@ -345,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				C7983E6822CACCFA00ACC903 /* DartPlayer.swift */,
+				C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */,
 				C7983E5122CACC3D00ACC903 /* Cricket */,
 				C7C5251D232EDB3C009AF03B /* X01 */,
 				C7062B1122F449B0006CE930 /* Utility */,
@@ -381,7 +382,6 @@
 				C7983E6522CACCE800ACC903 /* DartGame.swift */,
 				C7983E6B22CACD0D00ACC903 /* DartScore.swift */,
 				C7983E6E22CACD1F00ACC903 /* DartScoreKeeper.swift */,
-				C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */,
 				C75C5F3A2303281F0019C8B7 /* DartAction.swift */,
 			);
 			path = Protocol;

@@ -10,6 +10,10 @@ import Foundation
 
 protocol DartScore {
     associatedtype Score: DartScore
+    associatedtype ScoreKeeper: DartScoreKeeper
+    
+    var scoreKeeper: ScoreKeeper { get }
+    var updated: () -> () { get set }
     
     init()
         

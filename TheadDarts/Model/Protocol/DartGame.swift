@@ -9,11 +9,10 @@
 import Foundation
 
 protocol DartGame {
-    associatedtype PlayerUnit: DartPlayerUnit
     associatedtype Score: DartScore
     associatedtype ScoreKeeper: DartScoreKeeper
     
-    var playerUnits: [PlayerUnit] { get set }
+    var playerUnits: [DartPlayerUnit<Score>] { get set }
     var players: [DartPlayer] { get }
     var scores: [Score] { get }
     var winner: DartPlayer? { get }

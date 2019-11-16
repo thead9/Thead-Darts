@@ -13,7 +13,7 @@ class CricketScoreKeeper: DartScoreKeeper {
     
     var updated: () -> () = { }
     
-    var playerUnits: [CricketPlayerUnit]
+    var playerUnits: [DartPlayerUnit<Score>]
     
     var activeIndex: Int = 0 {
         didSet {
@@ -75,11 +75,11 @@ class CricketScoreKeeper: DartScoreKeeper {
     }
     
     // MARK: Inits
-    init(playerUnits: [CricketPlayerUnit]) {
+    init(playerUnits: [DartPlayerUnit<Score>]) {
         self.playerUnits = playerUnits
     }
     
-    convenience init(playerUnits: [CricketPlayerUnit], updated: @escaping () -> ()) {
+    convenience init(playerUnits: [DartPlayerUnit<Score>], updated: @escaping () -> ()) {
         self.init(playerUnits: playerUnits)
         self.updated = updated
     }

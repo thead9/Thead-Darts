@@ -1,8 +1,8 @@
 //
-//  PlayerUnit.swift
+//  DartPlayerUnit.swift
 //  TheadDarts
 //
-//  Created by Thomas Headley on 7/3/19.
+//  Created by Thomas Headley on 8/12/19.
 //  Copyright © 2019 Thead. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-class CricketPlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {    
+class DartPlayerUnit<Score: DartScore>: Identifiable, ObservableObject {
     var objectWillChange = PassthroughSubject<Void, Never>()
     var updated: () -> () = { }
     
@@ -21,7 +21,7 @@ class CricketPlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {
             objectWillChange.send(())
         }
     }
-    var score: CricketScore {
+    var score: Score {
         willSet {
             updated()
             objectWillChange.send(())
@@ -29,7 +29,7 @@ class CricketPlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {
     }
     let id = UUID()
     
-    required init(player: DartPlayer, score: CricketScore) {
+    required init(player: DartPlayer, score: Score) {
         self.player = player
         self.score = score
 
@@ -37,7 +37,7 @@ class CricketPlayerUnit: DartPlayerUnit, Identifiable, ObservableObject {
         self.score.updated = { self.objectWillChange.send(()) }
     }
     
-    convenience init(player: DartPlayer, score: CricketScore, updated: @escaping () -> ()) {
+    convenience init(player: DartPlayer, score: Score, updated: @escaping () -> ()) {
         self.init(player: player, score: score)
         self.updated = updated
     }

@@ -12,10 +12,12 @@ import Combine
 import SwiftUI
 
 class X01Score: DartScore {
+    typealias Score = X01Score
+    
     var objectWillChange = PassthroughSubject<Void, Never>()
     var updated: () -> () = { }
     
-    var scoreKeeper: X01ScoreKeeper = X01ScoreKeeper(playerUnits: [X01PlayerUnit]())
+    var scoreKeeper: X01ScoreKeeper = X01ScoreKeeper(playerUnits: [DartPlayerUnit<Score>]())
 
     var startingPoint: Int = 301
     var points: Int {
