@@ -19,8 +19,6 @@ protocol DartGame {
     var gameOver: Bool { get }
     
     var scoreKeeper: ScoreKeeper! { get }
-    
-    func addPlayer(_ player : DartPlayer)
 }
 
 // MARK: Interacting with Players
@@ -54,6 +52,10 @@ extension DartGame {
     
     mutating func addPlayer(named name: String) {
         self.addPlayer(DartPlayer(name: name))
+    }
+    
+    mutating func addPlayer(_ player : DartPlayer) {
+        playerUnits.append(DartPlayerUnit<Score>(player: player, score: Score()))
     }
     
     // MARK: Removing Players

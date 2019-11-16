@@ -21,6 +21,24 @@ class X01Game: DartGame, ObservableObject {
             objectWillChange.send(())
         }
     }
+    var players: [DartPlayer] {
+        get {
+            var playersToBeReturned = [DartPlayer]()
+            for playerUnit in playerUnits {
+                playersToBeReturned.append(playerUnit.player)
+            }
+            return playersToBeReturned
+        }
+    }
+    var scores: [X01Score] {
+        get {
+            var scoresToBeReturned = [X01Score]()
+            for playerUnit in playerUnits {
+                scoresToBeReturned.append(playerUnit.score)
+            }
+            return scoresToBeReturned
+        }
+    }
     
     var winnerIndex: Int? { get { scoreKeeper.winnerIndex } }
     var winner: DartPlayer? { get { scoreKeeper.winner } }
@@ -64,36 +82,5 @@ class X01Game: DartGame, ObservableObject {
             playerUnit.score.reset()
         }
         scoreKeeper.reset()
-    }
-}
-
-// MARK: Interacting with Players
-extension X01Game {
-    var players: [DartPlayer] {
-        get {
-            var playersToBeReturned = [DartPlayer]()
-            for playerUnit in playerUnits {
-                playersToBeReturned.append(playerUnit.player)
-            }
-            return playersToBeReturned
-        }
-    }
-    
-    // MARK: Adding Players
-    func addPlayer(_ player : DartPlayer) {
-        playerUnits.append(DartPlayerUnit<Score>(player: player, score: X01Score()))
-    }
-}
-
-// MARK: Score Keeping
-extension X01Game {
-    var scores: [X01Score] {
-        get {
-            var scoresToBeReturned = [X01Score]()
-            for playerUnit in playerUnits {
-                scoresToBeReturned.append(playerUnit.score)
-            }
-            return scoresToBeReturned
-        }
     }
 }

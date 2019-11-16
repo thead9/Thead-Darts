@@ -21,6 +21,25 @@ class CricketGame: DartGame, ObservableObject {
             objectWillChange.send(())
         }
     }
+    var players: [DartPlayer] {
+        get {
+            var playersToBeReturned = [DartPlayer]()
+            for playerUnit in playerUnits {
+                playersToBeReturned.append(playerUnit.player)
+            }
+            return playersToBeReturned
+        }
+    }
+    var scores: [CricketScore] {
+        get {
+            var scoresToBeReturned = [CricketScore]()
+            for playerUnit in playerUnits {
+                scoresToBeReturned.append(playerUnit.score)
+            }
+            return scoresToBeReturned
+        }
+    }
+    
     var winnerIndex: Int? { get { scoreKeeper.winnerIndex } }
     var winner: DartPlayer? { get { scoreKeeper.winner } }
     var gameOver: Bool { get { scoreKeeper.gameOver } }
@@ -72,35 +91,5 @@ class CricketGame: DartGame, ObservableObject {
             playerUnit.score.reset()
         }
         scoreKeeper.reset()
-    }
-}
-
-// MARK: Interacting with Players
-extension CricketGame {
-    var players: [DartPlayer] {
-        get {
-            var playersToBeReturned = [DartPlayer]()
-            for playerUnit in playerUnits {
-                playersToBeReturned.append(playerUnit.player)
-            }
-            return playersToBeReturned
-        }
-    }
-    
-    func addPlayer(_ player : DartPlayer) {
-        playerUnits.append(DartPlayerUnit<Score>(player: player, score: CricketScore()))
-    }
-}
-
-// MARK: Score Keeping
-extension CricketGame {
-    var scores: [CricketScore] {
-        get {
-            var scoresToBeReturned = [CricketScore]()
-            for playerUnit in playerUnits {
-                scoresToBeReturned.append(playerUnit.score)
-            }
-            return scoresToBeReturned
-        }
     }
 }
