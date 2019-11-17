@@ -12,6 +12,8 @@ struct X01CardView: View {
     
     @ObservedObject var settings = UserSettings()
     
+    var game = X01Game(numberOfPlayers: 2)
+    
     // MARK: Body
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -58,7 +60,8 @@ struct X01CardView: View {
                 }
                 .padding(.top)
                 
-                NavigationLink(destination: X01GameView(x01Game: X01Game(numberOfPlayers: 2, startingPoint: settings.x01StartingPoint, doubleOut: settings.doubleOut))) {
+                //NavigationLink(destination: X01GameView(x01Game: X01Game(numberOfPlayers: 2, startingPoint: settings.x01StartingPoint, doubleOut: settings.doubleOut))) {
+                NavigationLink(destination: X01GameView(x01GameVM: X01GameViewModel(x01Game: game))) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)

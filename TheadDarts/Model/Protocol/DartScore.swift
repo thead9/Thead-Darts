@@ -13,6 +13,7 @@ protocol DartScore {
     associatedtype ScoreKeeper: DartScoreKeeper
     
     var scoreKeeper: ScoreKeeper { get }
+    var points: Int { get }
     var updated: () -> () { get set }
     
     init()

@@ -11,9 +11,8 @@ import SwiftUI
 struct X01GameView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @ObservedObject var x01Game: X01Game
+    @ObservedObject var x01GameVM: X01GameViewModel
     
-    @State var gameOver = false
     @State var showNewGameModal = false
     @State var showWinnerModal = false
     
@@ -37,13 +36,12 @@ struct X01GameView: View {
                 }
                 
                 
-                X01HitView(x01Game: x01Game,
-                           onHit: {
-                            self.showWinnerModal = self.x01Game.gameOver
-                            self.gameOver = self.x01Game.gameOver
+                X01HitView(x01GameVM: x01GameVM,
+                           updateWinnerModal: {
+                            self.showWinnerModal = self.x01GameVM.gameOver
                            })
                 
-                if (x01Game.scoreKeeper.activeTurn.canAddThrow()) {
+                if x01GameVM.canAddThrow {
                     turnControls
                         .padding(.bottom, 2)
                 }
@@ -58,8 +56,7 @@ struct X01GameView: View {
             
             if showNewGameModal {
                 NewGameModal(affirmativeAction: {
-                                self.x01Game.newGame()
-                                self.setGameOver()
+                                self.x01GameVM.newGame()
                                 self.showNewGameModal = false
                             },
                              cancelAction: {
@@ -71,16 +68,14 @@ struct X01GameView: View {
             
             if showWinnerModal {
                 WinnerModal(canViewScoreboard: false,
-                            winnerName: self.x01Game.winner!.name,
+                            winnerName: self.x01GameVM.winnerName!,
                             newGameAction: {
-                                self.x01Game.newGame()
-                                self.setGameOver()
+                                self.x01GameVM.newGame()
                                 self.showWinnerModal = false},
                             viewScoreboardAction: {
                                 self.showWinnerModal = false},
                             undoAction: {
-                                self.x01Game.scoreKeeper.undo()
-                                self.setGameOver()
+                                self.x01GameVM.undo()
                                 self.showWinnerModal = false})
                     .padding()
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
@@ -95,8 +90,8 @@ struct X01GameView: View {
     
     var scoreBoard: some View {
         HStack {
-            ForEach(0..<x01Game.scores.count) { index in
-                X01PlayerUnitView(playerUnit: self.x01Game.playerUnits[index])
+            ForEach(0..<x01GameVM.playerUnits.count) { index in
+                X01PlayerUnitView(playerUnitVM: self.x01GameVM.playerUnits[index])
                     .padding(.horizontal, 5)
                     .padding(.vertical, 10)
                     .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
@@ -109,7 +104,7 @@ struct X01GameView: View {
     var turnControls: some View {
         Group {
             HStack {
-                ForEach(x01Game.scoreKeeper!.activeTurn.toString(), id: \.self) { label in
+                ForEach(x01GameVM.activeTurn.toString(), id: \.self) { label in
                     Text("\(label)")
                         .textStyle(ThrowTextStyle(label))
                 }
@@ -127,8 +122,7 @@ struct X01GameView: View {
 
                 Button(action: {
                     withAnimation {
-                        self.x01Game.scoreKeeper.undo()
-                        self.setGameOver()
+                        self.x01GameVM.undo()
                     }
                 }) {
                     Image(systemName: "arrow.uturn.left")
@@ -156,21 +150,13 @@ struct X01GameView: View {
         }
     }
     
-    func setGameOver() {
-        self.gameOver = self.x01Game.gameOver
-    }
-    
-    func isActiveIndex(_ index: Int) -> Bool {
-        return index == self.x01Game.scoreKeeper.activeIndex
-    }
-    
     func shouldAddActiveBorder(on index: Int) -> Bool {
-        return self.x01Game.scoreKeeper.activeIndex == index
+        return x01GameVM.activeIndex == index
     }
 }
 
 struct X01GameView_Previews: PreviewProvider {
     static var previews: some View {
-        X01GameView(x01Game: X01Game(numberOfPlayers: 2))
+        X01GameView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2)))
     }
 }

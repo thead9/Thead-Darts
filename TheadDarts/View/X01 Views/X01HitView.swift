@@ -10,9 +10,9 @@ import SwiftUI
 
 struct X01HitView: View {
 
-    @ObservedObject var x01Game: X01Game
+    @ObservedObject var x01GameVM: X01GameViewModel
     
-    var onHit: () -> ()
+    var updateWinnerModal: () -> ()
     
     var animationTime = 0.25
     
@@ -23,7 +23,7 @@ struct X01HitView: View {
                 x01SelectingMultiplier
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .frame(maxWidth: 450)
-            } else if !self.x01Game.scoreKeeper.activeTurn.canAddThrow() && !self.x01Game.gameOver {
+            } else if !self.x01GameVM.canAddThrow && !self.x01GameVM.gameOver {
                 x01TurnOverview
                     .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .frame(maxWidth: 450)
@@ -32,7 +32,7 @@ struct X01HitView: View {
                     .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
             }
         }
-        .frame(alignment: !self.selectingMultiplier.0 && !self.x01Game.scoreKeeper.activeTurn.canAddThrow() ? .center : .leading)
+        .frame(alignment: !self.selectingMultiplier.0 && !self.x01GameVM.canAddThrow ? .center : .leading)
     }
     
     // MARK: Hit Grid
@@ -59,7 +59,7 @@ struct X01HitView: View {
     
     func x01HitButtonAction(for wedge: Wedge) {
         if wedge == .miss {
-            self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].hit(on: .miss)
+            self.x01GameVM.hit(on: .miss)
         } else {
             self.selectingMultiplier = (true, wedge)
         }
@@ -91,7 +91,7 @@ struct X01HitView: View {
                                 }
                             }
                             .buttonStyle(SecondaryButtonStyle())
-                            .disabled(!self.x01Game.scoreKeeper.activeTurn.canAddThrow())
+                            .disabled(!self.x01GameVM.canAddThrow)
                         }
                     }
                 }
@@ -109,9 +109,9 @@ struct X01HitView: View {
                                         
                 Button(action: {
                     withAnimation(.easeInOut(duration: self.animationTime)) {
-                        self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].hit(on: self.selectingMultiplier.1, with: .single)
+                        self.x01GameVM.hit(on: self.selectingMultiplier.1, with: .single)
                         self.selectingMultiplier = (false, .one)
-                        self.onHit()
+                        self.updateWinnerModal()
                     }
                 }) {
                     Text("Single")
@@ -122,9 +122,9 @@ struct X01HitView: View {
                 
                 Button(action: {
                     withAnimation(.easeInOut(duration: self.animationTime)) {
-                        self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].hit(on: self.selectingMultiplier.1, with: .double)
+                        self.x01GameVM.hit(on: self.selectingMultiplier.1, with: .double)
                         self.selectingMultiplier = (false, .one)
-                        self.onHit()
+                        self.updateWinnerModal()
                     }
                 }) {
                     Text("Double")
@@ -136,9 +136,9 @@ struct X01HitView: View {
                 if (self.selectingMultiplier.1 != .bull) {
                     Button(action: {
                         withAnimation(.easeInOut(duration: self.animationTime)) {
-                            self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].hit(on: self.selectingMultiplier.1, with: .triple)
+                            self.x01GameVM.hit(on: self.selectingMultiplier.1, with: .triple)
                             self.selectingMultiplier = (false, .one)
-                            self.onHit()
+                            self.updateWinnerModal()
                         }
                     }) {
                         Text("Triple")
@@ -183,10 +183,10 @@ struct X01HitView: View {
                         .foregroundColor(Color.select(.primary))
                     
                     VStack(alignment: .leading, spacing: 0) {
-                        ForEach(0..<self.x01Game.scoreKeeper!.activeTurn.dartThrows.count, id: \.self) { index in
+                        ForEach(0..<self.x01GameVM.activeTurn.dartThrows.count, id: \.self) { index in
                             HStack(spacing: 10) {
                                 Text("Throw \(index + 1)")
-                                Text("\(self.x01Game.scoreKeeper!.activeTurn.dartThrows[index].toString())")
+                                Text("\(self.x01GameVM.activeTurn.dartThrows[index].toString())")
                                     .foregroundColor(Color.select(.secondary))
                             }
                             .font(.title)
@@ -200,7 +200,7 @@ struct X01HitView: View {
                         
                         HStack(spacing: 10) {
                             Text("Scored")
-                            Text("\(self.x01Game.scoreKeeper!.activeTurn.totalScore())")
+                            Text("\(self.x01GameVM.activeTurn.totalScore())")
                                 .foregroundColor(Color.select(.secondary))
                         }
                         .padding(.horizontal)
@@ -208,7 +208,7 @@ struct X01HitView: View {
                         
                         HStack(spacing: 10) {
                             Text("Remaining")
-                            Text("\(self.x01Game.scores[self.x01Game.scoreKeeper.activeIndex].points)")
+                            Text("\(self.x01GameVM.activeTurnPoints)")
                                 .foregroundColor(Color.select(.secondary))
                         }
                         .padding(.horizontal)
@@ -221,7 +221,7 @@ struct X01HitView: View {
                 
                 Button(action: {
                     withAnimation(.easeInOut(duration: self.animationTime)) {
-                        self.x01Game.scoreKeeper.nextPlayer()
+                        self.x01GameVM.nextPlayer()
                     }
                 }) {
                     Text("Next")
@@ -238,6 +238,6 @@ struct X01HitView: View {
 
 struct X01HitView_Previews: PreviewProvider {
     static var previews: some View {
-        X01HitView(x01Game: X01Game(numberOfPlayers: 2), onHit: { })
+        X01HitView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2)), updateWinnerModal: { })
     }
 }
