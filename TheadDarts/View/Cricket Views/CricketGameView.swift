@@ -11,9 +11,8 @@ import SwiftUI
 struct CricketGameView : View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
-    @ObservedObject var cricketGame: CricketGame
+    @ObservedObject var cricketGameVM: CricketGameViewModel
     
-    @State var gameOver = false
     @State var showNewGameModal = false
     @State var showWinnerModal = false
             
@@ -38,8 +37,7 @@ struct CricketGameView : View {
             
             if showNewGameModal {
                 NewGameModal(affirmativeAction: {
-                                self.cricketGame.newGame()
-                                self.setGameOver()
+                                self.cricketGameVM.newGame()
                                 self.showNewGameModal = false
                              },
                              cancelAction: {
@@ -50,16 +48,14 @@ struct CricketGameView : View {
             }
             
             if showWinnerModal {
-                WinnerModal(winnerName: self.cricketGame.winner!.name,
+                WinnerModal(winnerName: self.cricketGameVM.winnerName!,
                             newGameAction: {
-                                self.cricketGame.newGame()
-                                self.setGameOver()
+                                self.cricketGameVM.newGame()
                                 self.showWinnerModal = false},
                             viewScoreboardAction: {
                                 self.showWinnerModal = false},
                             undoAction: {
-                                self.cricketGame.scoreKeeper.undo()
-                                self.setGameOver()
+                                self.cricketGameVM.undo()
                                 self.showWinnerModal = false})
                     .padding()
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
@@ -87,8 +83,8 @@ struct CricketGameView : View {
                 .padding(.horizontal, 5)
                 .foregroundColor(Color.select(.secondary))
 
-                ForEach(0..<cricketGame.scores.count) { index in
-                    CricketPlayerUnitView(playerUnit: self.cricketGame.playerUnits[index])
+                ForEach(0..<cricketGameVM.playerUnits.count) { index in
+                    CricketPlayerUnitView(playerUnitVM: self.cricketGameVM.playerUnits[index])
                         .padding(.horizontal, 5)
                         .padding(.vertical, 10)
                         .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
@@ -101,12 +97,12 @@ struct CricketGameView : View {
                     .frame(width: leftColumnWidth)
                     .padding(.horizontal, 5)
 
-                ForEach(0..<cricketGame.scores.count) { index in
+                ForEach(0..<cricketGameVM.scores.count) { index in
                     CricketHitView(
-                        score: self.cricketGame.scores[index],
+                        scoreVM: CricketScoreViewModel(cricketScore: self.cricketGameVM.scores[index]),
                         onHit: {
-                            self.showWinnerModal = self.cricketGame.gameOver
-                            self.setGameOver()
+                            self.cricketGameVM.updateGameState()
+                            self.showWinnerModal = self.cricketGameVM.gameOver
                         },
                         wholeViewDisabled: self.shouldDisableHitView(at: index)
                     )
@@ -118,23 +114,22 @@ struct CricketGameView : View {
         }
     }
     
-    
     // MARK: Turn Controls
     var turnControls: some View {
         Group {
-            if cricketGame.scoreKeeper.activeTurn != nil {
+            if cricketGameVM.activeTurn != nil {
                 HStack {
-                    ForEach(cricketGame.scoreKeeper.activeTurn!.toString(), id: \.self) { label in
+                    ForEach(cricketGameVM.activeTurn!.toString(), id: \.self) { label in
                         Text("\(label)")
                             .padding(.vertical)
                             .frame(maxWidth: .infinity)
                             .foregroundColor(label.contains("T") ? Color.select(.hitBackground) : Color.select(.primary) )
                             .addBorder((label.contains("T") ? Color.select(.hitBackground) : Color.select(.secondary)), width: 1)
                     }
-                    if (!cricketGame.scoreKeeper.activeTurn!.canAddThrow()) {
+                    if (!cricketGameVM.activeTurn!.canAddThrow()) {
                         Button(action: {
                             withAnimation {
-                                self.cricketGame.scoreKeeper.nextPlayer()
+                                self.cricketGameVM.nextPlayer()
                             }
                         }) {
                             Text("Next")
@@ -144,7 +139,7 @@ struct CricketGameView : View {
                         .buttonStyle(PrimaryButtonStyle())
                     } else {
                         Button(action: {
-                            self.cricketGame.scores[self.cricketGame.scoreKeeper.activeIndex].hit(on: .miss)
+                            self.cricketGameVM.hit(on: .miss, for: self.cricketGameVM.activeIndex)
                         }) {
                             Text("Miss")
                                 .padding(.vertical)
@@ -167,8 +162,7 @@ struct CricketGameView : View {
                 
                 Button(action: {
                     withAnimation {
-                        self.cricketGame.scoreKeeper.undo()
-                        self.setGameOver()
+                        self.cricketGameVM.undo()
                     }
                 }) {
                     Image(systemName: "arrow.uturn.left")
@@ -195,20 +189,17 @@ struct CricketGameView : View {
         }
     }
     
-    func setGameOver() {
-        self.gameOver = self.cricketGame.gameOver
-    }
-    func isActiveIndex(_ index: Int) -> Bool {
-        return index == self.cricketGame.scoreKeeper!.activeIndex
-    }
-    
     func shouldAddActiveBorder(on index: Int) -> Bool {
-        return self.cricketGame.scoreKeeper.activeIndex == index && self.cricketGame.scoreKeeper.activeTurn != nil
+        if let _ = self.cricketGameVM.activeTurn {
+            return cricketGameVM.activeIndex == index
+        } else {
+            return false
+        }
     }
     
     func shouldDisableHitView(at index: Int) -> Bool {
-        if let activeTurn = self.cricketGame.scoreKeeper.activeTurn {
-            return self.cricketGame.scoreKeeper.activeIndex != index || !activeTurn.canAddThrow()
+        if let activeTurn = self.cricketGameVM.activeTurn {
+            return self.cricketGameVM.activeIndex != index || !activeTurn.canAddThrow()
         } else {
             return false
         }
@@ -218,7 +209,7 @@ struct CricketGameView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
     static var previews: some View {
-        CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2))
+        CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2)))
     }
 }
 #endif

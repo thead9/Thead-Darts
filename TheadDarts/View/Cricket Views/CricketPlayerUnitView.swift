@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct CricketPlayerUnitView : View {
-    @ObservedObject var playerUnit: DartPlayerUnit<CricketScore>
-    
+    @ObservedObject var playerUnitVM: PlayerUnitViewModel<CricketScore>
+
     var body: some View {
         VStack(spacing: 0) {
-            Text(self.playerUnit.player.name)
+            Text(self.playerUnitVM.name)
                 .font(.headline)
-            Text(String(self.playerUnit.score.points))
+            Text(String(self.playerUnitVM.points))
                 .font(.title)
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
@@ -25,7 +25,7 @@ struct CricketPlayerUnitView : View {
 #if DEBUG
 struct CricketPlayerUnitView_Previews : PreviewProvider {
     static var previews: some View {
-        CricketPlayerUnitView(playerUnit: DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore()))
+        CricketPlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit(player: DartPlayer(name: "Thomas"), score: CricketScore())))
             .previewLayout(.fixed(width: 150, height: 100))
     }
 }

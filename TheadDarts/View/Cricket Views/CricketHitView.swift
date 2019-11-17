@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct CricketHitView : View {
-    @ObservedObject var score: CricketScore
+    @ObservedObject var scoreVM: CricketScoreViewModel
         
     let cricketWedges: [Wedge] = [.twenty, .nineteen, .eightteen, .seventeen, .sixteen, .fifteen, .bull]
     
@@ -43,7 +43,7 @@ struct CricketHitView : View {
                                                 
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.25)) {
-                                self.score.hit(on: self.selectingMultiplier.1, with: .single)
+                                self.scoreVM.hit(on: self.selectingMultiplier.1, with: .single)
                                 self.selectingMultiplier = (false, .one)
                                 self.onHit()
                             }
@@ -57,7 +57,7 @@ struct CricketHitView : View {
                         
                         Button(action: {
                             withAnimation(.easeInOut(duration: 0.25)) {
-                                self.score.hit(on: self.selectingMultiplier.1, with: .double)
+                                self.scoreVM.hit(on: self.selectingMultiplier.1, with: .double)
                                 self.selectingMultiplier = (false, .one)
                                 self.onHit()
                             }
@@ -73,7 +73,7 @@ struct CricketHitView : View {
                         if (self.selectingMultiplier.1 != .bull) {
                             Button(action: {
                                 withAnimation(.easeInOut(duration: 0.25)) {
-                                    self.score.hit(on: self.selectingMultiplier.1, with: .triple)
+                                    self.scoreVM.hit(on: self.selectingMultiplier.1, with: .triple)
                                     self.selectingMultiplier = (false, .one)
                                     self.onHit()
                                 }
@@ -113,10 +113,10 @@ struct CricketHitView : View {
                                     self.selectingMultiplier = (true, wedge)
                                 }
                             }) {
-                                CricketMarkView(marks: self.score.marks[wedge])
+                                CricketMarkView(marks: self.scoreVM.marks[wedge])
                             }
-                            .disabled(!self.score.shouldAllowHit(on: wedge))
-                            .buttonStyle(SecondaryButtonStyle(addBorder: self.score.shouldAllowHit(on: wedge) && !self.wholeViewDisabled))
+                            .disabled(!self.scoreVM.shouldAllowHit(on: wedge))
+                            .buttonStyle(SecondaryButtonStyle(addBorder: self.scoreVM.shouldAllowHit(on: wedge) && !self.wholeViewDisabled))
                         }
                         .animation(.easeInOut)
                         .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
@@ -132,7 +132,7 @@ struct CricketHitView : View {
 #if DEBUG
 struct CricketHitView_Previews : PreviewProvider {
     static var previews: some View {
-        CricketHitView(score: CricketScore(), onHit: { }, wholeViewDisabled: false)
+        CricketHitView(scoreVM: CricketScoreViewModel(cricketScore: CricketScore()), onHit: { }, wholeViewDisabled: false)
             .previewLayout(.fixed(width: 150, height: 650))
     }
 }

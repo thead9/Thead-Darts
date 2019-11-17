@@ -36,7 +36,7 @@ struct CricketCardView: View {
                     .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
                 }
                 
-                NavigationLink(destination: CricketGameView(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns))) {
+                NavigationLink(destination: CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns)))) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)
