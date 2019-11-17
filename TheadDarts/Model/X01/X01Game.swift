@@ -8,19 +8,10 @@
 
 import Foundation
 
-import Combine
-import SwiftUI
-
-class X01Game: DartGame, ObservableObject {
+class X01Game: DartGame {
     typealias Score = X01Score
     
-    var objectWillChange = PassthroughSubject<Void, Never>()
-
-    var playerUnits = [DartPlayerUnit<Score>]() {
-        willSet {
-            objectWillChange.send(())
-        }
-    }
+    var playerUnits = [DartPlayerUnit<Score>]()
     var players: [DartPlayer] {
         get {
             var playersToBeReturned = [DartPlayer]()
@@ -50,13 +41,11 @@ class X01Game: DartGame, ObservableObject {
     init(numberOfPlayers: Int, startingPoint: Int = 301, doubleOut: Bool = true) {
         for index in 0..<numberOfPlayers {
             let playerUnit = DartPlayerUnit<Score>(player: DartPlayer(name: "Player \(index+1)"),
-                                           score: X01Score(startingPoint: startingPoint),
-                                           updated: { self.objectWillChange.send(()) })
+                                           score: X01Score(startingPoint: startingPoint))
             self.playerUnits.append(playerUnit)
         }
         scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits,
-                                     doubleOut: doubleOut,
-                                     updated: { self.objectWillChange.send(()) })
+                                     doubleOut: doubleOut)
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }
@@ -65,13 +54,11 @@ class X01Game: DartGame, ObservableObject {
     init(players: [DartPlayer], startingPoint: Int = 301, doubleOut: Bool = true) {
         for player in players {
             let playerUnit = DartPlayerUnit<Score>(player: player,
-                                           score: X01Score(startingPoint: startingPoint),
-                                           updated: { self.objectWillChange.send(()) })
+                                           score: X01Score(startingPoint: startingPoint))
             self.playerUnits.append(playerUnit)
         }
         scoreKeeper = X01ScoreKeeper(playerUnits: self.playerUnits,
-                                     doubleOut: doubleOut,
-                                     updated: { self.objectWillChange.send(()) })
+                                     doubleOut: doubleOut)
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
         }

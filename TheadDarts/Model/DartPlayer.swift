@@ -9,23 +9,12 @@
 import Foundation
 
 class DartPlayer {
-    var updated: () -> () = { }
-
-    var name: String = "Player" {
-        didSet {
-            updated()
-        }
-    }
+    var name: String = "Player"
     
     // MARK: Inits
     init() { }
     
     required init(name: String) {
         self.name = name
-    }
-    
-    convenience init(name: String, updated: @escaping () -> ()) {
-        self.init(name: name)
-        self.updated = updated
     }
 }

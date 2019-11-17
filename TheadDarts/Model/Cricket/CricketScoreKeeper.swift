@@ -10,16 +10,10 @@ import Foundation
 
 class CricketScoreKeeper: DartScoreKeeper {
     typealias Score = CricketScore
-    
-    var updated: () -> () = { }
-    
+        
     var playerUnits: [DartPlayerUnit<Score>]
     
-    var activeIndex: Int = 0 {
-        didSet {
-            updated()
-        }
-    }
+    var activeIndex: Int = 0
     
     var activeTurn: DartTurn<Score>?
     
@@ -79,11 +73,6 @@ class CricketScoreKeeper: DartScoreKeeper {
         self.playerUnits = playerUnits
     }
     
-    convenience init(playerUnits: [DartPlayerUnit<Score>], updated: @escaping () -> ()) {
-        self.init(playerUnits: playerUnits)
-        self.updated = updated
-    }
-    
     // MARK: Actions
     func shouldAllowHit(on wedge: Wedge, for score: Score) -> Bool {
         var shouldAllowHit = false
@@ -137,7 +126,6 @@ class CricketScoreKeeper: DartScoreKeeper {
         } else {
             gameActions.push(dartThrowForPoints)
         }
-        updated()
     }
     
     func nextPlayer() {
@@ -145,7 +133,6 @@ class CricketScoreKeeper: DartScoreKeeper {
         activeIndex = oldActiveIndex + 1 >= playerUnits.count ? 0 : oldActiveIndex + 1
         gameActions.push(TurnChange(oldActiveIndex: oldActiveIndex, oldTurn: activeTurn!, newActiveIndex: activeIndex))
         activeTurn = DartTurn()
-        updated()
     }
     
     func undo() {
@@ -162,7 +149,6 @@ class CricketScoreKeeper: DartScoreKeeper {
         }
         
         gameActions.pop()
-        updated()
     }
     
     func reset() {

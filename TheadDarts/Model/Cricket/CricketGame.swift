@@ -8,19 +8,10 @@
 
 import Foundation
 
-import Combine
-import SwiftUI
-
-class CricketGame: DartGame, ObservableObject {
+class CricketGame: DartGame {
     typealias Score = CricketScore
-    
-    var objectWillChange = PassthroughSubject<Void, Never>()
-    
-    var playerUnits = [DartPlayerUnit<Score>]() {
-        willSet {
-            objectWillChange.send(())
-        }
-    }
+        
+    var playerUnits = [DartPlayerUnit<Score>]()
     var players: [DartPlayer] {
         get {
             var playersToBeReturned = [DartPlayer]()
@@ -50,13 +41,11 @@ class CricketGame: DartGame, ObservableObject {
     init(numberOfPlayers: Int, trackTurns: Bool = false) {
         for index in 0..<numberOfPlayers {
             let playerUnit = DartPlayerUnit<Score>(player: DartPlayer(name: "Player \(index+1)"),
-                                               score: CricketScore(),
-                                               updated: { self.objectWillChange.send(()) })
+                                               score: CricketScore())
             self.playerUnits.append(playerUnit)
         }
         
-        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits,
-                                         updated: { self.objectWillChange.send(()) })
+        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits)
         
         if trackTurns {
             scoreKeeper.activeTurn = DartTurn<CricketScore>()
@@ -70,12 +59,10 @@ class CricketGame: DartGame, ObservableObject {
     init(players: [DartPlayer], trackTurns: Bool = false) {
         for player in players {
             let playerUnit = DartPlayerUnit<Score>(player: player,
-                                               score: CricketScore(),
-                                               updated: { self.objectWillChange.send(()) })
+                                               score: CricketScore())
             self.playerUnits.append(playerUnit)
         }
-        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits,
-                                         updated: { self.objectWillChange.send(()) })
+        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits)
         
         if trackTurns {
             scoreKeeper.activeTurn = DartTurn<CricketScore>()

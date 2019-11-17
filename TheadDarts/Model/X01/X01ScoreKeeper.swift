@@ -10,16 +10,10 @@ import Foundation
 
 class X01ScoreKeeper: DartScoreKeeper {
     typealias Score = X01Score
-
-    var updated: () -> () = { }
     
     var playerUnits: [DartPlayerUnit<Score>]
     
-    var activeIndex: Int = 0 {
-        didSet {
-            updated()
-        }
-    }
+    var activeIndex: Int = 0
     
     var activeTurn: DartTurn<Score> = DartTurn()
     
@@ -61,11 +55,6 @@ class X01ScoreKeeper: DartScoreKeeper {
     init(playerUnits: [DartPlayerUnit<Score>], doubleOut: Bool = true) {
         self.playerUnits = playerUnits
         self.doubleOut = doubleOut
-    }
-    
-    convenience init(playerUnits: [DartPlayerUnit<Score>], doubleOut: Bool = true, updated: @escaping () -> ()) {
-        self.init(playerUnits: playerUnits, doubleOut: doubleOut)
-        self.updated = updated
     }
     
     // MARK: Actions
@@ -114,8 +103,6 @@ class X01ScoreKeeper: DartScoreKeeper {
         
         self.activeTurn.add(dartThrow)
         gameActions.push(DartThrowOnTurn(dartThrow: dartThrow, turn: self.activeTurn))
-        
-        updated()
     }
     
     func nextPlayer() {
@@ -123,7 +110,6 @@ class X01ScoreKeeper: DartScoreKeeper {
         activeIndex = oldActiveIndex + 1 >= playerUnits.count ? 0 : oldActiveIndex + 1
         gameActions.push(TurnChange(oldActiveIndex: oldActiveIndex, oldTurn: activeTurn, newActiveIndex: activeIndex))
         activeTurn = DartTurn()
-        updated()
     }
     
     func undo() {
@@ -141,7 +127,6 @@ class X01ScoreKeeper: DartScoreKeeper {
         }
         
         gameActions.pop()
-        updated()
     }
     
     func reset() {

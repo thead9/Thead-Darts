@@ -8,15 +8,9 @@
 
 import Foundation
 
-import Combine
-import SwiftUI
-
 class X01Score: DartScore {
     typealias Score = X01Score
-    
-    var objectWillChange = PassthroughSubject<Void, Never>()
-    var updated: () -> () = { }
-    
+        
     var scoreKeeper: X01ScoreKeeper = X01ScoreKeeper(playerUnits: [DartPlayerUnit<Score>]())
 
     var startingPoint: Int = 301
@@ -26,19 +20,13 @@ class X01Score: DartScore {
         }
     }
     
-    var marks = Marks() {
-        didSet {
-            updated()
-            objectWillChange.send(())
-        }
-    }
+    var marks = Marks()
     
     // MARK: Inits
     required init () { }
 
-    init(startingPoint: Int = 301, updated: @escaping () -> () = { }) {
+    init(startingPoint: Int = 301) {
         self.startingPoint = startingPoint
-        self.updated = updated
     }
     
     func shouldAllowHit(on wedge: Wedge, with multiplier: Multiplier) -> Bool {

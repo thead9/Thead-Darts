@@ -8,23 +8,12 @@
 
 import Foundation
 
-import Combine
-import SwiftUI
-
-class CricketScore: DartScore, ObservableObject {
+class CricketScore: DartScore {
     typealias Score = CricketScore
-    
-    var objectWillChange = PassthroughSubject<Void, Never>()
-    var updated: () -> () = { }
-    
+        
     var scoreKeeper: CricketScoreKeeper = CricketScoreKeeper(playerUnits: [DartPlayerUnit<Score>]())
 
-    var marks = Marks() {
-        didSet {
-            updated()
-            objectWillChange.send(())
-        }
-    }
+    var marks = Marks()
     
     var points: Int {
         get {
@@ -52,10 +41,6 @@ class CricketScore: DartScore, ObservableObject {
     
     // MARK: Inits
     required init () { }
-
-    init(updated: @escaping () -> ()) {
-        self.updated = updated
-    }
     
     func isWedgeClosed(_ wedge: Wedge) -> Bool {
         return marks[wedge] >= 3
