@@ -106,46 +106,23 @@ struct X01HitView: View {
                 Text("\(self.selectingMultiplier.1.abbreviation())")
                     .font(.largeTitle)
                     .foregroundColor(Color.select(.primary))
-                                        
-                Button(action: {
-                    withAnimation(.easeInOut(duration: self.animationTime)) {
-                        self.x01GameVM.hit(on: self.selectingMultiplier.1, with: .single)
-                        self.selectingMultiplier = (false, .one)
-                        self.updateWinnerModal()
-                    }
-                }) {
-                    Text("Single")
-                        .padding(.vertical, 10)
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                
-                Button(action: {
-                    withAnimation(.easeInOut(duration: self.animationTime)) {
-                        self.x01GameVM.hit(on: self.selectingMultiplier.1, with: .double)
-                        self.selectingMultiplier = (false, .one)
-                        self.updateWinnerModal()
-                    }
-                }) {
-                    Text("Double")
-                        .padding(.vertical, 10)
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(PrimaryButtonStyle())
-                
-                if (self.selectingMultiplier.1 != .bull) {
-                    Button(action: {
-                        withAnimation(.easeInOut(duration: self.animationTime)) {
-                            self.x01GameVM.hit(on: self.selectingMultiplier.1, with: .triple)
-                            self.selectingMultiplier = (false, .one)
-                            self.updateWinnerModal()
+                 
+                ForEach(Multiplier.allCases) { multiplier in
+                    if (self.selectingMultiplier.1 != .bull || (self.selectingMultiplier.1 == .bull && multiplier != .triple)) {
+                        Button(action: {
+                            withAnimation(.easeInOut(duration: 0.25)) {
+                                self.x01GameVM.hit(on: self.selectingMultiplier.1, with: multiplier)
+                                self.selectingMultiplier = (false, .one)
+                                self.updateWinnerModal()
+                            }
+                        }) {
+                            Text("\(multiplier.name())")
+                                .font(.headline)
+                                .padding(.vertical, 15)
+                                .frame(maxWidth: .infinity)
                         }
-                    }) {
-                        Text("Triple")
-                            .padding(.vertical, 10)
-                            .frame(maxWidth: .infinity)
+                        .buttonStyle(PrimaryButtonStyle())
                     }
-                    .buttonStyle(PrimaryButtonStyle())
                 }
                 
                 Button(action: {

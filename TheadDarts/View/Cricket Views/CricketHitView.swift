@@ -40,50 +40,23 @@ struct CricketHitView : View {
                         Text("\(self.selectingMultiplier.1.abbreviation())")
                             .padding(.bottom)
                             .foregroundColor(Color.select(.primary))
-                                                
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 0.25)) {
-                                self.scoreVM.hit(on: self.selectingMultiplier.1, with: .single)
-                                self.selectingMultiplier = (false, .one)
-                                self.onHit()
-                            }
-                        }) {
-                            Text("Single")
-                                .font(.headline)
-                                .padding(.vertical, 15)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(PrimaryButtonStyle())
                         
-                        Button(action: {
-                            withAnimation(.easeInOut(duration: 0.25)) {
-                                self.scoreVM.hit(on: self.selectingMultiplier.1, with: .double)
-                                self.selectingMultiplier = (false, .one)
-                                self.onHit()
-                            }
-                        }) {
-                            Text("Double")
-                                .font(.headline)
-                                .padding(.vertical, 15)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(PrimaryButtonStyle())
-
-                        
-                        if (self.selectingMultiplier.1 != .bull) {
-                            Button(action: {
-                                withAnimation(.easeInOut(duration: 0.25)) {
-                                    self.scoreVM.hit(on: self.selectingMultiplier.1, with: .triple)
-                                    self.selectingMultiplier = (false, .one)
-                                    self.onHit()
+                        ForEach(Multiplier.allCases) { multiplier in
+                            if (self.selectingMultiplier.1 != .bull || (self.selectingMultiplier.1 == .bull && multiplier != .triple)) {
+                                Button(action: {
+                                    withAnimation(.easeInOut(duration: 0.25)) {
+                                        self.scoreVM.hit(on: self.selectingMultiplier.1, with: multiplier)
+                                        self.selectingMultiplier = (false, .one)
+                                        self.onHit()
+                                    }
+                                }) {
+                                    Text("\(multiplier.name())")
+                                        .font(.headline)
+                                        .padding(.vertical, 15)
+                                        .frame(maxWidth: .infinity)
                                 }
-                            }) {
-                                Text("Triple")
-                                    .font(.headline)
-                                    .padding(.vertical, 15)
-                                    .frame(maxWidth: .infinity)
+                                .buttonStyle(PrimaryButtonStyle())
                             }
-                            .buttonStyle(PrimaryButtonStyle())
                         }
                         
                         Button(action: {
