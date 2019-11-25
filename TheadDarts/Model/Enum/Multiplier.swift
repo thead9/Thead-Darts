@@ -24,3 +24,7 @@ enum Multiplier: Int, CaseIterable {
         }
     }
 }
+
+extension Multiplier: Identifiable {
+    var id: Multiplier { self }
+}
