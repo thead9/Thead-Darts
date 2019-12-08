@@ -1,15 +1,15 @@
 //
-//  X01PlayerUnitView.swift
+//  ScoreView.swift
 //  TheadDarts
 //
-//  Created by Thomas Headley on 9/28/19.
+//  Created by Thomas Headley on 12/8/19.
 //  Copyright © 2019 Thead. All rights reserved.
 //
 
 import SwiftUI
 
-struct X01PlayerUnitView: View {
-    @ObservedObject var playerUnitVM: PlayerUnitViewModel<X01Score>
+struct PlayerUnitView<Score: DartScore>: View {
+    @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
     
     var body: some View {
         VStack(spacing: 0) {
@@ -21,15 +21,10 @@ struct X01PlayerUnitView: View {
         .lineLimit(1)
         .frame(maxWidth: .infinity, alignment: .center)
     }
-    
-    
 }
 
-struct X01PlayerUnitView_Previews: PreviewProvider {
+struct PlayerUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        X01PlayerUnitView(playerUnitVM: PlayerUnitViewModel<X01Score>(DartPlayerUnit(player: DartPlayer(name: "Thomas"), score: X01Score())))
-            .previewLayout(.fixed(width: 150, height: 100))
+        PlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore())))
     }
 }
-
-

@@ -91,7 +91,7 @@ struct X01GameView: View {
     var scoreBoard: some View {
         HStack {
             ForEach(0..<x01GameVM.playerUnits.count) { index in
-                X01PlayerUnitView(playerUnitVM: self.x01GameVM.playerUnits[index])
+                PlayerUnitView(playerUnitVM: self.x01GameVM.playerUnits[index])
                     .padding(.horizontal, 5)
                     .padding(.vertical, 10)
                     .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))

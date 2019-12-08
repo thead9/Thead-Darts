@@ -84,7 +84,7 @@ struct CricketGameView : View {
                 .foregroundColor(Color.select(.secondary))
 
                 ForEach(0..<cricketGameVM.playerUnits.count) { index in
-                    CricketPlayerUnitView(playerUnitVM: self.cricketGameVM.playerUnits[index])
+                    PlayerUnitView(playerUnitVM: self.cricketGameVM.playerUnits[index])
                         .padding(.horizontal, 5)
                         .padding(.vertical, 10)
                         .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
