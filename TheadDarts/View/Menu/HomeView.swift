@@ -98,14 +98,16 @@ struct HomeView: View {
                     .padding(.bottom)
                 } else {
                     Group {
-                        settingsCard
+                        SettingsCardView(doneAction: {
+                            self.selectedGameType = GameType(rawValue: self.settings.gameType)
+                            self.settingsActive = false
+                        })
                             .transition(.move(edge: .bottom))
                             .frame(maxWidth: 500)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
-            .addBorder(Color(.clear), width: 0.0, condition: settings.theme == "clear")
             .padding(.horizontal, 15)
             .frame(maxWidth: .infinity)
             .navigationBarTitle(Text("Thead Darts"))
@@ -113,93 +115,6 @@ struct HomeView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .font(.headline)
-    }
-    
-    // MARK: Theme
-    var settingsCard: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("Settings")
-                .textStyle(CardTitleTextStyle(backgroundColor: Color.select(.secondary)))
-            
-            Rectangle()
-                .frame(maxWidth: .infinity, minHeight: 2, maxHeight: 2)
-                .foregroundColor(Color.select(.primary))
-            
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("Theme:")
-                        .font(.title)
-                    Text("\(self.settings.theme)")
-                        .padding()
-                        .foregroundColor(Color.select(.secondary))
-                        .background(Color.select(.hitBackground))
-                        .cornerRadius(25)
-                        .addBorder(Color.select(.primary), width: 2)
-                }
-                
-                themeGrid
-                    .transition(.slideInFadeUp)
-                    .padding(.top)
-                
-                Button(action: {
-                    withAnimation {
-                        self.selectedGameType = GameType(rawValue: self.settings.gameType)
-                        self.settingsActive = false
-                    }
-                }) {
-                    Text("Done")
-                        .padding()
-                        .font(.title)
-                }
-                .buttonStyle(SecondaryButtonStyle())
-                .padding(.top)
-            }
-            .padding()
-        }
-        .navigationBarHidden(false)
-        .cornerRadius(25)
-        .addBorder(Color.select(.primary), width: 2)
-        .padding(.top)
-    }
-    
-    let themeArray: [[UserSettings.Theme]] = [[.blue, .green, .indigo],
-                                              [.orange, .pink, .purple],
-                                              [.red, .teal, .yellow]]
-    
-    var themeGrid: some View {
-        VStack(spacing: 5) {
-            ForEach(0..<self.themeArray.count, id: \.self) { rowIndex in
-                HStack(spacing: 5) {
-                    ForEach(self.themeArray[rowIndex], id: \.self) { theme in
-                        Button( action: {
-                            withAnimation {
-                                self.settings.theme = theme.rawValue
-                            }
-                        }) {
-                            Text("\(theme.rawValue)")
-                                .padding(.vertical)
-                                .font(.headline)
-                                .frame(maxWidth: 150)
-                        }
-                        .buttonStyle(SecondaryButtonStyle(foregroundColor: Color.getColorNamed(theme.rawValue), useScaleEffect: false))
-                    }
-                }
-            }
-        }
-    }
-        
-    func boolToYesNo(_ bool: Bool) -> String {
-        return bool ? "Yes" : "No"
-    }
-}
-
-enum GameType: String {
-    case cricket
-    case x01
-    case none
-    
-    func toString() -> String {
-        return self.rawValue
     }
 }
 

@@ -16,14 +16,7 @@ struct X01CardView: View {
     
     // MARK: Body
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("X01")
-                .textStyle(CardTitleTextStyle())
-            
-            Rectangle()
-                .frame(minHeight: 2, maxHeight: 2)
-                .foregroundColor(Color.select(.primary))
-            
+        CardView(title: "X01") {
             VStack(alignment: .leading) {
                 HStack {
                     Text("Starting Point:")
@@ -52,7 +45,7 @@ struct X01CardView: View {
                     Button(
                         action: { self.settings.doubleOut.toggle() }
                     ) {
-                        Text("\(boolToYesNo(settings.doubleOut))")
+                        Text("\(settings.doubleOut.toYesNo())")
                             .padding()
                     }
                     // Can't use scaleEffect because of bug
@@ -60,7 +53,6 @@ struct X01CardView: View {
                 }
                 .padding(.top)
                 
-                //NavigationLink(destination: X01GameView(x01Game: X01Game(numberOfPlayers: 2, startingPoint: settings.x01StartingPoint, doubleOut: settings.doubleOut))) {
                 NavigationLink(destination: X01GameView(x01GameVM: X01GameViewModel(x01Game: game))) {
                     Text("Start Game")
                         .padding()
@@ -104,10 +96,6 @@ struct X01CardView: View {
                 }
             }
         }
-    }
-    
-    func boolToYesNo(_ bool: Bool) -> String {
-        return bool ? "Yes" : "No"
     }
 }
 
