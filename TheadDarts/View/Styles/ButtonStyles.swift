@@ -38,11 +38,7 @@ struct SecondaryButtonStyle: ButtonStyle {
 
 struct PrimarySecondaryButtonStyle: ButtonStyle {
     let isPrimary: Bool
-    let useScaleEffect = true
-    
-    init(isPrimary: Bool) {
-        self.isPrimary = isPrimary
-    }
+    var useScaleEffect = true
     
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label

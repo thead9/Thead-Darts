@@ -11,56 +11,47 @@ import SwiftUI
 struct X01CardView: View {
     
     @ObservedObject var settings = UserSettings()
-    
-    var game = X01Game(numberOfPlayers: 2)
-    
+        
     // MARK: Body
     var body: some View {
         CardView(title: "X01") {
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("Starting Point:")
+            VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Starting Point")
                         .font(.title)
-                    Button(action: {
-                        withAnimation {
-                            self.selectingX01StartingPoint.toggle()
-                        }
-                    }) {
-                        Text("\(settings.x01StartingPoint)")
-                            .padding()
-                    }
-                    // Can't use scaleEffect because of bug
-                    .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
-                }
-                
-                if selectingX01StartingPoint {
+                        .underline()
                     startingPointGrid
-                        .transition(.slideInFadeUp)
-                        .padding(.top, 3)
+                        .frame(maxWidth: .infinity)
                 }
                 
-                HStack {
-                    Text("Double Out:")
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Double Out")
                         .font(.title)
-                    Button(
-                        action: { self.settings.doubleOut.toggle() }
-                    ) {
-                        Text("\(settings.doubleOut.toYesNo())")
-                            .padding()
+                        .underline()
+                    HStack {
+                        Button( action: { withAnimation { self.settings.doubleOut = true } } ) {
+                            Text("Yes")
+                                .padding()
+                                .frame(maxWidth: 100)
+                        }
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.settings.doubleOut, useScaleEffect: false))
+                        Button( action: { withAnimation { self.settings.doubleOut = false } } ) {
+                            Text("No")
+                                .padding()
+                                .frame(maxWidth: 100)
+                        }
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: !self.settings.doubleOut, useScaleEffect: false))
                     }
-                    // Can't use scaleEffect because of bug
-                    .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
+                    .frame(maxWidth: .infinity)
                 }
-                .padding(.top)
                 
-                NavigationLink(destination: X01GameView(x01GameVM: X01GameViewModel(x01Game: game))) {
+                NavigationLink(destination: X01GameView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2, startingPoint: self.settings.x01StartingPoint)))) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)
                 }
                 // Can't use scaleEffect because of bug
                 .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
-                .padding(.top)
             }
             .padding()
         }
@@ -70,8 +61,6 @@ struct X01CardView: View {
     }
     
     // MARK: Starting Point Grid
-    @State var selectingX01StartingPoint = false
-
     let startingPointArray: [[Int]] = [[101, 201, 301],
                                        [401, 501, 601],
                                        [701, 801, 901]]
@@ -81,17 +70,12 @@ struct X01CardView: View {
             ForEach(0..<self.startingPointArray.count, id: \.self) { rowIndex in
                 HStack(spacing: 5) {
                     ForEach(self.startingPointArray[rowIndex], id: \.self) { startingPoint in
-                        Button( action: {
-                            withAnimation {
-                                self.settings.x01StartingPoint = startingPoint
-                                self.selectingX01StartingPoint.toggle()
-                            }
-                        }) {
+                        Button( action: { withAnimation { self.settings.x01StartingPoint = startingPoint } }) {
                             Text("\(startingPoint)")
                                 .padding()
-                                .frame(maxWidth: 200)
+                                .frame(maxWidth: 100)
                         }
-                        .buttonStyle(SecondaryButtonStyle())
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.settings.x01StartingPoint == startingPoint, useScaleEffect: false))
                     }
                 }
             }
