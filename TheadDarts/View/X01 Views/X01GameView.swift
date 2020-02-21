@@ -13,6 +13,8 @@ struct X01GameView: View {
     
     @ObservedObject var x01GameVM: X01GameViewModel
     
+    @State var playerNameBeingEdited: String?
+    @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
     @State var showNewGameModal = false
     @State var showWinnerModal = false
     
@@ -46,6 +48,17 @@ struct X01GameView: View {
             .zIndex(1)
             .disabled(showNewGameModal || showWinnerModal)
             .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
+            
+            if playerNameBeingEdited != nil {
+                NewGameModal(affirmativeAction: {
+                    self.updatePlayerNameBeingEdited("Test")
+                    self.playerNameBeingEdited = nil
+                        },
+                         cancelAction: { self.showNewGameModal = false} )
+                .padding()
+                .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                .zIndex(2)
+            }
             
             if showNewGameModal {
                 NewGameModal(affirmativeAction: {
@@ -83,7 +96,11 @@ struct X01GameView: View {
     var scoreBoard: some View {
         HStack {
             ForEach(0..<x01GameVM.playerUnits.count) { index in
-                PlayerUnitView(playerUnitVM: self.x01GameVM.playerUnits[index])
+                PlayerUnitView(playerUnitVM: self.x01GameVM.playerUnits[index],
+                               startPlayerNameEditing: { playerName, updatePlayerName in
+                                self.playerNameBeingEdited = playerName
+                                self.updatePlayerNameBeingEdited = updatePlayerName
+                               })
                     .padding(.horizontal, 5)
                     .padding(.vertical, 10)
                     .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))

@@ -11,20 +11,24 @@ import SwiftUI
 struct PlayerUnitView<Score: DartScore>: View {
     @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
     
+    let startPlayerNameEditing: (String, @escaping (String) -> ()) -> ()
+        
     var body: some View {
-        VStack(spacing: 0) {
-            Text(self.playerUnitVM.name)
-                .font(.headline)
-            Text(String(self.playerUnitVM.points))
-                .font(.title)
+        Button(action: { self.startPlayerNameEditing(self.playerUnitVM.name, self.playerUnitVM.update(nameTo:)) }) {
+            VStack(spacing: 0) {
+                Text(self.playerUnitVM.name)
+                    .font(.headline)
+                Text(String(self.playerUnitVM.points))
+                    .font(.title)
+            }
+            .lineLimit(1)
+            .frame(maxWidth: .infinity, alignment: .center)
         }
-        .lineLimit(1)
-        .frame(maxWidth: .infinity, alignment: .center)
     }
 }
 
 struct PlayerUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore())))
+        PlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore())), startPlayerNameEditing: { _,_ in } )
     }
 }

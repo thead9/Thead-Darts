@@ -22,4 +22,8 @@ class PlayerUnitViewModel<Score: DartScore>: ObservableObject {
         name = newName
         points = newPoints
     }
+    
+    func update(nameTo newName: String) {
+        name = newName
+    }
 }

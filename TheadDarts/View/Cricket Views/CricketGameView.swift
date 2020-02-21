@@ -13,6 +13,8 @@ struct CricketGameView : View {
     
     @ObservedObject var cricketGameVM: CricketGameViewModel
     
+    @State var playerNameBeingEdited: String?
+    @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
     @State var showNewGameModal = false
     @State var showWinnerModal = false
             
@@ -84,7 +86,11 @@ struct CricketGameView : View {
                 .foregroundColor(Color.select(.secondary))
 
                 ForEach(0..<cricketGameVM.playerUnits.count) { index in
-                    PlayerUnitView(playerUnitVM: self.cricketGameVM.playerUnits[index])
+                    PlayerUnitView(playerUnitVM: self.cricketGameVM.playerUnits[index],
+                                   startPlayerNameEditing: { playerName, updatePlayerName in
+                                     self.playerNameBeingEdited = playerName
+                                     self.updatePlayerNameBeingEdited = updatePlayerName
+                                   })
                         .padding(.horizontal, 5)
                         .padding(.vertical, 10)
                         .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
