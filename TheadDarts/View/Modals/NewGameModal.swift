@@ -20,21 +20,13 @@ struct NewGameModal: View {
                 .multilineTextAlignment(.center)
             
             HStack {
-                Button(action: {
-                    withAnimation {
-                        self.affirmativeAction()
-                    }
-                }) {
+                Button(action: { withAnimation { self.affirmativeAction() } } ) {
                     Text("Yes")
                         .padding()
                         .frame(maxWidth: 200)
                 }
                 .buttonStyle(DestructiveButtonStyle())
-                Button(action: {
-                    withAnimation {
-                        self.cancelAction()
-                    }
-                }) {
+                Button(action: { withAnimation { self.cancelAction() } } ) {
                     Text("No")
                         .padding()
                         .frame(maxWidth: 200)

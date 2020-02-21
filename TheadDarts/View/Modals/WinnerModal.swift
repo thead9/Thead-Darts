@@ -23,11 +23,7 @@ struct WinnerModal: View {
                 .multilineTextAlignment(.center)
             
             Group {
-                Button(action: {
-                    withAnimation {
-                        self.newGameAction()
-                    }
-                }) {
+                Button(action: { withAnimation { self.newGameAction() } } ) {
                     Text("New Game")
                         .padding()
                         .frame(maxWidth: 250)
@@ -36,11 +32,7 @@ struct WinnerModal: View {
                 .buttonStyle(PrimaryButtonStyle())
                 
                 if canViewScoreboard {
-                    Button(action: {
-                        withAnimation {
-                            self.viewScoreboardAction()
-                        }
-                    }) {
+                    Button(action: { withAnimation { self.viewScoreboardAction() } } ) {
                         Text("View Scoreboard")
                             .padding()
                             .frame(maxWidth: 250)
@@ -49,11 +41,7 @@ struct WinnerModal: View {
                     .buttonStyle(SecondaryButtonStyle(addBorder: false))
                 }
                 
-                Button(action: {
-                    withAnimation {
-                        self.undoAction()
-                    }
-                }) {
+                Button(action: { withAnimation { self.undoAction() } } ) {
                     Text("Undo")
                         .font(.subheadline)
                         .padding()
