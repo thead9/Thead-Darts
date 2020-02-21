@@ -36,6 +36,24 @@ struct SecondaryButtonStyle: ButtonStyle {
     }
 }
 
+struct PrimarySecondaryButtonStyle: ButtonStyle {
+    let isPrimary: Bool
+    let useScaleEffect = true
+    
+    init(isPrimary: Bool) {
+        self.isPrimary = isPrimary
+    }
+    
+    func makeBody(configuration: Self.Configuration) -> some View {
+        configuration.label
+            .background(isPrimary ? Color.select(.secondary) : Color.select(.hitBackground))
+            .foregroundColor(isPrimary ? Color.select(.background) : Color.select(.secondary))
+            .cornerRadius(25)
+            .addBorder(Color.select(.primary), condition: !isPrimary)
+            .scaleEffect(configuration.isPressed && useScaleEffect ? 0.9 : 1.0)
+    }
+}
+
 struct CancelButtonStyle: ButtonStyle {
     var useScaleEffect = true
 

@@ -12,7 +12,7 @@ struct HomeView: View {
     
     @ObservedObject var settings = UserSettings()
     
-    @State var selectedGameType: GameType = GameType(rawValue: UserSettings().gameType)
+    @State var selectedGameType: GameType = GameType(rawValue: UserSettings().gameType)!
     
     @State var settingsActive = false
         
@@ -37,10 +37,7 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity)
                             .font(.largeTitle)
                     }
-                    // Ideally this would be converted to a ternary style selection, but it doesn't compile???
-                    .foregroundColor(self.selectedGameType == .cricket ? Color.select(.background) : Color.select(.secondary))
-                    .background(self.selectedGameType == .cricket ? Color.select(.secondary) : Color.select(.hitBackground))
-                    .cornerRadius(25)
+                    .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.selectedGameType == .cricket))
                     
                     Button(action: {
                         withAnimation {
@@ -54,10 +51,7 @@ struct HomeView: View {
                             .frame(maxWidth: .infinity)
                             .font(.largeTitle)
                     }
-                    // Ideally this would be converted to a ternary style selection, but it doesn't compile???
-                    .foregroundColor(self.selectedGameType == .x01 ? Color.select(.background) : Color.select(.secondary))
-                    .background(self.selectedGameType == .x01 ? Color.select(.secondary) : Color.select(.hitBackground))
-                    .cornerRadius(25)
+                    .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.selectedGameType == .x01))
                 }
                 .padding(.top)
                 
@@ -99,7 +93,7 @@ struct HomeView: View {
                 } else {
                     Group {
                         SettingsCardView(doneAction: {
-                            self.selectedGameType = GameType(rawValue: self.settings.gameType)
+                            self.selectedGameType = GameType(rawValue: self.settings.gameType)!
                             self.settingsActive = false
                         })
                             .transition(.move(edge: .bottom))
