@@ -92,7 +92,7 @@ struct HomeView: View {
                     .padding(.bottom)
                 } else {
                     Group {
-                        SettingsCardView(doneAction: {
+                        SettingsCardView(settings: settings, doneAction: {
                             self.selectedGameType = GameType(rawValue: self.settings.gameType)!
                             self.settingsActive = false
                         })

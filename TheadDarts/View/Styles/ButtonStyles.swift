@@ -38,12 +38,13 @@ struct SecondaryButtonStyle: ButtonStyle {
 
 struct PrimarySecondaryButtonStyle: ButtonStyle {
     let isPrimary: Bool
+    var foregroundColorForSecondary = Color.select(.secondary)
     var useScaleEffect = true
     
     func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .background(isPrimary ? Color.select(.secondary) : Color.select(.hitBackground))
-            .foregroundColor(isPrimary ? Color.select(.background) : Color.select(.secondary))
+            .foregroundColor(isPrimary ? Color.select(.background) : foregroundColorForSecondary)
             .cornerRadius(25)
             .addBorder(Color.select(.primary), condition: !isPrimary)
             .scaleEffect(configuration.isPressed && useScaleEffect ? 0.9 : 1.0)

@@ -9,39 +9,27 @@
 import SwiftUI
 
 struct SettingsCardView: View {
-    @ObservedObject var settings = UserSettings()
+    @ObservedObject var settings: UserSettings
 
     var doneAction = { }
     
     var body: some View {
         CardView(title: "Settings") {
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("Theme:")
+            VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Theme")
                         .font(.title)
-                    Text("\(self.settings.theme)")
-                        .padding()
-                        .foregroundColor(Color.select(.secondary))
-                        .background(Color.select(.hitBackground))
-                        .cornerRadius(25)
-                        .addBorder(Color.select(.primary), width: 2)
+                        .underline()
                 }
                 
                 themeGrid
-                    .transition(.slideInFadeUp)
-                    .padding(.top)
                 
-                Button(action: {
-                    withAnimation {
-                        self.doneAction()
-                    }
-                }) {
+                Button(action: { withAnimation { self.doneAction() } } ) {
                     Text("Done")
                         .padding()
                         .font(.title)
                 }
                 .buttonStyle(SecondaryButtonStyle())
-                .padding(.top)
             }
             .padding()
         }
@@ -60,17 +48,13 @@ struct SettingsCardView: View {
             ForEach(0..<self.themeArray.count, id: \.self) { rowIndex in
                 HStack(spacing: 5) {
                     ForEach(self.themeArray[rowIndex], id: \.self) { theme in
-                        Button( action: {
-                            withAnimation {
-                                self.settings.theme = theme.rawValue
-                            }
-                        }) {
+                        Button( action: { withAnimation { self.settings.theme = theme.rawValue } } ) {
                             Text("\(theme.rawValue)")
                                 .padding(.vertical)
                                 .font(.headline)
                                 .frame(maxWidth: 150)
                         }
-                        .buttonStyle(SecondaryButtonStyle(foregroundColor: Color.getColorNamed(theme.rawValue), useScaleEffect: false))
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.settings.theme == theme.rawValue, foregroundColorForSecondary: Color.getColorNamed(theme.rawValue), useScaleEffect: false))
                     }
                 }
             }
@@ -80,6 +64,6 @@ struct SettingsCardView: View {
 
 struct SettingsCardView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsCardView()
+        SettingsCardView(settings: UserSettings())
     }
 }
