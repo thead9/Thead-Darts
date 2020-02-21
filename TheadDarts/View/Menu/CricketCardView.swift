@@ -15,18 +15,26 @@ struct CricketCardView: View {
     // MARK: Body
     var body: some View {
         CardView(title: "Cricket") {
-            VStack(alignment: .leading) {
-                HStack {
-                    Text("Track Turns:")
+            VStack(alignment: .leading, spacing: 20) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Track Turns")
                         .font(.title)
-                    Button(
-                        action: { self.settings.trackTurns.toggle() }
-                    ) {
-                        Text("\(settings.trackTurns.toYesNo())")
-                            .padding()
+                        .underline()
+                    HStack {
+                        Button( action: { withAnimation { self.settings.trackTurns = true } } ) {
+                            Text("Yes")
+                                .padding()
+                                .frame(maxWidth: 100)
+                        }
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.settings.trackTurns, useScaleEffect: false))
+                        Button( action: { withAnimation { self.settings.trackTurns = false } } ) {
+                            Text("No")
+                                .padding()
+                                .frame(maxWidth: 100)
+                        }
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: !self.settings.trackTurns, useScaleEffect: false))
                     }
-                    // Can't use scaleEffect because of bug
-                    .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
+                    .frame(maxWidth: .infinity)
                 }
                 
                 NavigationLink(destination: CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns)))) {
@@ -34,9 +42,7 @@ struct CricketCardView: View {
                         .padding()
                         .font(.largeTitle)
                 }
-                // Can't use scaleEffect because of bug
                 .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
-                .padding(.top)
             }
             .padding()
         }

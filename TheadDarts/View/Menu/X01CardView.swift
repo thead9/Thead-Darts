@@ -50,7 +50,6 @@ struct X01CardView: View {
                         .padding()
                         .font(.largeTitle)
                 }
-                // Can't use scaleEffect because of bug
                 .buttonStyle(SecondaryButtonStyle(useScaleEffect: false))
             }
             .padding()
