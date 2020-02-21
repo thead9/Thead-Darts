@@ -21,11 +21,7 @@ struct X01GameView: View {
         ZStack {
             VStack {
                 HStack {
-                    Button(
-                        action: {
-                            self.mode.wrappedValue.dismiss()
-                        }
-                    ) {
+                    Button( action: { self.mode.wrappedValue.dismiss() } ) {
                         Image(systemName: "house")
                     }
                     .frame(width: 50)
@@ -36,10 +32,7 @@ struct X01GameView: View {
                 }
                 
                 
-                X01HitView(x01GameVM: x01GameVM,
-                           updateWinnerModal: {
-                            self.showWinnerModal = self.x01GameVM.gameOver
-                           })
+                X01HitView(x01GameVM: x01GameVM, updateWinnerModal: { self.showWinnerModal = self.x01GameVM.gameOver } )
                 
                 if x01GameVM.canAddThrow {
                     turnControls
@@ -59,8 +52,7 @@ struct X01GameView: View {
                                 self.x01GameVM.newGame()
                                 self.showNewGameModal = false
                             },
-                             cancelAction: {
-                                self.showNewGameModal = false})
+                             cancelAction: { self.showNewGameModal = false} )
                     .padding()
                     .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                     .zIndex(2)
@@ -120,11 +112,7 @@ struct X01GameView: View {
             HStack {
                 Spacer()
 
-                Button(action: {
-                    withAnimation {
-                        self.x01GameVM.undo()
-                    }
-                }) {
+                Button(action: { withAnimation { self.x01GameVM.undo() } } ) {
                     Image(systemName: "arrow.uturn.left")
                         .textStyle(GameControlTextStyle())
                 }
@@ -133,11 +121,7 @@ struct X01GameView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    withAnimation {
-                        self.showNewGameModal = true
-                    }
-                }) {
+                Button(action: { withAnimation { self.showNewGameModal = true } } ) {
                     Image(systemName: "arrow.2.circlepath")
                         .textStyle(GameControlTextStyle())
                 }
