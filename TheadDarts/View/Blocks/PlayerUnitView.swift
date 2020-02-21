@@ -14,7 +14,9 @@ struct PlayerUnitView<Score: DartScore>: View {
     let startPlayerNameEditing: (String, @escaping (String) -> ()) -> ()
         
     var body: some View {
-        Button(action: { self.startPlayerNameEditing(self.playerUnitVM.name, self.playerUnitVM.update(nameTo:)) }) {
+        Button(action: { withAnimation {
+            self.startPlayerNameEditing(self.playerUnitVM.name, self.playerUnitVM.update(nameTo:)) }
+        }) {
             VStack(spacing: 0) {
                 Text(self.playerUnitVM.name)
                     .font(.headline)

@@ -12,6 +12,7 @@ struct X01GameView: View {
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     @ObservedObject var x01GameVM: X01GameViewModel
+    @ObservedObject private var keyboard = KeyboardResponder()
     
     @State var playerNameBeingEdited: String?
     @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
@@ -46,16 +47,18 @@ struct X01GameView: View {
             .font(.title)
             .padding(.vertical)
             .zIndex(1)
-            .disabled(showNewGameModal || showWinnerModal)
-            .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
+            .disabled(showNewGameModal || showWinnerModal || playerNameBeingEdited != nil)
+            .blur(radius: showNewGameModal || showWinnerModal || playerNameBeingEdited != nil ? 5 : 0)
             
             if playerNameBeingEdited != nil {
-                NewGameModal(affirmativeAction: {
-                    self.updatePlayerNameBeingEdited("Test")
-                    self.playerNameBeingEdited = nil
-                        },
-                         cancelAction: { self.showNewGameModal = false} )
+                EditPlayerNameModal(affirmativeAction: { newPlayerName in
+                        self.updatePlayerNameBeingEdited(newPlayerName)
+                        self.playerNameBeingEdited = nil
+                    },
+                    cancelAction: { self.playerNameBeingEdited = nil },
+                    playerName: playerNameBeingEdited!)
                 .padding()
+                .padding(.bottom, keyboard.currentHeight)
                 .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
                 .zIndex(2)
             }
