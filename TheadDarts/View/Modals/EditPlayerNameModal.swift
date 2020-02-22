@@ -41,6 +41,7 @@ struct EditPlayerNameModal: View {
             }
             .padding(.top)
         }
+        .frame(maxWidth: 500)
         .font(.title)
         .padding()
         .background(Color.select(.background))
