@@ -9,11 +9,25 @@
 import SwiftUI
 
 struct CricketHitLabelView : View {
-    let rows: CGFloat = 7
+    var bullRequired: Bool = true
+
+    var rows: CGFloat {
+        get {
+            return bullRequired ? 7 : 6
+        }
+    }
     let columns: CGFloat = 1
     let spacing: CGFloat = 5
     
-    let wedgeLabels: [String] = ["20", "19", "18", "17", "16", "15", "B"]
+    var wedgeLabels: [String] {
+        get {
+            if bullRequired {
+                return ["20", "19", "18", "17", "16", "15", "B"]
+            } else {
+                return ["20", "19", "18", "17", "16", "15"]
+            }
+        }
+    }
 
     func getItemWidth(containerWidth: CGFloat) -> CGFloat {
         return (containerWidth - spacing * (columns - 1)) / columns

@@ -36,6 +36,7 @@ struct X01GameView: View {
                 
                 
                 X01HitView(x01GameVM: x01GameVM, updateWinnerModal: { self.showWinnerModal = self.x01GameVM.gameOver } )
+                    .padding(.bottom, 5)
                 
                 if x01GameVM.canAddThrow {
                     turnControls

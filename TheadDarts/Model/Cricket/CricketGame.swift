@@ -31,6 +31,8 @@ class CricketGame: DartGame {
         }
     }
     
+    var bullRequired: Bool = true
+    
     var winnerIndex: Int? { get { scoreKeeper.winnerIndex } }
     var winner: DartPlayer? { get { scoreKeeper.winner } }
     var gameOver: Bool { get { scoreKeeper.gameOver } }
@@ -38,7 +40,7 @@ class CricketGame: DartGame {
     var scoreKeeper: CricketScoreKeeper!
     
     // MARK: Inits
-    init(numberOfPlayers: Int, trackTurns: Bool = false) {
+    init(numberOfPlayers: Int, trackTurns: Bool = false, bullRequired: Bool = true) {
         for index in 0..<numberOfPlayers {
             let playerUnit = DartPlayerUnit<Score>(player: DartPlayer(name: "Player \(index+1)"),
                                                score: CricketScore())
@@ -46,6 +48,7 @@ class CricketGame: DartGame {
         }
         
         scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits)
+        self.bullRequired = bullRequired
         
         if trackTurns {
             scoreKeeper.activeTurn = DartTurn<CricketScore>()
@@ -53,6 +56,7 @@ class CricketGame: DartGame {
         
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
+            score.bullRequired = bullRequired
         }
     }
     

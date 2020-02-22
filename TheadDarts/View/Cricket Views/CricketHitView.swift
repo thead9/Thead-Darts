@@ -11,9 +11,21 @@ import SwiftUI
 struct CricketHitView : View {
     @ObservedObject var scoreVM: CricketScoreViewModel
         
-    let cricketWedges: [Wedge] = [.twenty, .nineteen, .eightteen, .seventeen, .sixteen, .fifteen, .bull]
+    var cricketWedges: [Wedge] {
+        get {
+            if scoreVM.bullRequired {
+                return [.twenty, .nineteen, .eightteen, .seventeen, .sixteen, .fifteen, .bull]
+            } else {
+                return [.twenty, .nineteen, .eightteen, .seventeen, .sixteen, .fifteen]
+            }
+        }
+    }
     
-    let rows: CGFloat = 7
+    var rows: CGFloat {
+        get {
+            return scoreVM.bullRequired ? 7 : 6
+        }
+    }
     let columns: CGFloat = 1
     let spacing: CGFloat = 5
     

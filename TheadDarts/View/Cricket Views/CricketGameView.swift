@@ -26,6 +26,7 @@ struct CricketGameView : View {
         ZStack {
             VStack {
                 scoreboard
+                    .padding(.bottom, 5)
                 
                 turnControls
                     .padding(.bottom, 2)
@@ -113,7 +114,7 @@ struct CricketGameView : View {
             .padding(.horizontal, 5)
             
             HStack {
-                CricketHitLabelView()
+                CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
                     .frame(width: leftColumnWidth)
                     .padding(.horizontal, 5)
 

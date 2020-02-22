@@ -28,7 +28,7 @@ struct UserDefault<T> {
 final class UserSettings: ObservableObject {
     var objectWillChange = PassthroughSubject<Void, Never>()
 
-    @UserDefault(key: "x01StartingPoint", defaultValue: 301)
+    @UserDefault(key: "x01StartingPoint", defaultValue: 501)
     var x01StartingPoint: Int {
         didSet {
             objectWillChange.send()
@@ -42,8 +42,15 @@ final class UserSettings: ObservableObject {
         }
     }
     
-    @UserDefault(key: "trackTurns", defaultValue: true)
+    @UserDefault(key: "trackTurns", defaultValue: false)
     var trackTurns: Bool {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
+    @UserDefault(key: "bullRequired", defaultValue: true)
+    var bullRequired: Bool {
         didSet {
             objectWillChange.send()
         }

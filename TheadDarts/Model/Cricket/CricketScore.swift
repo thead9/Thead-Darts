@@ -21,20 +21,21 @@ class CricketScore: DartScore {
         }
     }
     
+    var bullRequired: Bool = true
+    
     var allClosed: Bool {
         get {
-            if (
-                !isWedgeClosed(.fifteen) ||
-                !isWedgeClosed(.sixteen) ||
-                !isWedgeClosed(.seventeen) ||
-                !isWedgeClosed(.eightteen) ||
-                !isWedgeClosed(.nineteen) ||
-                !isWedgeClosed(.twenty)  ||
-                !isWedgeClosed(.bull)
-            ) {
-                return false
+            let numbersAreClosed = isWedgeClosed(.fifteen) &&
+                                   isWedgeClosed(.sixteen) &&
+                                   isWedgeClosed(.seventeen) &&
+                                   isWedgeClosed(.eightteen) &&
+                                   isWedgeClosed(.nineteen) &&
+                                   isWedgeClosed(.twenty)
+            
+            if bullRequired {
+                return isWedgeClosed(.bull) && numbersAreClosed
             } else {
-                return true
+                return numbersAreClosed
             }
         }
     }
@@ -53,14 +54,18 @@ extension Marks {
         return self[wedge] > 3 ? wedge.rawValue * (self[wedge] - 3) : 0
     }
     
-    func totalCricketPoints() -> Int {
-        return (cricketPoints(for: .fifteen) +
-                cricketPoints(for: .sixteen) +
-                cricketPoints(for: .seventeen) +
-                cricketPoints(for: .eightteen) +
-                cricketPoints(for: .nineteen) +
-                cricketPoints(for: .twenty) +
-                cricketPoints(for: .bull))
+    func totalCricketPoints(bullRequired: Bool = true) -> Int {
+        var totalToReturn = cricketPoints(for: .fifteen) +
+                            cricketPoints(for: .sixteen) +
+                            cricketPoints(for: .seventeen) +
+                            cricketPoints(for: .eightteen) +
+                            cricketPoints(for: .nineteen) +
+                            cricketPoints(for: .twenty)
+        if bullRequired {
+            totalToReturn += cricketPoints(for: .bull)
+        }
+        
+        return totalToReturn
     }
 }
 
@@ -76,7 +81,9 @@ extension CricketScore {
     
     @discardableResult
     func hit(on wedge: Wedge, with multiplier: Multiplier) -> CricketScore {
-        
+        guard !(wedge == .bull && !bullRequired) else {
+            return self
+        }
         guard !(wedge == .bull && multiplier == .triple) else {
             return self
         }

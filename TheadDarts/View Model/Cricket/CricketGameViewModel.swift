@@ -16,6 +16,8 @@ class CricketGameViewModel: ObservableObject {
     
     @Published var scores: [CricketScore]
     
+    var bullRequired: Bool = true
+    
     @Published var gameOver: Bool
     @Published var winnerName: String?
     
@@ -27,6 +29,7 @@ class CricketGameViewModel: ObservableObject {
         
         playerUnits = CricketGameViewModel.playerUnitVMs(playerUnits: game.playerUnits)
         scores = CricketGameViewModel.scores(game: game)
+        bullRequired = cricketGame.bullRequired
         gameOver = CricketGameViewModel.gameOver(game: game)
         winnerName = CricketGameViewModel.winnerName(game: game)
         activeIndex = CricketGameViewModel.activeIndex(game: game)

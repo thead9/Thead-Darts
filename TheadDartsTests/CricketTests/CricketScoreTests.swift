@@ -710,6 +710,29 @@ class CricketScoreTests: XCTestCase {
         XCTAssertEqual(cricketScore.marks.cricketPoints(for: .twenty), 0)
         XCTAssertEqual(cricketScore.marks.cricketPoints(for: .bull), 25)
     }
+    func testHitBullNotRequired() {
+        cricketScore.bullRequired = false
+        
+        cricketScore.hit(on: .bull, with: .double)
+        cricketScore.hit(on: .bull, with: .single)
+        cricketScore.hit(on: .bull, with: .single)
+        
+        XCTAssertEqual(cricketScore.marks[.fifteen], 0)
+        XCTAssertEqual(cricketScore.marks[.sixteen], 0)
+        XCTAssertEqual(cricketScore.marks[.seventeen], 0)
+        XCTAssertEqual(cricketScore.marks[.eightteen], 0)
+        XCTAssertEqual(cricketScore.marks[.nineteen], 0)
+        XCTAssertEqual(cricketScore.marks[.twenty], 0)
+        XCTAssertEqual(cricketScore.marks[.bull], 0)
+        
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .fifteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .sixteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .seventeen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .eightteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .nineteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .twenty), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .bull), 0)
+    }
     func testHitBullDouble() {
         cricketScore.hit(on: .bull, with: .double)
         cricketScore.hit(on: .bull, with: .single)
@@ -731,7 +754,51 @@ class CricketScoreTests: XCTestCase {
         XCTAssertEqual(cricketScore.marks.cricketPoints(for: .twenty), 0)
         XCTAssertEqual(cricketScore.marks.cricketPoints(for: .bull), 50)
     }
+    func testHitBullDoubleNotRequired() {
+        cricketScore.bullRequired = false
+
+        cricketScore.hit(on: .bull, with: .double)
+        cricketScore.hit(on: .bull, with: .single)
+        cricketScore.hit(on: .bull, with: .double)
+        
+        XCTAssertEqual(cricketScore.marks[.fifteen], 0)
+        XCTAssertEqual(cricketScore.marks[.sixteen], 0)
+        XCTAssertEqual(cricketScore.marks[.seventeen], 0)
+        XCTAssertEqual(cricketScore.marks[.eightteen], 0)
+        XCTAssertEqual(cricketScore.marks[.nineteen], 0)
+        XCTAssertEqual(cricketScore.marks[.twenty], 0)
+        XCTAssertEqual(cricketScore.marks[.bull], 0)
+        
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .fifteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .sixteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .seventeen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .eightteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .nineteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .twenty), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .bull), 0)
+    }
     func testHitBullTriple() {
+        cricketScore.hit(on: .bull, with: .triple)
+        
+        XCTAssertEqual(cricketScore.marks[.fifteen], 0)
+        XCTAssertEqual(cricketScore.marks[.sixteen], 0)
+        XCTAssertEqual(cricketScore.marks[.seventeen], 0)
+        XCTAssertEqual(cricketScore.marks[.eightteen], 0)
+        XCTAssertEqual(cricketScore.marks[.nineteen], 0)
+        XCTAssertEqual(cricketScore.marks[.twenty], 0)
+        XCTAssertEqual(cricketScore.marks[.bull], 0)
+        
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .fifteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .sixteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .seventeen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .eightteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .nineteen), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .twenty), 0)
+        XCTAssertEqual(cricketScore.marks.cricketPoints(for: .bull), 0)
+    }
+    func testHitBullTripleNotRequired() {
+        cricketScore.bullRequired = false
+
         cricketScore.hit(on: .bull, with: .triple)
         
         XCTAssertEqual(cricketScore.marks[.fifteen], 0)
@@ -1616,6 +1683,18 @@ class CricketScoreTests: XCTestCase {
         cricketScore.hit(on: .twenty, with: .triple)
         cricketScore.hit(on: .bull, with: .double)
         cricketScore.hit(on: .bull, with: .single)
+        
+        XCTAssertTrue(cricketScore.allClosed)
+    }
+    func testAllClosedBullNotRequired() {
+        cricketScore.bullRequired = false
+        
+        cricketScore.hit(on: .fifteen, with: .triple)
+        cricketScore.hit(on: .sixteen, with: .triple)
+        cricketScore.hit(on: .seventeen, with: .triple)
+        cricketScore.hit(on: .eightteen, with: .triple)
+        cricketScore.hit(on: .nineteen, with: .triple)
+        cricketScore.hit(on: .twenty, with: .triple)
         
         XCTAssertTrue(cricketScore.allClosed)
     }

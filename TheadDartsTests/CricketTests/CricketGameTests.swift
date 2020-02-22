@@ -25,6 +25,14 @@ class CricketGameTests: XCTestCase {
         cricketPlayer2 = DartPlayer(name: "PlayerTwo")
     }
     
+    func setUpBullNotRequired() {
+        cricketGame = CricketGame(numberOfPlayers: 2, bullRequired: false)
+        cricketScore1 = cricketGame.playerUnits[0].score
+        cricketScore2 = cricketGame.playerUnits[1].score
+        cricketPlayer1 = DartPlayer(name: "PlayerOne")
+        cricketPlayer2 = DartPlayer(name: "PlayerTwo")
+    }
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
@@ -191,6 +199,21 @@ class CricketGameTests: XCTestCase {
         cricketScore1.hit(on: .bull, with: .double)
         cricketScore1.hit(on: .bull, with: .single)
 
+        XCTAssertEqual(cricketGame.winnerIndex, 0)
+        XCTAssertNotNil(cricketGame.winner)
+        XCTAssertTrue(cricketGame.gameOver)
+    }
+    
+    func testWinnerIndexWithOnePlayerClosedBullNotRequired() {
+        setUpBullNotRequired()
+        
+        cricketScore1.hit(on: .fifteen, with: .triple)
+        cricketScore1.hit(on: .sixteen, with: .triple)
+        cricketScore1.hit(on: .seventeen, with: .triple)
+        cricketScore1.hit(on: .eightteen, with: .triple)
+        cricketScore1.hit(on: .nineteen, with: .triple)
+        cricketScore1.hit(on: .twenty, with: .triple)
+        
         XCTAssertEqual(cricketGame.winnerIndex, 0)
         XCTAssertNotNil(cricketGame.winner)
         XCTAssertTrue(cricketGame.gameOver)
