@@ -19,24 +19,25 @@ struct CricketMarkView: View {
             HStack(spacing: 0) {
                 ZStack(alignment: .leading) {
                     Path { path in
-                        let height: CGFloat = geometry.size.height
+                        let height: CGFloat = CGFloat.min(geometry.size.height, geometry.size.width / 2)
                         let width: CGFloat = self.overThree ? geometry.size.width / 1.5 : geometry.size.width
                         let space: CGFloat = (width - height) / 2
                         let insetRatio: CGFloat = 0.1
+                        let insetAddition: CGFloat = (geometry.size.height - height) / 2
 
                         if (self.marks >= 1) {
-                            path.move(to: CGPoint(x: (height * (1-insetRatio)) + space, y: height * (1-insetRatio)))
-                            path.addLine(to: CGPoint(x: (height * insetRatio) + space, y: height * insetRatio))
+                            path.move(to: CGPoint(x: (height * (1-insetRatio)) + space, y: height * (1-insetRatio) + insetAddition))
+                            path.addLine(to: CGPoint(x: (height * insetRatio) + space, y: height * insetRatio + insetAddition))
                         }
                         if (self.marks >= 2) {
-                            path.move(to: CGPoint(x: (height * insetRatio) + space, y: height * (1-insetRatio)))
-                            path.addLine(to: CGPoint(x: (height * (1-insetRatio)) + space, y: height * insetRatio))
+                            path.move(to: CGPoint(x: (height * insetRatio) + space, y: height * (1-insetRatio) + insetAddition))
+                            path.addLine(to: CGPoint(x: (height * (1-insetRatio)) + space, y: height * insetRatio + insetAddition))
                         }
                         if (self.marks >= 3) {
                             let radius: CGFloat = height * 0.35
-                            path.move(to: CGPoint(x: width - ((width - radius*2)/2), y: height * 0.5))
-                            path.addArc(center: CGPoint(x: width * 0.5, y: height * 0.5), radius: radius, startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 180), clockwise: true)
-                            path.addArc(center: CGPoint(x: width * 0.5, y: height * 0.5), radius: radius, startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 360), clockwise: true)
+                            path.move(to: CGPoint(x: width - ((width - radius*2)/2), y: height * 0.5 + insetAddition))
+                            path.addArc(center: CGPoint(x: width * 0.5, y: height * 0.5 + insetAddition), radius: radius, startAngle: Angle(degrees: 0), endAngle: Angle(degrees: 180), clockwise: true)
+                            path.addArc(center: CGPoint(x: width * 0.5, y: height * 0.5 + insetAddition), radius: radius, startAngle: Angle(degrees: 180), endAngle: Angle(degrees: 360), clockwise: true)
                         }
                     }
                     .stroke(Color.select(.secondary), lineWidth: CGFloat(4))
@@ -52,6 +53,12 @@ struct CricketMarkView: View {
                 }
             }
         }
+    }
+}
+
+extension CGFloat {
+    static func min(_ left: CGFloat, _ right: CGFloat) -> CGFloat {
+        return left > right ? right : left
     }
 }
 
