@@ -10,6 +10,9 @@ import SwiftUI
 
 struct CricketMarkView: View {
     var marks: Int
+    var showPoints: Bool = true
+    
+    var overThree: Bool { self.marks > 3 && self.showPoints }
     
     var body: some View {
         GeometryReader { geometry in
@@ -17,7 +20,7 @@ struct CricketMarkView: View {
                 ZStack(alignment: .leading) {
                     Path { path in
                         let height: CGFloat = geometry.size.height
-                        let width: CGFloat = self.marks > 3 ? geometry.size.width / 1.5 : geometry.size.width
+                        let width: CGFloat = self.overThree ? geometry.size.width / 1.5 : geometry.size.width
                         let space: CGFloat = (width - height) / 2
                         let insetRatio: CGFloat = 0.1
 
@@ -38,9 +41,9 @@ struct CricketMarkView: View {
                     }
                     .stroke(Color.select(.secondary), lineWidth: CGFloat(4))
                 }
-                .frame(width: self.marks > 3 ? geometry.size.width / 2 : geometry.size.width)
+                .frame(width: self.overThree ? geometry.size.width / 2 : geometry.size.width)
                 
-                if (self.marks > 3) {
+                if self.overThree {
                     Spacer()
                     Text("\(self.marks - 3)")
                         .foregroundColor(Color.select(.secondary))

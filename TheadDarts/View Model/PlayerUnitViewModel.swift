@@ -14,12 +14,14 @@ class PlayerUnitViewModel<Score: DartScore>: ObservableObject {
     
     @Published var name: String
     @Published var points: Int
+    var showPoints: Bool = true
     
-    init(_ playerUnit: DartPlayerUnit<Score>) {
+    init(_ playerUnit: DartPlayerUnit<Score>, showPoints: Bool = true) {
         self.playerUnit = playerUnit
         
         self.name = playerUnit.player.name
         self.points = playerUnit.score.points
+        self.showPoints = showPoints
     }
     
     func update(nameTo newName: String, pointsTo newPoints: Int) {

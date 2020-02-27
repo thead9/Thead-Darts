@@ -56,6 +56,13 @@ final class UserSettings: ObservableObject {
         }
     }
     
+    @UserDefault(key: "usePoints", defaultValue: true)
+    var usePoints: Bool {
+        didSet {
+            objectWillChange.send()
+        }
+    }
+    
     enum Theme: String {
         case blue = "Blue"
         case green = "Green"

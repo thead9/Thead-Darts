@@ -55,9 +55,28 @@ struct CricketCardView: View {
                         .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: !self.settings.bullRequired, useScaleEffect: false))
                     }
                     .frame(maxWidth: .infinity)
+                    
+                    Text("Use Points")
+                        .font(.title)
+                        .underline()
+                    HStack {
+                        Button( action: { withAnimation { self.settings.usePoints = true } } ) {
+                            Text("Yes")
+                                .padding()
+                                .frame(maxWidth: 100)
+                        }
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.settings.usePoints, useScaleEffect: false))
+                        Button( action: { withAnimation { self.settings.usePoints = false } } ) {
+                            Text("No")
+                                .padding()
+                                .frame(maxWidth: 100)
+                        }
+                        .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: !self.settings.usePoints, useScaleEffect: false))
+                    }
+                    .frame(maxWidth: .infinity)
                 }
                 
-                NavigationLink(destination: CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: settings.trackTurns, bullRequired: settings.bullRequired)))) {
+                NavigationLink(destination: CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: false /*settings.trackTurns*/, bullRequired: settings.bullRequired, usePoints: settings.usePoints)))) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)

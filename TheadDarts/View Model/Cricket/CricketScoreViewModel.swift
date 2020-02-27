@@ -15,12 +15,14 @@ class CricketScoreViewModel: ObservableObject {
     @Published var marks: Marks
     
     var bullRequired: Bool = true
+    var showPoints: Bool = true
     
-    init(cricketScore: CricketScore) {
+    init(cricketScore: CricketScore, showPoints: Bool = true) {
         self.score = cricketScore
         
-        marks = cricketScore.marks
-        bullRequired = cricketScore.bullRequired
+        self.marks = cricketScore.marks
+        self.bullRequired = cricketScore.bullRequired
+        self.showPoints = showPoints
     }
     
     func shouldAllowHit(on wedge: Wedge) -> Bool {

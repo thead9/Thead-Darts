@@ -98,7 +98,7 @@ struct CricketHitView : View {
                                     self.selectingMultiplier = (true, wedge)
                                 }
                             }) {
-                                CricketMarkView(marks: self.scoreVM.marks[wedge])
+                                CricketMarkView(marks: self.scoreVM.marks[wedge], showPoints: self.scoreVM.showPoints)
                             }
                             .disabled(!self.scoreVM.shouldAllowHit(on: wedge))
                             .buttonStyle(SecondaryButtonStyle(addBorder: self.scoreVM.shouldAllowHit(on: wedge) && !self.wholeViewDisabled))

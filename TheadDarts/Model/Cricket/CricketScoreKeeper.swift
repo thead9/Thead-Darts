@@ -11,6 +11,8 @@ import Foundation
 class CricketScoreKeeper: DartScoreKeeper {
     typealias Score = CricketScore
         
+    var usePoints: Bool = true
+    
     var playerUnits: [DartPlayerUnit<Score>]
     
     var activeIndex: Int = 0
@@ -26,18 +28,24 @@ class CricketScoreKeeper: DartScoreKeeper {
             var indexOfPointsLeader = -1
             for (index, playerUnit) in playerUnits.enumerated() {
                 let score = playerUnit.score
+                
+                if score.allClosed {
+                    if !usePoints {
+                        return index
+                    }
+                    
+                    if indexOfPointsLeaderWithAllClosed == -1 {
+                        indexOfPointsLeaderWithAllClosed = index
+                    } else if score.points > playerUnits[indexOfPointsLeaderWithAllClosed].score.points {
+                        indexOfPointsLeaderWithAllClosed = index
+                    }
+                }
+                
                 if indexOfPointsLeader == -1 {
                     indexOfPointsLeader = index
                 } else {
                     if score.points > playerUnits[indexOfPointsLeader].score.points {
                         indexOfPointsLeader = index
-                    }
-                }
-                if score.allClosed {
-                    if indexOfPointsLeaderWithAllClosed == -1 {
-                        indexOfPointsLeaderWithAllClosed = index
-                    } else if score.points > playerUnits[indexOfPointsLeaderWithAllClosed].score.points {
-                        indexOfPointsLeaderWithAllClosed = index
                     }
                 }
             }
@@ -69,8 +77,13 @@ class CricketScoreKeeper: DartScoreKeeper {
     }
     
     // MARK: Inits
-    init(playerUnits: [DartPlayerUnit<Score>]) {
+    init(playerUnits: [DartPlayerUnit<Score>], trackTurns: Bool = true, usePoints: Bool = true) {
+        self.usePoints = usePoints
         self.playerUnits = playerUnits
+        
+        if trackTurns {
+            self.activeTurn = DartTurn<CricketScore>()
+        }
     }
     
     // MARK: Actions
@@ -81,6 +94,10 @@ class CricketScoreKeeper: DartScoreKeeper {
             return true
         } else {
             shouldAllowHit = !everyoneClosed(wedge: wedge) && winner == nil
+            
+            if shouldAllowHit && !usePoints {
+                shouldAllowHit = score.marks[wedge] < 3
+            }
         }
         
         if let activeTurn = activeTurn, shouldAllowHit {

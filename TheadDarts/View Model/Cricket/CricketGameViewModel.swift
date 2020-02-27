@@ -17,6 +17,7 @@ class CricketGameViewModel: ObservableObject {
     @Published var scores: [CricketScore]
     
     var bullRequired: Bool = true
+    var showPoints: Bool = true
     
     @Published var gameOver: Bool
     @Published var winnerName: String?
@@ -27,9 +28,11 @@ class CricketGameViewModel: ObservableObject {
     init(cricketGame: CricketGame) {
         self.game = cricketGame
         
-        playerUnits = CricketGameViewModel.playerUnitVMs(playerUnits: game.playerUnits)
-        scores = CricketGameViewModel.scores(game: game)
         bullRequired = cricketGame.bullRequired
+        showPoints = cricketGame.usePoints
+        
+        playerUnits = CricketGameViewModel.playerUnitVMs(playerUnits: game.playerUnits, showPoints: self.showPoints)
+        scores = CricketGameViewModel.scores(game: game)
         gameOver = CricketGameViewModel.gameOver(game: game)
         winnerName = CricketGameViewModel.winnerName(game: game)
         activeIndex = CricketGameViewModel.activeIndex(game: game)
@@ -37,7 +40,7 @@ class CricketGameViewModel: ObservableObject {
     }
     
     func updateGameState() {
-        playerUnits = CricketGameViewModel.playerUnitVMs(playerUnits: game.playerUnits)
+        playerUnits = CricketGameViewModel.playerUnitVMs(playerUnits: game.playerUnits, showPoints: self.showPoints)
         scores = CricketGameViewModel.scores(game: game)
         gameOver = CricketGameViewModel.gameOver(game: game)
         winnerName = CricketGameViewModel.winnerName(game: game)
@@ -68,10 +71,10 @@ class CricketGameViewModel: ObservableObject {
 }
 
 extension CricketGameViewModel {
-    static func playerUnitVMs(playerUnits: [DartPlayerUnit<CricketScore>]) -> [PlayerUnitViewModel<CricketScore>] {
+    static func playerUnitVMs(playerUnits: [DartPlayerUnit<CricketScore>], showPoints: Bool) -> [PlayerUnitViewModel<CricketScore>] {
         var playerUnitVMs: [PlayerUnitViewModel<CricketScore>] = []
         for playerUnit in playerUnits {
-            playerUnitVMs.append(PlayerUnitViewModel<CricketScore>(playerUnit))
+            playerUnitVMs.append(PlayerUnitViewModel<CricketScore>(playerUnit, showPoints: showPoints))
         }
         return playerUnitVMs
     }

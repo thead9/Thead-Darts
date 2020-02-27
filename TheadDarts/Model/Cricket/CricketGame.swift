@@ -32,6 +32,7 @@ class CricketGame: DartGame {
     }
     
     var bullRequired: Bool = true
+    var usePoints: Bool = true
     
     var winnerIndex: Int? { get { scoreKeeper.winnerIndex } }
     var winner: DartPlayer? { get { scoreKeeper.winner } }
@@ -40,40 +41,30 @@ class CricketGame: DartGame {
     var scoreKeeper: CricketScoreKeeper!
     
     // MARK: Inits
-    init(numberOfPlayers: Int, trackTurns: Bool = false, bullRequired: Bool = true) {
+    convenience init(numberOfPlayers: Int, trackTurns: Bool = false, bullRequired: Bool = true, usePoints: Bool = true) {
+        var dartPlayers = [DartPlayer]()
         for index in 0..<numberOfPlayers {
-            let playerUnit = DartPlayerUnit<Score>(player: DartPlayer(name: "Player \(index+1)"),
-                                               score: CricketScore())
-            self.playerUnits.append(playerUnit)
+            dartPlayers.append(DartPlayer(name: "Player \(index+1)"))
         }
         
-        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits)
-        self.bullRequired = bullRequired
-        
-        if trackTurns {
-            scoreKeeper.activeTurn = DartTurn<CricketScore>()
-        }
-        
-        for score in scores {
-            score.scoreKeeper = self.scoreKeeper
-            score.bullRequired = bullRequired
-        }
+        self.init(players: dartPlayers, trackTurns: trackTurns, bullRequired: bullRequired, usePoints: usePoints)
     }
     
-    init(players: [DartPlayer], trackTurns: Bool = false) {
+    init(players: [DartPlayer], trackTurns: Bool = false, bullRequired: Bool = true, usePoints: Bool = true) {
         for player in players {
             let playerUnit = DartPlayerUnit<Score>(player: player,
                                                score: CricketScore())
             self.playerUnits.append(playerUnit)
         }
-        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits)
         
-        if trackTurns {
-            scoreKeeper.activeTurn = DartTurn<CricketScore>()
-        }
+        self.bullRequired = bullRequired
+        self.usePoints = usePoints
+        
+        scoreKeeper = CricketScoreKeeper(playerUnits: self.playerUnits, trackTurns: trackTurns, usePoints: usePoints)
         
         for score in scores {
             score.scoreKeeper = self.scoreKeeper
+            score.bullRequired = bullRequired
         }
     }
     

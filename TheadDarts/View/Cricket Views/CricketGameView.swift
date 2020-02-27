@@ -120,7 +120,7 @@ struct CricketGameView : View {
 
                 ForEach(0..<cricketGameVM.scores.count) { index in
                     CricketHitView(
-                        scoreVM: CricketScoreViewModel(cricketScore: self.cricketGameVM.scores[index]),
+                        scoreVM: CricketScoreViewModel(cricketScore: self.cricketGameVM.scores[index], showPoints: self.cricketGameVM.showPoints),
                         onHit: {
                             self.cricketGameVM.updateGameState()
                             self.showWinnerModal = self.cricketGameVM.gameOver

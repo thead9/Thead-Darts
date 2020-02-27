@@ -20,8 +20,10 @@ struct PlayerUnitView<Score: DartScore>: View {
             VStack(spacing: 0) {
                 Text(self.playerUnitVM.name)
                     .font(.headline)
-                Text(String(self.playerUnitVM.points))
-                    .font(.title)
+                if playerUnitVM.showPoints {
+                    Text(String(self.playerUnitVM.points))
+                        .font(.title)
+                }
             }
             .lineLimit(1)
             .frame(maxWidth: .infinity, alignment: .center)
