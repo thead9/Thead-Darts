@@ -18,7 +18,7 @@ struct WinnerModal: View {
     
     var body: some View {
         VStack {
-            Text("\(winnerName) has won!")
+            Text("\(winnerName) Wins!")
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
             
