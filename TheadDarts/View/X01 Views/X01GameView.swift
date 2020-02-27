@@ -19,6 +19,8 @@ struct X01GameView: View {
     @State var showNewGameModal = false
     @State var showWinnerModal = false
     
+    @State var disableBottomForMultiplier = false
+    
     // MARK: Body
     var body: some View {
         ZStack {
@@ -35,15 +37,16 @@ struct X01GameView: View {
                 }
                 
                 
-                X01HitView(x01GameVM: x01GameVM, updateWinnerModal: { self.showWinnerModal = self.x01GameVM.gameOver } )
+                X01HitView(x01GameVM: x01GameVM, updateWinnerModal: { self.showWinnerModal = self.x01GameVM.gameOver }, disableBottom: { shouldDisable in self.disableBottomForMultiplier = shouldDisable } )
                     .padding(.bottom, 5)
                 
-                if x01GameVM.canAddThrow {
-                    turnControls
-                        .padding(.bottom, 2)
-                }
+                turnControls
+                    .padding(.bottom, 2)
+                    .blur(radius: !x01GameVM.canAddThrow ? 5 : 0)
                 
                 bottomControls
+                    .disabled(self.disableBottomForMultiplier)
+                    .blur(radius: self.disableBottomForMultiplier ? 5 : 0)
             }
             .font(.title)
             .padding(.vertical)

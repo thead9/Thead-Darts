@@ -13,26 +13,46 @@ struct X01HitView: View {
     @ObservedObject var x01GameVM: X01GameViewModel
     
     var updateWinnerModal: () -> ()
+    var disableBottom: (Bool) -> ()
     
     var animationTime = 0.25
     
     // MARK: Body
     var body: some View {
-        Group {
+        ZStack {
+            x01HitGrid
+                .disabled(self.selectingMultiplier.0 || (!self.x01GameVM.canAddThrow && !self.x01GameVM.gameOver))
+                .blur(radius: self.selectingMultiplier.0 || (!self.x01GameVM.canAddThrow && !self.x01GameVM.gameOver) ? 5 : 0)
+            
             if self.selectingMultiplier.0 {
                 x01SelectingMultiplier
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                     .frame(maxWidth: 450)
-            } else if !self.x01GameVM.canAddThrow && !self.x01GameVM.gameOver {
-                x01TurnOverview
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                    .frame(maxWidth: 450)
-            } else {
-                x01HitGrid
-                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
+                    .zIndex(2)
             }
+            
+            if !self.x01GameVM.canAddThrow && !self.x01GameVM.gameOver {
+                x01TurnOverview
+                    .frame(maxWidth: 450)
+                    .zIndex(3)
+            }
+            
         }
         .frame(alignment: !self.selectingMultiplier.0 && !self.x01GameVM.canAddThrow ? .center : .leading)
+
+//        Group {
+//            if self.selectingMultiplier.0 {
+//                x01SelectingMultiplier
+//                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+//                    .frame(maxWidth: 450)
+//            } else if !self.x01GameVM.canAddThrow && !self.x01GameVM.gameOver {
+//                x01TurnOverview
+//                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+//                    .frame(maxWidth: 450)
+//            } else {
+//                x01HitGrid
+//                    .transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing)))
+//            }
+//        }
     }
     
     // MARK: Hit Grid
@@ -62,6 +82,7 @@ struct X01HitView: View {
             self.x01GameVM.hit(on: .miss)
         } else {
             self.selectingMultiplier = (true, wedge)
+            self.disableBottom(true)
         }
     }
     
@@ -113,6 +134,7 @@ struct X01HitView: View {
                             withAnimation(.easeInOut(duration: 0.25)) {
                                 self.x01GameVM.hit(on: self.selectingMultiplier.1, with: multiplier)
                                 self.selectingMultiplier = (false, .one)
+                                self.disableBottom(false)
                                 self.updateWinnerModal()
                             }
                         }) {
@@ -128,6 +150,7 @@ struct X01HitView: View {
                 Button(action: {
                     withAnimation(.easeInOut(duration: self.animationTime)) {
                         self.selectingMultiplier = (false, .one)
+                        self.disableBottom(false)
                     }
                 }) {
                     Text("Cancel")
@@ -150,7 +173,7 @@ struct X01HitView: View {
     // MARK: Turn Summary
     var x01TurnOverview: some View {
         GeometryReader { geometry in
-            VStack() {
+            VStack {
                 VStack(alignment: .leading, spacing: 0) {
                     Text("Turn Summary")
                         .textStyle(CardTitleTextStyle())
@@ -193,6 +216,7 @@ struct X01HitView: View {
                     }
                     .padding(.vertical, 5)
                 }
+                .background(Color.select(.background))
                 .cornerRadius(25)
                 .addBorder(Color.select(.primary), width: 2)
                 
@@ -215,6 +239,6 @@ struct X01HitView: View {
 
 struct X01HitView_Previews: PreviewProvider {
     static var previews: some View {
-        X01HitView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2)), updateWinnerModal: { })
+        X01HitView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2)), updateWinnerModal: { }, disableBottom: { bogus in })
     }
 }
