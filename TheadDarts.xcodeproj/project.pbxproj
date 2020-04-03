@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C7062B1322F44A59006CE930 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7062B1222F44A59006CE930 /* Stack.swift */; };
 		C7062B1422F44A59006CE930 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7062B1222F44A59006CE930 /* Stack.swift */; };
 		C708132022D1236B00B22BFF /* CricketHitLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708131F22D1236B00B22BFF /* CricketHitLabelView.swift */; };
 		C70E1EE62352495300706F81 /* ColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E1EE52352495300706F81 /* ColorSelector.swift */; };
@@ -16,6 +15,7 @@
 		C70E310222CBB09200269AEE /* CricketHitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E310122CBB09200269AEE /* CricketHitView.swift */; };
 		C70EA050236F579F00EEEF39 /* Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70EA04F236F579F00EEEF39 /* Transitions.swift */; };
 		C72B638323007EDD008B0189 /* ViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72B638223007EDD008B0189 /* ViewStyle.swift */; };
+		C7567EDE2437AA030091C0EA /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7567EDD2437AA030091C0EA /* Stack.swift */; };
 		C75C5F3823022FF80019C8B7 /* DartPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */; };
 		C75C5F3923022FF80019C8B7 /* DartPlayerUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */; };
 		C75C5F3B2303281F0019C8B7 /* DartAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C5F3A2303281F0019C8B7 /* DartAction.swift */; };
@@ -117,6 +117,7 @@
 		C70E310122CBB09200269AEE /* CricketHitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketHitView.swift; sourceTree = "<group>"; };
 		C70EA04F236F579F00EEEF39 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		C72B638223007EDD008B0189 /* ViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyle.swift; sourceTree = "<group>"; };
+		C7567EDD2437AA030091C0EA /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = TheadDarts/Model/Utility/Stack.swift; sourceTree = "<group>"; };
 		C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartPlayerUnit.swift; sourceTree = "<group>"; };
 		C75C5F3A2303281F0019C8B7 /* DartAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartAction.swift; sourceTree = "<group>"; };
 		C75C5F3E2303287D0019C8B7 /* DartThrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrow.swift; sourceTree = "<group>"; };
@@ -292,6 +293,7 @@
 		C7983E1322CACC0E00ACC903 = {
 			isa = PBXGroup;
 			children = (
+				C7567EDD2437AA030091C0EA /* Stack.swift */,
 				C7983E1E22CACC0E00ACC903 /* TheadDarts */,
 				C7983E3522CACC1200ACC903 /* TheadDartsTests */,
 				C7983E4022CACC1200ACC903 /* TheadDartsUITests */,
@@ -603,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7567EDE2437AA030091C0EA /* Stack.swift in Sources */,
 				C7F46D1B233F9BAE00C3C3F7 /* X01ScoreKeeper.swift in Sources */,
 				C7C52525232EDC62009AF03B /* X01Score.swift in Sources */,
 				C7F46D2123402BCE00C3C3F7 /* X01GameView.swift in Sources */,
@@ -645,7 +648,6 @@
 				C77EF0A4232D4C57004B4045 /* HomeView.swift in Sources */,
 				C7E3C599236BB86A0098A122 /* Marks.swift in Sources */,
 				C75C5F4223032DC60019C8B7 /* TurnChange.swift in Sources */,
-				C7062B1322F44A59006CE930 /* Stack.swift in Sources */,
 				C78C712524007AFF0077C465 /* KeyboardResponder.swift in Sources */,
 				C7983E6022CACCBF00ACC903 /* CricketScore.swift in Sources */,
 				C7AABFA72381A0FB001DA6F7 /* CricketGameViewModel.swift in Sources */,
