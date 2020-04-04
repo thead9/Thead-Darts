@@ -19,87 +19,25 @@ struct HomeView: View {
     // MARK: Body
     var body: some View {
         NavigationView {
-            VStack(alignment: .leading) {
-                Text("Select Game Type")
-                    .padding(.top)
-                    .font(.largeTitle)
-                
-                HStack {
-                    Button(action: {
-                        withAnimation {
-                            self.settingsActive = false
-                            self.selectedGameType = GameType.cricket
-                            self.settings.gameType = GameType.cricket.rawValue
-                        }
-                    }) {
-                        Text("Cricket")
-                            .padding(.vertical)
-                            .frame(maxWidth: .infinity)
-                            .font(.largeTitle)
-                    }
-                    .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.selectedGameType == .cricket))
+            ZStack {
+                VStack(alignment: .leading) {
+                    gameTypeSelector
+                    gameCard
                     
-                    Button(action: {
-                        withAnimation {
-                            self.settingsActive = false
-                            self.selectedGameType = .x01
-                            self.settings.gameType = GameType.x01.rawValue
-                        }
-                    }) {
-                        Text("X01")
-                            .padding(.vertical)
-                            .frame(maxWidth: .infinity)
-                            .font(.largeTitle)
-                    }
-                    .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.selectedGameType == .x01))
+                    Spacer()
+                    
+                    settingsControls
                 }
-                .padding(.top)
+                .disabled(settingsActive)
+                .blur(radius: settingsActive ? 5 : 0)
                 
-                Group {
-                    if self.selectedGameType == .cricket {
-                        CricketCardView()
-                            .transition(.slideAndFade)
-                            .frame(maxWidth: 500)
-                    }
-                    
-                    if self.selectedGameType == .x01 {
-                        X01CardView()
-                            .transition(.slideAndFade)
-                            .frame(maxWidth: 500)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .center)
-                
-                Spacer()
-                
-                if !self.settingsActive {
-                    HStack {
-                        Spacer()
-                        
-                        Button(action: {
-                            withAnimation {
-                                self.selectedGameType = GameType.none
-                                self.settingsActive = true
-                            }
-                        }) {
-                            Image(systemName: "gear")
-                                .padding()
-                                .font(.title)
-                        }
-                        .buttonStyle(SecondaryButtonStyle())
-                    
-                    }
-                    .padding(.bottom)
-                } else {
-                    Group {
-                        SettingsCardView(settings: settings, doneAction: {
-                            self.selectedGameType = GameType(rawValue: self.settings.gameType)!
-                            self.settingsActive = false
-                        })
-                            .transition(.move(edge: .bottom))
-                            .frame(maxWidth: 500)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                if settingsActive {
+                    SettingsCardView(settings: settings, doneAction: {
+                        self.selectedGameType = GameType(rawValue: self.settings.gameType)!
+                        self.settingsActive = false
+                    })
+                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+                    .zIndex(2)
                 }
             }
             .padding(.horizontal, 15)
@@ -109,6 +47,80 @@ struct HomeView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .font(.headline)
+    }
+    
+    private func select(gameType: GameType) {
+        self.settingsActive = false
+        self.selectedGameType = gameType
+        self.settings.gameType = gameType.rawValue
+    }
+    
+    private var gameTypeSelector: some View {
+        Group{
+            Text("Select Game Type")
+                .padding(.top)
+                .font(.largeTitle)
+            
+            HStack {
+                Button(action: { withAnimation { self.select(gameType: .cricket) } } ) {
+                    Text("Cricket")
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .font(.largeTitle)
+                }
+                .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.selectedGameType == .cricket))
+                
+                Button(action: { withAnimation { self.select(gameType: .x01) } } ) {
+                    Text("X01")
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .font(.largeTitle)
+                }
+                .buttonStyle(PrimarySecondaryButtonStyle(isPrimary: self.selectedGameType == .x01))
+            }
+            .padding(.top)
+        }
+    }
+    
+    private var gameCard: some View {
+        Group {
+            if self.selectedGameType == .cricket {
+                CricketCardView()
+                    .transition(.slideAndFade)
+                    .frame(maxWidth: 500)
+            }
+            
+            if self.selectedGameType == .x01 {
+                X01CardView()
+                    .transition(.slideAndFade)
+                    .frame(maxWidth: 500)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+    }
+    
+    private var settingsControls: some View {
+        Group {
+            if !self.settingsActive {
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        withAnimation {
+                            self.selectedGameType = GameType.none
+                            self.settingsActive = true
+                        }
+                    }) {
+                        Image(systemName: "gear")
+                            .padding()
+                            .font(.title)
+                    }
+                    .buttonStyle(SecondaryButtonStyle())
+                
+                }
+                .padding(.bottom)
+            }
+        }
     }
 }
 
