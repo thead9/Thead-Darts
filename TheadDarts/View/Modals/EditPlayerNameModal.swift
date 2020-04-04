@@ -28,14 +28,14 @@ struct EditPlayerNameModal: View {
             HStack {
                 Button(action: { withAnimation { self.affirmativeAction(self.playerName) } } ) {
                     Text("Confirm")
-                        .padding()
                         .frame(maxWidth: 200)
+                        .padding()
                 }
                 .buttonStyle(PrimaryButtonStyle())
                 Button(action: { withAnimation { self.cancelAction() } } ) {
                     Text("Cancel")
-                        .padding()
                         .frame(maxWidth: 200)
+                        .padding()
                 }
                 .buttonStyle(SecondaryButtonStyle(addBorder: false))
             }

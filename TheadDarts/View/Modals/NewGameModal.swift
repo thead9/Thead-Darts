@@ -22,14 +22,14 @@ struct NewGameModal: View {
             HStack {
                 Button(action: { withAnimation { self.affirmativeAction() } } ) {
                     Text("Yes")
-                        .padding()
                         .frame(maxWidth: 200)
+                        .padding()
                 }
                 .buttonStyle(DestructiveButtonStyle())
                 Button(action: { withAnimation { self.cancelAction() } } ) {
                     Text("No")
-                        .padding()
                         .frame(maxWidth: 200)
+                        .padding()
                 }
                 .buttonStyle(SecondaryButtonStyle(addBorder: false))
             }

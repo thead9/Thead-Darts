@@ -25,8 +25,8 @@ struct WinnerModal: View {
             Group {
                 Button(action: { withAnimation { self.newGameAction() } } ) {
                     Text("New Game")
-                        .padding()
                         .frame(maxWidth: 250)
+                        .padding()
                 }
                 .padding(.top)
                 .buttonStyle(PrimaryButtonStyle())
@@ -34,8 +34,8 @@ struct WinnerModal: View {
                 if canViewScoreboard {
                     Button(action: { withAnimation { self.viewScoreboardAction() } } ) {
                         Text("View Scoreboard")
-                            .padding()
                             .frame(maxWidth: 250)
+                            .padding()
                     }
                     .padding(.top)
                     .buttonStyle(SecondaryButtonStyle(addBorder: false))
@@ -44,8 +44,8 @@ struct WinnerModal: View {
                 Button(action: { withAnimation { self.undoAction() } } ) {
                     Text("Undo")
                         .font(.subheadline)
-                        .padding()
                         .frame(maxWidth: 250)
+                        .padding()
                 }
                 .padding(.top)
                 .buttonStyle(CancelButtonStyle())
