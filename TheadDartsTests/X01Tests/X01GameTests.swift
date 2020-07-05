@@ -16,6 +16,7 @@ class X01GameTests: XCTestCase {
     var x01Score2 = X01Score()
     var x01Player1 = DartPlayer(name: "PlayerOne")
     var x01Player2 = DartPlayer(name: "PlayerTwo")
+    let settings = UserSettings()
     
     override func setUp() {
         x01Game = X01Game(numberOfPlayers: 2)
@@ -23,11 +24,10 @@ class X01GameTests: XCTestCase {
         x01Score2 = x01Game.playerUnits[1].score
         x01Player1 = DartPlayer(name: "PlayerOne")
         x01Player2 = DartPlayer(name: "PlayerTwo")
+      settings.doubleOut = true
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    override func tearDown() { }
     
     // MARK: Inits
     func testInitWithNumberOfPlayers() {
@@ -176,6 +176,16 @@ class X01GameTests: XCTestCase {
         
         XCTAssertEqual(x01Game.scores[0].points, 2)
     }
+  
+  func testNoBustOn1() {
+    let settings = UserSettings()
+    settings.doubleOut = false
+    
+    x01Score1.startingPoint = 2
+    x01Score1.hit(on: .one, with: .single)
+    
+    XCTAssertEqual(x01Game.scores[0].points, 1)
+  }
     
     func testBustOnFirstThrow() {
         x01Score1.startingPoint = 10

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C7062B1422F44A59006CE930 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7062B1222F44A59006CE930 /* Stack.swift */; };
 		C708132022D1236B00B22BFF /* CricketHitLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C708131F22D1236B00B22BFF /* CricketHitLabelView.swift */; };
 		C70E1EE62352495300706F81 /* ColorSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E1EE52352495300706F81 /* ColorSelector.swift */; };
 		C70E1EEC23525CF000706F81 /* X01CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E1EEB23525CF000706F81 /* X01CardView.swift */; };
@@ -70,6 +69,7 @@
 		C7AC884124B2553500691118 /* TheadDartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC884024B2553500691118 /* TheadDartsView.swift */; };
 		C7AC884224B2553500691118 /* TheadDartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC884024B2553500691118 /* TheadDartsView.swift */; };
 		C7AC884324B2553500691118 /* TheadDartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC884024B2553500691118 /* TheadDartsView.swift */; };
+		C7AC884424B25A7100691118 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7567EDD2437AA030091C0EA /* Stack.swift */; };
 		C7B78DB8237B166700F71E01 /* NewGameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B78DB7237B166700F71E01 /* NewGameModal.swift */; };
 		C7B78DBB237B1B9F00F71E01 /* WinnerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B78DBA237B1B9F00F71E01 /* WinnerModal.swift */; };
 		C7C52525232EDC62009AF03B /* X01Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C52524232EDC62009AF03B /* X01Score.swift */; };
@@ -109,7 +109,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C7062B1222F44A59006CE930 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = ../../../../../../../../System/Volumes/Data/Users/thomasheadley/Developer/SwiftUI/TheadDarts/TheadDarts/Model/Utility/Stack.swift; sourceTree = "<group>"; };
 		C708131F22D1236B00B22BFF /* CricketHitLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketHitLabelView.swift; sourceTree = "<group>"; };
 		C70E1EE52352495300706F81 /* ColorSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelector.swift; sourceTree = "<group>"; };
 		C70E1EEB23525CF000706F81 /* X01CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01CardView.swift; sourceTree = "<group>"; };
@@ -117,7 +116,7 @@
 		C70E310122CBB09200269AEE /* CricketHitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketHitView.swift; sourceTree = "<group>"; };
 		C70EA04F236F579F00EEEF39 /* Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transitions.swift; sourceTree = "<group>"; };
 		C72B638223007EDD008B0189 /* ViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyle.swift; sourceTree = "<group>"; };
-		C7567EDD2437AA030091C0EA /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Stack.swift; path = TheadDarts/Model/Utility/Stack.swift; sourceTree = "<group>"; };
+		C7567EDD2437AA030091C0EA /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		C75C5F3723022FF80019C8B7 /* DartPlayerUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartPlayerUnit.swift; sourceTree = "<group>"; };
 		C75C5F3A2303281F0019C8B7 /* DartAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartAction.swift; sourceTree = "<group>"; };
 		C75C5F3E2303287D0019C8B7 /* DartThrow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrow.swift; sourceTree = "<group>"; };
@@ -203,7 +202,7 @@
 		C7062B1122F449B0006CE930 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				C7062B1222F44A59006CE930 /* Stack.swift */,
+				C7567EDD2437AA030091C0EA /* Stack.swift */,
 				C7F46D282340FDBB00C3C3F7 /* UserSettings.swift */,
 				C79CFA86239F3F81001EB8A8 /* BoolExtensions.swift */,
 			);
@@ -300,7 +299,6 @@
 		C7983E1322CACC0E00ACC903 = {
 			isa = PBXGroup;
 			children = (
-				C7567EDD2437AA030091C0EA /* Stack.swift */,
 				C7983E1E22CACC0E00ACC903 /* TheadDarts */,
 				C7983E3522CACC1200ACC903 /* TheadDartsTests */,
 				C7983E4022CACC1200ACC903 /* TheadDartsUITests */,
@@ -541,7 +539,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Thead;
 				TargetAttributes = {
 					C7983E1B22CACC0E00ACC903 = {
@@ -680,12 +678,12 @@
 				C7983E7322CACD4800ACC903 /* CricketGameTests.swift in Sources */,
 				C7983E5822CACC8300ACC903 /* Multiplier.swift in Sources */,
 				C7983E6122CACCBF00ACC903 /* CricketScore.swift in Sources */,
+				C7AC884424B25A7100691118 /* Stack.swift in Sources */,
 				C75DDF76237F1423004196D8 /* DartPlayerTests.swift in Sources */,
 				C79CFA82239F3512001EB8A8 /* GameType.swift in Sources */,
 				C7F46D2A2340FDBB00C3C3F7 /* UserSettings.swift in Sources */,
 				C7983E6422CACCD300ACC903 /* CricketScoreKeeper.swift in Sources */,
 				C7983E7722CACD7800ACC903 /* CricketScoreTests.swift in Sources */,
-				C7062B1422F44A59006CE930 /* Stack.swift in Sources */,
 				C7983E6A22CACCFA00ACC903 /* DartPlayer.swift in Sources */,
 				C7C52526232EDC62009AF03B /* X01Score.swift in Sources */,
 				C7983E6722CACCE800ACC903 /* DartGame.swift in Sources */,
@@ -747,6 +745,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -807,6 +806,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
