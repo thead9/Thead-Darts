@@ -32,12 +32,9 @@
 		C78EDD26230D9DC500700A55 /* DartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD24230D9DC500700A55 /* DartTurn.swift */; };
 		C78EDD28230F044F00700A55 /* DartThrowOnTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */; };
 		C78EDD29230F044F00700A55 /* DartThrowOnTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */; };
-		C7983E2022CACC0E00ACC903 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */; };
-		C7983E2222CACC0E00ACC903 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E2122CACC0E00ACC903 /* SceneDelegate.swift */; };
 		C7983E2422CACC0E00ACC903 /* CricketGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E2322CACC0E00ACC903 /* CricketGameView.swift */; };
 		C7983E2622CACC1200ACC903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2522CACC1200ACC903 /* Assets.xcassets */; };
 		C7983E2922CACC1200ACC903 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2822CACC1200ACC903 /* Preview Assets.xcassets */; };
-		C7983E2C22CACC1200ACC903 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2A22CACC1200ACC903 /* LaunchScreen.storyboard */; };
 		C7983E4222CACC1200ACC903 /* TheadDartsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E4122CACC1200ACC903 /* TheadDartsUITests.swift */; };
 		C7983E5422CACC7000ACC903 /* Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5322CACC7000ACC903 /* Wedge.swift */; };
 		C7983E5522CACC7000ACC903 /* Wedge.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E5322CACC7000ACC903 /* Wedge.swift */; };
@@ -70,6 +67,9 @@
 		C7AABFA323806F5D001DA6F7 /* X01GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AABFA223806F5D001DA6F7 /* X01GameViewModel.swift */; };
 		C7AABFA72381A0FB001DA6F7 /* CricketGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AABFA62381A0FB001DA6F7 /* CricketGameViewModel.swift */; };
 		C7AABFAA2381A754001DA6F7 /* CricketScoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AABFA92381A754001DA6F7 /* CricketScoreViewModel.swift */; };
+		C7AC884124B2553500691118 /* TheadDartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC884024B2553500691118 /* TheadDartsView.swift */; };
+		C7AC884224B2553500691118 /* TheadDartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC884024B2553500691118 /* TheadDartsView.swift */; };
+		C7AC884324B2553500691118 /* TheadDartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AC884024B2553500691118 /* TheadDartsView.swift */; };
 		C7B78DB8237B166700F71E01 /* NewGameModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B78DB7237B166700F71E01 /* NewGameModal.swift */; };
 		C7B78DBB237B1B9F00F71E01 /* WinnerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B78DBA237B1B9F00F71E01 /* WinnerModal.swift */; };
 		C7C52525232EDC62009AF03B /* X01Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C52524232EDC62009AF03B /* X01Score.swift */; };
@@ -129,12 +129,9 @@
 		C78EDD24230D9DC500700A55 /* DartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartTurn.swift; sourceTree = "<group>"; };
 		C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrowOnTurn.swift; sourceTree = "<group>"; };
 		C7983E1C22CACC0E00ACC903 /* Darts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Darts.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C7983E2122CACC0E00ACC903 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C7983E2322CACC0E00ACC903 /* CricketGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketGameView.swift; sourceTree = "<group>"; };
 		C7983E2522CACC1200ACC903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7983E2822CACC1200ACC903 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C7983E2B22CACC1200ACC903 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7983E2D22CACC1200ACC903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7983E3222CACC1200ACC903 /* TheadDartsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TheadDartsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7983E3822CACC1200ACC903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,6 +158,7 @@
 		C7AABFA223806F5D001DA6F7 /* X01GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01GameViewModel.swift; sourceTree = "<group>"; };
 		C7AABFA62381A0FB001DA6F7 /* CricketGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketGameViewModel.swift; sourceTree = "<group>"; };
 		C7AABFA92381A754001DA6F7 /* CricketScoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketScoreViewModel.swift; sourceTree = "<group>"; };
+		C7AC884024B2553500691118 /* TheadDartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheadDartsView.swift; sourceTree = "<group>"; };
 		C7B78DB7237B166700F71E01 /* NewGameModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameModal.swift; sourceTree = "<group>"; };
 		C7B78DBA237B1B9F00F71E01 /* WinnerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinnerModal.swift; sourceTree = "<group>"; };
 		C7C52524232EDC62009AF03B /* X01Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = X01Score.swift; sourceTree = "<group>"; };
@@ -212,9 +210,18 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		C7185E92248711AA003E4D6A /* Composable */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Composable;
+			sourceTree = "<group>";
+		};
 		C71E265222CB96A5005D91E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C7AC884024B2553500691118 /* TheadDartsView.swift */,
+				C7185E92248711AA003E4D6A /* Composable */,
 				C78C712324007ACA0077C465 /* Utility */,
 				C79CFA79239D8C8E001EB8A8 /* Blocks */,
 				C7B78DB6237B159800F71E01 /* Modals */,
@@ -317,10 +324,7 @@
 				C7594097237F0D9800B34847 /* View Model */,
 				C71E265222CB96A5005D91E1 /* View */,
 				C7983E4F22CACC2B00ACC903 /* Model */,
-				C7983E1F22CACC0E00ACC903 /* AppDelegate.swift */,
-				C7983E2122CACC0E00ACC903 /* SceneDelegate.swift */,
 				C7983E2522CACC1200ACC903 /* Assets.xcassets */,
-				C7983E2A22CACC1200ACC903 /* LaunchScreen.storyboard */,
 				C7983E2D22CACC1200ACC903 /* Info.plist */,
 				C7983E2722CACC1200ACC903 /* Preview Content */,
 			);
@@ -578,7 +582,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7983E2C22CACC1200ACC903 /* LaunchScreen.storyboard in Resources */,
 				C7983E2922CACC1200ACC903 /* Preview Assets.xcassets in Resources */,
 				C7983E2622CACC1200ACC903 /* Assets.xcassets in Resources */,
 			);
@@ -619,7 +622,7 @@
 				C75C5F3823022FF80019C8B7 /* DartPlayerUnit.swift in Sources */,
 				C7983E6922CACCFA00ACC903 /* DartPlayer.swift in Sources */,
 				C7F46D272340CB4800C3C3F7 /* X01HitView.swift in Sources */,
-				C7983E2022CACC0E00ACC903 /* AppDelegate.swift in Sources */,
+				C7AC884124B2553500691118 /* TheadDartsView.swift in Sources */,
 				C7983E6F22CACD1F00ACC903 /* DartScoreKeeper.swift in Sources */,
 				C7983E5A22CACC9900ACC903 /* CricketGame.swift in Sources */,
 				C70E310222CBB09200269AEE /* CricketHitView.swift in Sources */,
@@ -628,7 +631,6 @@
 				C70E1EE62352495300706F81 /* ColorSelector.swift in Sources */,
 				C79CFA7E239F3034001EB8A8 /* CardView.swift in Sources */,
 				C7B78DB8237B166700F71E01 /* NewGameModal.swift in Sources */,
-				C7983E2222CACC0E00ACC903 /* SceneDelegate.swift in Sources */,
 				C708132022D1236B00B22BFF /* CricketHitLabelView.swift in Sources */,
 				C79CFA7B239D8CB8001EB8A8 /* PlayerUnitView.swift in Sources */,
 				C70EA050236F579F00EEEF39 /* Transitions.swift in Sources */,
@@ -668,6 +670,7 @@
 				C79CFA88239F3F81001EB8A8 /* BoolExtensions.swift in Sources */,
 				C75C5F3C2303281F0019C8B7 /* DartAction.swift in Sources */,
 				C75C5F402303287D0019C8B7 /* DartThrow.swift in Sources */,
+				C7AC884224B2553500691118 /* TheadDartsView.swift in Sources */,
 				C7F46D19233F9B2900C3C3F7 /* X01Game.swift in Sources */,
 				C7983E7022CACD1F00ACC903 /* DartScoreKeeper.swift in Sources */,
 				C7C5252D232EE3C8009AF03B /* X01ScoreTests.swift in Sources */,
@@ -697,6 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7AC884324B2553500691118 /* TheadDartsView.swift in Sources */,
 				C7983E4222CACC1200ACC903 /* TheadDartsUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -715,17 +719,6 @@
 			targetProxy = C7983E3E22CACC1200ACC903 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		C7983E2A22CACC1200ACC903 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C7983E2B22CACC1200ACC903 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		C7983E4422CACC1200ACC903 /* Debug */ = {
@@ -778,7 +771,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -832,7 +825,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -852,6 +845,7 @@
 				DEVELOPMENT_TEAM = X94L6WV9DW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TheadDarts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -874,6 +868,7 @@
 				DEVELOPMENT_TEAM = X94L6WV9DW;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = TheadDarts/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
