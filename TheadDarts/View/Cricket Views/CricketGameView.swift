@@ -219,23 +219,6 @@ struct CricketGameView : View {
   }
 }
 
-struct HiddenNavigationBar: ViewModifier {
-  @State var isHidden = false
-  
-  func body(content: Content) -> some View {
-    content
-      .navigationBarTitle("", displayMode: .inline)
-      .navigationBarHidden(isHidden)
-      .onAppear { self.isHidden = true }
-  }
-}
-
-extension View {
-  func hiddenNavigationBarStyle() -> some View {
-    modifier( HiddenNavigationBar() )
-  }
-}
-
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
   static let cricketGameVM = CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2))
