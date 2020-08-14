@@ -14,7 +14,7 @@ class CricketGameViewModel: ObservableObject {
   
   @Published var playerUnitVMs: [PlayerUnitViewModel<CricketScore>]
   
-  @Published var scores: [CricketScoreViewModel]
+  @Published var scoreVMs: [CricketScoreViewModel]
   
   var bullRequired: Bool = true
   var showPoints: Bool = true
@@ -32,7 +32,7 @@ class CricketGameViewModel: ObservableObject {
     showPoints = cricketGame.usePoints
     
     playerUnitVMs = CricketGameViewModel.playerUnitVMs(playerUnits: game.playerUnits, showPoints: self.showPoints)
-    scores = CricketGameViewModel.scores(game: game)
+    scoreVMs = CricketGameViewModel.scores(game: game)
     gameOver = CricketGameViewModel.gameOver(game: game)
     winnerName = CricketGameViewModel.winnerName(game: game)
     activeIndex = CricketGameViewModel.activeIndex(game: game)
@@ -41,7 +41,7 @@ class CricketGameViewModel: ObservableObject {
     
   func updateGameState() {
     playerUnitVMs = CricketGameViewModel.playerUnitVMs(playerUnits: game.playerUnits, showPoints: self.showPoints)
-    scores = CricketGameViewModel.scores(game: game)
+    scoreVMs = CricketGameViewModel.scores(game: game)
     gameOver = CricketGameViewModel.gameOver(game: game)
     winnerName = CricketGameViewModel.winnerName(game: game)
     activeIndex = CricketGameViewModel.activeIndex(game: game)
@@ -72,11 +72,7 @@ class CricketGameViewModel: ObservableObject {
 
 extension CricketGameViewModel {
   static func playerUnitVMs(playerUnits: [DartPlayerUnit<CricketScore>], showPoints: Bool) -> [PlayerUnitViewModel<CricketScore>] {
-    var playerUnitVMs: [PlayerUnitViewModel<CricketScore>] = []
-    for playerUnit in playerUnits {
-      playerUnitVMs.append(PlayerUnitViewModel<CricketScore>(playerUnit, showPoints: showPoints))
-    }
-    return playerUnitVMs
+    playerUnits.map { PlayerUnitViewModel<CricketScore>($0, showPoints: showPoints) }
   }
   
   static func scores(game: CricketGame) -> [CricketScoreViewModel] {

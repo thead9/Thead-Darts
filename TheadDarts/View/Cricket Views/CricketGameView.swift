@@ -18,10 +18,10 @@ struct CricketGameView : View {
   @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
   @State var showNewGameModal = false
   @State var showWinnerModal = false
+  
+  let cricketLabelWidth: CGFloat = 50
             
   // MARK: Body
-  let leftColumnWidth: CGFloat = 50
-
   var body: some View {
     ZStack {
       VStack {
@@ -124,47 +124,29 @@ struct CricketGameView : View {
     
   //MARK: Scoreboard
   var scoreboard: some View {
-    VStack {
-      HStack {
-        Button(action: { }) {
-          Image(systemName: "house")
-        }
-        .frame(width: leftColumnWidth)
-        .padding(.horizontal, 5)
-        .foregroundColor(Color.select(.secondary))
-
-        ForEach(0..<cricketGameVM.playerUnitVMs.count) { index in
-          PlayerUnitView(playerUnitVM: cricketGameVM.playerUnitVMs[index],
-                         startPlayerNameEditing: { playerName, updatePlayerName in
-                           playerNameBeingEdited = playerName
-                           updatePlayerNameBeingEdited = updatePlayerName
-                         })
-          .padding(.horizontal, 5)
-          .padding(.vertical, 10)
-          .addBorder(Color.select(.secondary), width: 3, condition: shouldAddActiveBorder(on: index))
-        }
+    HStack {
+      CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
+        .frame(width: cricketLabelWidth)
+        .padding(.horizontal, 15)
+        .alignmentGuide(.topCricketLabelAndLanes, computeValue: { dimension in
+          dimension[VerticalAlignment.top]
+        })
+      
+      ForEach(0..<cricketGameVM.scoreVMs.count) { index in
+        CricketLaneView(
+          playerUnitVM: cricketGameVM.playerUnitVMs[index],
+          scoreVM: cricketGameVM.scoreVMs[index],
+          isWholeViewDisabled: shouldDisableHitView(at: index),
+          onHit: {
+            cricketGameVM.updateGameState()
+            showWinnerModal = cricketGameVM.gameOver
+          },
+          startPlayerNameEditing: { playerName, updatePlayerName in
+            playerNameBeingEdited = playerName
+            updatePlayerNameBeingEdited = updatePlayerName
+          })
+          .padding(.trailing, 10)
       }
-      .padding(.horizontal, 5)
-        
-      HStack {
-        CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
-          .frame(width: leftColumnWidth)
-          .padding(.horizontal, 5)
-
-        ForEach(0..<cricketGameVM.scores.count) { index in
-          CricketHitView(
-            scoreVM: cricketGameVM.scores[index],
-            onHit: {
-                cricketGameVM.updateGameState()
-                showWinnerModal = cricketGameVM.gameOver
-            },
-            wholeViewDisabled: shouldDisableHitView(at: index)
-          )
-          .padding(.horizontal, 5)
-          .disabled(shouldDisableHitView(at: index))
-        }
-      }
-      .padding(.horizontal, 5)
     }
   }
     
@@ -219,13 +201,33 @@ struct CricketGameView : View {
   }
 }
 
+extension VerticalAlignment {
+  struct TopCricketLabelAndLanes: AlignmentID {
+    static func defaultValue(in context: ViewDimensions) -> CGFloat {
+      context[.top]
+    }
+  }
+  
+  static let topCricketLabelAndLanes = VerticalAlignment(TopCricketLabelAndLanes.self)
+}
+
 struct CricketLaneView<Score: DartScore>: View {
   @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
-  let startPlayerNameEditing: (String, (String) -> ()) -> ()
+  @ObservedObject var scoreVM: CricketScoreViewModel
+  var isWholeViewDisabled: Bool
+  let onHit: () -> ()
+  let startPlayerNameEditing: (String, @escaping (String) -> ()) -> ()
 
   var body: some View {
-    PlayerUnitView(playerUnitVM: playerUnitVM,
-                   startPlayerNameEditing: startPlayerNameEditing)
+    VStack {
+      PlayerUnitView(playerUnitVM: playerUnitVM,
+                     startPlayerNameEditing: startPlayerNameEditing)
+      
+      CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
+        .alignmentGuide(.topCricketLabelAndLanes, computeValue: { dimension in
+          dimension[VerticalAlignment.top]
+        })
+    }
   }
 }
 
@@ -238,7 +240,12 @@ struct ContentView_Previews : PreviewProvider {
         CricketGameView(cricketGameVM: cricketGameVM)
       }
       
-      CricketLaneView(playerUnitVM: PlayerUnitViewModel(DartPlayerUnit(player: DartPlayer(), score: CricketScore())), startPlayerNameEditing: {_,_  in })
+      CricketLaneView(
+        playerUnitVM: PlayerUnitViewModel(DartPlayerUnit(player: DartPlayer(), score: CricketScore())),
+        scoreVM: CricketScoreViewModel(cricketScore: CricketScore()),
+        isWholeViewDisabled: false,
+        onHit: { },
+        startPlayerNameEditing: {_,_  in })
         .previewLayout(.sizeThatFits)
     }
   }
