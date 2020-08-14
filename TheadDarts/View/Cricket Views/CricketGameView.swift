@@ -133,8 +133,8 @@ struct CricketGameView : View {
         .padding(.horizontal, 5)
         .foregroundColor(Color.select(.secondary))
 
-        ForEach(0..<cricketGameVM.playerUnits.count) { index in
-          PlayerUnitView(playerUnitVM: cricketGameVM.playerUnits[index],
+        ForEach(0..<cricketGameVM.playerUnitVMs.count) { index in
+          PlayerUnitView(playerUnitVM: cricketGameVM.playerUnitVMs[index],
                          startPlayerNameEditing: { playerName, updatePlayerName in
                            playerNameBeingEdited = playerName
                            updatePlayerNameBeingEdited = updatePlayerName
@@ -153,7 +153,7 @@ struct CricketGameView : View {
 
         ForEach(0..<cricketGameVM.scores.count) { index in
           CricketHitView(
-            scoreVM: CricketScoreViewModel(cricketScore: cricketGameVM.scores[index], showPoints: cricketGameVM.showPoints),
+            scoreVM: cricketGameVM.scores[index],
             onHit: {
                 cricketGameVM.updateGameState()
                 showWinnerModal = cricketGameVM.gameOver
@@ -219,6 +219,16 @@ struct CricketGameView : View {
   }
 }
 
+struct CricketLaneView<Score: DartScore>: View {
+  @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
+  let startPlayerNameEditing: (String, (String) -> ()) -> ()
+
+  var body: some View {
+    PlayerUnitView(playerUnitVM: playerUnitVM,
+                   startPlayerNameEditing: startPlayerNameEditing)
+  }
+}
+
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
   static let cricketGameVM = CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2))
@@ -227,6 +237,9 @@ struct ContentView_Previews : PreviewProvider {
       NavigationView {
         CricketGameView(cricketGameVM: cricketGameVM)
       }
+      
+      CricketLaneView(playerUnitVM: PlayerUnitViewModel(DartPlayerUnit(player: DartPlayer(), score: CricketScore())), startPlayerNameEditing: {_,_  in })
+        .previewLayout(.sizeThatFits)
     }
   }
 }
