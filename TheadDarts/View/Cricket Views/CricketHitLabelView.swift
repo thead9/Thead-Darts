@@ -18,16 +18,6 @@ struct CricketHitLabelView : View {
   }
   let columns: CGFloat = 1
   let spacing: CGFloat = 5
-  
-  var wedgeLabels: [String] {
-    get {
-      if bullRequired {
-        return ["20", "19", "18", "17", "16", "15", "B"]
-      } else {
-        return ["20", "19", "18", "17", "16", "15"]
-      }
-    }
-  }
 
   func getItemWidth(containerWidth: CGFloat) -> CGFloat {
     return (containerWidth - spacing * (columns - 1)) / columns
@@ -40,7 +30,7 @@ struct CricketHitLabelView : View {
   var body: some View {
     GeometryReader { geometry in
       VStack(alignment: .center, spacing: self.spacing) {
-        ForEach(self.wedgeLabels, id: \.self) { label in
+        ForEach(Wedge.cricketWedgeLabels(isBoolRequired: bullRequired), id: \.self) { label in
           Text(label)
           .frame(width: self.getItemWidth(containerWidth: geometry.size.width),
                  height: self.getItemHeight(containerHeight: geometry.size.height))

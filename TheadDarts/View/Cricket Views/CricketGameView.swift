@@ -125,12 +125,12 @@ struct CricketGameView : View {
   //MARK: Scoreboard
   var scoreboard: some View {
     HStack {
-      CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
-        .frame(width: cricketLabelWidth)
-        .padding(.horizontal, 15)
-        .alignmentGuide(.topCricketLabelAndLanes, computeValue: { dimension in
-          dimension[VerticalAlignment.top]
-        })
+      VStack {
+        Spacer()
+        CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
+          .frame(width: cricketLabelWidth)
+          .padding(.horizontal, 15)
+      }
       
       ForEach(0..<cricketGameVM.scoreVMs.count) { index in
         CricketLaneView(
@@ -159,14 +159,15 @@ struct CricketGameView : View {
             Text("\(label)")
               .padding(.vertical)
               .frame(maxWidth: .infinity)
-              .foregroundColor(label.contains("T") ? Color.select(.hitBackground) : Color.select(.primary) )
+              .foregroundColor(label.contains("T") ? Color.select(.hitBackground) :
+                                                     Color.select(.primary) )
               .addBorder((label.contains("T") ? Color.select(.hitBackground) : Color.select(.secondary)), width: 1)
           }
           if (!cricketGameVM.activeTurn!.canAddThrow()) {
             Button(action: { withAnimation { cricketGameVM.nextPlayer() } } ) {
               Text("Next")
-                  .padding(.vertical)
-                  .frame(maxWidth: .infinity)
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
             }
             .buttonStyle(PrimaryButtonStyle())
           } else {
@@ -201,16 +202,6 @@ struct CricketGameView : View {
   }
 }
 
-extension VerticalAlignment {
-  struct TopCricketLabelAndLanes: AlignmentID {
-    static func defaultValue(in context: ViewDimensions) -> CGFloat {
-      context[.top]
-    }
-  }
-  
-  static let topCricketLabelAndLanes = VerticalAlignment(TopCricketLabelAndLanes.self)
-}
-
 struct CricketLaneView<Score: DartScore>: View {
   @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
   @ObservedObject var scoreVM: CricketScoreViewModel
@@ -224,9 +215,6 @@ struct CricketLaneView<Score: DartScore>: View {
                      startPlayerNameEditing: startPlayerNameEditing)
       
       CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
-        .alignmentGuide(.topCricketLabelAndLanes, computeValue: { dimension in
-          dimension[VerticalAlignment.top]
-        })
     }
   }
 }
