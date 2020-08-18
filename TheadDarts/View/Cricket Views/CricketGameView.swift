@@ -201,23 +201,6 @@ struct CricketGameView : View {
   }
 }
 
-struct CricketLaneView<Score: DartScore>: View {
-  @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
-  @ObservedObject var scoreVM: CricketScoreViewModel
-  var isWholeViewDisabled: Bool
-  let onHit: () -> ()
-  let startPlayerNameEditing: (String, @escaping (String) -> ()) -> ()
-
-  var body: some View {
-    VStack {
-      PlayerUnitView(playerUnitVM: playerUnitVM,
-                     startPlayerNameEditing: startPlayerNameEditing)
-      
-      CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
-    }
-  }
-}
-
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
   static let cricketGameVM = CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2))
