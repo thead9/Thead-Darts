@@ -18,7 +18,7 @@ struct CricketHitView : View {
     
   var body: some View {
     ZStack {
-      VStack {
+      VStack(spacing: spacing) {
         ForEach(Wedge.cricketWedges(isBoolRequired: scoreVM.bullRequired)) { wedge in
           Button(action: {
             withAnimation(.easeInOut(duration: 0.25)) {

@@ -10,43 +10,30 @@ import SwiftUI
 
 struct CricketHitLabelView : View {
   var bullRequired: Bool = true
-
-  var rows: CGFloat {
-    get {
-      return bullRequired ? 7 : 6
-    }
-  }
-  let columns: CGFloat = 1
-  let spacing: CGFloat = 5
-
-  func getItemWidth(containerWidth: CGFloat) -> CGFloat {
-    return (containerWidth - spacing * (columns - 1)) / columns
-  }
-  
-  func getItemHeight(containerHeight: CGFloat) -> CGFloat {
-    return (containerHeight - spacing * (rows - 1)) / rows
-  }
+  let spacing: CGFloat = 20
     
+  let dummyPlayer = PlayerUnitViewModel(DartPlayerUnit(player: DartPlayer(), score: CricketScore()))
+  
   var body: some View {
-    GeometryReader { geometry in
-      VStack(alignment: .center, spacing: self.spacing) {
-        ForEach(Wedge.cricketWedgeLabels(isBoolRequired: bullRequired), id: \.self) { label in
-          Text(label)
-          .frame(width: self.getItemWidth(containerWidth: geometry.size.width),
-                 height: self.getItemHeight(containerHeight: geometry.size.height))
-        }
+    VStack(alignment: .center, spacing: spacing) {
+      PlayerUnitView(playerUnitVM: dummyPlayer, startPlayerNameEditing: {_, _ in })
+        .disabled(true)
+        .opacity(0)
+      
+      ForEach(Wedge.cricketWedgeLabels(isBoolRequired: bullRequired), id: \.self) { label in
+        Text(label)
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
       }
-      .frame(maxWidth: .infinity)
-      .font(.largeTitle)
     }
+    .font(.largeTitle)
   }
 }
 
 #if DEBUG
 struct CricketHitLabelView_Previews : PreviewProvider {
-    static var previews: some View {
-        CricketHitLabelView()
-            .previewLayout(.fixed(width: 75, height: 650))
-    }
+  static var previews: some View {
+    CricketHitLabelView()
+      .previewLayout(.fixed(width: 75, height: 650))
+  }
 }
 #endif

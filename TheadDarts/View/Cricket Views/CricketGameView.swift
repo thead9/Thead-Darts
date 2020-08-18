@@ -125,13 +125,6 @@ struct CricketGameView : View {
   //MARK: Scoreboard
   var scoreboard: some View {
     HStack {
-      VStack {
-        Spacer()
-        CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
-          .frame(width: cricketLabelWidth)
-          .padding(.horizontal, 15)
-      }
-      
       ForEach(0..<cricketGameVM.scoreVMs.count) { index in
         CricketLaneView(
           playerUnitVM: cricketGameVM.playerUnitVMs[index],
@@ -145,7 +138,13 @@ struct CricketGameView : View {
             playerNameBeingEdited = playerName
             updatePlayerNameBeingEdited = updatePlayerName
           })
-          .padding(.trailing, 10)
+          .padding(.horizontal, 10)
+        
+        if (cricketGameVM.scoreVMs.count.isMultiple(of: 2) &&
+              (cricketGameVM.scoreVMs.count / 2) - 1 == index) {
+          CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
+            .frame(width: cricketLabelWidth)
+        }
       }
     }
   }
