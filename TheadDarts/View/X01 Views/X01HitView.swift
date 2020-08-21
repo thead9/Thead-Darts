@@ -19,7 +19,7 @@ struct X01HitView: View {
     
   // MARK: Body
   var body: some View {
-    ZStack(alignment: .center) {
+    ZStack {
       x01HitGrid
         .disabled(selectingMultiplier.0 || (!x01GameVM.canAddThrow && !x01GameVM.gameOver))
         .blur(radius: selectingMultiplier.0 || (!x01GameVM.canAddThrow && !x01GameVM.gameOver) ? 5 : 0)
