@@ -123,7 +123,7 @@ struct CricketGameView : View {
   }
   
   //MARK: Scoreboard
-  enum CricketHitHeight: EqualLength {}
+  enum CricketHitHeight: EqualLength { }
   let cricketHitHeightReader = GeometryPreferenceReader(
     key: AppendValue<CricketHitHeight>.self,
     value: { [$0.size.height] }
