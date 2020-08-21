@@ -90,10 +90,10 @@ struct X01HitView: View {
   }
     
   enum X01MultiplierButtonWidth: EqualLength {}
-    let rightColumnWidth = GeometryPreferenceReader(
-      key: AppendValue<X01MultiplierButtonWidth>.self,
-      value: { [$0.size.width] }
-    )
+  let x01MultiplierButtonWidthReader = GeometryPreferenceReader(
+    key: AppendValue<X01MultiplierButtonWidth>.self,
+    value: { [$0.size.width] }
+  )
   @State var x01MultiplierButtonWidth: CGFloat? = nil
   
   // MARK: Selecting Multiplier
@@ -117,7 +117,7 @@ struct X01HitView: View {
               .font(.headline)
               .padding(.vertical, 15)
               .padding(.horizontal, 100)
-              .readEqualLength(rightColumnWidth)
+              .readEqualLength(x01MultiplierButtonWidthReader)
               .frame(width: x01MultiplierButtonWidth)
           }
           .buttonStyle(PrimaryButtonStyle())
@@ -134,7 +134,7 @@ struct X01HitView: View {
           .font(.subheadline)
           .padding(.vertical, 10)
           .padding(.horizontal, 50)
-          .readEqualLength(rightColumnWidth)
+          .readEqualLength(x01MultiplierButtonWidthReader)
           .frame(width: x01MultiplierButtonWidth)
       }
       .buttonStyle(CancelButtonStyle())
@@ -145,10 +145,17 @@ struct X01HitView: View {
     .cornerRadius(25)
     .addBorder(Color.select(.primary), width: 2)
     .padding()
-    .assignEqualLength(for: rightColumnWidth.key, to: $x01MultiplierButtonWidth)
+    .assignEqualLength(for: x01MultiplierButtonWidthReader.key, to: $x01MultiplierButtonWidth)
   }
-    
+  
   // MARK: Turn Summary
+  enum X01TurnSummaryInfoTextWidth: EqualLength {}
+    let x01TurnSummaryInfoTextWidthReader = GeometryPreferenceReader(
+      key: AppendValue<X01TurnSummaryInfoTextWidth>.self,
+      value: { [$0.size.width] }
+    )
+  @State var x01TurnSummaryInfoTextWidth: CGFloat? = nil
+  
   var x01TurnOverview: some View {
     VStack {
       VStack(alignment: .leading, spacing: 0) {
@@ -163,6 +170,8 @@ struct X01HitView: View {
           ForEach(0..<x01GameVM.activeTurn.dartThrows.count, id: \.self) { index in
             HStack(spacing: 10) {
               Text("Throw \(index + 1)")
+                .readEqualLength(x01TurnSummaryInfoTextWidthReader)
+                .frame(width: x01TurnSummaryInfoTextWidth, alignment: .leading)
               Text("\(x01GameVM.activeTurn.dartThrows[index].toString())")
                 .foregroundColor(Color.select(.secondary))
             }
@@ -177,6 +186,8 @@ struct X01HitView: View {
             
           HStack(spacing: 10) {
             Text("Scored")
+              .readEqualLength(x01TurnSummaryInfoTextWidthReader)
+              .frame(width: x01TurnSummaryInfoTextWidth, alignment: .leading)
             Text("\(x01GameVM.activeTurn.totalScore())")
               .foregroundColor(Color.select(.secondary))
           }
@@ -185,6 +196,8 @@ struct X01HitView: View {
             
           HStack(spacing: 10) {
             Text("Remaining")
+              .readEqualLength(x01TurnSummaryInfoTextWidthReader)
+              .frame(width: x01TurnSummaryInfoTextWidth, alignment: .leading)
             Text("\(x01GameVM.activeTurnPoints)")
                 .foregroundColor(Color.select(.secondary))
           }
@@ -196,6 +209,7 @@ struct X01HitView: View {
       .background(Color.select(.background))
       .cornerRadius(25)
       .addBorder(Color.select(.primary), width: 2)
+      .assignEqualLength(for: x01TurnSummaryInfoTextWidthReader.key, to: $x01TurnSummaryInfoTextWidth)
       
       Button(action: {
         withAnimation(.easeInOut(duration: animationTime)) {
