@@ -150,10 +150,10 @@ struct X01HitView: View {
   
   // MARK: Turn Summary
   enum X01TurnSummaryInfoTextWidth: EqualLength {}
-    let x01TurnSummaryInfoTextWidthReader = GeometryPreferenceReader(
-      key: AppendValue<X01TurnSummaryInfoTextWidth>.self,
-      value: { [$0.size.width] }
-    )
+  let x01TurnSummaryInfoTextWidthReader = GeometryPreferenceReader(
+    key: AppendValue<X01TurnSummaryInfoTextWidth>.self,
+    value: { [$0.size.width] }
+  )
   @State var x01TurnSummaryInfoTextWidth: CGFloat? = nil
   
   var x01TurnOverview: some View {

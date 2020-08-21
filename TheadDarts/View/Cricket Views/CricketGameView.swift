@@ -121,12 +121,19 @@ struct CricketGameView : View {
       ToolbarItem(placement: .bottomBar) { Spacer() }
     }
   }
-    
+  
   //MARK: Scoreboard
+  enum CricketHitHeight: EqualLength {}
+  let cricketHitHeightReader = GeometryPreferenceReader(
+    key: AppendValue<CricketHitHeight>.self,
+    value: { [$0.size.height] }
+  )
+  @State var cricketHitHeight: CGFloat? = nil
+  
   var scoreboard: some View {
-    HStack {
+    HStack(alignment: .bottom) {
       ForEach(0..<cricketGameVM.scoreVMs.count) { index in
-        CricketLaneView(
+        cricketLaneView(
           playerUnitVM: cricketGameVM.playerUnitVMs[index],
           scoreVM: cricketGameVM.scoreVMs[index],
           isWholeViewDisabled: shouldDisableHitView(at: index),
@@ -143,10 +150,29 @@ struct CricketGameView : View {
         if (cricketGameVM.scoreVMs.count.isMultiple(of: 2) &&
               (cricketGameVM.scoreVMs.count / 2) - 1 == index) {
           CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
-            .frame(width: cricketLabelWidth)
+            .readEqualLength(cricketHitHeightReader)
+            .frame(width: cricketLabelWidth, height: cricketHitHeight)
         }
       }
     }
+    .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
+  }
+  
+  @ViewBuilder
+  func cricketLaneView(playerUnitVM: PlayerUnitViewModel<CricketScore>,
+                       scoreVM: CricketScoreViewModel,
+                       isWholeViewDisabled: Bool,
+                       onHit: @escaping () -> (),
+                       startPlayerNameEditing: @escaping (String, @escaping (String) -> ()) -> ()) -> some View {
+    VStack {
+      PlayerUnitView(playerUnitVM: playerUnitVM,
+                     startPlayerNameEditing: startPlayerNameEditing)
+      
+      CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
+        .readEqualLength(cricketHitHeightReader)
+        .frame(height: cricketHitHeight)
+    }
+    .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
   }
     
   // MARK: Turn Controls
@@ -209,14 +235,6 @@ struct ContentView_Previews : PreviewProvider {
       NavigationView {
         CricketGameView(cricketGameVM: cricketGameVM)
       }
-      
-      CricketLaneView(
-        playerUnitVM: PlayerUnitViewModel(DartPlayerUnit(player: DartPlayer(), score: CricketScore())),
-        scoreVM: CricketScoreViewModel(cricketScore: CricketScore()),
-        isWholeViewDisabled: false,
-        onHit: { },
-        startPlayerNameEditing: {_,_  in })
-        .previewLayout(.sizeThatFits)
     }
   }
 }
