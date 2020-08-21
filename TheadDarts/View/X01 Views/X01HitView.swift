@@ -89,7 +89,7 @@ struct X01HitView: View {
     }
   }
     
-  enum X01MultiplierButtonWidth: EqualLength {}
+  enum X01MultiplierButtonWidth: EqualLength { }
   let x01MultiplierButtonWidthReader = GeometryPreferenceReader(
     key: AppendValue<X01MultiplierButtonWidth>.self,
     value: { [$0.size.width] }
@@ -149,11 +149,11 @@ struct X01HitView: View {
   }
   
   // MARK: Turn Summary
-  enum X01TurnSummaryInfoTextWidth: EqualLength {}
-    let x01TurnSummaryInfoTextWidthReader = GeometryPreferenceReader(
-      key: AppendValue<X01TurnSummaryInfoTextWidth>.self,
-      value: { [$0.size.width] }
-    )
+  enum X01TurnSummaryInfoTextWidth: EqualLength { }
+  let x01TurnSummaryInfoTextWidthReader = GeometryPreferenceReader(
+    key: AppendValue<X01TurnSummaryInfoTextWidth>.self,
+    value: { [$0.size.width] }
+  )
   @State var x01TurnSummaryInfoTextWidth: CGFloat? = nil
   
   var x01TurnOverview: some View {
