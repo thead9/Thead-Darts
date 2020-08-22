@@ -13,23 +13,35 @@ struct PlayerUnitView<Score: DartScore>: View {
   @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
     
   let startPlayerNameEditing: (String, @escaping (String) -> ()) -> ()
-        
+    
+  @State private var text = ""
+  
   var body: some View {
-    Button(action: { withAnimation {
-      startPlayerNameEditing(playerUnitVM.name, playerUnitVM.update(nameTo:)) }
-    }) {
-      VStack(spacing: 0) {
-        Text(playerUnitVM.name)
-          .font(.headline)
-        if playerUnitVM.showPoints {
-          Text(String(playerUnitVM.points))
-            .font(.title)
-        }
+    VStack {
+      TextField("Some Text", text: $text)
+        .textFieldStyle(RoundedBorderTextFieldStyle())
+        .padding()
+      if playerUnitVM.showPoints {
+        Text(String(playerUnitVM.points))
+          .font(.title)
       }
-      .lineLimit(1)
-      .frame(maxWidth: .infinity, alignment: .center)
     }
-    .foregroundColor(Color.select(.primary))
+    
+//    Button(action: { withAnimation {
+//      startPlayerNameEditing(playerUnitVM.name, playerUnitVM.update(nameTo:)) }
+//    }) {
+//      VStack(spacing: 0) {
+//        Text(playerUnitVM.name)
+//          .font(.headline)
+//        if playerUnitVM.showPoints {
+//          Text(String(playerUnitVM.points))
+//            .font(.title)
+//        }
+//      }
+//      .lineLimit(1)
+//      .frame(maxWidth: .infinity, alignment: .center)
+//    }
+//    .foregroundColor(Color.select(.primary))
   }
 }
 

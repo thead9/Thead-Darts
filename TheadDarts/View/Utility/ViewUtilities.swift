@@ -67,3 +67,24 @@ extension View {
     modifier(length)
   }
 }
+
+struct IgnoresKeyboardSafeArea: ViewModifier {
+  func body(content: Content) -> some View {
+    ScrollView([]) {
+      content
+    }
+    .ignoresSafeArea(.keyboard, edges: .bottom)
+  }
+}
+
+extension View {
+  @ViewBuilder
+  func ignoresKeyboardSafeArea(_ ignores: Bool = true) -> some View {
+    if ignores {
+      self.modifier(IgnoresKeyboardSafeArea())
+    }
+    else {
+      self
+    }
+  }
+}
