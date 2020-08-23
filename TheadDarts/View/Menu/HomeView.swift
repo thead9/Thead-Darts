@@ -40,7 +40,6 @@ struct HomeView: View {
       .frame(maxWidth: .infinity)
       .hiddenNavigationBarStyle()
       .toolbar {
-        ToolbarItem(placement: .bottomBar) { Spacer() }
         ToolbarItem(placement: .bottomBar) {
           HStack {
             Spacer().frame(width: 0)
@@ -57,6 +56,7 @@ struct HomeView: View {
             }
           }
         }
+        ToolbarItem(placement: .bottomBar) { Spacer() }
       }
     }
     .navigationViewStyle(StackNavigationViewStyle())
