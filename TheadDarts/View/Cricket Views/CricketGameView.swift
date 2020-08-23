@@ -26,10 +26,8 @@ struct CricketGameView : View {
     ZStack {
       VStack {
         scoreboard
-          .padding(.bottom, 5)
             
-        turnControls
-          .padding(.bottom, 2)
+        //turnControls
       }
       .font(.title)
       .padding(.vertical)
@@ -170,7 +168,7 @@ struct CricketGameView : View {
       
       CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
         .readEqualLength(cricketHitHeightReader)
-        .frame(height: cricketHitHeight)
+        .frame(maxHeight: .infinity)
     }
     .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
   }

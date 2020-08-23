@@ -17,31 +17,17 @@ struct PlayerUnitView<Score: DartScore>: View {
   @State private var text = ""
   
   var body: some View {
-    VStack {
-      TextField("Some Text", text: $text)
-        .textFieldStyle(RoundedBorderTextFieldStyle())
-        .padding()
+    VStack(spacing: 0) {
+      TextField("Name", text: $playerUnitVM.name)
+        .textFieldStyle(PlainTextFieldStyle())
+        .multilineTextAlignment(.center)
+        .padding(.horizontal)
+      
       if playerUnitVM.showPoints {
         Text(String(playerUnitVM.points))
           .font(.title)
       }
     }
-    
-//    Button(action: { withAnimation {
-//      startPlayerNameEditing(playerUnitVM.name, playerUnitVM.update(nameTo:)) }
-//    }) {
-//      VStack(spacing: 0) {
-//        Text(playerUnitVM.name)
-//          .font(.headline)
-//        if playerUnitVM.showPoints {
-//          Text(String(playerUnitVM.points))
-//            .font(.title)
-//        }
-//      }
-//      .lineLimit(1)
-//      .frame(maxWidth: .infinity, alignment: .center)
-//    }
-//    .foregroundColor(Color.select(.primary))
   }
 }
 
