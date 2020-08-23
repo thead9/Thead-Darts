@@ -14,8 +14,6 @@ struct X01GameView: View {
   @ObservedObject var x01GameVM: X01GameViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
   
-  @State var playerNameBeingEdited: String?
-  @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
   @State var showNewGameModal = false
   @State var showWinnerModal = false
   
@@ -43,22 +41,8 @@ struct X01GameView: View {
       .font(.title)
       .padding(.vertical)
       .zIndex(1)
-      .disabled(showNewGameModal || showWinnerModal || playerNameBeingEdited != nil)
-      .blur(radius: showNewGameModal || showWinnerModal || playerNameBeingEdited != nil ? 5 : 0)
-            
-      if playerNameBeingEdited != nil {
-        EditPlayerNameModal(
-          affirmativeAction: { newPlayerName in
-            updatePlayerNameBeingEdited(newPlayerName)
-            playerNameBeingEdited = nil
-          },
-          cancelAction: { playerNameBeingEdited = nil },
-          playerName: playerNameBeingEdited!)
-        .padding()
-        .padding(.bottom, keyboard.currentHeight)
-        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-        .zIndex(2)
-      }
+      .disabled(showNewGameModal || showWinnerModal)
+      .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
             
       if showNewGameModal {
         NewGameModal(
@@ -133,11 +117,7 @@ struct X01GameView: View {
   var scoreBoard: some View {
     HStack {
       ForEach(0..<x01GameVM.playerUnits.count) { index in
-        PlayerUnitView(playerUnitVM: x01GameVM.playerUnits[index],
-          startPlayerNameEditing: { playerName, updatePlayerName in
-           playerNameBeingEdited = playerName
-           updatePlayerNameBeingEdited = updatePlayerName
-          })
+        PlayerUnitView(playerUnitVM: x01GameVM.playerUnits[index])
         .padding(.horizontal, 5)
         .padding(.vertical, 10)
         .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))

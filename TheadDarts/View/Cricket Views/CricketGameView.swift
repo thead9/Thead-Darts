@@ -14,8 +14,6 @@ struct CricketGameView : View {
   @ObservedObject var cricketGameVM: CricketGameViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
   
-  @State var playerNameBeingEdited: String?
-  @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
   @State var showNewGameModal = false
   @State var showWinnerModal = false
   
@@ -32,22 +30,8 @@ struct CricketGameView : View {
       .font(.title)
       .padding(.vertical)
       .zIndex(1)
-      .disabled(showNewGameModal || showWinnerModal || playerNameBeingEdited != nil)
-      .blur(radius: showNewGameModal || showWinnerModal || playerNameBeingEdited != nil ? 5 : 0)
-        
-      if playerNameBeingEdited != nil {
-        EditPlayerNameModal(
-          affirmativeAction: { newPlayerName in
-            updatePlayerNameBeingEdited(newPlayerName)
-            playerNameBeingEdited = nil
-          },
-          cancelAction: { playerNameBeingEdited = nil },
-          playerName: playerNameBeingEdited!)
-        .padding()
-        .padding(.bottom, keyboard.currentHeight)
-        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-        .zIndex(2)
-      }
+      .disabled(showNewGameModal || showWinnerModal)
+      .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
         
       if showNewGameModal {
         NewGameModal(
@@ -138,10 +122,6 @@ struct CricketGameView : View {
           onHit: {
             cricketGameVM.updateGameState()
             showWinnerModal = cricketGameVM.gameOver
-          },
-          startPlayerNameEditing: { playerName, updatePlayerName in
-            playerNameBeingEdited = playerName
-            updatePlayerNameBeingEdited = updatePlayerName
           })
           .padding(.horizontal, 10)
         
@@ -160,11 +140,9 @@ struct CricketGameView : View {
   func cricketLaneView(playerUnitVM: PlayerUnitViewModel<CricketScore>,
                        scoreVM: CricketScoreViewModel,
                        isWholeViewDisabled: Bool,
-                       onHit: @escaping () -> (),
-                       startPlayerNameEditing: @escaping (String, @escaping (String) -> ()) -> ()) -> some View {
+                       onHit: @escaping () -> ()) -> some View {
     VStack {
-      PlayerUnitView(playerUnitVM: playerUnitVM,
-                     startPlayerNameEditing: startPlayerNameEditing)
+      PlayerUnitView(playerUnitVM: playerUnitVM)
       
       CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
         .readEqualLength(cricketHitHeightReader)

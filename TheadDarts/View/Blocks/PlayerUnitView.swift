@@ -9,16 +9,11 @@
 import SwiftUI
 
 struct PlayerUnitView<Score: DartScore>: View {
-
   @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
-    
-  let startPlayerNameEditing: (String, @escaping (String) -> ()) -> ()
-    
-  @State private var text = ""
   
   var body: some View {
     VStack(spacing: 0) {
-      TextField("Name", text: $playerUnitVM.name)
+      TextField("Name...", text: $playerUnitVM.name)
         .textFieldStyle(PlainTextFieldStyle())
         .multilineTextAlignment(.center)
         .padding(.horizontal)
@@ -33,7 +28,7 @@ struct PlayerUnitView<Score: DartScore>: View {
 
 struct PlayerUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore())), startPlayerNameEditing: { _,_ in } )
+        PlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore())))
           .previewLayout(.sizeThatFits)
     }
 }

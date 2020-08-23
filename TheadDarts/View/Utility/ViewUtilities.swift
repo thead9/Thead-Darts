@@ -88,3 +88,15 @@ extension View {
     }
   }
 }
+
+extension View {
+  @ViewBuilder
+  public func `if`<V>(_ condition: Bool, input: (Self) -> V) -> some View where V: View {
+    if condition {
+      input(self)
+    }
+    else {
+      self
+    }
+  }
+}
