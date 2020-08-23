@@ -16,30 +16,35 @@ struct X01GameView: View {
   
   @State var showNewGameModal = false
   @State var showWinnerModal = false
-  
-  @State var disableBottomForMultiplier = false
-    
+  @State var isEditingName = false
+      
   // MARK: Body
   var body: some View {
     ZStack {
       VStack {
         scoreBoard
                 
-        X01HitView(x01GameVM: x01GameVM,
-          updateWinnerModal: {
+        X01HitView(x01GameVM: x01GameVM, updateWinnerModal: {
             showWinnerModal = x01GameVM.gameOver
-          },
-          disableBottom: { shouldDisable in
-            disableBottomForMultiplier = shouldDisable
           })
           .padding(.bottom, 5)
+          .if(isEditingName) {
+            $0
+              .disabled(isEditingName)
+              .onTapGesture { self.hideKeyboard() }
+          }
         
         turnControls
           .padding(.bottom, 2)
           .blur(radius: !x01GameVM.canAddThrow ? 5 : 0)
+          .if(isEditingName) {
+            $0
+              .disabled(isEditingName)
+              .onTapGesture { self.hideKeyboard() }
+          }
       }
       .font(.title)
-      .padding(.vertical)
+      .padding()
       .zIndex(1)
       .disabled(showNewGameModal || showWinnerModal)
       .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
@@ -113,11 +118,11 @@ struct X01GameView: View {
       ToolbarItem(placement: .bottomBar) { Spacer() }
     }
   }
-    
+      
   var scoreBoard: some View {
     HStack {
       ForEach(0..<x01GameVM.playerUnits.count) { index in
-        PlayerUnitView(playerUnitVM: x01GameVM.playerUnits[index])
+        PlayerUnitView(playerUnitVM: x01GameVM.playerUnits[index], isEditingName: $isEditingName)
         .padding(.horizontal, 5)
         .padding(.vertical, 10)
         .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
@@ -137,34 +142,6 @@ struct X01GameView: View {
       }
       .padding(.horizontal)
       .font(.headline)
-    }
-  }
-    
-  // MARK: BottomControls
-  var bottomControls: some View {
-    Group {
-      HStack {
-        Spacer()
-
-        Button(action: { withAnimation { self.x01GameVM.undo() } } ) {
-          Image(systemName: "arrow.uturn.left")
-            .textStyle(GameControlTextStyle())
-        }
-        .padding(.horizontal, 20)
-        .buttonStyle(SecondaryButtonStyle())
-        
-        Spacer()
-        
-        Button(action: { withAnimation { self.showNewGameModal = true } } ) {
-          Image(systemName: "arrow.2.circlepath")
-            .textStyle(GameControlTextStyle())
-        }
-        .buttonStyle(SecondaryButtonStyle())
-        
-        Spacer()
-      }
-      .font(.title)
-      .foregroundColor(Color.select(.secondary))
     }
   }
     

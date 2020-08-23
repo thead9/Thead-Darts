@@ -16,6 +16,7 @@ struct CricketGameView : View {
   
   @State var showNewGameModal = false
   @State var showWinnerModal = false
+  @State var isEditingName = false
   
   let cricketLabelWidth: CGFloat = 50
             
@@ -25,7 +26,7 @@ struct CricketGameView : View {
       VStack {
         scoreboard
             
-        //turnControls
+        turnControls
       }
       .font(.title)
       .padding(.vertical)
@@ -130,23 +131,29 @@ struct CricketGameView : View {
           CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
             .readEqualLength(cricketHitHeightReader)
             .frame(width: cricketLabelWidth, height: cricketHitHeight)
+            .if(isEditingName) { $0.onTapGesture { self.hideKeyboard() } }
         }
       }
     }
     .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
   }
-  
+    
   @ViewBuilder
   func cricketLaneView(playerUnitVM: PlayerUnitViewModel<CricketScore>,
                        scoreVM: CricketScoreViewModel,
                        isWholeViewDisabled: Bool,
                        onHit: @escaping () -> ()) -> some View {
     VStack {
-      PlayerUnitView(playerUnitVM: playerUnitVM)
+      PlayerUnitView(playerUnitVM: playerUnitVM, isEditingName: $isEditingName)
       
       CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
         .readEqualLength(cricketHitHeightReader)
         .frame(maxHeight: .infinity)
+        .if(isEditingName) {
+          $0
+            .disabled(isEditingName)
+            .onTapGesture { self.hideKeyboard() }
+        }
     }
     .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
   }

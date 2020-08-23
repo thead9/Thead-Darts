@@ -13,8 +13,6 @@ struct X01HitView: View {
   @ObservedObject var x01GameVM: X01GameViewModel
     
   var updateWinnerModal: () -> ()
-  var disableBottom: (Bool) -> ()
-    
   var animationTime = 0.25
     
   // MARK: Body
@@ -46,7 +44,6 @@ struct X01HitView: View {
       x01GameVM.hit(on: .miss)
     } else {
       selectingMultiplier = (true, wedge)
-      disableBottom(true)
     }
   }
     
@@ -109,7 +106,6 @@ struct X01HitView: View {
             withAnimation(.easeInOut(duration: 0.25)) {
               x01GameVM.hit(on: selectingMultiplier.1, with: multiplier)
               selectingMultiplier = (false, .one)
-              disableBottom(false)
               updateWinnerModal()
             }
           }) {
@@ -127,7 +123,6 @@ struct X01HitView: View {
       Button(action: {
         withAnimation(.easeInOut(duration: animationTime)) {
           selectingMultiplier = (false, .one)
-          disableBottom(false)
         }
       }) {
         Text("Cancel")
@@ -229,7 +224,7 @@ struct X01HitView: View {
 
 struct X01HitView_Previews: PreviewProvider {
   static var previews: some View {
-    X01HitView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2)), updateWinnerModal: { }, disableBottom: { bogus in })
+    X01HitView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2)), updateWinnerModal: { })
       .previewLayout(.sizeThatFits)
   }
 }
