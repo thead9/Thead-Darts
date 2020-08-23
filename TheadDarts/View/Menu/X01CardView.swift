@@ -45,7 +45,7 @@ struct X01CardView: View {
                     .frame(maxWidth: .infinity)
                 }
                 
-              NavigationLink(destination: X01GameView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2, startingPoint: self.settings.x01StartingPoint, doubleOut: settings.doubleOut)))) {
+              NavigationLink(destination: X01GameView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2, startingPoint: self.settings.x01StartingPoint, doubleOut: settings.doubleOut))).ignoresKeyboardSafeArea()) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)

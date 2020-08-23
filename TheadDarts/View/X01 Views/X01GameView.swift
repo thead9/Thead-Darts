@@ -14,51 +14,40 @@ struct X01GameView: View {
   @ObservedObject var x01GameVM: X01GameViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
   
-  @State var playerNameBeingEdited: String?
-  @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
   @State var showNewGameModal = false
   @State var showWinnerModal = false
-  
-  @State var disableBottomForMultiplier = false
-    
+  @State var isEditingName = false
+      
   // MARK: Body
   var body: some View {
     ZStack {
       VStack {
         scoreBoard
                 
-        X01HitView(x01GameVM: x01GameVM,
-          updateWinnerModal: {
+        X01HitView(x01GameVM: x01GameVM, updateWinnerModal: {
             showWinnerModal = x01GameVM.gameOver
-          },
-          disableBottom: { shouldDisable in
-            disableBottomForMultiplier = shouldDisable
           })
           .padding(.bottom, 5)
+          .if(isEditingName) {
+            $0
+              .disabled(isEditingName)
+              .onTapGesture { self.hideKeyboard() }
+          }
         
         turnControls
           .padding(.bottom, 2)
           .blur(radius: !x01GameVM.canAddThrow ? 5 : 0)
+          .if(isEditingName) {
+            $0
+              .disabled(isEditingName)
+              .onTapGesture { self.hideKeyboard() }
+          }
       }
       .font(.title)
-      .padding(.vertical)
+      .padding()
       .zIndex(1)
-      .disabled(showNewGameModal || showWinnerModal || playerNameBeingEdited != nil)
-      .blur(radius: showNewGameModal || showWinnerModal || playerNameBeingEdited != nil ? 5 : 0)
-            
-      if playerNameBeingEdited != nil {
-        EditPlayerNameModal(
-          affirmativeAction: { newPlayerName in
-            updatePlayerNameBeingEdited(newPlayerName)
-            playerNameBeingEdited = nil
-          },
-          cancelAction: { playerNameBeingEdited = nil },
-          playerName: playerNameBeingEdited!)
-        .padding()
-        .padding(.bottom, keyboard.currentHeight)
-        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-        .zIndex(2)
-      }
+      .disabled(showNewGameModal || showWinnerModal)
+      .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
             
       if showNewGameModal {
         NewGameModal(
@@ -94,12 +83,12 @@ struct X01GameView: View {
       ToolbarItem(placement: .bottomBar) {
         HStack {
           Spacer().frame(width: 0)
-          Button(action: { mode.wrappedValue.dismiss() } ) {
-            Image(systemName: "house")
+          Button(action: { withAnimation { showNewGameModal = true } } ) {
+            Image(systemName: "arrow.2.circlepath")
               .font(.title)
               .padding()
-              .foregroundColor(Color.select(.primary))
           }
+          .foregroundColor(Color.select(.secondary))
         }
       }
       ToolbarItem(placement: .bottomBar) { Spacer() }
@@ -118,26 +107,22 @@ struct X01GameView: View {
       ToolbarItem(placement: .bottomBar) {
         HStack {
           Spacer().frame(width: 0)
-          Button(action: { withAnimation { showNewGameModal = true } } ) {
-            Image(systemName: "arrow.2.circlepath")
+          Button(action: { mode.wrappedValue.dismiss() } ) {
+            Image(systemName: "house")
               .font(.title)
               .padding()
+              .foregroundColor(Color.select(.primary))
           }
-          .foregroundColor(Color.select(.secondary))
         }
       }
       ToolbarItem(placement: .bottomBar) { Spacer() }
     }
   }
-    
+      
   var scoreBoard: some View {
     HStack {
       ForEach(0..<x01GameVM.playerUnits.count) { index in
-        PlayerUnitView(playerUnitVM: x01GameVM.playerUnits[index],
-          startPlayerNameEditing: { playerName, updatePlayerName in
-           playerNameBeingEdited = playerName
-           updatePlayerNameBeingEdited = updatePlayerName
-          })
+        PlayerUnitView(playerUnitVM: x01GameVM.playerUnits[index], isEditingName: $isEditingName)
         .padding(.horizontal, 5)
         .padding(.vertical, 10)
         .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
@@ -157,34 +142,6 @@ struct X01GameView: View {
       }
       .padding(.horizontal)
       .font(.headline)
-    }
-  }
-    
-  // MARK: BottomControls
-  var bottomControls: some View {
-    Group {
-      HStack {
-        Spacer()
-
-        Button(action: { withAnimation { self.x01GameVM.undo() } } ) {
-          Image(systemName: "arrow.uturn.left")
-            .textStyle(GameControlTextStyle())
-        }
-        .padding(.horizontal, 20)
-        .buttonStyle(SecondaryButtonStyle())
-        
-        Spacer()
-        
-        Button(action: { withAnimation { self.showNewGameModal = true } } ) {
-          Image(systemName: "arrow.2.circlepath")
-            .textStyle(GameControlTextStyle())
-        }
-        .buttonStyle(SecondaryButtonStyle())
-        
-        Spacer()
-      }
-      .font(.title)
-      .foregroundColor(Color.select(.secondary))
     }
   }
     

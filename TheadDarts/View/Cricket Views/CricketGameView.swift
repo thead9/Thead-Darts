@@ -14,10 +14,9 @@ struct CricketGameView : View {
   @ObservedObject var cricketGameVM: CricketGameViewModel
   @ObservedObject private var keyboard = KeyboardResponder()
   
-  @State var playerNameBeingEdited: String?
-  @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
   @State var showNewGameModal = false
   @State var showWinnerModal = false
+  @State var isEditingName = false
   
   let cricketLabelWidth: CGFloat = 50
             
@@ -26,30 +25,14 @@ struct CricketGameView : View {
     ZStack {
       VStack {
         scoreboard
-          .padding(.bottom, 5)
             
         turnControls
-          .padding(.bottom, 2)
       }
       .font(.title)
       .padding(.vertical)
       .zIndex(1)
-      .disabled(showNewGameModal || showWinnerModal || playerNameBeingEdited != nil)
-      .blur(radius: showNewGameModal || showWinnerModal || playerNameBeingEdited != nil ? 5 : 0)
-        
-      if playerNameBeingEdited != nil {
-        EditPlayerNameModal(
-          affirmativeAction: { newPlayerName in
-            updatePlayerNameBeingEdited(newPlayerName)
-            playerNameBeingEdited = nil
-          },
-          cancelAction: { playerNameBeingEdited = nil },
-          playerName: playerNameBeingEdited!)
-        .padding()
-        .padding(.bottom, keyboard.currentHeight)
-        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-        .zIndex(2)
-      }
+      .disabled(showNewGameModal || showWinnerModal)
+      .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
         
       if showNewGameModal {
         NewGameModal(
@@ -86,12 +69,12 @@ struct CricketGameView : View {
       ToolbarItem(placement: .bottomBar) {
         HStack {
           Spacer().frame(width: 0)
-          Button(action: { mode.wrappedValue.dismiss() } ) {
-            Image(systemName: "house")
+          Button(action: { withAnimation { showNewGameModal = true } } ) {
+            Image(systemName: "arrow.2.circlepath")
               .font(.title)
               .padding()
-              .foregroundColor(Color.select(.primary))
           }
+          .foregroundColor(Color.select(.secondary))
         }
       }
       ToolbarItem(placement: .bottomBar) { Spacer() }
@@ -110,12 +93,12 @@ struct CricketGameView : View {
       ToolbarItem(placement: .bottomBar) {
         HStack {
           Spacer().frame(width: 0)
-          Button(action: { withAnimation { showNewGameModal = true } } ) {
-            Image(systemName: "arrow.2.circlepath")
+          Button(action: { mode.wrappedValue.dismiss() } ) {
+            Image(systemName: "house")
               .font(.title)
               .padding()
+              .foregroundColor(Color.select(.primary))
           }
-          .foregroundColor(Color.select(.secondary))
         }
       }
       ToolbarItem(placement: .bottomBar) { Spacer() }
@@ -140,10 +123,6 @@ struct CricketGameView : View {
           onHit: {
             cricketGameVM.updateGameState()
             showWinnerModal = cricketGameVM.gameOver
-          },
-          startPlayerNameEditing: { playerName, updatePlayerName in
-            playerNameBeingEdited = playerName
-            updatePlayerNameBeingEdited = updatePlayerName
           })
           .padding(.horizontal, 10)
         
@@ -152,25 +131,29 @@ struct CricketGameView : View {
           CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
             .readEqualLength(cricketHitHeightReader)
             .frame(width: cricketLabelWidth, height: cricketHitHeight)
+            .if(isEditingName) { $0.onTapGesture { self.hideKeyboard() } }
         }
       }
     }
     .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
   }
-  
+    
   @ViewBuilder
   func cricketLaneView(playerUnitVM: PlayerUnitViewModel<CricketScore>,
                        scoreVM: CricketScoreViewModel,
                        isWholeViewDisabled: Bool,
-                       onHit: @escaping () -> (),
-                       startPlayerNameEditing: @escaping (String, @escaping (String) -> ()) -> ()) -> some View {
+                       onHit: @escaping () -> ()) -> some View {
     VStack {
-      PlayerUnitView(playerUnitVM: playerUnitVM,
-                     startPlayerNameEditing: startPlayerNameEditing)
+      PlayerUnitView(playerUnitVM: playerUnitVM, isEditingName: $isEditingName)
       
       CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
         .readEqualLength(cricketHitHeightReader)
-        .frame(height: cricketHitHeight)
+        .frame(maxHeight: .infinity)
+        .if(isEditingName) {
+          $0
+            .disabled(isEditingName)
+            .onTapGesture { self.hideKeyboard() }
+        }
     }
     .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
   }

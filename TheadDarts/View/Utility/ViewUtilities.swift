@@ -67,3 +67,42 @@ extension View {
     modifier(length)
   }
 }
+
+struct IgnoresKeyboardSafeArea: ViewModifier {
+  func body(content: Content) -> some View {
+    ScrollView([]) {
+      content
+    }
+    .ignoresSafeArea(.keyboard, edges: .bottom)
+  }
+}
+
+extension View {
+  @ViewBuilder
+  func ignoresKeyboardSafeArea(_ ignores: Bool = true) -> some View {
+    if ignores {
+      self.modifier(IgnoresKeyboardSafeArea())
+    }
+    else {
+      self
+    }
+  }
+}
+
+extension View {
+  @ViewBuilder
+  public func `if`<V>(_ condition: Bool, input: (Self) -> V) -> some View where V: View {
+    if condition {
+      input(self)
+    }
+    else {
+      self
+    }
+  }
+}
+
+extension View {
+  func hideKeyboard() {
+    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+  }
+}

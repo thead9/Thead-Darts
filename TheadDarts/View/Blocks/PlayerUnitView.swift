@@ -9,33 +9,29 @@
 import SwiftUI
 
 struct PlayerUnitView<Score: DartScore>: View {
-
   @ObservedObject var playerUnitVM: PlayerUnitViewModel<Score>
-    
-  let startPlayerNameEditing: (String, @escaping (String) -> ()) -> ()
-        
+  @Binding var isEditingName: Bool
+  
   var body: some View {
-    Button(action: { withAnimation {
-      startPlayerNameEditing(playerUnitVM.name, playerUnitVM.update(nameTo:)) }
-    }) {
-      VStack(spacing: 0) {
-        Text(playerUnitVM.name)
-          .font(.headline)
-        if playerUnitVM.showPoints {
-          Text(String(playerUnitVM.points))
-            .font(.title)
-        }
+    VStack(spacing: 0) {
+      TextField("Name...", text: $playerUnitVM.name, onEditingChanged: { isEditing in
+        isEditingName = isEditing
+      })
+        .textFieldStyle(PlainTextFieldStyle())
+        .multilineTextAlignment(.center)
+        .padding(.horizontal)
+      
+      if playerUnitVM.showPoints {
+        Text(String(playerUnitVM.points))
+          .font(.title)
       }
-      .lineLimit(1)
-      .frame(maxWidth: .infinity, alignment: .center)
     }
-    .foregroundColor(Color.select(.primary))
   }
 }
 
 struct PlayerUnitView_Previews: PreviewProvider {
     static var previews: some View {
-        PlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore())), startPlayerNameEditing: { _,_ in } )
+      PlayerUnitView(playerUnitVM: PlayerUnitViewModel<CricketScore>(DartPlayerUnit<CricketScore>(player: DartPlayer(name: "Thomas"), score: CricketScore())), isEditingName: .constant(false))
           .previewLayout(.sizeThatFits)
     }
 }
