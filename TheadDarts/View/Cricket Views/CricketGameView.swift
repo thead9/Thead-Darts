@@ -9,228 +9,216 @@
 import SwiftUI
 
 struct CricketGameView : View {
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    
-    @ObservedObject var cricketGameVM: CricketGameViewModel
-    @ObservedObject private var keyboard = KeyboardResponder()
-    
-    @State var playerNameBeingEdited: String?
-    @State var updatePlayerNameBeingEdited: (String) -> () = { _ in }
-    @State var showNewGameModal = false
-    @State var showWinnerModal = false
-            
-    // MARK: Body
-    let leftColumnWidth: CGFloat = 50
+  @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 
-    var body: some View {
-        ZStack {
-            VStack {
-                scoreboard
-                    .padding(.bottom, 5)
-                
-                turnControls
-                    .padding(.bottom, 2)
-                
-                bottomControls
-            }
-            .font(.title)
-            .padding(.vertical)
-            .zIndex(1)
-            .disabled(showNewGameModal || showWinnerModal || playerNameBeingEdited != nil)
-            .blur(radius: showNewGameModal || showWinnerModal || playerNameBeingEdited != nil ? 5 : 0)
+  @ObservedObject var cricketGameVM: CricketGameViewModel
+  @ObservedObject private var keyboard = KeyboardResponder()
+  
+  @State var showNewGameModal = false
+  @State var showWinnerModal = false
+  @State var isEditingName = false
+  
+  let cricketLabelWidth: CGFloat = 50
             
-            if playerNameBeingEdited != nil {
-                EditPlayerNameModal(affirmativeAction: { newPlayerName in
-                        self.updatePlayerNameBeingEdited(newPlayerName)
-                        self.playerNameBeingEdited = nil
-                    },
-                    cancelAction: { self.playerNameBeingEdited = nil },
-                    playerName: playerNameBeingEdited!)
-                .padding()
-                .padding(.bottom, keyboard.currentHeight)
-                .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-                .zIndex(2)
-            }
+  // MARK: Body
+  var body: some View {
+    ZStack {
+      VStack {
+        scoreboard
             
-            if showNewGameModal {
-                NewGameModal(affirmativeAction: {
-                                self.cricketGameVM.newGame()
-                                self.showNewGameModal = false
-                             },
-                             cancelAction: {
-                                self.showNewGameModal = false})
-                    .padding()
-                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-                    .zIndex(2)
-            }
-            
-            if showWinnerModal {
-                WinnerModal(winnerName: self.cricketGameVM.winnerName!,
-                            newGameAction: {
-                                self.cricketGameVM.newGame()
-                                self.showWinnerModal = false},
-                            viewScoreboardAction: {
-                                self.showWinnerModal = false},
-                            undoAction: {
-                                self.cricketGameVM.undo()
-                                self.showWinnerModal = false})
-                    .padding()
-                    .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
-                    .zIndex(2)
-            }
-        }
-        .foregroundColor(Color.select(.primary))
-        .navigationBarTitle(Text("Title")) // Placeholder title needed to avoid UI bug
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
+        turnControls
+      }
+      .font(.title)
+      .padding(.vertical)
+      .zIndex(1)
+      .disabled(showNewGameModal || showWinnerModal)
+      .blur(radius: showNewGameModal || showWinnerModal ? 5 : 0)
+        
+      if showNewGameModal {
+        NewGameModal(
+          affirmativeAction: {
+            cricketGameVM.newGame()
+            showNewGameModal = false
+          },
+          cancelAction: { showNewGameModal = false } )
+        .padding()
+        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+        .zIndex(2)
+      }
+        
+      if showWinnerModal {
+        WinnerModal(winnerName: cricketGameVM.winnerName!,
+          newGameAction: {
+              cricketGameVM.newGame()
+              showWinnerModal = false
+          },
+          viewScoreboardAction: { showWinnerModal = false},
+          undoAction: {
+              cricketGameVM.undo()
+              showWinnerModal = false
+          })
+        .padding()
+        .transition(AnyTransition.move(edge: .bottom).combined(with: .opacity))
+        .zIndex(2)
+      }
     }
+    .foregroundColor(Color.select(.primary))
+    .hiddenNavigationBarStyle()
+    .toolbar {
+      ToolbarItem(placement: .bottomBar) { Spacer() }
+      ToolbarItem(placement: .bottomBar) {
+        HStack {
+          Spacer().frame(width: 0)
+          Button(action: { mode.wrappedValue.dismiss() } ) {
+            Image(systemName: "house")
+              .font(.title)
+              .padding()
+              .foregroundColor(Color.select(.primary))
+          }
+        }
+      }
+      ToolbarItem(placement: .bottomBar) { Spacer() }
+      ToolbarItem(placement: .bottomBar) {
+        HStack {
+          Spacer().frame(width: 0)
+          Button(action: { withAnimation { cricketGameVM.undo() } } ) {
+            Image(systemName: "arrow.uturn.left")
+              .font(.title)
+              .padding()
+          }
+          .foregroundColor(Color.select(.secondary))
+        }
+      }
+      ToolbarItem(placement: .bottomBar) { Spacer() }
+      ToolbarItem(placement: .bottomBar) {
+        HStack {
+          Spacer().frame(width: 0)
+          Button(action: { withAnimation { showNewGameModal = true } } ) {
+            Image(systemName: "arrow.2.circlepath")
+              .font(.title)
+              .padding()
+          }
+          .foregroundColor(Color.select(.secondary))
+        }
+      }
+      ToolbarItem(placement: .bottomBar) { Spacer() }
+    }
+  }
+  
+  //MARK: Scoreboard
+  enum CricketHitHeight: EqualLength { }
+  let cricketHitHeightReader = GeometryPreferenceReader(
+    key: AppendValue<CricketHitHeight>.self,
+    value: { [$0.size.height] }
+  )
+  @State var cricketHitHeight: CGFloat? = nil
+  
+  var scoreboard: some View {
+    HStack(alignment: .bottom) {
+      ForEach(0..<cricketGameVM.scoreVMs.count) { index in
+        cricketLaneView(
+          playerUnitVM: cricketGameVM.playerUnitVMs[index],
+          scoreVM: cricketGameVM.scoreVMs[index],
+          isWholeViewDisabled: shouldDisableHitView(at: index),
+          onHit: {
+            cricketGameVM.updateGameState()
+            showWinnerModal = cricketGameVM.gameOver
+          })
+          .padding(.horizontal, 10)
+        
+        if (cricketGameVM.scoreVMs.count.isMultiple(of: 2) &&
+              (cricketGameVM.scoreVMs.count / 2) - 1 == index) {
+          CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
+            .readEqualLength(cricketHitHeightReader)
+            .frame(width: cricketLabelWidth, height: cricketHitHeight)
+            .if(isEditingName) { $0.onTapGesture { self.hideKeyboard() } }
+        }
+      }
+    }
+    .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
+  }
     
-    //MARK: Scoreboard
-    var scoreboard: some View {
-        VStack {
-            HStack {
-                Button(
-                    action: {
-                        self.mode.wrappedValue.dismiss()
-                    }
-                ) {
-                    Image(systemName: "house")
-                }
-                .frame(width: leftColumnWidth)
-                .padding(.horizontal, 5)
-                .foregroundColor(Color.select(.secondary))
-
-                ForEach(0..<cricketGameVM.playerUnits.count) { index in
-                    PlayerUnitView(playerUnitVM: self.cricketGameVM.playerUnits[index],
-                                   startPlayerNameEditing: { playerName, updatePlayerName in
-                                     self.playerNameBeingEdited = playerName
-                                     self.updatePlayerNameBeingEdited = updatePlayerName
-                                   })
-                        .padding(.horizontal, 5)
-                        .padding(.vertical, 10)
-                        .addBorder(Color.select(.secondary), width: 3, condition: self.shouldAddActiveBorder(on: index))
-                }
-            }
-            .padding(.horizontal, 5)
-            
-            HStack {
-                CricketHitLabelView(bullRequired: cricketGameVM.bullRequired)
-                    .frame(width: leftColumnWidth)
-                    .padding(.horizontal, 5)
-
-                ForEach(0..<cricketGameVM.scores.count) { index in
-                    CricketHitView(
-                        scoreVM: CricketScoreViewModel(cricketScore: self.cricketGameVM.scores[index], showPoints: self.cricketGameVM.showPoints),
-                        onHit: {
-                            self.cricketGameVM.updateGameState()
-                            self.showWinnerModal = self.cricketGameVM.gameOver
-                        },
-                        wholeViewDisabled: self.shouldDisableHitView(at: index)
-                    )
-                    .padding(.horizontal, 5)
-                    .disabled(self.shouldDisableHitView(at: index))
-                }
-            }
-            .padding(.horizontal, 5)
+  @ViewBuilder
+  func cricketLaneView(playerUnitVM: PlayerUnitViewModel<CricketScore>,
+                       scoreVM: CricketScoreViewModel,
+                       isWholeViewDisabled: Bool,
+                       onHit: @escaping () -> ()) -> some View {
+    VStack {
+      PlayerUnitView(playerUnitVM: playerUnitVM, isEditingName: $isEditingName)
+      
+      CricketHitView(scoreVM: scoreVM, onHit: onHit, wholeViewDisabled: isWholeViewDisabled)
+        .readEqualLength(cricketHitHeightReader)
+        .frame(maxHeight: .infinity)
+        .if(isEditingName) {
+          $0
+            .disabled(isEditingName)
+            .onTapGesture { self.hideKeyboard() }
         }
     }
+    .assignEqualLength(for: cricketHitHeightReader.key, to: $cricketHitHeight)
+  }
     
-    // MARK: Turn Controls
-    var turnControls: some View {
-        Group {
-            if cricketGameVM.activeTurn != nil {
-                HStack {
-                    ForEach(cricketGameVM.activeTurn!.toString(), id: \.self) { label in
-                        Text("\(label)")
-                            .padding(.vertical)
-                            .frame(maxWidth: .infinity)
-                            .foregroundColor(label.contains("T") ? Color.select(.hitBackground) : Color.select(.primary) )
-                            .addBorder((label.contains("T") ? Color.select(.hitBackground) : Color.select(.secondary)), width: 1)
-                    }
-                    if (!cricketGameVM.activeTurn!.canAddThrow()) {
-                        Button(action: {
-                            withAnimation {
-                                self.cricketGameVM.nextPlayer()
-                            }
-                        }) {
-                            Text("Next")
-                                .padding(.vertical)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(PrimaryButtonStyle())
-                    } else {
-                        Button(action: {
-                            self.cricketGameVM.hit(on: .miss, for: self.cricketGameVM.activeIndex)
-                        }) {
-                            Text("Miss")
-                                .padding(.vertical)
-                                .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(SecondaryButtonStyle())
-                    }
-                }
-                .padding(.horizontal)
-                .font(.headline)
+  // MARK: Turn Controls
+  var turnControls: some View {
+    Group {
+      if cricketGameVM.activeTurn != nil {
+        HStack {
+          ForEach(cricketGameVM.activeTurn!.toString(), id: \.self) { label in
+            Text("\(label)")
+              .padding(.vertical)
+              .frame(maxWidth: .infinity)
+              .foregroundColor(label.contains("T") ? Color.select(.hitBackground) :
+                                                     Color.select(.primary) )
+              .addBorder((label.contains("T") ? Color.select(.hitBackground) : Color.select(.secondary)), width: 1)
+          }
+          if (!cricketGameVM.activeTurn!.canAddThrow()) {
+            Button(action: { withAnimation { cricketGameVM.nextPlayer() } } ) {
+              Text("Next")
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
             }
-        }
-    }
-    
-    // MARK: BottomControls
-    var bottomControls: some View {
-        Group {
-            HStack {
-                Spacer()
-                
-                Button(action: {
-                    withAnimation {
-                        self.cricketGameVM.undo()
-                    }
-                }) {
-                    Image(systemName: "arrow.uturn.left")
-                        .textStyle(GameControlTextStyle())
-                }
-                .buttonStyle(SecondaryButtonStyle())
-                
-                Spacer()
-
-                Button(action: {
-                    withAnimation {
-                        self.showNewGameModal = true
-                    }
-                }) {
-                    Image(systemName: "arrow.2.circlepath")
-                        .textStyle(GameControlTextStyle())
-                }
-                .buttonStyle(SecondaryButtonStyle())
-                
-                Spacer()
+            .buttonStyle(PrimaryButtonStyle())
+          } else {
+            Button(action: { cricketGameVM.hit(on: .miss, for: cricketGameVM.activeIndex) } ) {
+              Text("Miss")
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
             }
-            .font(.title)
-            .foregroundColor(Color.select(.secondary))
+            .buttonStyle(SecondaryButtonStyle())
+          }
         }
+        .padding(.horizontal)
+        .font(.headline)
+      }
     }
+  }
     
-    func shouldAddActiveBorder(on index: Int) -> Bool {
-        if let _ = self.cricketGameVM.activeTurn {
-            return cricketGameVM.activeIndex == index
-        } else {
-            return false
-        }
+  func shouldAddActiveBorder(on index: Int) -> Bool {
+    if let _ = cricketGameVM.activeTurn {
+      return cricketGameVM.activeIndex == index
+    } else {
+      return false
     }
-    
-    func shouldDisableHitView(at index: Int) -> Bool {
-        if let activeTurn = self.cricketGameVM.activeTurn {
-            return self.cricketGameVM.activeIndex != index || !activeTurn.canAddThrow()
-        } else {
-            return false
-        }
+  }
+  
+  func shouldDisableHitView(at index: Int) -> Bool {
+    if let activeTurn = cricketGameVM.activeTurn {
+      return cricketGameVM.activeIndex != index || !activeTurn.canAddThrow()
+    } else {
+      return false
     }
+  }
 }
 
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
-    static var previews: some View {
-        CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2)))
+  static let cricketGameVM = CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2))
+  static var previews: some View {
+    Group {
+      NavigationView {
+        CricketGameView(cricketGameVM: cricketGameVM)
+      }
     }
+  }
 }
 #endif

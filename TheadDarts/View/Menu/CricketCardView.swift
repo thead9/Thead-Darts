@@ -56,7 +56,7 @@ struct CricketCardView: View {
                     .frame(maxWidth: .infinity)
                 }
                 
-                NavigationLink(destination: CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: false /*settings.trackTurns*/, bullRequired: settings.bullRequired, usePoints: settings.usePoints)))) {
+                NavigationLink(destination: cricketGameView) {
                     Text("Start Game")
                         .padding()
                         .font(.largeTitle)
@@ -69,6 +69,11 @@ struct CricketCardView: View {
         .addBorder(Color.select(.primary), width: 2)
         .padding(.top)
     }
+  
+  var cricketGameView: some View {
+      CricketGameView(cricketGameVM: CricketGameViewModel(cricketGame: CricketGame(numberOfPlayers: 2, trackTurns: false /*settings.trackTurns*/, bullRequired: settings.bullRequired, usePoints: settings.usePoints)))
+        .ignoresKeyboardSafeArea()
+  }
 }
 
 struct CricketCardView_Previews: PreviewProvider {

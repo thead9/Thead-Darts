@@ -9,53 +9,24 @@
 import SwiftUI
 
 struct CricketHitLabelView : View {
-    var bullRequired: Bool = true
-
-    var rows: CGFloat {
-        get {
-            return bullRequired ? 7 : 6
-        }
+  var bullRequired: Bool = true
+  
+  var body: some View {
+    VStack(alignment: .center) {
+      ForEach(Wedge.cricketWedgeLabels(isBoolRequired: bullRequired), id: \.self) { label in
+        Text(label)
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
+      }
     }
-    let columns: CGFloat = 1
-    let spacing: CGFloat = 5
-    
-    var wedgeLabels: [String] {
-        get {
-            if bullRequired {
-                return ["20", "19", "18", "17", "16", "15", "B"]
-            } else {
-                return ["20", "19", "18", "17", "16", "15"]
-            }
-        }
-    }
-
-    func getItemWidth(containerWidth: CGFloat) -> CGFloat {
-        return (containerWidth - spacing * (columns - 1)) / columns
-    }
-    
-    func getItemHeight(containerHeight: CGFloat) -> CGFloat {
-        return (containerHeight - spacing * (rows - 1)) / rows
-    }
-    
-    var body: some View {
-        GeometryReader { geometry in
-            VStack(alignment: .center, spacing: self.spacing) {
-                ForEach(self.wedgeLabels, id: \.self) { label in
-                    Text(label)
-                    .frame(width: self.getItemWidth(containerWidth: geometry.size.width), height: self.getItemHeight(containerHeight: geometry.size.height))
-                }
-            }
-            .frame(maxWidth: .infinity)
-            .font(.largeTitle)
-        }
-    }
+    .font(.largeTitle)
+  }
 }
 
 #if DEBUG
 struct CricketHitLabelView_Previews : PreviewProvider {
-    static var previews: some View {
-        CricketHitLabelView()
-            .previewLayout(.fixed(width: 75, height: 650))
-    }
+  static var previews: some View {
+    CricketHitLabelView()
+      .previewLayout(.fixed(width: 75, height: 650))
+  }
 }
 #endif
