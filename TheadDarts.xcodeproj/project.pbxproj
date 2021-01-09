@@ -31,6 +31,7 @@
 		C78EDD26230D9DC500700A55 /* DartTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD24230D9DC500700A55 /* DartTurn.swift */; };
 		C78EDD28230F044F00700A55 /* DartThrowOnTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */; };
 		C78EDD29230F044F00700A55 /* DartThrowOnTurn.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */; };
+		C793D2DD25AA4DA900DB34E1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C793D2DC25AA4DA900DB34E1 /* Launch Screen.storyboard */; };
 		C7983E2422CACC0E00ACC903 /* CricketGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7983E2322CACC0E00ACC903 /* CricketGameView.swift */; };
 		C7983E2622CACC1200ACC903 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2522CACC1200ACC903 /* Assets.xcassets */; };
 		C7983E2922CACC1200ACC903 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7983E2822CACC1200ACC903 /* Preview Assets.xcassets */; };
@@ -203,6 +204,7 @@
 		C78C712424007AFF0077C465 /* KeyboardResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		C78EDD24230D9DC500700A55 /* DartTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartTurn.swift; sourceTree = "<group>"; };
 		C78EDD27230F044E00700A55 /* DartThrowOnTurn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DartThrowOnTurn.swift; sourceTree = "<group>"; };
+		C793D2DC25AA4DA900DB34E1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C7983E1C22CACC0E00ACC903 /* Darts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Darts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7983E2322CACC0E00ACC903 /* CricketGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CricketGameView.swift; sourceTree = "<group>"; };
 		C7983E2522CACC1200ACC903 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				C77EF0A2232D4C1B004B4045 /* Menu */,
 				C732757022F03D2A003DDC77 /* Styles */,
 				C71E265322CB9755005D91E1 /* Cricket Views */,
+				C793D2DC25AA4DA900DB34E1 /* Launch Screen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C793D2DD25AA4DA900DB34E1 /* Launch Screen.storyboard in Resources */,
 				C7983E2922CACC1200ACC903 /* Preview Assets.xcassets in Resources */,
 				C7983E2622CACC1200ACC903 /* Assets.xcassets in Resources */,
 			);
