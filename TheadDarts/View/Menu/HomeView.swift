@@ -97,7 +97,7 @@ struct HomeView: View {
   }
     
   private var gameCard: some View {
-    Group {
+    ScrollView {
       if selectedGameType == .cricket {
         CricketCardView()
           .transition(.slideAndFade)
@@ -140,5 +140,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
     HomeView()
+      .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
   }
 }

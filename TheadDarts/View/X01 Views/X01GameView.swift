@@ -83,12 +83,12 @@ struct X01GameView: View {
       ToolbarItem(placement: .bottomBar) {
         HStack {
           Spacer().frame(width: 0)
-          Button(action: { withAnimation { showNewGameModal = true } } ) {
-            Image(systemName: "arrow.2.circlepath")
+          Button(action: { mode.wrappedValue.dismiss() } ) {
+            Image(systemName: "house")
               .font(.title)
               .padding()
+              .foregroundColor(Color.select(.primary))
           }
-          .foregroundColor(Color.select(.secondary))
         }
       }
       ToolbarItem(placement: .bottomBar) { Spacer() }
@@ -107,12 +107,12 @@ struct X01GameView: View {
       ToolbarItem(placement: .bottomBar) {
         HStack {
           Spacer().frame(width: 0)
-          Button(action: { mode.wrappedValue.dismiss() } ) {
-            Image(systemName: "house")
+          Button(action: { withAnimation { showNewGameModal = true } } ) {
+            Image(systemName: "arrow.2.circlepath")
               .font(.title)
               .padding()
-              .foregroundColor(Color.select(.primary))
           }
+          .foregroundColor(Color.select(.secondary))
         }
       }
       ToolbarItem(placement: .bottomBar) { Spacer() }
@@ -155,5 +155,6 @@ struct X01GameView_Previews: PreviewProvider {
     NavigationView{
       X01GameView(x01GameVM: X01GameViewModel(x01Game: X01Game(numberOfPlayers: 2)))
     }
+    .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
   }
 }
